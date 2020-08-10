@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>落空</title>
-  <icon>http://yoursite.com/icon.png</icon>
+  <icon>https://ayoubu.github.io/icon.png</icon>
   <subtitle>我慢慢明白了为什么我不快乐，因为我总是期待一个结果</subtitle>
-  <link href="http://yoursite.com/atom.xml" rel="self"/>
+  <link href="https://ayoubu.github.io/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="https://ayoubu.github.io/"/>
   <updated>2020-08-10T03:11:22.033Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>https://ayoubu.github.io/</id>
   
   <author>
     <name>落空</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/archives/16107.html"/>
-    <id>http://yoursite.com/archives/16107.html</id>
+    <link href="https://ayoubu.github.io/archives/16107.html"/>
+    <id>https://ayoubu.github.io/archives/16107.html</id>
     <published>2020-08-09T14:42:21.391Z</published>
     <updated>2020-08-10T03:11:22.033Z</updated>
     
