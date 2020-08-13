@@ -1,21 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/archives/16107.html</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+    <title>写作以及博文管理</title>
+    <url>/archives/6783.html</url>
+    <content><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>我的博客网站已经搭好，在此特别感谢一下<a href="https://tding.top/archives/2bd6d82.html">小丁</a>的分享。我下的是NexT最新的主题，再搭建的过程踩了不少坑，不过大部分问题通过参考他的解决方案都完美解决了，一些小的地方，只要理解了他的解决方式，也都可以用相似的方法解决，具体的我就不在赘述了。</p>
+<p>在搭建好博客之后我就想开始我的博客之路了，可是关于怎么去写博客，网上虽然都介绍，但是我感觉都有点简单，对于要经常写博客的同学来说，可能有点不太友好。通过YouTube上的一位UP主<a href="https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOMJR6D25ishrSedvsguVSm">Mike Dan</a>的分享，我整理出了一些方法，现在记录分享给大家。</p>
+<a id="more"></a>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h2 id="新建一篇博文（post）"><a href="#新建一篇博文（post）" class="headerlink" title="新建一篇博文（post）"></a>新建一篇博文（post）</h2><p>这个是最基础的操作，直接通过以下命令就可以实现。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new test_post</span><br><span class="line">or</span><br><span class="line">hexo new post test_post</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>此时会在hexo/source/_post目录下生成一个名为test_post.md文件。此时刷新网站，也会多一个名为test_post的文章（命令必须在网站的根目录（我的是hexo/）才会有效，win10用户可以在hexo/目录下，按住shift+鼠标右键，然后选择 <strong>在此处打开PowerShell</strong> 直接进如此目录）。使用<code>hexo new</code> 命令可以直接新建post是因为我们网站的配置文件中的 <code>default_layout: post</code> 选的是post，需要更改时可以直接在网站配置文件中搜索更改。可以更改为post、page、draft。</p>
+<p>新建完成后直接刷新本地的网站首页就可以看到了。</p>
+<h2 id="新建一篇草稿（draft）"><a href="#新建一篇草稿（draft）" class="headerlink" title="新建一篇草稿（draft）"></a>新建一篇草稿（draft）</h2><p>在我们写作的过程中，有时我们想先发布到网站上看看效果。此时我们就可以使用草稿这个功能(draft)，即草稿。我们可以使用下列命令来新建一个草稿。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new draft test_draft</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>此时会在hexo/source/_draft 目录下生成一个名为test_draft的文件。此时在网站主页是看不到这篇文章的，因为它是草稿嘛，想看这个需要使用下面的命令重新启动服务器。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo server --draft</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>在我们确定文章没问题之后，想将其发布，可以使用以下命令，将其推送至公开的网站首页。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo publish test_draft</span><br></pre></td></tr></table></figure>
+
+<p>此时再刷新网站首页就可以看到了。</p>
+<h2 id="新建一个页面（page）"><a href="#新建一个页面（page）" class="headerlink" title="新建一个页面（page）"></a>新建一个页面（page）</h2><p>新建页面操作会生成一个新的普通的网页，这个网页不会直接显示在网站主页上，方法如下。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p>运行命令后会在hexo/source 目录下生成一个名为test 的文件夹，在这个文件夹中会包含一个名为index.md的文件。生的页面可以在本地浏览器中输入：<a href="http://localhost:4000/test/">http://localhost:4000/test/</a> 进行访问。我们主页的<code>关于</code> <code>标签</code> <code>分类</code> 等的跳转页面都是通过这种方式建立的，至于其它用处目前我还不清楚，之后如果发现了它的用法后再来补充。</p>
+<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>我们可以使用 <code>hexo new post or draft or page</code> 的主要原因其实是hexo为我们建立一些常用的模板，这些模板放在hexo/scaffolds目录下。如下图所示。</p>
+<p><img src="https://i.imgur.com/2cn9II6.png" alt="模板文件目录"></p>
+<p>打开我们最常用的post.md文件，如下图所示，其中第前两行表示名称(title)和日期(date)可以按照这种方式设置为自动填写，第三行的标签(tags)可以手动填写。</p>
+<p><img src="https://i.imgur.com/gmevrXa.png" alt="post.md文件"></p>
+<p>有时候我们还想添加一些其它的信息，例如分类(categories)，置顶信息（top,这个需要安装特定的插件来实现）等。此时我们可以直接在这个文件中添加，这样以后生成新的博文的时候就会默认包含这些你添加的信息了。</p>
+<p>除此之外我们还可以添加一些其他的默认模板，比如我最近在学习python我可以添加一个默认模板用于写python相关的博文，这样我就可以直接通过<code>hexo new python test_python</code> 来生成了（python为我的模板名称）。下图为我建的用于生成python文章的模板。</p>
+<p><img src="https://i.imgur.com/cX6dP28.png" alt="python模板"><br>其中tags以列表的方式可以添加多个，而categories列表中是表示文章的类别，比如：<code>[python,learn python]</code> 就表示这篇文章是在python 类别下的 learn python 类别中。</p>
+<h2 id="删除博文"><a href="#删除博文" class="headerlink" title="删除博文"></a>删除博文</h2><p>删除文章比较简单，先停止本地运行的服务，然后直接在hexo/source/_posts目录下找到相应文件直接删除，再运行<code>hexo g</code> 命令重新生成，最后再启动本地服务，发现博文已经删除。如果全部删除了，打开首页会有问题，重新创建一个，再打开首页就没问题了。</p>
+<p>本文主要介绍了使用hexo进行博文写作和管理文章的方法。其中管理文章主要体现在对tags和categories的应用。目前就想到这么多，以后想到再补充。</p>
 ]]></content>
+      <categories>
+        <category>杂记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>博文创建及管理</tag>
+      </tags>
   </entry>
 </search>

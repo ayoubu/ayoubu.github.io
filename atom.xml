@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>落空</title>
+  <title>落空的个人博客</title>
   <icon>https://ayoubu.github.io/icon.png</icon>
-  <subtitle>我慢慢明白了为什么我不快乐，因为我总是期待一个结果</subtitle>
+  <subtitle>我慢慢明白了为什么我不快乐，因为我总是期待一个结果。</subtitle>
   <link href="https://ayoubu.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayoubu.github.io/"/>
-  <updated>2020-08-10T03:11:22.033Z</updated>
+  <updated>2020-08-13T07:11:35.875Z</updated>
   <id>https://ayoubu.github.io/</id>
   
   <author>
@@ -17,23 +17,24 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://ayoubu.github.io/archives/16107.html"/>
-    <id>https://ayoubu.github.io/archives/16107.html</id>
-    <published>2020-08-09T14:42:21.391Z</published>
-    <updated>2020-08-10T03:11:22.033Z</updated>
+    <title>写作以及博文管理</title>
+    <link href="https://ayoubu.github.io/archives/6783.html"/>
+    <id>https://ayoubu.github.io/archives/6783.html</id>
+    <published>2020-08-13T14:04:10.000Z</published>
+    <updated>2020-08-13T07:11:35.875Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
-        
-      
+    <summary type="html">&lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;我的博客网站已经搭好，在此特别感谢一下&lt;a href=&quot;https://tding.top/archives/2bd6d82.html&quot;&gt;小丁&lt;/a&gt;的分享。我下的是NexT最新的主题，再搭建的过程踩了不少坑，不过大部分问题通过参考他的解决方案都完美解决了，一些小的地方，只要理解了他的解决方式，也都可以用相似的方法解决，具体的我就不在赘述了。&lt;/p&gt;
+&lt;p&gt;在搭建好博客之后我就想开始我的博客之路了，可是关于怎么去写博客，网上虽然都介绍，但是我感觉都有点简单，对于要经常写博客的同学来说，可能有点不太友好。通过YouTube上的一位UP主&lt;a href=&quot;https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOMJR6D25ishrSedvsguVSm&quot;&gt;Mike Dan&lt;/a&gt;的分享，我整理出了一些方法，现在记录分享给大家。&lt;/p&gt;</summary>
     
     
     
+    <category term="杂记" scheme="https://ayoubu.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+    <category term="hexo" scheme="https://ayoubu.github.io/tags/hexo/"/>
+    
+    <category term="博文创建及管理" scheme="https://ayoubu.github.io/tags/%E5%8D%9A%E6%96%87%E5%88%9B%E5%BB%BA%E5%8F%8A%E7%AE%A1%E7%90%86/"/>
     
   </entry>
   
