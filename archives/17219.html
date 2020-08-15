@@ -52,13 +52,13 @@
 
   <meta name="description" content="List的结构Python中的list是以栈这种数据结构存储的，因此包含一些栈的特性。List中可以存放任何数据以及对象。 向List中添加元素append() 方法向一个列表中添加一个元素。 1234l &#x3D; [&amp;#x27;大宝&amp;#x27;]l.append(&amp;#x27;小宝&amp;#x27;)   #append 只能接受一个参数&gt;&gt;&gt;l[&amp;#x27;大宝&amp;#x27;,&amp;#x27;小">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python之list-副本">
+<meta property="og:title" content="python之list">
 <meta property="og:url" content="https://ayoubu.github.io/archives/17219.html">
 <meta property="og:site_name" content="落空的个人博客">
 <meta property="og:description" content="List的结构Python中的list是以栈这种数据结构存储的，因此包含一些栈的特性。List中可以存放任何数据以及对象。 向List中添加元素append() 方法向一个列表中添加一个元素。 1234l &#x3D; [&amp;#x27;大宝&amp;#x27;]l.append(&amp;#x27;小宝&amp;#x27;)   #append 只能接受一个参数&gt;&gt;&gt;l[&amp;#x27;大宝&amp;#x27;,&amp;#x27;小">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-14T17:26:46.000Z">
-<meta property="article:modified_time" content="2020-08-15T05:13:10.949Z">
+<meta property="article:modified_time" content="2020-08-15T03:01:35.767Z">
 <meta property="article:author" content="落空">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="list">
@@ -76,7 +76,7 @@
   };
 </script>
 <link rel="stylesheet" type="text/css" href="/css/injector.css" />
-  <title>python之list-副本 | 落空的个人博客</title>
+  <title>python之list | 落空的个人博客</title>
   
 
 
@@ -163,7 +163,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">4</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">3</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -231,7 +231,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          python之list-副本
+          python之list
         </h1>
 
         <div class="post-meta">
@@ -250,7 +250,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-15 05:13:10" itemprop="dateModified" datetime="2020-08-15T05:13:10Z">2020-08-15</time>
+                <time title="修改时间：2020-08-15 03:01:35" itemprop="dateModified" datetime="2020-08-15T03:01:35Z">2020-08-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -305,7 +305,6 @@
         <h2 id="List的结构"><a href="#List的结构" class="headerlink" title="List的结构"></a>List的结构</h2><p>Python中的list是以栈这种数据结构存储的，因此包含一些栈的特性。List中可以存放任何数据以及对象。</p>
 <h2 id="向List中添加元素"><a href="#向List中添加元素" class="headerlink" title="向List中添加元素"></a>向List中添加元素</h2><h3 id="append-方法"><a href="#append-方法" class="headerlink" title="append() 方法"></a>append() 方法</h3><p>向一个列表中添加一个元素。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>]</span><br><span class="line">l.append(<span class="string">&#x27;小宝&#x27;</span>)   <span class="comment">#append 只能接受一个参数</span></span><br><span class="line">&gt;&gt;&gt;l</span><br><span class="line">[<span class="string">&#x27;大宝&#x27;</span>,<span class="string">&#x27;小宝&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
 <a id="more"></a>
 
 <h3 id="extend-方法"><a href="#extend-方法" class="headerlink" title="extend() 方法"></a>extend() 方法</h3><p>该方法也是扩展列表的方法，只不过是用另一个列表进行扩展，也可以理解为把一个列表添加到另一个列表的后面。</p>
@@ -313,7 +312,6 @@
 
 <h3 id="insert-方法"><a href="#insert-方法" class="headerlink" title="insert() 方法"></a>insert() 方法</h3><p>前两个方法是在列表后面添加元素，有时需要在指定位置添加元素，此时就需要用到insert()方法了。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>,<span class="string">&#x27;小宝&#x27;</span>]</span><br><span class="line">l.insert(<span class="number">1</span>,<span class="number">91</span>) <span class="comment">#在l中的第一个位置插入91</span></span><br><span class="line">&gt;&gt;&gt;l</span><br><span class="line">[<span class="string">&#x27;大宝&#x27;</span>,<span class="number">91</span>,<span class="string">&#x27;小宝&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
 <h2 id="从List中删除元素"><a href="#从List中删除元素" class="headerlink" title="从List中删除元素"></a>从List中删除元素</h2><h3 id="remove"><a href="#remove" class="headerlink" title="remove()"></a>remove()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>, <span class="string">&#x27;小宝&#x27;</span>]</span><br><span class="line">l.remove(<span class="string">&#x27;大宝&#x27;</span>)</span><br><span class="line"><span class="comment">#此时列表为 l = [&#x27;小宝&#x27;]</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="语句-del"><a href="#语句-del" class="headerlink" title="语句 del()"></a>语句 del()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>, <span class="string">&#x27;小宝&#x27;</span>]</span><br><span class="line"><span class="keyword">del</span> l[<span class="number">0</span>] <span class="comment">#删除‘大宝’</span></span><br><span class="line"><span class="keyword">del</span> l  <span class="comment">#删除整个列表</span></span><br></pre></td></tr></table></figure>
@@ -339,6 +337,7 @@
 <h3 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h3><p>count() 函数是用来计算列表中某个元素出现的次数的。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>, <span class="number">91</span>, <span class="string">&#x27;小宝&#x27;</span>, <span class="number">99</span>, <span class="string">&#x27;小宝&#x27;</span>]</span><br><span class="line">&gt;&gt;&gt;l.count(<span class="string">&#x27;大宝&#x27;</span>)</span><br><span class="line"><span class="number">1</span></span><br><span class="line">&gt;&gt;&gt;l.count(<span class="string">&#x27;小宝&#x27;</span>)</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
 
+
 <h3 id="index-函数"><a href="#index-函数" class="headerlink" title="index() 函数"></a>index() 函数</h3><p>index() 函数是用来查找元素出现的位置的，会返回元素第一次出现的位置。index()函数还可以对查找范围进行限制。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>, <span class="number">91</span>, <span class="string">&#x27;小宝&#x27;</span>, <span class="number">99</span>, <span class="string">&#x27;小宝&#x27;</span>,<span class="string">&#x27;大宝&#x27;</span>, <span class="number">91</span>, <span class="string">&#x27;小宝&#x27;</span>]</span><br><span class="line">&gt;&gt;&gt;l.index(<span class="string">&#x27;大宝&#x27;</span>)   <span class="comment">#查找列表中&#x27;大宝&#x27;出现的位置</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line">&gt;&gt;&gt;l.index(<span class="string">&#x27;小宝&#x27;</span>，<span class="number">3</span>，<span class="number">5</span>)  <span class="comment">#查找从3到5这个区间中&#x27;小宝&#x27;出现的位置</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
 
@@ -350,7 +349,6 @@
 
 <h2 id="列表的拷贝"><a href="#列表的拷贝" class="headerlink" title="列表的拷贝"></a>列表的拷贝</h2><p>列表的拷贝分为<strong>深拷贝</strong>和<strong>浅拷贝</strong>，其中深拷贝是会在内存中重新复制一个原数组，而浅拷贝只是给原数组起了个别名而已。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">l=[<span class="number">3</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">6</span>]</span><br><span class="line">l1 = l    <span class="comment">#浅拷贝</span></span><br><span class="line">l2 = l[:]    <span class="comment">#深拷贝</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l.sort()</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l1</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l2</span><br><span class="line">[<span class="number">3</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">6</span>]</span><br></pre></td></tr></table></figure>
-
 
     </div>
 
@@ -396,8 +394,8 @@
       <i class="fa fa-chevron-left"></i> 写作以及博文管理
     </a></div>
       <div class="post-nav-item">
-    <a href="/archives/17219.html" rel="next" title="python之list">
-      python之list <i class="fa fa-chevron-right"></i>
+    <a href="/archives/60667.html" rel="next" title="财务知识之市盈率(PE)">
+      财务知识之市盈率(PE) <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -474,7 +472,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -799,13 +797,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">9k</span>
+    <span title="站点总字数">5k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">8 分钟</span>
+    <span title="站点阅读时长">5 分钟</span>
 </div>
 
         

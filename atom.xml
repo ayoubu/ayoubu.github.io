@@ -73,31 +73,6 @@
   </entry>
   
   <entry>
-    <title>python之list-副本</title>
-    <link href="https://ayoubu.github.io/archives/17219.html"/>
-    <id>https://ayoubu.github.io/archives/17219.html</id>
-    <published>2020-08-14T17:26:46.000Z</published>
-    <updated>2020-08-15T05:13:10.949Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;List的结构&quot;&gt;&lt;a href=&quot;#List的结构&quot; class=&quot;headerlink&quot; title=&quot;List的结构&quot;&gt;&lt;/a&gt;List的结构&lt;/h2&gt;&lt;p&gt;Python中的list是以栈这种数据结构存储的，因此包含一些栈的特性。List中可以存放任何数据以及对象。&lt;/p&gt;
-&lt;h2 id=&quot;向List中添加元素&quot;&gt;&lt;a href=&quot;#向List中添加元素&quot; class=&quot;headerlink&quot; title=&quot;向List中添加元素&quot;&gt;&lt;/a&gt;向List中添加元素&lt;/h2&gt;&lt;h3 id=&quot;append-方法&quot;&gt;&lt;a href=&quot;#append-方法&quot; class=&quot;headerlink&quot; title=&quot;append() 方法&quot;&gt;&lt;/a&gt;append() 方法&lt;/h3&gt;&lt;p&gt;向一个列表中添加一个元素。&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;l = [&lt;span class=&quot;string&quot;&gt;&amp;#x27;大宝&amp;#x27;&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;l.append(&lt;span class=&quot;string&quot;&gt;&amp;#x27;小宝&amp;#x27;&lt;/span&gt;)   &lt;span class=&quot;comment&quot;&gt;#append 只能接受一个参数&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt;l&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[&lt;span class=&quot;string&quot;&gt;&amp;#x27;大宝&amp;#x27;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&amp;#x27;小宝&amp;#x27;&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
-    
-    <category term="python 语法学习" scheme="https://ayoubu.github.io/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
-    
-    <category term="list" scheme="https://ayoubu.github.io/tags/list/"/>
-    
-  </entry>
-  
-  <entry>
     <title>写作以及博文管理</title>
     <link href="https://ayoubu.github.io/archives/6783.html"/>
     <id>https://ayoubu.github.io/archives/6783.html</id>
