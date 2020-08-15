@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Tp_uCM85etMVq9MuOfdPYQ6aA4SI0lOYqjanBUw5BuQ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://ayoubu.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="List的结构Python中的list是以栈这种数据结构存储的，因此包含一些栈的特性。List中可以存放任何数据以及对象。 向List中添加元素append() 方法向一个列表中添加一个元素。 1234l &#x3D; [&amp;#x27;大宝&amp;#x27;]l.append(&amp;#x27;小宝&amp;#x27;)   #append 只能接受一个参数&gt;&gt;&gt;l[&amp;#x27;大宝&amp;#x27;,&amp;#x27;小">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python之list-副本">
+<meta property="og:url" content="https://ayoubu.github.io/archives/17219.html">
+<meta property="og:site_name" content="落空的个人博客">
+<meta property="og:description" content="List的结构Python中的list是以栈这种数据结构存储的，因此包含一些栈的特性。List中可以存放任何数据以及对象。 向List中添加元素append() 方法向一个列表中添加一个元素。 1234l &#x3D; [&amp;#x27;大宝&amp;#x27;]l.append(&amp;#x27;小宝&amp;#x27;)   #append 只能接受一个参数&gt;&gt;&gt;l[&amp;#x27;大宝&amp;#x27;,&amp;#x27;小">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-14T17:26:46.000Z">
+<meta property="article:modified_time" content="2020-08-15T05:13:10.949Z">
+<meta property="article:author" content="落空">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="list">
+<meta name="twitter:card" content="summary">
+
+
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<link rel="stylesheet" type="text/css" href="/css/injector.css" />
+  <title>python之list-副本 | 落空的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落空的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落空的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我慢慢明白了为什么我不快乐，因为我总是期待一个结果。</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">4</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/17219.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python之list-副本
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-14 17:26:46" itemprop="dateCreated datePublished" datetime="2020-08-14T17:26:46Z">2020-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-15 05:13:10" itemprop="dateModified" datetime="2020-08-15T05:13:10Z">2020-08-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">python 语法学习</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="List的结构"><a href="#List的结构" class="headerlink" title="List的结构"></a>List的结构</h2><p>Python中的list是以栈这种数据结构存储的，因此包含一些栈的特性。List中可以存放任何数据以及对象。</p>
+<h2 id="向List中添加元素"><a href="#向List中添加元素" class="headerlink" title="向List中添加元素"></a>向List中添加元素</h2><h3 id="append-方法"><a href="#append-方法" class="headerlink" title="append() 方法"></a>append() 方法</h3><p>向一个列表中添加一个元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>]</span><br><span class="line">l.append(<span class="string">&#x27;小宝&#x27;</span>)   <span class="comment">#append 只能接受一个参数</span></span><br><span class="line">&gt;&gt;&gt;l</span><br><span class="line">[<span class="string">&#x27;大宝&#x27;</span>,<span class="string">&#x27;小宝&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="extend-方法"><a href="#extend-方法" class="headerlink" title="extend() 方法"></a>extend() 方法</h3><p>该方法也是扩展列表的方法，只不过是用另一个列表进行扩展，也可以理解为把一个列表添加到另一个列表的后面。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>,<span class="string">&#x27;小宝&#x27;</span>]</span><br><span class="line">l.extend([<span class="number">91</span>,<span class="number">99</span>])</span><br><span class="line">&gt;&gt;&gt;l</span><br><span class="line">[<span class="string">&#x27;大宝&#x27;</span>,<span class="string">&#x27;小宝&#x27;</span>,<span class="number">91</span>,<span class="number">99</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="insert-方法"><a href="#insert-方法" class="headerlink" title="insert() 方法"></a>insert() 方法</h3><p>前两个方法是在列表后面添加元素，有时需要在指定位置添加元素，此时就需要用到insert()方法了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>,<span class="string">&#x27;小宝&#x27;</span>]</span><br><span class="line">l.insert(<span class="number">1</span>,<span class="number">91</span>) <span class="comment">#在l中的第一个位置插入91</span></span><br><span class="line">&gt;&gt;&gt;l</span><br><span class="line">[<span class="string">&#x27;大宝&#x27;</span>,<span class="number">91</span>,<span class="string">&#x27;小宝&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="从List中删除元素"><a href="#从List中删除元素" class="headerlink" title="从List中删除元素"></a>从List中删除元素</h2><h3 id="remove"><a href="#remove" class="headerlink" title="remove()"></a>remove()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>, <span class="string">&#x27;小宝&#x27;</span>]</span><br><span class="line">l.remove(<span class="string">&#x27;大宝&#x27;</span>)</span><br><span class="line"><span class="comment">#此时列表为 l = [&#x27;小宝&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="语句-del"><a href="#语句-del" class="headerlink" title="语句 del()"></a>语句 del()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>, <span class="string">&#x27;小宝&#x27;</span>]</span><br><span class="line"><span class="keyword">del</span> l[<span class="number">0</span>] <span class="comment">#删除‘大宝’</span></span><br><span class="line"><span class="keyword">del</span> l  <span class="comment">#删除整个列表</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="pop"><a href="#pop" class="headerlink" title="pop()"></a>pop()</h3><p><code>pop()</code> 可以从列表中取出最后一个元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>, <span class="string">&#x27;小宝&#x27;</span>]</span><br><span class="line">you = l.pop()  <span class="comment">#取出列表中的最后一个元素，即：‘小宝’</span></span><br><span class="line"><span class="comment"># pop()取出特定元素</span></span><br><span class="line">me = pop(<span class="number">0</span>)   <span class="comment">#取出列表中的第一个元素，即：‘大宝’</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="列表的切片操作（slice）"><a href="#列表的切片操作（slice）" class="headerlink" title="列表的切片操作（slice）"></a>列表的切片操作（slice）</h2><p>前面的操作只是用来处理列表中的单个元素，而列表的切片操作是用来处理多个元素的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>, <span class="number">91</span>, <span class="string">&#x27;小宝&#x27;</span>, <span class="number">99</span>]</span><br><span class="line">&gt;&gt;&gt;l[<span class="number">1</span>:<span class="number">3</span>]   <span class="comment">#取出数组中第一个到第三个元素</span></span><br><span class="line">[<span class="number">91</span>,<span class="string">&#x27;小宝&#x27;</span>]</span><br><span class="line">&gt;&gt;&gt;l[:<span class="number">3</span>]  <span class="comment">#取出从开始到第三个元素</span></span><br><span class="line">[<span class="string">&#x27;大宝&#x27;</span>, <span class="number">91</span>, <span class="string">&#x27;小宝&#x27;</span>]</span><br><span class="line">&gt;&gt;&gt;l[<span class="number">1</span>:]  <span class="comment">#取出从第一个到数据末尾的所有元素</span></span><br><span class="line">[<span class="number">91</span>, <span class="string">&#x27;小宝&#x27;</span>, <span class="number">99</span>]</span><br><span class="line">&gt;&gt;&gt;l[:]  <span class="comment">#相当于拷贝当前列表</span></span><br><span class="line">[<span class="string">&#x27;大宝&#x27;</span>, <span class="number">91</span>, <span class="string">&#x27;小宝&#x27;</span>, <span class="number">99</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="列表中的一些常用操作符"><a href="#列表中的一些常用操作符" class="headerlink" title="列表中的一些常用操作符"></a>列表中的一些常用操作符</h2><h3 id="比较操作符"><a href="#比较操作符" class="headerlink" title="比较操作符"></a>比较操作符</h3><p>两个列表进行比较会从第一个元素开始比，相等时才会跳到下一个元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">list1 = [<span class="number">123</span>,<span class="number">456</span>]</span><br><span class="line">list2 = [<span class="number">234</span>,<span class="number">123</span>]</span><br><span class="line">list3 = [<span class="number">123</span>,<span class="number">123</span>]</span><br><span class="line">&gt;&gt;&gt;list1 &gt; list2</span><br><span class="line"><span class="literal">False</span></span><br><span class="line">&gt;&gt;&gt;list1 &gt; list3</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="连接操作符"><a href="#连接操作符" class="headerlink" title="连接操作符"></a>连接操作符</h3><p>列表可以相加，从而实现两个列表的连接。但是加法操作不能实现向列表中添加新元素的操作。为了规范期间最好不要使用列表的加法操作来拼接两个列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">list1 = [<span class="number">123</span>,<span class="number">456</span>]</span><br><span class="line">list2 = [<span class="number">234</span>,<span class="number">123</span>]</span><br><span class="line">&gt;&gt;&gt;list1 + <span class="number">789</span></span><br><span class="line">error</span><br><span class="line">&gt;&gt;&gt;list1 + list2</span><br><span class="line">[<span class="number">123</span>,<span class="number">456</span>,<span class="number">234</span>,<span class="number">123</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="重复操作符"><a href="#重复操作符" class="headerlink" title="重复操作符"></a>重复操作符</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">list1 = [<span class="number">123</span>,<span class="number">456</span>]</span><br><span class="line">&gt;&gt;&gt;list1 * <span class="number">3</span>  <span class="comment">#列表乘一个数，相当于将一个列表复制几次</span></span><br><span class="line">[<span class="number">123</span>,<span class="number">456</span>,<span class="number">123</span>,<span class="number">456</span>,<span class="number">123</span>,<span class="number">456</span>]</span><br><span class="line">&gt;&gt;&gt;list1 *= <span class="number">3</span>  <span class="comment">#复合操作，相当于将一个列表复制3次，然后再放进原列表</span></span><br><span class="line">&gt;&gt;&gt;list1</span><br><span class="line">[<span class="number">123</span>,<span class="number">456</span>,<span class="number">123</span>,<span class="number">456</span>,<span class="number">123</span>,<span class="number">456</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="成员关系操作符"><a href="#成员关系操作符" class="headerlink" title="成员关系操作符"></a>成员关系操作符</h3><p>成员关系操作符就是判断成员和列表的关系。这种判断只能在同一个维度的列表中进行，不能判断嵌套列表中的元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">list1 = [<span class="number">123</span>,<span class="number">456</span>]</span><br><span class="line">&gt;&gt;&gt;<span class="number">123</span> <span class="keyword">in</span> list1</span><br><span class="line"><span class="literal">True</span></span><br><span class="line">&gt;&gt;&gt;<span class="string">&#x27;大宝&#x27;</span> <span class="keyword">in</span> list1</span><br><span class="line"><span class="literal">False</span></span><br><span class="line">&gt;&gt;&gt;<span class="string">&#x27;小宝&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> list1</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="comment"># 嵌套列表的情况</span></span><br><span class="line">list2 = [<span class="number">123</span>,<span class="number">456</span>,[<span class="string">&#x27;小宝&#x27;</span>]]</span><br><span class="line">&gt;&gt;&gt;<span class="string">&#x27;小宝&#x27;</span> <span class="keyword">in</span> list2</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="comment"># 可以用这种方式进行访问</span></span><br><span class="line">&gt;&gt;&gt;<span class="string">&#x27;小宝&#x27;</span> <span class="keyword">in</span> list2[<span class="number">2</span>]</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="列表的内置函数"><a href="#列表的内置函数" class="headerlink" title="列表的内置函数"></a>列表的内置函数</h2><p>列表的内置函数即列表这个类，官方提供的可用的函数，可以通过<code>dir(list)</code> 这个命令进行查看。</p>
+<h3 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h3><p>count() 函数是用来计算列表中某个元素出现的次数的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>, <span class="number">91</span>, <span class="string">&#x27;小宝&#x27;</span>, <span class="number">99</span>, <span class="string">&#x27;小宝&#x27;</span>]</span><br><span class="line">&gt;&gt;&gt;l.count(<span class="string">&#x27;大宝&#x27;</span>)</span><br><span class="line"><span class="number">1</span></span><br><span class="line">&gt;&gt;&gt;l.count(<span class="string">&#x27;小宝&#x27;</span>)</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="index-函数"><a href="#index-函数" class="headerlink" title="index() 函数"></a>index() 函数</h3><p>index() 函数是用来查找元素出现的位置的，会返回元素第一次出现的位置。index()函数还可以对查找范围进行限制。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>, <span class="number">91</span>, <span class="string">&#x27;小宝&#x27;</span>, <span class="number">99</span>, <span class="string">&#x27;小宝&#x27;</span>,<span class="string">&#x27;大宝&#x27;</span>, <span class="number">91</span>, <span class="string">&#x27;小宝&#x27;</span>]</span><br><span class="line">&gt;&gt;&gt;l.index(<span class="string">&#x27;大宝&#x27;</span>)   <span class="comment">#查找列表中&#x27;大宝&#x27;出现的位置</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line">&gt;&gt;&gt;l.index(<span class="string">&#x27;小宝&#x27;</span>，<span class="number">3</span>，<span class="number">5</span>)  <span class="comment">#查找从3到5这个区间中&#x27;小宝&#x27;出现的位置</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="reverse"><a href="#reverse" class="headerlink" title="reverse()"></a>reverse()</h3><p>reverse() 函数会将列表进行反转，即原来第一个元素会和最后一个元素调换位置，第二个会和倒数第二个元素调换位置，以此类推。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;大宝&#x27;</span>, <span class="number">91</span>, <span class="string">&#x27;小宝&#x27;</span>, <span class="number">99</span>]</span><br><span class="line">&gt;&gt;&gt;l.reverse()</span><br><span class="line">[<span class="number">99</span>,<span class="string">&#x27;小宝&#x27;</span>, <span class="number">91</span>, <span class="string">&#x27;大宝&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><p>sort() 函数是用于对列表进行排序的函数。sort()函数可以对纯数字或者对纯字符的列表进行排序，不能对混合的列表进行排序。sort() 函数有三个参数，第一个是要使用的排序算法func，第二个是与该算法对应的key，第三个是reverse，即是否反转（逆序）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="string">&#x27;af&#x27;</span>,<span class="string">&#x27;ab&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;bc&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l.sort()</span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;ab&#x27;</span>, <span class="string">&#x27;af&#x27;</span>, <span class="string">&#x27;bc&#x27;</span>]</span><br><span class="line">l=[<span class="number">3</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l.sort()</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">l=[<span class="number">3</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l.sort(reverse=<span class="literal">True</span>)   <span class="comment">#默认reverse=False</span></span><br><span class="line">[<span class="number">6</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="列表的拷贝"><a href="#列表的拷贝" class="headerlink" title="列表的拷贝"></a>列表的拷贝</h2><p>列表的拷贝分为<strong>深拷贝</strong>和<strong>浅拷贝</strong>，其中深拷贝是会在内存中重新复制一个原数组，而浅拷贝只是给原数组起了个别名而已。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">l=[<span class="number">3</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">6</span>]</span><br><span class="line">l1 = l    <span class="comment">#浅拷贝</span></span><br><span class="line">l2 = l[:]    <span class="comment">#深拷贝</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l.sort()</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l1</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l2</span><br><span class="line">[<span class="number">3</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">6</span>]</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="落空 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="落空 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/list/" rel="tag"># list</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/6783.html" rel="prev" title="写作以及博文管理">
+      <i class="fa fa-chevron-left"></i> 写作以及博文管理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/17219.html" rel="next" title="python之list">
+      python之list <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#List%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">List的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%91List%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="nav-number">2.</span> <span class="nav-text">向List中添加元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#append-%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">append() 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#extend-%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">extend() 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#insert-%E6%96%B9%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">insert() 方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8EList%E4%B8%AD%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-number">3.</span> <span class="nav-text">从List中删除元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#remove"><span class="nav-number">3.1.</span> <span class="nav-text">remove()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E5%8F%A5-del"><span class="nav-number">3.2.</span> <span class="nav-text">语句 del()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pop"><span class="nav-number">3.3.</span> <span class="nav-text">pop()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E7%9A%84%E5%88%87%E7%89%87%E6%93%8D%E4%BD%9C%EF%BC%88slice%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">列表的切片操作（slice）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">5.</span> <span class="nav-text">列表中的一些常用操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">5.1.</span> <span class="nav-text">比较操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">5.2.</span> <span class="nav-text">连接操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">5.3.</span> <span class="nav-text">重复操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%90%E5%91%98%E5%85%B3%E7%B3%BB%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">5.4.</span> <span class="nav-text">成员关系操作符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E7%9A%84%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">列表的内置函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#count"><span class="nav-number">6.1.</span> <span class="nav-text">count()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#index-%E5%87%BD%E6%95%B0"><span class="nav-number">6.2.</span> <span class="nav-text">index() 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reverse"><span class="nav-number">6.3.</span> <span class="nav-text">reverse()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">6.4.</span> <span class="nav-text">sort()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E7%9A%84%E6%8B%B7%E8%B4%9D"><span class="nav-number">7.</span> <span class="nav-text">列表的拷贝</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="落空"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">落空</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ayoubu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ayoubu@outlook.com" title="E-Mail → mailto:ayoubu@outlook.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5095666460" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5095666460" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/ayoubu" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-zhihu"></i>知乎</a>
+      </span>
+  </div>
+
+
+<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">落空</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">9k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">8 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  <script async src="/js/cursor/love.min.js"></script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>
