@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Tp_uCM85etMVq9MuOfdPYQ6aA4SI0lOYqjanBUw5BuQ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://ayoubu.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="简介字符串和元组有点类似，可以把字符串理解为一个由字符组成的元组，字符串一旦创建也是不能更改的。也就是说不能通过索引去更改某个字符。但是，python字符串类提供了很多方法，可以帮我们实现这些操作。 Python 字符串的编写方式多种多样，主要有：Single quotes、Double quotes 还有 Triple quoted 三种形式。 Single quotes12&gt;&gt;&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python之字符串">
+<meta property="og:url" content="https://ayoubu.github.io/archives/49647.html">
+<meta property="og:site_name" content="落空的个人博客">
+<meta property="og:description" content="简介字符串和元组有点类似，可以把字符串理解为一个由字符组成的元组，字符串一旦创建也是不能更改的。也就是说不能通过索引去更改某个字符。但是，python字符串类提供了很多方法，可以帮我们实现这些操作。 Python 字符串的编写方式多种多样，主要有：Single quotes、Double quotes 还有 Triple quoted 三种形式。 Single quotes12&gt;&gt;&amp;g">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-15T16:48:26.000Z">
+<meta property="article:modified_time" content="2020-08-16T07:29:15.616Z">
+<meta property="article:author" content="落空">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="字符串">
+<meta name="twitter:card" content="summary">
+
+
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<link rel="stylesheet" type="text/css" href="/css/injector.css" />
+  <title>python之字符串 | 落空的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落空的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落空的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我慢慢明白了为什么我不快乐，因为我总是期待一个结果。</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">7</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/49647.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python之字符串
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-15 16:48:26" itemprop="dateCreated datePublished" datetime="2020-08-15T16:48:26Z">2020-08-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-16 07:29:15" itemprop="dateModified" datetime="2020-08-16T07:29:15Z">2020-08-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">python 语法学习</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>字符串和元组有点类似，可以把字符串理解为一个由字符组成的元组，字符串一旦创建也是不能更改的。也就是说不能通过索引去更改某个字符。但是，python字符串类提供了很多方法，可以帮我们实现这些操作。</p>
+<p>Python 字符串的编写方式多种多样，主要有：Single quotes、Double quotes 还有 Triple quoted 三种形式。</p>
+<h3 id="Single-quotes"><a href="#Single-quotes" class="headerlink" title="Single quotes"></a>Single quotes</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">&#x27;I love you&#x27;</span>)</span><br><span class="line">I love you</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="Double-quotes"><a href="#Double-quotes" class="headerlink" title="Double quotes"></a>Double quotes</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">&quot;I love you&quot;</span>)</span><br><span class="line">I love you</span><br></pre></td></tr></table></figure>
+
+<h3 id="Triple-quotes"><a href="#Triple-quotes" class="headerlink" title="Triple quotes"></a>Triple quotes</h3><p>通常，使用三引号字符串来引用多行文本。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">poetry = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">面朝大海，春暖花开</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">从明天起，做一个幸福的人</span></span><br><span class="line"><span class="string">喂马、劈柴，周游世界&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="混合使用-Single-quotes-和-Double-quotes"><a href="#混合使用-Single-quotes-和-Double-quotes" class="headerlink" title="混合使用 Single quotes 和 Double quotes"></a>混合使用 Single quotes 和 Double quotes</h3><p>一般在我们需要输出带引号的一句话时使用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">&quot;Let&#x27;s go!&quot;</span>)    <span class="comment">#此时使用单引号，就会有问题</span></span><br><span class="line">Let<span class="string">&#x27;s go!</span></span><br><span class="line"><span class="string">&gt;&gt;&gt; print(&#x27;</span><span class="string">&quot;Life is short, you need Python.&quot;</span><span class="string">&#x27;)</span></span><br><span class="line"><span class="string">&quot;Life is short, you need Python.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串的内置方法"><a href="#字符串的内置方法" class="headerlink" title="字符串的内置方法"></a>字符串的内置方法</h2><p>以下列举了所有的python字符串内置函数。</p>
+<table>
+<thead>
+<tr>
+<th>capitalize()</th>
+<th>把字符串的第一个字符改为大写</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>casefold()</td>
+<td>把整个字符串的所有字符改为小写</td>
+</tr>
+<tr>
+<td>center(width)</td>
+<td>将字符串居中，并使用空格填充至长度 width 的新字符串</td>
+</tr>
+<tr>
+<td>count(sub[, start[, end]])</td>
+<td>返回 sub 在字符串里边出现的次数，start 和 end 参数表示范围，可选。</td>
+</tr>
+<tr>
+<td>encode(encoding=’utf-8’, errors=’strict’)</td>
+<td>以 encoding 指定的编码格式对字符串进行编码。</td>
+</tr>
+<tr>
+<td>endswith(sub[, start[, end]])</td>
+<td>检查字符串是否以 sub 子字符串结束，如果是返回 True，否则返回 False。start 和 end 参数表示范围，可选。</td>
+</tr>
+<tr>
+<td>expandtabs([tabsize=8])</td>
+<td>把字符串中的 tab 符号（\t）转换为空格，如不指定参数，默认的空格数是 tabsize=8。</td>
+</tr>
+<tr>
+<td>find(sub[, start[, end]])</td>
+<td>检测 sub 是否包含在字符串中，如果有则返回索引值，否则返回 -1，start 和 end 参数表示范围，可选。</td>
+</tr>
+<tr>
+<td>index(sub[, start[, end]])</td>
+<td>跟 find 方法一样，不过如果 sub 不在 string 中会产生一个异常。</td>
+</tr>
+<tr>
+<td>isalnum()</td>
+<td>如果字符串至少有一个字符并且所有字符都是字母或数字则返回 True，否则返回 False。</td>
+</tr>
+<tr>
+<td>isalpha()</td>
+<td>如果字符串至少有一个字符并且所有字符都是字母则返回 True，否则返回 False。</td>
+</tr>
+<tr>
+<td>isdecimal()</td>
+<td>如果字符串只包含十进制数字则返回 True，否则返回 False。</td>
+</tr>
+<tr>
+<td>isdigit()</td>
+<td>如果字符串只包含数字则返回 True，否则返回 False。</td>
+</tr>
+<tr>
+<td>islower()</td>
+<td>如果字符串中至少包含一个区分大小写的字符，并且这些字符都是小写，则返回 True，否则返回 False。</td>
+</tr>
+<tr>
+<td>isnumeric()</td>
+<td>如果字符串中只包含数字字符，则返回 True，否则返回 False。</td>
+</tr>
+<tr>
+<td>isspace()</td>
+<td>如果字符串中只包含空格，则返回 True，否则返回 False。</td>
+</tr>
+<tr>
+<td>istitle()</td>
+<td>如果字符串是标题化（所有的单词都是以大写开始，其余字母均小写），则返回 True，否则返回 False。</td>
+</tr>
+<tr>
+<td>isupper()</td>
+<td>如果字符串中至少包含一个区分大小写的字符，并且这些字符都是大写，则返回 True，否则返回 False。</td>
+</tr>
+<tr>
+<td>join(sub)</td>
+<td>以字符串作为分隔符，插入到 sub 中所有的字符之间。</td>
+</tr>
+<tr>
+<td>ljust(width)</td>
+<td>返回一个左对齐的字符串，并使用空格填充至长度为 width 的新字符串。</td>
+</tr>
+<tr>
+<td>lower()</td>
+<td>转换字符串中所有大写字符为小写。</td>
+</tr>
+<tr>
+<td>lstrip()</td>
+<td>去掉字符串左边的所有空格</td>
+</tr>
+<tr>
+<td>partition(sub)</td>
+<td>找到子字符串 sub，把字符串分成一个 3 元组 (pre_sub, sub, fol_sub)，如果字符串中不包含 sub 则返回 (‘原字符串’, ‘’, ‘’)</td>
+</tr>
+<tr>
+<td>replace(old, new[, count])</td>
+<td>把字符串中的 old 子字符串替换成 new 子字符串，如果 count 指定，则替换不超过 count 次。</td>
+</tr>
+<tr>
+<td>rfind(sub[, start[, end]])</td>
+<td>类似于 find() 方法，不过是从右边开始查找。</td>
+</tr>
+<tr>
+<td>rindex(sub[, start[, end]])</td>
+<td>类似于 index() 方法，不过是从右边开始。</td>
+</tr>
+<tr>
+<td>rjust(width)</td>
+<td>返回一个右对齐的字符串，并使用空格填充至长度为 width 的新字符串。</td>
+</tr>
+<tr>
+<td>rpartition(sub)</td>
+<td>类似于 partition() 方法，不过是从右边开始查找。</td>
+</tr>
+<tr>
+<td>rstrip()</td>
+<td>删除字符串末尾的空格。</td>
+</tr>
+<tr>
+<td>split(sep=None, maxsplit=-1)</td>
+<td>不带参数默认是以空格为分隔符切片字符串，如果 maxsplit 参数有设置，则仅分隔 maxsplit 个子字符串，返回切片后的子字符串拼接的列表。</td>
+</tr>
+<tr>
+<td>splitlines(([keepends]))</td>
+<td>在输出结果里是否去掉换行符，默认为 False，不包含换行符；如果为 True，则保留换行符。。</td>
+</tr>
+<tr>
+<td>startswith(prefix[, start[, end]])</td>
+<td>检查字符串是否以 prefix 开头，是则返回 True，否则返回 False。start 和 end 参数可以指定范围检查，可选。</td>
+</tr>
+<tr>
+<td>strip([chars])</td>
+<td>删除字符串前边和后边所有的空格，chars 参数可以定制删除的字符，可选。</td>
+</tr>
+<tr>
+<td>swapcase()</td>
+<td>翻转字符串中的大小写。</td>
+</tr>
+<tr>
+<td>title()</td>
+<td>返回标题化（所有的单词都是以大写开始，其余字母均小写）的字符串。</td>
+</tr>
+<tr>
+<td>translate(table)</td>
+<td>根据 table 的规则（可以由 str.maketrans(‘a’, ‘b’) 定制）转换字符串中的字符。</td>
+</tr>
+<tr>
+<td>upper()</td>
+<td>转换字符串中的所有小写字符为大写。</td>
+</tr>
+<tr>
+<td>zfill(width)</td>
+<td>返回长度为 width 的字符串，原字符串右对齐，前边用 0 填充。</td>
+</tr>
+</tbody></table>
+<h3 id="capitalize"><a href="#capitalize" class="headerlink" title="capitalize()"></a>capitalize()</h3><p>将字符串的首字母变成大写形式，然后返回一个新的字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>str2 = <span class="string">&#x27;xiao xie&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>str2.capitalize()</span><br><span class="line"><span class="string">&#x27;Xiao xie&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="casefold"><a href="#casefold" class="headerlink" title="casefold()"></a>casefold()</h3><p>将字符串中的大写全部变成小写，然后返回一个新的字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">&#x27;DaXie&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.casefold()</span><br><span class="line"><span class="string">&#x27;daxie&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="center-width"><a href="#center-width" class="headerlink" title="center(width)"></a>center(width)</h3><p>将字符串居中，并使用空格填充至长度为width 的新字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">&#x27;center&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.center(<span class="number">40</span>)</span><br><span class="line"><span class="string">&#x27;                 center                 &#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="endswith-sub-start-end"><a href="#endswith-sub-start-end" class="headerlink" title="endswith(sub[,start[,end]])"></a>endswith(sub[,start[,end]])</h3><p>检查字符串是否以 sub 子字符串结束，如果是返回 True，否则返回 False。start 和 end 参数表示范围，可选。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">&#x27;center&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.endswith(<span class="string">&#x27;er&#x27;</span>)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.endswith(<span class="string">&#x27;er&#x27;</span>,<span class="number">0</span>,<span class="number">4</span>)    <span class="comment">#查找前四个是否以‘er&#x27;结束</span></span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="expandtabs-tabsize-8"><a href="#expandtabs-tabsize-8" class="headerlink" title="expandtabs([tabsize=8])"></a>expandtabs([tabsize=8])</h3><p>把字符串中的 tab 符号（\t）转换为空格，如不指定参数，默认的空格数是 tabsize=8。默认参数下有点像print时的结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">&#x27;I\tlove\tyou&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(s)</span><br><span class="line">I    love    you</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.expandtabs()</span><br><span class="line"><span class="string">&#x27;I       love    you&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="find-sub-start-end"><a href="#find-sub-start-end" class="headerlink" title="find(sub[,start[,end]])"></a>find(sub[,start[,end]])</h3><p>检测 sub 是否包含在字符串中，如果有则返回索引值，否则返回 -1，start 和 end 参数表示范围，可选。 与之相应的index(sub)跟 find 方法一样，不过如果 sub 不在 string 中会产生一个异常。</p>
+<p>除此之外还有rfind()，它和find()类似，只不过从右边开始查找，这个是为节省时间。与之对应的index()也有rindex()方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">&#x27;I love you&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.find(<span class="string">&#x27;he&#x27;</span>)   <span class="comment">#找不到时返回-1</span></span><br><span class="line"><span class="number">-1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.find(<span class="string">&#x27;you&#x27;</span>)</span><br><span class="line"><span class="number">7</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="join-sub"><a href="#join-sub" class="headerlink" title="join(sub)"></a>join(sub)</h3><p>以字符串作为分隔符，插入到 sub 中所有的字符之间。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">&#x27;大宝&#x27;</span>   <span class="comment">#把’大宝‘作为分隔符</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.join(<span class="string">&#x27;||||&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;|大宝|大宝|大宝|&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="lstrip"><a href="#lstrip" class="headerlink" title="lstrip()"></a>lstrip()</h3><p>去掉字符串左边的所有空格 ，与之对应的还有rstrip()，即去掉字符串右边的所有空格。还有strip()是两头的都去掉。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">&#x27;       I love you          &#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.lstrip()</span><br><span class="line"><span class="string">&#x27;I love you          &#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.rstrip()</span><br><span class="line"><span class="string">&#x27;       I love you&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.strip()</span><br><span class="line"><span class="string">&#x27;I love you&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="partition-sub"><a href="#partition-sub" class="headerlink" title="partition(sub)"></a>partition(sub)</h3><p>找到子字符串 sub，把字符串分成一个 3 元组 (pre_sub, sub, fol_sub)，如果字符串中不包含 sub 则返回 (‘原字符串’, ‘’, ‘’) </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">&#x27;Iloveyou&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.partition(<span class="string">&#x27;love&#x27;</span>)</span><br><span class="line">(<span class="string">&#x27;I&#x27;</span>, <span class="string">&#x27;love&#x27;</span>, <span class="string">&#x27;you&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="replace-old-new-count"><a href="#replace-old-new-count" class="headerlink" title="replace(old,new[,count])"></a>replace(old,new[,count])</h3><p>把字符串中的 old 子字符串替换成 new 子字符串，如果 count 指定，则替换不超过 count 次。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s =<span class="string">&#x27;大宝，大宝，大宝&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.replace(<span class="string">&#x27;大&#x27;</span>,<span class="string">&#x27;小&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;小宝，小宝，小宝&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.replace(<span class="string">&#x27;大&#x27;</span>,<span class="string">&#x27;小&#x27;</span>,<span class="number">2</span>)</span><br><span class="line"><span class="string">&#x27;小宝，小宝，大宝&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="split-sep-None-maxsplit-1"><a href="#split-sep-None-maxsplit-1" class="headerlink" title="split(sep=None, maxsplit=-1)"></a>split(sep=None, maxsplit=-1)</h3><p>不带参数默认是以空格为分隔符切片字符串，如果 maxsplit 参数有设置，则仅分隔 maxsplit 个子字符串，返回切片后的子字符串拼接的列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">&#x27;I love you&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.split()    <span class="comment">#以空格切割</span></span><br><span class="line">[<span class="string">&#x27;I&#x27;</span>, <span class="string">&#x27;love&#x27;</span>, <span class="string">&#x27;you&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s =<span class="string">&#x27;大宝，大宝，大宝&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.split(<span class="string">&#x27;，&#x27;</span>)    <span class="comment">#以’，‘切割</span></span><br><span class="line">[<span class="string">&#x27;大宝&#x27;</span>, <span class="string">&#x27;大宝&#x27;</span>, <span class="string">&#x27;大宝&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="translate-table"><a href="#translate-table" class="headerlink" title="translate(table)"></a>translate(table)</h3><p>根据 table 的规则（可以由 str.maketrans(‘a’, ‘b’) 定制）转换字符串中的字符。有点类似replace操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s =<span class="string">&#x27;大宝，大宝，大宝&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.translate(str.maketrans(<span class="string">&#x27;大&#x27;</span>,<span class="string">&#x27;小&#x27;</span>))</span><br><span class="line"><span class="string">&#x27;小宝，小宝，小宝&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h2><h3 id="format-方法"><a href="#format-方法" class="headerlink" title="format() 方法"></a>format() 方法</h3><p>format()方法可以使用位置参数或者关键字参数，可以单独使用，也可以混合使用，混合使用时位置参数必须在关键字参数之前。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用位置参数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0&#125; love &#123;1&#125;!&quot;</span>.format(<span class="string">&quot;I&quot;</span>,<span class="string">&quot;you&quot;</span>)</span><br><span class="line"><span class="string">&#x27;I love you!&#x27;</span></span><br><span class="line"><span class="comment"># 使用变量作为参数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;a&#125; love &#123;b&#125;!&quot;</span>.format(a = <span class="string">&quot;I&quot;</span>,b = <span class="string">&quot;you&quot;</span>)</span><br><span class="line"><span class="string">&#x27;I love you!&#x27;</span></span><br><span class="line"><span class="comment"># 混合使用</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0&#125; love &#123;b&#125;!&quot;</span>.format(<span class="string">&quot;I&quot;</span>,b = <span class="string">&quot;you&quot;</span>)</span><br><span class="line"><span class="string">&#x27;I love you!&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="小数的格式化打印"><a href="#小数的格式化打印" class="headerlink" title="小数的格式化打印"></a>小数的格式化打印</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#123;0:.2f&#125; &#123;1&#125;&#x27;</span>.format(<span class="number">0.12345</span>,<span class="string">&#x27;%&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;0.12 %&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串格式化符号"><a href="#字符串格式化符号" class="headerlink" title="字符串格式化符号"></a>字符串格式化符号</h2><h3 id="字符串格式化符号含义"><a href="#字符串格式化符号含义" class="headerlink" title="字符串格式化符号含义"></a>字符串格式化符号含义</h3><table>
+<thead>
+<tr>
+<th><strong>符号</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%c</td>
+<td>格式化字符及其 ASCII 码</td>
+</tr>
+<tr>
+<td>%s</td>
+<td>格式化字符串</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>格式化整数</td>
+</tr>
+<tr>
+<td>%o</td>
+<td>格式化无符号八进制数</td>
+</tr>
+<tr>
+<td>%x</td>
+<td>格式化无符号十六进制数</td>
+</tr>
+<tr>
+<td>%X</td>
+<td>格式化无符号十六进制数（大写）</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>格式化浮点数字，可指定小数点后的精度</td>
+</tr>
+<tr>
+<td>%e</td>
+<td>用科学计数法格式化浮点数</td>
+</tr>
+<tr>
+<td>%E</td>
+<td>作用同 %e，用科学计数法格式化浮点数</td>
+</tr>
+<tr>
+<td>%g</td>
+<td>根据值的大小决定使用 %f 或 %e</td>
+</tr>
+<tr>
+<td>%G</td>
+<td>作用同 %g，根据值的大小决定使用 %f 或者 %E</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%c %c %c&#x27;</span> % (<span class="number">97</span>,<span class="number">98</span>,<span class="number">99</span>)        <span class="comment"># 格式化字符及其 ASCII 码</span></span><br><span class="line"><span class="string">&#x27;a b c&#x27;</span></span><br><span class="line"><span class="string">&#x27;%s %s %s&#x27;</span> % (<span class="string">&#x27;I&#x27;</span>,<span class="string">&#x27;love&#x27;</span>,<span class="string">&#x27;you&#x27;</span>)    <span class="comment"># 用字符串格式化字符串</span></span><br><span class="line"><span class="string">&#x27;I love you&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%d ,%d&#x27;</span> %(<span class="number">25.66</span>,<span class="number">40</span>)     <span class="comment">#小数也会被格式化成整数</span></span><br><span class="line"><span class="string">&#x27;25 ,40&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%x&#x27;</span>% <span class="number">11</span>    <span class="comment">#格式化为16进制（小写字母）</span></span><br><span class="line"><span class="string">&#x27;b&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%X&#x27;</span>% <span class="number">11</span>    <span class="comment">#格式化为16进制（大写字母）</span></span><br><span class="line"><span class="string">&#x27;B&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%f&#x27;</span>%<span class="number">1.25</span>    <span class="comment">#格式化为浮点数，默认保留小数点后6位，不够会以0补齐</span></span><br><span class="line"><span class="string">&#x27;1.250000&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="格式化操作符辅助命令"><a href="#格式化操作符辅助命令" class="headerlink" title="格式化操作符辅助命令"></a>格式化操作符辅助命令</h3><table>
+<thead>
+<tr>
+<th><strong>符号</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>m.n</td>
+<td>m 是显示的最小总宽度，n 是小数点后的位数</td>
+</tr>
+<tr>
+<td>-</td>
+<td>用于左对齐</td>
+</tr>
+<tr>
+<td>+</td>
+<td>在正数前面显示加号（+）</td>
+</tr>
+<tr>
+<td>#</td>
+<td>在八进制数前面显示 ‘0o’，在十六进制数前面显示 ‘0x’ 或 ‘0X’</td>
+</tr>
+<tr>
+<td>0</td>
+<td>显示的数字前面填充 ‘0’ 取代空格</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%5.1f&#x27;</span> % <span class="number">27.658</span>   <span class="comment">#总长度为5，保留1位小数</span></span><br><span class="line"><span class="string">&#x27; 27.7&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%.2e&#x27;</span>%<span class="number">27.568</span>    <span class="comment">#保留两位小数</span></span><br><span class="line"><span class="string">&#x27;2.76e+01&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%6d&#x27;</span>%<span class="number">1</span>        <span class="comment">#格式化整数，总长度为6</span></span><br><span class="line"><span class="string">&#x27;     1&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%-6d&#x27;</span>%<span class="number">1</span>    <span class="comment">#格式化整数，总长度为6，左对齐</span></span><br><span class="line"><span class="string">&#x27;1     &#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%+d&#x27;</span>%<span class="number">1</span>        <span class="comment">#格式化显示正整数，并添加符号</span></span><br><span class="line"><span class="string">&#x27;+1&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%+d&#x27;</span>%<span class="number">-1</span>    <span class="comment">#格式化显示负整数，并添加符号</span></span><br><span class="line"><span class="string">&#x27;-1&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%d&#x27;</span>%<span class="number">-1</span>        <span class="comment">#仅显示负数时可以不用+号</span></span><br><span class="line"><span class="string">&#x27;-1&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%#o&#x27;</span>%<span class="number">10</span>    <span class="comment">#格式化显示八进制数，并添加八进制说明符</span></span><br><span class="line"><span class="string">&#x27;0o12&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%#X&#x27;</span>%<span class="number">12</span>    <span class="comment">#格式化显示十六进制数，并添加十六进制说明符</span></span><br><span class="line"><span class="string">&#x27;0XC&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%06d&#x27;</span>%<span class="number">1</span>    <span class="comment">#格式化显示整数，以0替换空格</span></span><br><span class="line"><span class="string">&#x27;000001&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Python-的转义字符及其含义"><a href="#Python-的转义字符及其含义" class="headerlink" title="Python 的转义字符及其含义"></a>Python 的转义字符及其含义</h3><table>
+<thead>
+<tr>
+<th><strong>符号</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#39;</td>
+<td>单引号</td>
+</tr>
+<tr>
+<td>&quot;</td>
+<td>双引号</td>
+</tr>
+<tr>
+<td>\a</td>
+<td>发出系统响铃声</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>退格符</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>换行符</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>横向制表符（TAB）</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>纵向制表符</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>回车符</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>换页符</td>
+</tr>
+<tr>
+<td>\o</td>
+<td>八进制数代表的字符</td>
+</tr>
+<tr>
+<td>\x</td>
+<td>十六进制数代表的字符</td>
+</tr>
+<tr>
+<td>\0</td>
+<td>表示一个空字符</td>
+</tr>
+<tr>
+<td>\</td>
+<td>反斜杠</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\46747.html" rel="bookmark">python之字典</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\28278.html" rel="bookmark">python之函数</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\7409.html" rel="bookmark">python课后作业002</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\51299.html" rel="bookmark">python 之 tuple</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\17219.html" rel="bookmark">python之list</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="落空 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="落空 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag"># 字符串</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/51299.html" rel="prev" title="python 之 tuple">
+      <i class="fa fa-chevron-left"></i> python 之 tuple
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/7409.html" rel="next" title="python课后作业002">
+      python课后作业002 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Single-quotes"><span class="nav-number">1.1.</span> <span class="nav-text">Single quotes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Double-quotes"><span class="nav-number">1.2.</span> <span class="nav-text">Double quotes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Triple-quotes"><span class="nav-number">1.3.</span> <span class="nav-text">Triple quotes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8-Single-quotes-%E5%92%8C-Double-quotes"><span class="nav-number">1.4.</span> <span class="nav-text">混合使用 Single quotes 和 Double quotes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">字符串的内置方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#capitalize"><span class="nav-number">2.1.</span> <span class="nav-text">capitalize()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#casefold"><span class="nav-number">2.2.</span> <span class="nav-text">casefold()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#center-width"><span class="nav-number">2.3.</span> <span class="nav-text">center(width)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#endswith-sub-start-end"><span class="nav-number">2.4.</span> <span class="nav-text">endswith(sub[,start[,end]])</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#expandtabs-tabsize-8"><span class="nav-number">2.5.</span> <span class="nav-text">expandtabs([tabsize&#x3D;8])</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find-sub-start-end"><span class="nav-number">2.6.</span> <span class="nav-text">find(sub[,start[,end]])</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#join-sub"><span class="nav-number">2.7.</span> <span class="nav-text">join(sub)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lstrip"><span class="nav-number">2.8.</span> <span class="nav-text">lstrip()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#partition-sub"><span class="nav-number">2.9.</span> <span class="nav-text">partition(sub)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#replace-old-new-count"><span class="nav-number">2.10.</span> <span class="nav-text">replace(old,new[,count])</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#split-sep-None-maxsplit-1"><span class="nav-number">2.11.</span> <span class="nav-text">split(sep&#x3D;None, maxsplit&#x3D;-1)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#translate-table"><span class="nav-number">2.12.</span> <span class="nav-text">translate(table)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">字符串格式化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#format-%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">format() 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E6%95%B0%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%89%93%E5%8D%B0"><span class="nav-number">3.2.</span> <span class="nav-text">小数的格式化打印</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%AC%A6%E5%8F%B7"><span class="nav-number">4.</span> <span class="nav-text">字符串格式化符号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%AC%A6%E5%8F%B7%E5%90%AB%E4%B9%89"><span class="nav-number">4.1.</span> <span class="nav-text">字符串格式化符号含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%BE%85%E5%8A%A9%E5%91%BD%E4%BB%A4"><span class="nav-number">4.2.</span> <span class="nav-text">格式化操作符辅助命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-%E7%9A%84%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6%E5%8F%8A%E5%85%B6%E5%90%AB%E4%B9%89"><span class="nav-number">4.3.</span> <span class="nav-text">Python 的转义字符及其含义</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="落空"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">落空</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ayoubu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ayoubu@outlook.com" title="E-Mail → mailto:ayoubu@outlook.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5095666460" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5095666460" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/ayoubu" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-zhihu"></i>知乎</a>
+      </span>
+  </div>
+
+
+<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">落空</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">19k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">18 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  <script async src="/js/cursor/love.min.js"></script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>

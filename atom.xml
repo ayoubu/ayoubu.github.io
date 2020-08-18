@@ -6,7 +6,7 @@
   <link href="https://ayoubu.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayoubu.github.io/"/>
-  <updated>2020-08-15T02:31:48.522Z</updated>
+  <updated>2020-08-18T06:58:46.547Z</updated>
   <id>https://ayoubu.github.io/</id>
   
   <author>
@@ -17,33 +17,135 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>财务知识之市盈率(PE)</title>
-    <link href="https://ayoubu.github.io/archives/60667.html"/>
-    <id>https://ayoubu.github.io/archives/60667.html</id>
-    <published>2020-08-14T22:04:17.000Z</published>
-    <updated>2020-08-15T02:31:48.522Z</updated>
+    <title>python之字典</title>
+    <link href="https://ayoubu.github.io/archives/46747.html"/>
+    <id>https://ayoubu.github.io/archives/46747.html</id>
+    <published>2020-08-18T14:19:06.000Z</published>
+    <updated>2020-08-18T06:58:46.547Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Python-字典-Dictionary&quot;&gt;&lt;a href=&quot;#Python-字典-Dictionary&quot; class=&quot;headerlink&quot; title=&quot;Python 字典(Dictionary)&quot;&gt;&lt;/a&gt;Python 字典(Dictionary)&lt;/h2&gt;&lt;p&gt;字典是另一种可变容器模型，且可存储任意类型对象。Python中的字典是唯一的&lt;strong&gt;映射类型&lt;/strong&gt;，与之对应的列表、元组等都为序列类型。&lt;/p&gt;
+&lt;p&gt;字典的每个键值 &lt;strong&gt;key=&amp;gt;value&lt;/strong&gt; 对用冒号 &lt;strong&gt;:&lt;/strong&gt; 分割，每个键值对之间用逗号 &lt;strong&gt;,&lt;/strong&gt; 分割，整个字典包括在花括号 &lt;strong&gt;{}&lt;/strong&gt; 中 ,格式如下所示：&lt;code&gt;d = &amp;#123;key1 : value1, key2 : value2 &amp;#125;&lt;/code&gt;，索引的时候直接使用key值就行。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
+    
+    <category term="python 语法学习" scheme="https://ayoubu.github.io/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
+    
+    <category term="字典" scheme="https://ayoubu.github.io/tags/%E5%AD%97%E5%85%B8/"/>
+    
+    <category term="Dictionary" scheme="https://ayoubu.github.io/tags/Dictionary/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python之函数</title>
+    <link href="https://ayoubu.github.io/archives/28278.html"/>
+    <id>https://ayoubu.github.io/archives/28278.html</id>
+    <published>2020-08-16T15:33:09.000Z</published>
+    <updated>2020-08-18T06:58:46.542Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;初识python函数&quot;&gt;&lt;a href=&quot;#初识python函数&quot; class=&quot;headerlink&quot; title=&quot;初识python函数&quot;&gt;&lt;/a&gt;初识python函数&lt;/h2&gt;&lt;p&gt;在python中定义函数的关键字为&lt;strong&gt;def&lt;/strong&gt;，一个完整的函数应该包括函数名、参数、返回值。其中参数和返回值不是必要的。&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;MyFirstFunction&lt;/span&gt;():&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    print(&lt;span class=&quot;string&quot;&gt;&amp;#x27;这是我的第一个函数。&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; MyFirstFunction()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;这是我的第一个函数。&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;形参和实参&quot;&gt;&lt;a href=&quot;#形参和实参&quot; class=&quot;headerlink&quot; title=&quot;形参和实参&quot;&gt;&lt;/a&gt;形参和实参&lt;/h3&gt;&lt;p&gt;函数定义过程中的参数成为形参，因为它只是一个形式，表示占据一个参数的位置。实参就是在函数调用过程中实际传入的参数，此时参数是有值的，代表一定含义的。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
+    
+    <category term="python 语法学习" scheme="https://ayoubu.github.io/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
+    
+    <category term="函数" scheme="https://ayoubu.github.io/tags/%E5%87%BD%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python课后作业002</title>
+    <link href="https://ayoubu.github.io/archives/7409.html"/>
+    <id>https://ayoubu.github.io/archives/7409.html</id>
+    <published>2020-08-16T09:44:41.000Z</published>
+    <updated>2020-08-18T07:00:39.648Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;市盈率&quot;&gt;&lt;a href=&quot;#市盈率&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h3 id=&quot;什么是BIF？&quot;&gt;&lt;a href=&quot;#什么是BIF？&quot; class=&quot;headerlink&quot; title=&quot;什么是BIF？&quot;&gt;&lt;/a&gt;什么是BIF？&lt;/h3&gt;&lt;p&gt;BIF 就是 Built-in</summary>
         
       
     
     
     
-    <category term="金融" scheme="https://ayoubu.github.io/categories/%E9%87%91%E8%9E%8D/"/>
+    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
     
-    <category term="财务知识" scheme="https://ayoubu.github.io/categories/%E9%87%91%E8%9E%8D/%E8%B4%A2%E5%8A%A1%E7%9F%A5%E8%AF%86/"/>
+    <category term="课后作业" scheme="https://ayoubu.github.io/categories/Python/%E8%AF%BE%E5%90%8E%E4%BD%9C%E4%B8%9A/"/>
     
     
-    <category term="PE" scheme="https://ayoubu.github.io/tags/PE/"/>
+    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
     
-    <category term="财务知识" scheme="https://ayoubu.github.io/tags/%E8%B4%A2%E5%8A%A1%E7%9F%A5%E8%AF%86/"/>
+    <category term="BIF" scheme="https://ayoubu.github.io/tags/BIF/"/>
     
-    <category term="市盈率" scheme="https://ayoubu.github.io/tags/%E5%B8%82%E7%9B%88%E7%8E%87/"/>
+  </entry>
+  
+  <entry>
+    <title>python之字符串</title>
+    <link href="https://ayoubu.github.io/archives/49647.html"/>
+    <id>https://ayoubu.github.io/archives/49647.html</id>
+    <published>2020-08-15T16:48:26.000Z</published>
+    <updated>2020-08-16T07:29:15.616Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;字符串和元组有点类似，可以把字符串理解为一个由字符组成的元组，字符串一旦创建也是不能更改的。也就是说不能通过索引去更改某个字符。但是，python字符串类提供了很多方法，可以帮我们实现这些操作。&lt;/p&gt;
+&lt;p&gt;Python 字符串的编写方式多种多样，主要有：Single quotes、Double quotes 还有 Triple quoted 三种形式。&lt;/p&gt;
+&lt;h3 id=&quot;Single-quotes&quot;&gt;&lt;a href=&quot;#Single-quotes&quot; class=&quot;headerlink&quot; title=&quot;Single quotes&quot;&gt;&lt;/a&gt;Single quotes&lt;/h3&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;print(&lt;span class=&quot;string&quot;&gt;&amp;#x27;I love you&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;I love you&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
+    
+    <category term="python 语法学习" scheme="https://ayoubu.github.io/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
+    
+    <category term="字符串" scheme="https://ayoubu.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python 之 tuple</title>
+    <link href="https://ayoubu.github.io/archives/51299.html"/>
+    <id>https://ayoubu.github.io/archives/51299.html</id>
+    <published>2020-08-15T16:20:51.000Z</published>
+    <updated>2020-08-16T07:29:40.915Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;元组的概念&quot;&gt;&lt;a href=&quot;#元组的概念&quot; class=&quot;headerlink&quot; title=&quot;元组的概念&quot;&gt;&lt;/a&gt;元组的概念&lt;/h2&gt;&lt;p&gt;元组和列表很相似，只不过元组一旦定义了以后就不能更改了。&lt;/p&gt;
+&lt;h2 id=&quot;创建和访问元组&quot;&gt;&lt;a href=&quot;#创建和访问元组&quot; class=&quot;headerlink&quot; title=&quot;创建和访问元组&quot;&gt;&lt;/a&gt;创建和访问元组&lt;/h2&gt;&lt;p&gt;元组的创建“，”非常重要。&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#常规创建元组的方法---()&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;t = (&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;)    &lt;span class=&quot;comment&quot;&gt;#创建一个元组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;t[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;]    &lt;span class=&quot;comment&quot;&gt;#访问元组内的第一个元素&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;[&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;:]    &lt;span class=&quot;comment&quot;&gt;#访问索引为5之后的所有元素&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;t2 = t[:]     &lt;span class=&quot;comment&quot;&gt;#拷贝元组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#创建一个空元组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;t = ()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#创建只有一个元素的元组时一定要加,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;t = (&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;t = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,    &lt;span class=&quot;comment&quot;&gt;#这种语法也是合法的&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;t = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;，&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;，&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;，&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;     &lt;span class=&quot;comment&quot;&gt;#这种也可以正常创建&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
+    
+    <category term="python 语法学习" scheme="https://ayoubu.github.io/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
+    
+    <category term="tuple" scheme="https://ayoubu.github.io/tags/tuple/"/>
+    
+    <category term="元组" scheme="https://ayoubu.github.io/tags/%E5%85%83%E7%BB%84/"/>
     
   </entry>
   
