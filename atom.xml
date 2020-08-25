@@ -6,7 +6,7 @@
   <link href="https://ayoubu.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayoubu.github.io/"/>
-  <updated>2020-08-18T06:58:46.547Z</updated>
+  <updated>2020-08-24T08:46:18.994Z</updated>
   <id>https://ayoubu.github.io/</id>
   
   <author>
@@ -17,11 +17,159 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>python之模块</title>
+    <link href="https://ayoubu.github.io/archives/53523.html"/>
+    <id>https://ayoubu.github.io/archives/53523.html</id>
+    <published>2020-08-24T15:28:43.000Z</published>
+    <updated>2020-08-24T08:46:18.994Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;模块&quot;&gt;&lt;a href=&quot;#模块&quot; class=&quot;headerlink&quot; title=&quot;模块&quot;&gt;&lt;/a&gt;模块&lt;/h2&gt;&lt;p&gt;模块是一种更高级的封装，它的作用是封装和组织我们写的代码，将代码分割成不同的模块，便于我们的测试和维护。同时模块也可以方便我们对代码的重用。在python中我们接触过的封装有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;容器  —&amp;gt;  数据的封装&lt;/li&gt;
+&lt;li&gt;函数  —&amp;gt;  语句的封装&lt;/li&gt;
+&lt;li&gt;类  —&amp;gt;  方法和属性的封装&lt;/li&gt;
+&lt;li&gt;模块  —&amp;gt;  模块就是程序&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
+    
+    <category term="python 语法学习" scheme="https://ayoubu.github.io/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
+    
+    <category term="模块" scheme="https://ayoubu.github.io/tags/%E6%A8%A1%E5%9D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python之魔法方法</title>
+    <link href="https://ayoubu.github.io/archives/52592.html"/>
+    <id>https://ayoubu.github.io/archives/52592.html</id>
+    <published>2020-08-22T11:51:09.000Z</published>
+    <updated>2020-08-24T07:28:21.155Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;构造和析构&quot;&gt;&lt;a href=&quot;#构造和析构&quot; class=&quot;headerlink&quot; title=&quot;构造和析构&quot;&gt;&lt;/a&gt;构造和析构&lt;/h2&gt;&lt;h3 id=&quot;init-self-…-方法&quot;&gt;&lt;a href=&quot;#init-self-…-方法&quot; class=&quot;headerlink&quot; title=&quot;_init_\(self,[, …]) 方法&quot;&gt;&lt;/a&gt;&lt;em&gt;_init_\&lt;/em&gt;(self,[, …]) 方法&lt;/h3&gt;&lt;p&gt;魔法方法总是被双下划线包围，例如__init__方法。魔法方法代表了python的强大之处。&lt;/p&gt;
+&lt;p&gt;python中的默认构造函数为__init__(self,[, …]) 方法，init函数的返回值必须为None，否则会产生TpyeError的错误。&lt;/p&gt;
+&lt;h3 id=&quot;new-cls-…-方法&quot;&gt;&lt;a href=&quot;#new-cls-…-方法&quot; class=&quot;headerlink&quot; title=&quot;__new__(cls,[, …]) 方法&quot;&gt;&lt;/a&gt;__new__(cls,[, …]) 方法&lt;/h3&gt;&lt;p&gt;注：python中创建对象时调用的第一个对象其实并不是init，而是__new__方法，new方法是用来创建类的一个新的实例的，一般情况下我们不需要对new方法进行重写，但是有时后我们继承了某些特殊类，需要修改它的默认创建对象的方式时，可以对new方法进行重写。如下所示。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
+    
+    <category term="python 语法学习" scheme="https://ayoubu.github.io/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
+    
+    <category term="魔法方法" scheme="https://ayoubu.github.io/tags/%E9%AD%94%E6%B3%95%E6%96%B9%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python之类和对象</title>
+    <link href="https://ayoubu.github.io/archives/30561.html"/>
+    <id>https://ayoubu.github.io/archives/30561.html</id>
+    <published>2020-08-21T14:19:20.000Z</published>
+    <updated>2020-08-22T03:50:33.051Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;关于类的基本概念&quot;&gt;&lt;a href=&quot;#关于类的基本概念&quot; class=&quot;headerlink&quot; title=&quot;关于类的基本概念&quot;&gt;&lt;/a&gt;关于类的基本概念&lt;/h2&gt;&lt;h3 id=&quot;对象&quot;&gt;&lt;a href=&quot;#对象&quot; class=&quot;headerlink&quot; title=&quot;对象&quot;&gt;&lt;/a&gt;对象&lt;/h3&gt;&lt;p&gt;对象是由&lt;strong&gt;属性&lt;/strong&gt;和&lt;strong&gt;方法&lt;/strong&gt;组成的，属性描述的是对象的一些固有性质，而方法则是对象可以执行的操作。对象是通过实例化类得到的。&lt;/p&gt;
+&lt;h3 id=&quot;面向对象的特征&quot;&gt;&lt;a href=&quot;#面向对象的特征&quot; class=&quot;headerlink&quot; title=&quot;面向对象的特征&quot;&gt;&lt;/a&gt;面向对象的特征&lt;/h3&gt;&lt;p&gt;面向对象的主要特征为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;封装：将对象的属性和方法进行封装，从而起到保护数据的作用。&lt;/li&gt;
+&lt;li&gt;继承：子类自动共享父类之间数据和方法的机制。&lt;/li&gt;
+&lt;li&gt;多态：不同对象对同一方法响应不同的方式。&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
+    
+    <category term="python 语法学习" scheme="https://ayoubu.github.io/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
+    
+    <category term="类" scheme="https://ayoubu.github.io/tags/%E7%B1%BB/"/>
+    
+    <category term="对象" scheme="https://ayoubu.github.io/tags/%E5%AF%B9%E8%B1%A1/"/>
+    
+    <category term="class" scheme="https://ayoubu.github.io/tags/class/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python之异常处理</title>
+    <link href="https://ayoubu.github.io/archives/19524.html"/>
+    <id>https://ayoubu.github.io/archives/19524.html</id>
+    <published>2020-08-19T17:22:13.000Z</published>
+    <updated>2020-08-21T03:12:24.656Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;什么是异常&quot;&gt;&lt;a href=&quot;#什么是异常&quot; class=&quot;headerlink&quot; title=&quot;什么是异常&quot;&gt;&lt;/a&gt;什么是异常&lt;/h2&gt;&lt;p&gt;程序中的异常是区别于错误存在的，错误往往指的是语法或者逻辑上的，最终导致编译器无法编译通过。而异常往往是由不受控制的输入或者输出导致的。在程序设计过程中，对于一些不受控制的输入，最好是引入异常处理。这样可以增强程序的健壮性，不至于遇到点问题程序就崩溃了。&lt;/p&gt;
+&lt;h2 id=&quot;Python中的异常处理&quot;&gt;&lt;a href=&quot;#Python中的异常处理&quot; class=&quot;headerlink&quot; title=&quot;Python中的异常处理&quot;&gt;&lt;/a&gt;Python中的异常处理&lt;/h2&gt;&lt;p&gt;和一些高级语言一样，python也引入了try/except/finally语句块来处理异常，除此之外python还有断言(Assertions)来防止一些关键结果出问题。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
+    
+    <category term="python 语法学习" scheme="https://ayoubu.github.io/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
+    
+    <category term="异常处理" scheme="https://ayoubu.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
+    
+    <category term="Exception" scheme="https://ayoubu.github.io/tags/Exception/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python之文件</title>
+    <link href="https://ayoubu.github.io/archives/58554.html"/>
+    <id>https://ayoubu.github.io/archives/58554.html</id>
+    <published>2020-08-19T11:22:35.000Z</published>
+    <updated>2020-08-19T09:20:50.643Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;文件打开模式&quot;&gt;&lt;a href=&quot;#文件打开模式&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
+    
+    <category term="python 语法学习" scheme="https://ayoubu.github.io/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
+    
+    <category term="文件" scheme="https://ayoubu.github.io/tags/%E6%96%87%E4%BB%B6/"/>
+    
+    <category term="os" scheme="https://ayoubu.github.io/tags/os/"/>
+    
+    <category term="os.path" scheme="https://ayoubu.github.io/tags/os-path/"/>
+    
+    <category term="pickle" scheme="https://ayoubu.github.io/tags/pickle/"/>
+    
+  </entry>
+  
+  <entry>
     <title>python之字典</title>
     <link href="https://ayoubu.github.io/archives/46747.html"/>
     <id>https://ayoubu.github.io/archives/46747.html</id>
     <published>2020-08-18T14:19:06.000Z</published>
-    <updated>2020-08-18T06:58:46.547Z</updated>
+    <updated>2020-08-24T02:46:54.194Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Python-字典-Dictionary&quot;&gt;&lt;a href=&quot;#Python-字典-Dictionary&quot; class=&quot;headerlink&quot; title=&quot;Python 字典(Dictionary)&quot;&gt;&lt;/a&gt;Python 字典(Dictionary)&lt;/h2&gt;&lt;p&gt;字典是另一种可变容器模型，且可存储任意类型对象。Python中的字典是唯一的&lt;strong&gt;映射类型&lt;/strong&gt;，与之对应的列表、元组等都为序列类型。&lt;/p&gt;
@@ -39,6 +187,8 @@
     <category term="字典" scheme="https://ayoubu.github.io/tags/%E5%AD%97%E5%85%B8/"/>
     
     <category term="Dictionary" scheme="https://ayoubu.github.io/tags/Dictionary/"/>
+    
+    <category term="集合" scheme="https://ayoubu.github.io/tags/%E9%9B%86%E5%90%88/"/>
     
   </entry>
   

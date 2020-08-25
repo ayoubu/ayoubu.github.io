@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Tp_uCM85etMVq9MuOfdPYQ6aA4SI0lOYqjanBUw5BuQ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://ayoubu.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="构造和析构_init_\(self,[, …]) 方法魔法方法总是被双下划线包围，例如__init__方法。魔法方法代表了python的强大之处。 python中的默认构造函数为__init__(self,[, …]) 方法，init函数的返回值必须为None，否则会产生TpyeError的错误。 __new__(cls,[, …]) 方法注：python中创建对象时调用的第一个对象其实并不是in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python之魔法方法">
+<meta property="og:url" content="https://ayoubu.github.io/archives/52592.html">
+<meta property="og:site_name" content="落空的个人博客">
+<meta property="og:description" content="构造和析构_init_\(self,[, …]) 方法魔法方法总是被双下划线包围，例如__init__方法。魔法方法代表了python的强大之处。 python中的默认构造函数为__init__(self,[, …]) 方法，init函数的返回值必须为None，否则会产生TpyeError的错误。 __new__(cls,[, …]) 方法注：python中创建对象时调用的第一个对象其实并不是in">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-22T11:51:09.000Z">
+<meta property="article:modified_time" content="2020-08-24T07:28:21.155Z">
+<meta property="article:author" content="落空">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="魔法方法">
+<meta name="twitter:card" content="summary">
+
+
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<link rel="stylesheet" type="text/css" href="/css/injector.css" />
+  <title>python之魔法方法 | 落空的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落空的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落空的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我慢慢明白了为什么我不快乐，因为我总是期待一个结果。</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">23</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">12</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/52592.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python之魔法方法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-22 11:51:09" itemprop="dateCreated datePublished" datetime="2020-08-22T11:51:09Z">2020-08-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-24 07:28:21" itemprop="dateModified" datetime="2020-08-24T07:28:21Z">2020-08-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">python 语法学习</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>10 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="构造和析构"><a href="#构造和析构" class="headerlink" title="构造和析构"></a>构造和析构</h2><h3 id="init-self-…-方法"><a href="#init-self-…-方法" class="headerlink" title="_init_\(self,[, …]) 方法"></a><em>_init_\</em>(self,[, …]) 方法</h3><p>魔法方法总是被双下划线包围，例如__init__方法。魔法方法代表了python的强大之处。</p>
+<p>python中的默认构造函数为__init__(self,[, …]) 方法，init函数的返回值必须为None，否则会产生TpyeError的错误。</p>
+<h3 id="new-cls-…-方法"><a href="#new-cls-…-方法" class="headerlink" title="__new__(cls,[, …]) 方法"></a>__new__(cls,[, …]) 方法</h3><p>注：python中创建对象时调用的第一个对象其实并不是init，而是__new__方法，new方法是用来创建类的一个新的实例的，一般情况下我们不需要对new方法进行重写，但是有时后我们继承了某些特殊类，需要修改它的默认创建对象的方式时，可以对new方法进行重写。如下所示。</p>
+<a id="more"></a>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CapStr</span>(<span class="params">str</span>):</span>        <span class="comment"># 继承str类，实现自动转换大写功能</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span>(<span class="params">cls, string</span>):</span>    <span class="comment"># cls 是默认参数，就像self一样</span></span><br><span class="line">        string = string.upper()</span><br><span class="line">        <span class="keyword">return</span> str.__new__(cls, string)        <span class="comment"># 返回一个创建好的str实例</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = CapStr(<span class="string">&#x27;I love you!!&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="string">&#x27;I LOVE YOU!&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="del-方法"><a href="#del-方法" class="headerlink" title="__del__() 方法"></a>__del__() 方法</h3><p>del 方法和C++中的析构函数类似，就是在程序运行结束后释放资源。一般情况下，python在所有对对象的应用都为空的情况下，会自动调用对象的此函数进行资源释放的。</p>
+<h2 id="Python中的所有魔法方法"><a href="#Python中的所有魔法方法" class="headerlink" title="Python中的所有魔法方法"></a>Python中的所有魔法方法</h2><table>
+<thead>
+<tr>
+<th><strong>魔法方法</strong></th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td><strong>基本的魔法方法</strong></td>
+</tr>
+<tr>
+<td>__new__(cls[, …])</td>
+<td>1. __new__ 是在一个对象实例化的时候所调用的第一个方法 2. 它的第一个参数是这个类，其他的参数是用来直接传递给 __init__ 方法 3. __new__决定是否要使用该 __init__方法，因为 __new__可以调用其他类的构造方法或者直接返回别的实例对象来作为本类的实例，如果 __new__没有返回实例对象，则 __init__不会被调用 4. __new__主要是用于继承一个不可变的类型比如一个 tuple 或者 string</td>
+</tr>
+<tr>
+<td>__init__(self[, …])</td>
+<td>构造器，当一个实例被创建的时候调用的初始化方法</td>
+</tr>
+<tr>
+<td>__del__(self)</td>
+<td>析构器，当一个实例被销毁的时候调用的方法</td>
+</tr>
+<tr>
+<td>__call__(self[, args…])</td>
+<td>允许一个类的实例像函数一样被调用：x(a, b) 调用 x.__call__(a, b)</td>
+</tr>
+<tr>
+<td>__len__(self)</td>
+<td>定义当被 len() 调用时的行为</td>
+</tr>
+<tr>
+<td>__repr__(self)</td>
+<td>定义当被 repr() 调用时的行为，直接使用对象名调用</td>
+</tr>
+<tr>
+<td>__str__(self)</td>
+<td>定义当被 str() 调用时的行为</td>
+</tr>
+<tr>
+<td><strong>bytes</strong>(self)</td>
+<td>定义当被 bytes() 调用时的行为</td>
+</tr>
+<tr>
+<td><strong>hash</strong>(self)</td>
+<td>定义当被 hash() 调用时的行为</td>
+</tr>
+<tr>
+<td><strong>bool</strong>(self)</td>
+<td>定义当被 bool() 调用时的行为，应该返回 True 或 False</td>
+</tr>
+<tr>
+<td><strong>format</strong>(self, format_spec)</td>
+<td>定义当被 format() 调用时的行为</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>有关属性</strong></td>
+</tr>
+<tr>
+<td><strong>getattr</strong>(self, name)</td>
+<td>定义当用户试图获取一个不存在的属性时的行为</td>
+</tr>
+<tr>
+<td><strong>getattribute</strong>(self, name)</td>
+<td>定义当该类的属性被访问时的行为</td>
+</tr>
+<tr>
+<td><strong>setattr</strong>(self, name, value)</td>
+<td>定义当一个属性被设置时的行为</td>
+</tr>
+<tr>
+<td><strong>delattr</strong>(self, name)</td>
+<td>定义当一个属性被删除时的行为</td>
+</tr>
+<tr>
+<td><strong>dir</strong>(self)</td>
+<td>定义当 dir() 被调用时的行为</td>
+</tr>
+<tr>
+<td><strong>get</strong>(self, instance, owner)</td>
+<td>定义当描述符的值被取得时的行为</td>
+</tr>
+<tr>
+<td><strong>set</strong>(self, instance, value)</td>
+<td>定义当描述符的值被改变时的行为</td>
+</tr>
+<tr>
+<td><strong>delete</strong>(self, instance)</td>
+<td>定义当描述符的值被删除时的行为</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>比较操作符</strong></td>
+</tr>
+<tr>
+<td><strong>lt</strong>(self, other)</td>
+<td>定义小于号的行为：x &lt; y 调用 x.<strong>lt</strong>(y)</td>
+</tr>
+<tr>
+<td><strong>le</strong>(self, other)</td>
+<td>定义小于等于号的行为：x &lt;= y 调用 x.<strong>le</strong>(y)</td>
+</tr>
+<tr>
+<td><strong>eq</strong>(self, other)</td>
+<td>定义等于号的行为：x == y 调用 x.<strong>eq</strong>(y)</td>
+</tr>
+<tr>
+<td><strong>ne</strong>(self, other)</td>
+<td>定义不等号的行为：x != y 调用 x.<strong>ne</strong>(y)</td>
+</tr>
+<tr>
+<td><strong>gt</strong>(self, other)</td>
+<td>定义大于号的行为：x &gt; y 调用 x.<strong>gt</strong>(y)</td>
+</tr>
+<tr>
+<td><strong>ge</strong>(self, other)</td>
+<td>定义大于等于号的行为：x &gt;= y 调用 x.<strong>ge</strong>(y)</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>算数运算符</strong></td>
+</tr>
+<tr>
+<td><strong>add</strong>(self, other)</td>
+<td>定义加法的行为：+</td>
+</tr>
+<tr>
+<td><strong>sub</strong>(self, other)</td>
+<td>定义减法的行为：-</td>
+</tr>
+<tr>
+<td><strong>mul</strong>(self, other)</td>
+<td>定义乘法的行为：*</td>
+</tr>
+<tr>
+<td><strong>truediv</strong>(self, other)</td>
+<td>定义真除法的行为：/</td>
+</tr>
+<tr>
+<td><strong>floordiv</strong>(self, other)</td>
+<td>定义整数除法的行为：//</td>
+</tr>
+<tr>
+<td><strong>mod</strong>(self, other)</td>
+<td>定义取模算法的行为：%</td>
+</tr>
+<tr>
+<td><strong>divmod</strong>(self, other)</td>
+<td>定义当被 divmod() 调用时的行为</td>
+</tr>
+<tr>
+<td><strong>pow</strong>(self, other[, modulo])</td>
+<td>定义当被 power() 调用或 ** 运算时的行为</td>
+</tr>
+<tr>
+<td><strong>lshift</strong>(self, other)</td>
+<td>定义按位左移位的行为：&lt;&lt;</td>
+</tr>
+<tr>
+<td><strong>rshift</strong>(self, other)</td>
+<td>定义按位右移位的行为：&gt;&gt;</td>
+</tr>
+<tr>
+<td><strong>and</strong>(self, other)</td>
+<td>定义按位与操作的行为：&amp;</td>
+</tr>
+<tr>
+<td><strong>xor</strong>(self, other)</td>
+<td>定义按位异或操作的行为：^</td>
+</tr>
+<tr>
+<td><strong>or</strong>(self, other)</td>
+<td>定义按位或操作的行为：|</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>反运算</strong></td>
+</tr>
+<tr>
+<td><strong>radd</strong>(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td><strong>rsub</strong>(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td><strong>rmul</strong>(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td><strong>rtruediv</strong>(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td><strong>rfloordiv</strong>(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td><strong>rmod</strong>(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td><strong>rdivmod</strong>(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td><strong>rpow</strong>(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td><strong>rlshift</strong>(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td><strong>rrshift</strong>(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td><strong>rand</strong>(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td><strong>rxor</strong>(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td><strong>ror</strong>(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>增量赋值运算</strong></td>
+</tr>
+<tr>
+<td><strong>iadd</strong>(self, other)</td>
+<td>定义赋值加法的行为：+=</td>
+</tr>
+<tr>
+<td><strong>isub</strong>(self, other)</td>
+<td>定义赋值减法的行为：-=</td>
+</tr>
+<tr>
+<td><strong>imul</strong>(self, other)</td>
+<td>定义赋值乘法的行为：*=</td>
+</tr>
+<tr>
+<td><strong>itruediv</strong>(self, other)</td>
+<td>定义赋值真除法的行为：/=</td>
+</tr>
+<tr>
+<td><strong>ifloordiv</strong>(self, other)</td>
+<td>定义赋值整数除法的行为：//=</td>
+</tr>
+<tr>
+<td><strong>imod</strong>(self, other)</td>
+<td>定义赋值取模算法的行为：%=</td>
+</tr>
+<tr>
+<td><strong>ipow</strong>(self, other[, modulo])</td>
+<td>定义赋值幂运算的行为：**=</td>
+</tr>
+<tr>
+<td><strong>ilshift</strong>(self, other)</td>
+<td>定义赋值按位左移位的行为：&lt;&lt;=</td>
+</tr>
+<tr>
+<td><strong>irshift</strong>(self, other)</td>
+<td>定义赋值按位右移位的行为：&gt;&gt;=</td>
+</tr>
+<tr>
+<td><strong>iand</strong>(self, other)</td>
+<td>定义赋值按位与操作的行为：&amp;=</td>
+</tr>
+<tr>
+<td><strong>ixor</strong>(self, other)</td>
+<td>定义赋值按位异或操作的行为：^=</td>
+</tr>
+<tr>
+<td><strong>ior</strong>(self, other)</td>
+<td>定义赋值按位或操作的行为：|=</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>一元操作符</strong></td>
+</tr>
+<tr>
+<td><strong>pos</strong>(self)</td>
+<td>定义正号的行为：+x</td>
+</tr>
+<tr>
+<td><strong>neg</strong>(self)</td>
+<td>定义负号的行为：-x</td>
+</tr>
+<tr>
+<td><strong>abs</strong>(self)</td>
+<td>定义当被 abs() 调用时的行为</td>
+</tr>
+<tr>
+<td><strong>invert</strong>(self)</td>
+<td>定义按位求反的行为：~x</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>类型转换</strong></td>
+</tr>
+<tr>
+<td><strong>complex</strong>(self)</td>
+<td>定义当被 complex() 调用时的行为（需要返回恰当的值）</td>
+</tr>
+<tr>
+<td><strong>int</strong>(self)</td>
+<td>定义当被 int() 调用时的行为（需要返回恰当的值）</td>
+</tr>
+<tr>
+<td><strong>float</strong>(self)</td>
+<td>定义当被 float() 调用时的行为（需要返回恰当的值）</td>
+</tr>
+<tr>
+<td><strong>round</strong>(self[, n])</td>
+<td>定义当被 round() 调用时的行为（需要返回恰当的值）</td>
+</tr>
+<tr>
+<td><strong>index</strong>(self)</td>
+<td>1. 当对象是被应用在切片表达式中时，实现整形强制转换 2. 如果你定义了一个可能在切片时用到的定制的数值型,你应该定义 <strong>index</strong> 3. 如果 <strong>index</strong> 被定义，则 <strong>int</strong> 也需要被定义，且返回相同的值</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>上下文管理（with 语句）</strong></td>
+</tr>
+<tr>
+<td><strong>enter</strong>(self)</td>
+<td>1. 定义当使用 with 语句时的初始化行为 2. <strong>enter</strong> 的返回值被 with 语句的目标或者 as 后的名字绑定</td>
+</tr>
+<tr>
+<td><strong>exit</strong>(self, exc_type, exc_value, traceback)</td>
+<td>1. 定义当一个代码块被执行或者终止后上下文管理器应该做什么 2. 一般被用来处理异常，清除工作或者做一些代码块执行完毕之后的日常工作</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>容器类型</strong></td>
+</tr>
+<tr>
+<td><strong>len</strong>(self)</td>
+<td>定义当被 len() 调用时的行为（返回容器中元素的个数）</td>
+</tr>
+<tr>
+<td><strong>getitem</strong>(self, key)</td>
+<td>定义获取容器中指定元素的行为，相当于 self[key]</td>
+</tr>
+<tr>
+<td>__setitem__(self, key, value)</td>
+<td>定义设置容器中指定元素的行为，相当于 self[key] = value</td>
+</tr>
+<tr>
+<td>__delitem__(self, key)</td>
+<td>定义删除容器中指定元素的行为，相当于 del self[key]</td>
+</tr>
+<tr>
+<td><strong>iter</strong>(self)</td>
+<td>定义当迭代容器中的元素的行为</td>
+</tr>
+<tr>
+<td><strong>reversed</strong>(self)</td>
+<td>定义当被 reversed() 调用时的行为</td>
+</tr>
+<tr>
+<td><strong>contains</strong>(self, item)</td>
+<td>定义当使用成员测试运算符（in 或 not in）时的行为</td>
+</tr>
+</tbody></table>
+<h2 id="简单定制"><a href="#简单定制" class="headerlink" title="简单定制"></a>简单定制</h2><ul>
+<li>基本要求<ul>
+<li>定制一个计时器类</li>
+<li>start 和 stop方法代表启动计时和停止计时</li>
+<li>假设计时器对象t1，print(t1) 和直接调用t1均显示结果</li>
+<li>当计时器未启动或已经停止计时，调用stop方法会给予温馨的提示</li>
+<li>两个计时器对象可以进行相加：t1 + t2</li>
+<li>只能使用有限资源完成</li>
+</ul>
+</li>
+</ul>
+<h2 id="属性访问"><a href="#属性访问" class="headerlink" title="属性访问"></a>属性访问</h2><ul>
+<li><p>__getattr__(self, name) —– 定义当前用户试图获取一个不存在的属性时的行为。</p>
+</li>
+<li><p>__getattribute__(self, name)  —– 定义当该类的属性被访问时的行为</p>
+</li>
+<li><p>__setattr__(self, name, value) —– 定义当一个属性被设置时的行为</p>
+</li>
+<li><p>__delattr__(self, name) —- 定义当一个属性被删除时的行为的撒  </p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattribute__</span>(<span class="params">self, name</span>):</span>    <span class="comment"># 访问属性时会首先进入</span></span><br><span class="line">        print(<span class="string">&#x27;getattribute&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> super().__getattribute__(name)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self,name</span>):</span>        <span class="comment"># 访问的属性不存在的时候进入</span></span><br><span class="line">        print(<span class="string">&#x27;getattr&#x27;</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span>(<span class="params">self,name,value</span>):</span>    <span class="comment"># 设置属性的值的时候进入</span></span><br><span class="line">        print(<span class="string">&#x27;setattr&#x27;</span>)</span><br><span class="line">        super().__setattr__(name,value)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__delattr__</span>(<span class="params">self,name</span>):</span>        <span class="comment"># 删除属性的值的时候进入</span></span><br><span class="line">        print(<span class="string">&#x27;delattr&#x27;</span>)</span><br><span class="line">        super().__delattr__(name)</span><br><span class="line">        </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = C()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.x</span><br><span class="line">getattribute</span><br><span class="line">getattr</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.x = <span class="number">1</span></span><br><span class="line">setattr</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.x</span><br><span class="line">getattribute</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> c.x</span><br><span class="line">delattr</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.x</span><br><span class="line">getattribute</span><br><span class="line">getattr</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意死循环陷阱"><a href="#注意死循环陷阱" class="headerlink" title="注意死循环陷阱"></a>注意死循环陷阱</h3><p><strong>练习要求：</strong></p>
+<ul>
+<li>写一个矩形类，默认有宽和高两个属性</li>
+<li>如果为一个叫square的属性赋值，那么说明这是一个正方形，值就是正方形的边长，此时宽和高都应该等于边长。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我的代码</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rect</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,width = <span class="number">0</span>, height =<span class="number">0</span></span>):</span>  <span class="comment">#初始化过程</span></span><br><span class="line">        self.width = width</span><br><span class="line">        self.height = height</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span>(<span class="params">self, name, value</span>):</span></span><br><span class="line">        <span class="keyword">if</span> name == <span class="string">&#x27;square&#x27;</span>:</span><br><span class="line">            print(<span class="string">&#x27;设置矩形为正方形&#x27;</span>)</span><br><span class="line">            self.width = value</span><br><span class="line">            self.height = value</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment">#self.name = value        #这种方式会造成死循环，因为初始化的过程会调用此函数</span></span><br><span class="line">            super().__setattr__(name, value)</span><br><span class="line">            self.__dict__[name] = value <span class="comment">#这种方式也是可以的，因为类中的变量和值就是以字典方式存放的。</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getArea</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.width * self.height</span><br></pre></td></tr></table></figure>
+
+<h2 id="描述符"><a href="#描述符" class="headerlink" title="描述符"></a>描述符</h2><ul>
+<li><p>描述符就是将某种<strong>特殊类型</strong>的类的实例指派给另一个类的属性。（特殊类型指的是至少实现以下三个魔术方法中的某一个，或者全部）</p>
+<ul>
+<li><p>__get__(self, instance, owner)</p>
+<p>用于访问属性，它返回属性的值  </p>
+</li>
+<li><p>__set__(self, instance, value)</p>
+</li>
+</ul>
+<p>​      将在属性分配操作中调用，不返回任何内容</p>
+<ul>
+<li>__delete__(self, instance)</li>
+</ul>
+<p>​      控制删除操作，不返回任何内容</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDecriptor</span>:</span>   <span class="comment"># 此为特殊类型的类</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__get__</span>(<span class="params">self, instance, owner</span>):</span></span><br><span class="line">        print(<span class="string">&quot;getting...&quot;</span>,self, instance, owner)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__set__</span>(<span class="params">self, instance, value</span>):</span></span><br><span class="line">        print(<span class="string">&quot;setting...&quot;</span>,self,instance, value)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__delete__</span>(<span class="params">self, instance</span>):</span></span><br><span class="line">        print(<span class="string">&quot;deleting...&quot;</span>,instance)</span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span>:</span>        <span class="comment"># 另一个类</span></span><br><span class="line">    x = MyDecriptor()    <span class="comment"># 将特殊类型的类赋值给测试类的一个属性x</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>test = Test()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>test.x   <span class="comment"># 访问属性x时会调用到特殊类中的get方法</span></span><br><span class="line">getting... &lt;__main__.MyDecriptor object at <span class="number">0x000001F5C3C5A190</span>&gt; &lt;__main__.Test object at <span class="number">0x000001F5C3C5A910</span>&gt; &lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">__main__</span>.<span class="title">Test</span>&#x27;&gt;</span></span><br><span class="line">&gt;&gt;&gt; test.x = &quot;大宝&quot;    # 设置属性x时会调用到特殊类中的set方法</span><br><span class="line">setting... &lt;__main__.MyDecriptor object at <span class="number">0x000001F5C3C5A190</span>&gt; &lt;__main__.Test object at <span class="number">0x000001F5C3C5A910</span>&gt; 大宝</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> test.x        <span class="comment"># 删除属性x时会调用到特殊类中的delete方法</span></span><br><span class="line">deleting... &lt;__main__.Test object at <span class="number">0x000001F5C3C5A910</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定义自己的property类</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyProperty</span>:</span>    <span class="comment"># 实现了特殊方法的类，即描述符类</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, fget=None, fset=None, fdel=None</span>):</span></span><br><span class="line">        self.fget = fget</span><br><span class="line">        self.fset = fset</span><br><span class="line">        self.fdel = fdel</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__get__</span>(<span class="params">self, instance, owner</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.fget(instance)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__set__</span>(<span class="params">self, instance, value</span>):</span></span><br><span class="line">        self.fset(instance, value)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__delete__</span>(<span class="params">self, instance</span>):</span></span><br><span class="line">        self.fdel(instance)</span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span>    <span class="comment"># 测试类</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self._x = <span class="literal">None</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getX</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self._x</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setX</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        self._x = value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">delX</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">del</span> self._x</span><br><span class="line">    x = MyProperty(getX, setX, delX)</span><br><span class="line">    </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = C()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.x = <span class="string">&#x27;大宝&#x27;</span>    <span class="comment">#可以正常赋值</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.x        <span class="comment"># 可以正常读取</span></span><br><span class="line"><span class="string">&#x27;大宝&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c._x    <span class="comment"># 和_x的值一致</span></span><br><span class="line"><span class="string">&#x27;大宝&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> c.x  <span class="comment"># 删除属性</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>练习：</strong></p>
+<ul>
+<li>先定义一个温度类，然后定义两个描述符类用于描述摄氏度和华氏度两个属性。</li>
+<li>要求两个属性会自动进行转换，也就是说你可以给摄氏度这个属性赋值，然后打印的华氏度属性是自动转换后的结果。</li>
+<li>华氏度 = 摄氏度 * 1.8 + 32</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我的代码，直接调用了内置的property函数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Temperature</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init</span>(<span class="params">self</span>):</span></span><br><span class="line">        self._celsius = <span class="number">0</span>       <span class="comment">#摄氏度</span></span><br><span class="line">        self._fahrenheit = <span class="number">0</span>     <span class="comment">#华氏度</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setCelsius</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        self._celsius = value</span><br><span class="line">        self._fahrenheit = value * <span class="number">1.8</span> + <span class="number">32</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getCelsius</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self._celsius</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setFahrenheit</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        self._ahrenheit = value</span><br><span class="line">        self._celsius = (value <span class="number">-32</span>) / <span class="number">1.8</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getFahrenheit</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self._fahrenheit</span><br><span class="line"></span><br><span class="line">    celsius = property(getCelsius, setCelsius)</span><br><span class="line">    fahrenheit = property(getFahrenheit, setFahrenheit)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t = Temperature()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t.celsius = <span class="number">20</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t.ahrenheit</span><br><span class="line"><span class="number">68.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t.fahrenheit = <span class="number">98</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t.celsius</span><br><span class="line"><span class="number">36.666666666666664</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 老师的方法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Celsius</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, value = <span class="number">26.0</span></span>):</span></span><br><span class="line">        self.value = float(value)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__get__</span>(<span class="params">self,instance, owner</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__set__</span>(<span class="params">self,instance, value</span>):</span></span><br><span class="line">        self.value = float(value)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fahrenheit</span>:</span>   <span class="comment"># 必须得知道华氏度的变量名，即cel</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__set__</span>(<span class="params">self, instance, value</span>):</span></span><br><span class="line">        instance.cel = (float(value) - <span class="number">32</span>) / <span class="number">1.8</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__get__</span>(<span class="params">self, instance, owner</span>):</span></span><br><span class="line">        <span class="keyword">return</span> instance.cel * <span class="number">1.8</span> + <span class="number">32</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Temperature</span>:</span></span><br><span class="line">    cel = Celsius()        <span class="comment"># 直接调用Celsius描述符类</span></span><br><span class="line">    fah = Fahrenheit()    <span class="comment"># 直接调用Fahrenheit描述符类</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t.cel</span><br><span class="line"><span class="number">26.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t.fah</span><br><span class="line"><span class="number">78.80000000000001</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t.cel = <span class="number">40</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t.fah</span><br><span class="line"><span class="number">104.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t.fah = <span class="number">80</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t.cel</span><br><span class="line"><span class="number">26.666666666666664</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="定制容器"><a href="#定制容器" class="headerlink" title="定制容器"></a>定制容器</h2><p>定制容器就是利用一些容器类型的魔法方法实现我们自己定义的容器的功能。</p>
+<h3 id="协议是什么"><a href="#协议是什么" class="headerlink" title="协议是什么"></a>协议是什么</h3><p><strong>协议(Protocols)：</strong>与其它编程语言中的接口很相似，它规定你哪些方法必须要定义。然而，在Python中的协议就没有这些规定了，它更像是一种指南。</p>
+<h3 id="容器类型的协议"><a href="#容器类型的协议" class="headerlink" title="容器类型的协议"></a>容器类型的协议</h3><ul>
+<li>如果说你希望定制的容器是不可变的话，你只需要定义__len__() 和 __getitem__()方法。</li>
+<li>如果你希望定制的容器是可变的话，除了__len__() 和 __getitem__()方法，你还需要定义__setitem__() 和 __delitem__()两个方法。</li>
+</ul>
+<h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><ul>
+<li>编写一个不可变的自定义列表，要求记录列表中每个元素被访问的次数。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CountList</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, *args</span>):</span></span><br><span class="line">        self.values = [x <span class="keyword">for</span> x <span class="keyword">in</span> args]   <span class="comment"># 序列迭代</span></span><br><span class="line">        self.count = &#123;&#125;.fromkeys(self.values, <span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> len(self.values)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span>(<span class="params">self, index</span>):</span></span><br><span class="line">        self.count[self.values[index]] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> self.values[index]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可变的列表</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CountList</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, *args</span>):</span></span><br><span class="line">        self.values = [x <span class="keyword">for</span> x <span class="keyword">in</span> args]   <span class="comment"># 序列迭代</span></span><br><span class="line">        self.count = &#123;&#125;.fromkeys(self.values, <span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> len(self.values)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span>(<span class="params">self, index</span>):</span></span><br><span class="line">        self.count[self.values[index]] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> self.values[index]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setitem__</span>(<span class="params">self, key, value</span>):</span></span><br><span class="line">        self.count.pop(self.values[key])</span><br><span class="line">        self.count[value]=<span class="number">0</span></span><br><span class="line">        self.values[key] = value</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__delitem__</span>(<span class="params">self, key</span>):</span></span><br><span class="line">        self.values.remove(self.values[key])</span><br><span class="line">        self.count.pop(self.values[key])</span><br></pre></td></tr></table></figure>
+
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>Python中的for循环之类的都是调用迭代器，它的实现原理如下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">&#x27;I love you&#x27;</span></span><br><span class="line">it = iter(string)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        each = next(it)</span><br><span class="line">    <span class="keyword">except</span> StopIteration:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    print(each)</span><br><span class="line">I</span><br><span class="line"> </span><br><span class="line">l</span><br><span class="line">o</span><br><span class="line">v</span><br><span class="line">e</span><br><span class="line"> </span><br><span class="line">y</span><br><span class="line">o</span><br><span class="line">u</span><br></pre></td></tr></table></figure>
+
+<h3 id="迭代器中的魔法方法"><a href="#迭代器中的魔法方法" class="headerlink" title="迭代器中的魔法方法"></a>迭代器中的魔法方法</h3><ul>
+<li><p>iter()</p>
+<p>__iter__()</p>
+</li>
+<li><p>next()</p>
+<p>__next__()</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fibs</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, n = <span class="number">10</span></span>):</span></span><br><span class="line">        self.a = <span class="number">0</span></span><br><span class="line">        self.b = <span class="number">1</span></span><br><span class="line">        self.n = n</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.a, self.b = self.b, self.a + self.b</span><br><span class="line">        <span class="keyword">if</span> self.a &gt; self.n:</span><br><span class="line">            <span class="keyword">raise</span> StopIteration</span><br><span class="line">        <span class="keyword">return</span> self.a  </span><br></pre></td></tr></table></figure>
+
+<h2 id="生成器-yield"><a href="#生成器-yield" class="headerlink" title="生成器 (yield)"></a>生成器 (yield)</h2><p>Python 生成器是模仿协同程序的概念打造的，所谓的协同程序就是可以运行的独立函数调用，函数可以暂停或者挂起，并在需要的时候从程序离开的地方继续或者重新开始。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fibs</span>():</span></span><br><span class="line">    a = <span class="number">0</span></span><br><span class="line">    b = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        <span class="keyword">yield</span> a</span><br><span class="line"><span class="keyword">for</span> each <span class="keyword">in</span> fibs():</span><br><span class="line">    <span class="keyword">if</span> each &gt; <span class="number">100</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(each, end=<span class="string">&#x27;  &#x27;</span>)</span><br><span class="line"><span class="number">1</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">5</span>  <span class="number">8</span>  <span class="number">13</span>  <span class="number">21</span>  <span class="number">34</span>  <span class="number">55</span>  <span class="number">89</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="推导式"><a href="#推导式" class="headerlink" title="推导式"></a>推导式</h2><h3 id="列表推导式"><a href="#列表推导式" class="headerlink" title="列表推导式"></a>列表推导式</h3><p>自动化生成列表的方式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 100以内能被2整除，但是不能被3整除的数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>) <span class="keyword">if</span> <span class="keyword">not</span> (i % <span class="number">2</span>) <span class="keyword">and</span> (i % <span class="number">3</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[<span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">14</span>, <span class="number">16</span>, <span class="number">20</span>, <span class="number">22</span>, <span class="number">26</span>, <span class="number">28</span>, <span class="number">32</span>, <span class="number">34</span>, <span class="number">38</span>, <span class="number">40</span>, <span class="number">44</span>, <span class="number">46</span>, <span class="number">50</span>, <span class="number">52</span>, <span class="number">56</span>, <span class="number">58</span>, <span class="number">62</span>, <span class="number">64</span>, <span class="number">68</span>, <span class="number">70</span>, <span class="number">74</span>, <span class="number">76</span>, <span class="number">80</span>, <span class="number">82</span>, <span class="number">86</span>, <span class="number">88</span>, <span class="number">92</span>, <span class="number">94</span>, <span class="number">98</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="字典推导式"><a href="#字典推导式" class="headerlink" title="字典推导式"></a>字典推导式</h3><p>自动化生成字典的方式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 判断10以内可以被2整除的数</span></span><br><span class="line">d = &gt;&gt;&gt; d = &#123;i:i%<span class="number">2</span> == <span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)&#125;  <span class="comment"># 注意冒号</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">&#123;<span class="number">0</span>: <span class="literal">True</span>, <span class="number">1</span>: <span class="literal">False</span>, <span class="number">2</span>: <span class="literal">True</span>, <span class="number">3</span>: <span class="literal">False</span>, <span class="number">4</span>: <span class="literal">True</span>, <span class="number">5</span>: <span class="literal">False</span>, <span class="number">6</span>: <span class="literal">True</span>, <span class="number">7</span>: <span class="literal">False</span>, <span class="number">8</span>: <span class="literal">True</span>, <span class="number">9</span>: <span class="literal">False</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="集合推导式"><a href="#集合推导式" class="headerlink" title="集合推导式"></a>集合推导式</h3><p>自动化生成集合的方式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从一个列表中生成一个集合</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = &#123;i <span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">0</span>,<span class="number">3</span>]&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="迭代器推导式"><a href="#迭代器推导式" class="headerlink" title="迭代器推导式"></a>迭代器推导式</h3><p>自动生成一个迭代器。迭代器推导式可以直接作为参数传给函数，且不用加括号。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>e = (i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>e</span><br><span class="line">&lt;generator object &lt;genexpr&gt; at <span class="number">0x0000029DC1633F20</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(e)</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(e)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> each <span class="keyword">in</span> e:</span><br><span class="line">    print(each, end=<span class="string">&#x27;  &#x27;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span>  <span class="comment">#因为我之前调用了两次next，所以迭代器指向2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#迭代器推导式做参数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sum(i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>) <span class="keyword">if</span> i % <span class="number">2</span>)</span><br><span class="line"><span class="number">2500</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注：字符串是没有推导式的，因为所有被引号包含的关键字都会被当作字符处理的。而元组也是没有推导式的，元组的推导式会被当作迭代器来使用，并不会生成一个新的元组。</strong></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\53523.html" rel="bookmark">python之模块</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\30561.html" rel="bookmark">python之类和对象</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\19524.html" rel="bookmark">python之异常处理</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\58554.html" rel="bookmark">python之文件</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\46747.html" rel="bookmark">python之字典</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="落空 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="落空 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E9%AD%94%E6%B3%95%E6%96%B9%E6%B3%95/" rel="tag"># 魔法方法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/30561.html" rel="prev" title="python之类和对象">
+      <i class="fa fa-chevron-left"></i> python之类和对象
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/53523.html" rel="next" title="python之模块">
+      python之模块 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">构造和析构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#init-self-%E2%80%A6-%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">_init_\(self,[, …]) 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new-cls-%E2%80%A6-%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">__new__(cls,[, …]) 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#del-%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">__del__() 方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E9%AD%94%E6%B3%95%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">Python中的所有魔法方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%AE%9A%E5%88%B6"><span class="nav-number">3.</span> <span class="nav-text">简单定制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E8%AE%BF%E9%97%AE"><span class="nav-number">4.</span> <span class="nav-text">属性访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E6%AD%BB%E5%BE%AA%E7%8E%AF%E9%99%B7%E9%98%B1"><span class="nav-number">4.1.</span> <span class="nav-text">注意死循环陷阱</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-number">5.</span> <span class="nav-text">描述符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E5%88%B6%E5%AE%B9%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text">定制容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">6.1.</span> <span class="nav-text">协议是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8D%8F%E8%AE%AE"><span class="nav-number">6.2.</span> <span class="nav-text">容器类型的协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">6.3.</span> <span class="nav-text">练习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">7.</span> <span class="nav-text">迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%AD%E7%9A%84%E9%AD%94%E6%B3%95%E6%96%B9%E6%B3%95"><span class="nav-number">7.1.</span> <span class="nav-text">迭代器中的魔法方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%99%A8-yield"><span class="nav-number">8.</span> <span class="nav-text">生成器 (yield)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="nav-number">9.</span> <span class="nav-text">推导式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="nav-number">9.1.</span> <span class="nav-text">列表推导式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E5%85%B8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="nav-number">9.2.</span> <span class="nav-text">字典推导式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="nav-number">9.3.</span> <span class="nav-text">集合推导式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="nav-number">9.4.</span> <span class="nav-text">迭代器推导式</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="落空"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">落空</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ayoubu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ayoubu@outlook.com" title="E-Mail → mailto:ayoubu@outlook.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5095666460" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5095666460" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/ayoubu" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-zhihu"></i>知乎</a>
+      </span>
+  </div>
+
+
+<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">落空</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">44k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">40 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  <script async src="/js/cursor/love.min.js"></script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>
