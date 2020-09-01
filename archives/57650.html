@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Tp_uCM85etMVq9MuOfdPYQ6aA4SI0lOYqjanBUw5BuQ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://ayoubu.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="相似格式如何一秒快速录入在数据录入的过程中经常需要录入一些相同的部分，比如同一个省份的开头是相同的，邮箱的后半部分。此时我们可以自定义单元格格式来加速我们数据录入的过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Excel 快速录入和定位的小技巧">
+<meta property="og:url" content="https://ayoubu.github.io/archives/57650.html">
+<meta property="og:site_name" content="落空的个人博客">
+<meta property="og:description" content="相似格式如何一秒快速录入在数据录入的过程中经常需要录入一些相同的部分，比如同一个省份的开头是相同的，邮箱的后半部分。此时我们可以自定义单元格格式来加速我们数据录入的过程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.imgur.com/tQUDhXi.jpg">
+<meta property="article:published_time" content="2020-08-28T15:16:09.000Z">
+<meta property="article:modified_time" content="2020-08-29T04:09:35.297Z">
+<meta property="article:author" content="落空">
+<meta property="article:tag" content="Excel">
+<meta property="article:tag" content="数据录入">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/tQUDhXi.jpg">
+
+
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<link rel="stylesheet" type="text/css" href="/css/injector.css" />
+  <title>Excel 快速录入和定位的小技巧 | 落空的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落空的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落空的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我慢慢明白了为什么我不快乐，因为我总是期待一个结果。</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">19</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/57650.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Excel 快速录入和定位的小技巧
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-28 15:16:09" itemprop="dateCreated datePublished" datetime="2020-08-28T15:16:09Z">2020-08-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-29 04:09:35" itemprop="dateModified" datetime="2020-08-29T04:09:35Z">2020-08-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
+                    <span itemprop="name">数据分析</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/" itemprop="url" rel="index">
+                    <span itemprop="name">Excel</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="相似格式如何一秒快速录入"><a href="#相似格式如何一秒快速录入" class="headerlink" title="相似格式如何一秒快速录入"></a>相似格式如何一秒快速录入</h2><p>在数据录入的过程中经常需要录入一些相同的部分，比如同一个省份的开头是相同的，邮箱的后半部分。此时我们可以自定义单元格格式来加速我们数据录入的过程。</p>
+<a id="more"></a>
+
+<p><img src="https://i.imgur.com/tQUDhXi.jpg" alt="单元格格式设置"></p>
+<h2 id="录入长串数字的方法"><a href="#录入长串数字的方法" class="headerlink" title="录入长串数字的方法"></a>录入长串数字的方法</h2><p>将单元格格式设置为文本格式即可。</p>
+<h2 id="如何将手机号码分段显示"><a href="#如何将手机号码分段显示" class="headerlink" title="如何将手机号码分段显示"></a>如何将手机号码分段显示</h2><p>将单元格格式设置为自定义的<code>000-0000-0000</code>手机号码显示时就会按照这个格式分隔开比如132-xxxx-xxxx，如果你不想用-隔开，也可以直接输入空格，就会变成132 xxxx xxxx。</p>
+<h2 id="组织-Excel-自动生成超链接"><a href="#组织-Excel-自动生成超链接" class="headerlink" title="组织 Excel 自动生成超链接"></a>组织 Excel 自动生成超链接</h2><p>在excel中输入邮箱和网址时会自动生成超链接，鼠标不小心点到时就会跳转，很烦人。此时也可以通过设置来关闭: <code>文件--&gt;选项--&gt;校对--&gt;自动更正选项--&gt;键入时自动套用格式--&gt;取消勾选Internet 及网路路径替换为超链接</code></p>
+<h2 id="下拉菜单输入"><a href="#下拉菜单输入" class="headerlink" title="下拉菜单输入"></a>下拉菜单输入</h2><p>在空白处列表中输入需要的菜单名称，然后再选中需要使用下拉菜单输入的单元格，然后点击<code>数据--&gt;数据验证--&gt;设置</code>将验证条件中的允许设为序列，然后点击来源右边的小箭头，选中刚才输入的单元格即可。</p>
+<h2 id="横列转数列"><a href="#横列转数列" class="headerlink" title="横列转数列"></a>横列转数列</h2><p>先选中需要转置的单元格，复制。然后点击鼠标右键，选择<code>选择性粘贴</code>，再弹出的对话框中勾选转置即可。</p>
+<h2 id="空白单元格的批量填充"><a href="#空白单元格的批量填充" class="headerlink" title="空白单元格的批量填充"></a>空白单元格的批量填充</h2><p>选中整个表格，在开始菜单中点击定位功能或者<code>Ctrl+G</code>，然后选择定位条件为：空值。然后在第一个表格中输入<code>=</code>然后再点击上一个表格，最后再<code>Ctrl+回车</code>，所有空白的区域都会以表格中的上一个值填充。最后再复制表格内容，粘贴为值。</p>
+<h2 id="Alt-向下方向键：显示前面录入过的内容"><a href="#Alt-向下方向键：显示前面录入过的内容" class="headerlink" title="Alt + 向下方向键：显示前面录入过的内容"></a>Alt + 向下方向键：显示前面录入过的内容</h2><h2 id="Excel-中如何快速定位公式"><a href="#Excel-中如何快速定位公式" class="headerlink" title="Excel 中如何快速定位公式"></a>Excel 中如何快速定位公式</h2><p>在表格中如果向查看哪些单元格使用了公式，可以使用定位功能，然后选择条件为公式就可以查到。也可以在<code>开始</code>菜单中的<code>查找和选择</code>下点击<code>公式</code>进行定位。</p>
+<h2 id="输入开头为0的文本数据"><a href="#输入开头为0的文本数据" class="headerlink" title="输入开头为0的文本数据"></a>输入开头为0的文本数据</h2><p>可以在数据前输入单引号或者将单元格格式设置为文本格式。</p>
+<h2 id="多个0的录入"><a href="#多个0的录入" class="headerlink" title="多个0的录入"></a>多个0的录入</h2><p>在常规单元格中输入<code>1**8</code>会变为100000000，快速在末尾添加8个零。</p>
+<h2 id="快速填充"><a href="#快速填充" class="headerlink" title="快速填充"></a>快速填充</h2><p><code>Ctrl + D</code> 向下填充，<code>Ctrl + R</code> 向右填充。</p>
+<h2 id="使用-Tab-键进行移动"><a href="#使用-Tab-键进行移动" class="headerlink" title="使用 Tab 键进行移动"></a>使用 Tab 键进行移动</h2><p>使用<code>Tab</code> 键进行移动时，输入完一行数据后，按回车会自动跳转到下一行的起始处，可以加快数据录入的效率。</p>
+<h2 id="同组工作表数据录入"><a href="#同组工作表数据录入" class="headerlink" title="同组工作表数据录入"></a>同组工作表数据录入</h2><p>需要在多个单元格中输入相同内容时，可以先按住<code>Ctrl键</code>选中这些单元格，然后输入数据，最后<code>Ctrl+回车</code>，所有单元格就会输入相同的值。</p>
+<p>同理，想在不同表中的同一位置输入相同值的时候，可以先按住<code>Ctrl键</code>选中这些表，此时输入内容时，其它表中相同位置也会输入同样内容。</p>
+<h2 id="快速删除工作表中空行"><a href="#快速删除工作表中空行" class="headerlink" title="快速删除工作表中空行"></a>快速删除工作表中空行</h2><p>首先按<code>F5</code>或者<code>Ctrl + G</code> 设置定位条件为：<code>空值</code>，然后在<code>开始菜单</code>下的<code>删除</code>中，选择<code>删除工作表行</code>就可以删除空行了。</p>
+<h2 id="提取差异单元格，并标注颜色"><a href="#提取差异单元格，并标注颜色" class="headerlink" title="提取差异单元格，并标注颜色"></a>提取差异单元格，并标注颜色</h2><p>选中整个表格，然后点击<code>开始菜单</code>下的<code>条件格式</code>，在<code>突出显示单元格规则</code>下选择<code>重复</code>，此时就会将所有重复值都突出显示出来。</p>
+<h2 id="快速提取身份证号码"><a href="#快速提取身份证号码" class="headerlink" title="快速提取身份证号码"></a>快速提取身份证号码</h2><p>如果我们想从身份证号码中，快速提取出出生年月日，我们可以使用这个公式：<code>TEXT(MID(A2,7,8),&quot;0000-00-00&quot;)</code>就可以了。</p>
+<h2 id="套用电子表格样式"><a href="#套用电子表格样式" class="headerlink" title="套用电子表格样式"></a>套用电子表格样式</h2><p><strong>套用电子表格样式的好处：</strong></p>
+<ul>
+<li>便于阅读</li>
+<li>可以帮助我们更快速地录入信息</li>
+<li>能帮助完善字段标题</li>
+<li>方便对数据进行筛选、计算和删除重复项</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>有时太智能了，可能会计算出一些我们不想要的结果，因为转换后计算的公式是自动全表应用的。此时我们使用转换表格设计中转换为区域的功能，转换完之后表格就不会自动计算所有值了。也可以使用清除格式，来清除表格格式。</li>
+</ul>
+<h3 id="一些快捷键"><a href="#一些快捷键" class="headerlink" title="一些快捷键"></a>一些快捷键</h3><ul>
+<li>选中整个表格：先选择第一个表格，按住Ctrl+Shift键，再依次按方向右键和下键，即可选中整个表格</li>
+<li>套用电子表格样式：Ctrl + L键。</li>
+</ul>
+<h2 id="实战案例—销售数据表格"><a href="#实战案例—销售数据表格" class="headerlink" title="实战案例—销售数据表格"></a>实战案例—销售数据表格</h2><h3 id="删除空格"><a href="#删除空格" class="headerlink" title="删除空格"></a>删除空格</h3><p>拿到一张数据表的时候，首先要做的就是删除表中的空格，因为空格可能会对之后的数据计算造成影响。删除空格可以使用查找替换的方法。</p>
+<h3 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h3><p>查看表格是否包含序列，没有就增加序列。</p>
+<h3 id="解决合并单元格的问题"><a href="#解决合并单元格的问题" class="headerlink" title="解决合并单元格的问题"></a>解决合并单元格的问题</h3><p>将合并的单元格进行拆分，并且填充为相同的数据。</p>
+<h3 id="单元格包含多个信息"><a href="#单元格包含多个信息" class="headerlink" title="单元格包含多个信息"></a>单元格包含多个信息</h3><p>查看单元格是否包含了格信息，如果是，利用数列的拆分技巧，将单元格内容拆分为多列。</p>
+<p>方法：先新在需要分列的数据后建空白列，然后选中分列的数据（不要选到表头），在数据选项卡下选择分列功能，按照需要分列的数据属性进行相应的分列设置。</p>
+<h3 id="删除空行"><a href="#删除空行" class="headerlink" title="删除空行"></a>删除空行</h3><p>参考之前介绍的方法，删除空行。</p>
+<h3 id="更改时间时期格式"><a href="#更改时间时期格式" class="headerlink" title="更改时间时期格式"></a>更改时间时期格式</h3><p>系统认可的时间日期格式为’ - ‘或者’ / ‘，可以利用查找替换来进行更改。</p>
+<h3 id="数值数据被转成了科学计数显示"><a href="#数值数据被转成了科学计数显示" class="headerlink" title="数值数据被转成了科学计数显示"></a>数值数据被转成了科学计数显示</h3><p>这个一旦转换后，是无法挽救的，因此一定要注意在录入之前就将单元格格式设置为文本格式。</p>
+<h3 id="用于计算的数据"><a href="#用于计算的数据" class="headerlink" title="用于计算的数据"></a>用于计算的数据</h3><p>用于计算的数据一定得是数值格式，不然会出现公式计算错误。如果非要加一些文本，可以用设置单元格格式的方式增加。</p>
+<h3 id="增加表格样式"><a href="#增加表格样式" class="headerlink" title="增加表格样式"></a>增加表格样式</h3><p>在修改完表格的错误之后，可以给表格套用表格样式，使得表格便于阅读。</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\27947.html" rel="bookmark">Excel学习之图表</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\50892.html" rel="bookmark">Excel学习之数据透视表</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\4338.html" rel="bookmark">Excel学习之路之微图表</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\13281.html" rel="bookmark">Excel学习之路-函数</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\21268.html" rel="bookmark">Excel学习之路01</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="落空 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="落空 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Excel/" rel="tag"># Excel</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BD%95%E5%85%A5/" rel="tag"># 数据录入</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/21268.html" rel="prev" title="Excel学习之路01">
+      <i class="fa fa-chevron-left"></i> Excel学习之路01
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/13281.html" rel="next" title="Excel学习之路-函数">
+      Excel学习之路-函数 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E4%BC%BC%E6%A0%BC%E5%BC%8F%E5%A6%82%E4%BD%95%E4%B8%80%E7%A7%92%E5%BF%AB%E9%80%9F%E5%BD%95%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">相似格式如何一秒快速录入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%95%E5%85%A5%E9%95%BF%E4%B8%B2%E6%95%B0%E5%AD%97%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">录入长串数字的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%B0%86%E6%89%8B%E6%9C%BA%E5%8F%B7%E7%A0%81%E5%88%86%E6%AE%B5%E6%98%BE%E7%A4%BA"><span class="nav-number">3.</span> <span class="nav-text">如何将手机号码分段显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E7%BB%87-Excel-%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="nav-number">4.</span> <span class="nav-text">组织 Excel 自动生成超链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E6%8B%89%E8%8F%9C%E5%8D%95%E8%BE%93%E5%85%A5"><span class="nav-number">5.</span> <span class="nav-text">下拉菜单输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%AA%E5%88%97%E8%BD%AC%E6%95%B0%E5%88%97"><span class="nav-number">6.</span> <span class="nav-text">横列转数列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E7%99%BD%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%89%B9%E9%87%8F%E5%A1%AB%E5%85%85"><span class="nav-number">7.</span> <span class="nav-text">空白单元格的批量填充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Alt-%E5%90%91%E4%B8%8B%E6%96%B9%E5%90%91%E9%94%AE%EF%BC%9A%E6%98%BE%E7%A4%BA%E5%89%8D%E9%9D%A2%E5%BD%95%E5%85%A5%E8%BF%87%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">8.</span> <span class="nav-text">Alt + 向下方向键：显示前面录入过的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Excel-%E4%B8%AD%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E5%85%AC%E5%BC%8F"><span class="nav-number">9.</span> <span class="nav-text">Excel 中如何快速定位公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E5%BC%80%E5%A4%B4%E4%B8%BA0%E7%9A%84%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE"><span class="nav-number">10.</span> <span class="nav-text">输入开头为0的文本数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AA0%E7%9A%84%E5%BD%95%E5%85%A5"><span class="nav-number">11.</span> <span class="nav-text">多个0的录入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%A1%AB%E5%85%85"><span class="nav-number">12.</span> <span class="nav-text">快速填充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Tab-%E9%94%AE%E8%BF%9B%E8%A1%8C%E7%A7%BB%E5%8A%A8"><span class="nav-number">13.</span> <span class="nav-text">使用 Tab 键进行移动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E7%BB%84%E5%B7%A5%E4%BD%9C%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%BD%95%E5%85%A5"><span class="nav-number">14.</span> <span class="nav-text">同组工作表数据录入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%88%A0%E9%99%A4%E5%B7%A5%E4%BD%9C%E8%A1%A8%E4%B8%AD%E7%A9%BA%E8%A1%8C"><span class="nav-number">15.</span> <span class="nav-text">快速删除工作表中空行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E5%B7%AE%E5%BC%82%E5%8D%95%E5%85%83%E6%A0%BC%EF%BC%8C%E5%B9%B6%E6%A0%87%E6%B3%A8%E9%A2%9C%E8%89%B2"><span class="nav-number">16.</span> <span class="nav-text">提取差异单元格，并标注颜色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%8F%90%E5%8F%96%E8%BA%AB%E4%BB%BD%E8%AF%81%E5%8F%B7%E7%A0%81"><span class="nav-number">17.</span> <span class="nav-text">快速提取身份证号码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%97%E7%94%A8%E7%94%B5%E5%AD%90%E8%A1%A8%E6%A0%BC%E6%A0%B7%E5%BC%8F"><span class="nav-number">18.</span> <span class="nav-text">套用电子表格样式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">18.1.</span> <span class="nav-text">一些快捷键</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E2%80%94%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BC"><span class="nav-number">19.</span> <span class="nav-text">实战案例—销售数据表格</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%A9%BA%E6%A0%BC"><span class="nav-number">19.1.</span> <span class="nav-text">删除空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97"><span class="nav-number">19.2.</span> <span class="nav-text">序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%90%88%E5%B9%B6%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">19.3.</span> <span class="nav-text">解决合并单元格的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E6%A0%BC%E5%8C%85%E5%90%AB%E5%A4%9A%E4%B8%AA%E4%BF%A1%E6%81%AF"><span class="nav-number">19.4.</span> <span class="nav-text">单元格包含多个信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%A9%BA%E8%A1%8C"><span class="nav-number">19.5.</span> <span class="nav-text">删除空行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E6%97%B6%E9%97%B4%E6%97%B6%E6%9C%9F%E6%A0%BC%E5%BC%8F"><span class="nav-number">19.6.</span> <span class="nav-text">更改时间时期格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E8%A2%AB%E8%BD%AC%E6%88%90%E4%BA%86%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%98%BE%E7%A4%BA"><span class="nav-number">19.7.</span> <span class="nav-text">数值数据被转成了科学计数显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E4%BA%8E%E8%AE%A1%E7%AE%97%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">19.8.</span> <span class="nav-text">用于计算的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E8%A1%A8%E6%A0%BC%E6%A0%B7%E5%BC%8F"><span class="nav-number">19.9.</span> <span class="nav-text">增加表格样式</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="落空"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">落空</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ayoubu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ayoubu@outlook.com" title="E-Mail → mailto:ayoubu@outlook.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5095666460" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5095666460" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/ayoubu" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-zhihu"></i>知乎</a>
+      </span>
+  </div>
+
+
+<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">落空</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">55k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">50 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  <script async src="/js/cursor/love.min.js"></script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>

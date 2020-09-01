@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Tp_uCM85etMVq9MuOfdPYQ6aA4SI0lOYqjanBUw5BuQ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://ayoubu.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="函数基础函数是我们对原本数据进行计算统计或者用来增加字段的一种表达方式。  兼容性函数 — 38 多维数据集函数 — 7 数据库函数 — 12 日期和时间函数  — 22 工程函数 — 41 财务函数 — 53 信息函数 —17 逻辑函数 — 7 查找和引用函数 — 20 数学和三角函数 — 63 统计函数 — 98 文本函数 — 27">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Excel学习之路-函数">
+<meta property="og:url" content="https://ayoubu.github.io/archives/13281.html">
+<meta property="og:site_name" content="落空的个人博客">
+<meta property="og:description" content="函数基础函数是我们对原本数据进行计算统计或者用来增加字段的一种表达方式。  兼容性函数 — 38 多维数据集函数 — 7 数据库函数 — 12 日期和时间函数  — 22 工程函数 — 41 财务函数 — 53 信息函数 —17 逻辑函数 — 7 查找和引用函数 — 20 数学和三角函数 — 63 统计函数 — 98 文本函数 — 27">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.imgur.com/DUp9E46.png">
+<meta property="og:image" content="https://i.imgur.com/2b156t1.png">
+<meta property="og:image" content="https://i.imgur.com/CDzuNKb.png">
+<meta property="article:published_time" content="2020-08-29T12:09:53.000Z">
+<meta property="article:modified_time" content="2020-08-30T07:26:09.589Z">
+<meta property="article:author" content="落空">
+<meta property="article:tag" content="函数">
+<meta property="article:tag" content="Excel">
+<meta property="article:tag" content="数据分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/DUp9E46.png">
+
+
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<link rel="stylesheet" type="text/css" href="/css/injector.css" />
+  <title>Excel学习之路-函数 | 落空的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落空的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落空的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我慢慢明白了为什么我不快乐，因为我总是期待一个结果。</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">19</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/13281.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Excel学习之路-函数
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-29 12:09:53" itemprop="dateCreated datePublished" datetime="2020-08-29T12:09:53Z">2020-08-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-30 07:26:09" itemprop="dateModified" datetime="2020-08-30T07:26:09Z">2020-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
+                    <span itemprop="name">数据分析</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/" itemprop="url" rel="index">
+                    <span itemprop="name">Excel</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="函数基础"><a href="#函数基础" class="headerlink" title="函数基础"></a>函数基础</h2><p>函数是我们对原本数据进行计算统计或者用来增加字段的一种表达方式。</p>
+<ol>
+<li>兼容性函数 — 38</li>
+<li>多维数据集函数 — 7</li>
+<li>数据库函数 — 12</li>
+<li>日期和时间函数  — 22</li>
+<li>工程函数 — 41</li>
+<li>财务函数 — 53</li>
+<li>信息函数 —17</li>
+<li>逻辑函数 — 7</li>
+<li>查找和引用函数 — 20</li>
+<li>数学和三角函数 — 63</li>
+<li>统计函数 — 98</li>
+<li>文本函数 — 27</li>
+</ol>
+<a id="more"></a>
+
+<h3 id="Excel-单元格命名"><a href="#Excel-单元格命名" class="headerlink" title="Excel 单元格命名"></a>Excel 单元格命名</h3><p>在我们应用公式的时候，可以对单元格，或者单元格块进行重命名，之后我们在其它页使用公式时就可以通过命名快速选取单元格。</p>
+<p><strong>命名时注意：</strong></p>
+<ul>
+<li>Excel名称不能使用RC</li>
+<li>空格会被下划线自动填充</li>
+<li>与单元格相同的名称避免使用</li>
+<li>符号只能使用”.”或者下划线”_”</li>
+</ul>
+<p>想要删除命名时，可以通过<code>公式--&gt;名称管理器</code>找到相应的命名删除即可。</p>
+<h3 id="单元格引用"><a href="#单元格引用" class="headerlink" title="单元格引用"></a>单元格引用</h3><ul>
+<li>绝对引用：行和列都锁定。如：<code>$A$2</code>.</li>
+<li>相对引用：行和列只锁定一个。如：<code>列不变：$A2</code>，<code>行不变：A$2</code>.</li>
+<li>混合引用：一个锁定行，一个锁定列</li>
+</ul>
+<h2 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h2><h3 id="Vlookup-函数"><a href="#Vlookup-函数" class="headerlink" title="Vlookup 函数"></a>Vlookup 函数</h3><p>Vlookup函数使用条件：</p>
+<ul>
+<li>有两张表</li>
+<li>两张表要有共通的字段</li>
+<li>表一缺失的字段能在表二里面找得到</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])</span><br><span class="line">lookup_value:你要查找的值</span><br><span class="line">table_array:你要查找的值在哪个区域（需要用的绝对引用，或者区域命名）</span><br><span class="line">col_index_num:查找的值在区域当中的第几列</span><br><span class="line">range_lookup:模糊查找 or 精确查找：0</span><br></pre></td></tr></table></figure>
+
+<p>此时我们就可以使用表二中表一缺失的字段来填补表一。比如说根据员工的姓名，从其它表中复制一些相应信息时可以使用。</p>
+<p><strong>VLOOKUP 多条件查找：</strong></p>
+<p><code>=VLOOKUP(E2&amp;F2,IF(&#123;1,0&#125;,A2:A7&amp;B2:B7,C2:C7),2,0)</code> 其中E2和F2是两个查找条件，IF中的这一团东西A2:A7&amp;B2:B7与E2和F2对应，C2：C7表示查找区域。{1,0} 还不知道。</p>
+<h3 id="IF-函数"><a href="#IF-函数" class="headerlink" title="IF 函数"></a>IF 函数</h3><p>IF 函数在excel中主要是用于逻辑判断。</p>
+<p>IF 函数的基本语法为：<code>IF(判断条件, 如果为真执行, 如果为假执行)</code>，用于判断运算的符号有：<code>=, &gt;, &lt;, &gt;=, &lt;=, &gt;&lt;(不等于)</code>。在使用IF函数时可以进行嵌套使用或者和AND或者OR函数联合使用，从而实现复杂的逻辑判断。</p>
+<h3 id="MATCH-和-INDEX-函数"><a href="#MATCH-和-INDEX-函数" class="headerlink" title="MATCH 和 INDEX 函数"></a>MATCH 和 INDEX 函数</h3><p><strong>INDEX与MATCH函数的语法:</strong></p>
+<p><code>INDEX (array, row_num, [column_num])</code> — 返回表或区域中的值。引用三个参数分别为数据表区域， 行数， 列数。</p>
+<p><code>MATCH (lookup_value, looup_array, [match_type])</code> — 返回指定数值在指定数组区域中的位置。 三个参数分别为查找的值、 查找单元格区域、查找方式。</p>
+<p>这两个函数通常是配合使用的，首先使用MATCH函数索引到位置，然后使用INDEX根据索引位置得到索引值。</p>
+<h3 id="条件求和"><a href="#条件求和" class="headerlink" title="条件求和"></a>条件求和</h3><p><code>SUMIF(条件区域，指定的求和条件，求和区域)</code></p>
+<p>示例：求一班总成绩，公式：<code>=SUMIF(C2:C5,E2,D2:D5)</code> </p>
+<p><img src="https://i.imgur.com/DUp9E46.png" alt="SUNMIF 求和"></p>
+<h3 id="多条件求和"><a href="#多条件求和" class="headerlink" title="多条件求和"></a>多条件求和</h3><p><code>SUMIFS(求和区域，条件区域1，指定的求和条件1，条件区域2，指定的求和条件2，...)</code> </p>
+<p>示例：统计部门及岗位的补助金额之和，公式：<code>=SUMIFS(D2:D9,B2:B9,F2,C2:C9,G2)</code> </p>
+<p><img src="https://i.imgur.com/2b156t1.png" alt="SUMIFS 多条件求和"> </p>
+<h3 id="条件计数"><a href="#条件计数" class="headerlink" title="条件计数"></a>条件计数</h3><p><code>COUNTIF(条件区域，指定计数条件)</code></p>
+<p>示例：统计店铺数量。 公式：<code>=COUNTIF(B2:B12,E2)</code> </p>
+<p><img src="https://i.imgur.com/CDzuNKb.png" alt="CONTIF 条件计数"></p>
+<h3 id="多条件计数"><a href="#多条件计数" class="headerlink" title="多条件计数"></a>多条件计数</h3><p><code>COUNTIF(条件区域1，指定计数条件1，条件区域2，指定计数条件2,...)</code></p>
+<p>使用方法同上，只不过是加入了多个条件。</p>
+<h3 id="计算文本算式"><a href="#计算文本算式" class="headerlink" title="计算文本算式"></a>计算文本算式</h3><p>在一些工程类的表格中可能会用到一些文本类型的算式，如何快速计算出结果呢？点击<code>公式--&gt;定义名称</code> 在弹出的对话框中输入<code>公式名称</code>，引用位置处输入<code>EVALUATE(B2)</code> B2为公式所在的单元格，然后在需要引入公式的单元格处输入<code>=公式名称</code> 即可。</p>
+<h3 id="合并多个单元格内容"><a href="#合并多个单元格内容" class="headerlink" title="合并多个单元格内容"></a>合并多个单元格内容</h3><p>在需要输入合并单元格内容的单元格内输入<code>单元格1&amp;单元格2&amp;单元格3...</code> 用&amp;连接，就可以将它们合并了。也可以直接输入合并后的结果，按<code>Ctrl + E</code> 就可以把其它所有单元格按照合并后的结果进行填充了。</p>
+<h3 id="合并带有格式的单元格内容"><a href="#合并带有格式的单元格内容" class="headerlink" title="合并带有格式的单元格内容"></a>合并带有格式的单元格内容</h3><p>需要合并带有格式的单元格如日期和时间时，可以将带有格式的单元格转换为文本然后再进行合并。比如<code>A2&amp;TEXT(B2,&quot;y年m月d日&quot;)</code> 意思就是将单元格B2的时间按照年月日的方式转换为文本，再和A2单元格进行合并。</p>
+<h3 id="REPLACE-函数"><a href="#REPLACE-函数" class="headerlink" title="REPLACE 函数"></a>REPLACE 函数</h3><p>REPLACE函数可以将单元格内的某些字符进行替换，如电话号码中间的4位，身份证中间的某几位。</p>
+<p>使用方法：<code>REPLACE(目标单元格, 起始位, 替换几位, &quot;替换内容&quot;)</code> </p>
+<h3 id="屏蔽函数公式返回的错误值"><a href="#屏蔽函数公式返回的错误值" class="headerlink" title="屏蔽函数公式返回的错误值"></a>屏蔽函数公式返回的错误值</h3><p>为了避免计算公式计算时返回各种各样的错误值，可以通过<code>IFERROR</code> 函数，设置如果有错误则返回什么值。如：<code>=IFERROR(A2/B2,-1)</code> ，如果A2/B2计算错误，就返回-1.</p>
+<h3 id="四舍五入函数"><a href="#四舍五入函数" class="headerlink" title="四舍五入函数"></a>四舍五入函数</h3><p><code>ROUND(值, 保留位数)</code> 函数是用来进行四舍五入的函数，使用起来也非常方便。</p>
+<h3 id="取整的间隔小时数"><a href="#取整的间隔小时数" class="headerlink" title="取整的间隔小时数"></a>取整的间隔小时数</h3><p>需要计算时间间隔可以使用<code>TEXT(B2-B1,&quot;[h]小时&quot;)</code> B1和B2是两个系统可以识别的时间，计算后的单位可以位[h]–小时，[m]–分钟，[s]–秒。</p>
+<h3 id="时间函数"><a href="#时间函数" class="headerlink" title="时间函数"></a>时间函数</h3><p><code>TODAY()</code> – 显示今天的日期。<code>2020/8/30</code></p>
+<p><code>NOW()</code> – 显示今天的日期和时间。 <code>2020/8/30  14:53</code></p>
+<p><code>YEAR(&quot;2018/3/21&quot;)</code> – 只显示这个日期的年。 <code>2018</code></p>
+<p><code>MONTH(&quot;2018/3/21&quot;)</code> – 3</p>
+<p><code>DAY(&quot;2018/3/21&quot;)</code> – 21</p>
+<p><code>HOUR(&quot;12:32:09&quot;)</code>  – 12  (0~23)</p>
+<p><code>MINUTE(&quot;12:32:09&quot;)</code>  – 32  (0~59)</p>
+<p><code>SECOND(&quot;12:32:09&quot;)</code> – 9 (0~59)</p>
+<h3 id="计算某个日期是星期几"><a href="#计算某个日期是星期几" class="headerlink" title="计算某个日期是星期几"></a>计算某个日期是星期几</h3><p>使用公式<code>TEXT(WEEKDAY(&quot;2018/6/12&quot;),&quot;aaaa&quot;)</code> 就可以计算出日期“2018/6/12”是星期几了。</p>
+<h3 id="根据日期计算年龄"><a href="#根据日期计算年龄" class="headerlink" title="根据日期计算年龄"></a>根据日期计算年龄</h3><p>使用公式：<code>DATEDIF(出生日期, TODAY(), &quot;Y&quot;)</code> 就可以计算出年龄了。</p>
+<h3 id="从身份证号码中提取性别"><a href="#从身份证号码中提取性别" class="headerlink" title="从身份证号码中提取性别"></a>从身份证号码中提取性别</h3><p>直接使用公式：<code>IF(MOD(MID(A2,17,1),2)=1,&quot;男&quot;,&quot;女&quot;)</code> 就可以实现。其中A2单元格中是身份证号码，MID()是用来提取第17位数字，MOD()是用来判断该数字是否可以被2整除，IF()是用来做最终的判断的。</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\27947.html" rel="bookmark">Excel学习之图表</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\50892.html" rel="bookmark">Excel学习之数据透视表</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\4338.html" rel="bookmark">Excel学习之路之微图表</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\21268.html" rel="bookmark">Excel学习之路01</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\37845.html" rel="bookmark">Excel学习之路00</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="落空 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="落空 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%87%BD%E6%95%B0/" rel="tag"># 函数</a>
+              <a href="/tags/Excel/" rel="tag"># Excel</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag"># 数据分析</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/57650.html" rel="prev" title="Excel 快速录入和定位的小技巧">
+      <i class="fa fa-chevron-left"></i> Excel 快速录入和定位的小技巧
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/4338.html" rel="next" title="Excel学习之路之微图表">
+      Excel学习之路之微图表 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">函数基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Excel-%E5%8D%95%E5%85%83%E6%A0%BC%E5%91%BD%E5%90%8D"><span class="nav-number">1.1.</span> <span class="nav-text">Excel 单元格命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E6%A0%BC%E5%BC%95%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">单元格引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vlookup-%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">Vlookup 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IF-%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">IF 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MATCH-%E5%92%8C-INDEX-%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">MATCH 和 INDEX 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%B1%82%E5%92%8C"><span class="nav-number">2.4.</span> <span class="nav-text">条件求和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%9D%A1%E4%BB%B6%E6%B1%82%E5%92%8C"><span class="nav-number">2.5.</span> <span class="nav-text">多条件求和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%AE%A1%E6%95%B0"><span class="nav-number">2.6.</span> <span class="nav-text">条件计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%AE%A1%E6%95%B0"><span class="nav-number">2.7.</span> <span class="nav-text">多条件计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%96%87%E6%9C%AC%E7%AE%97%E5%BC%8F"><span class="nav-number">2.8.</span> <span class="nav-text">计算文本算式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E5%A4%9A%E4%B8%AA%E5%8D%95%E5%85%83%E6%A0%BC%E5%86%85%E5%AE%B9"><span class="nav-number">2.9.</span> <span class="nav-text">合并多个单元格内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E5%B8%A6%E6%9C%89%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%8D%95%E5%85%83%E6%A0%BC%E5%86%85%E5%AE%B9"><span class="nav-number">2.10.</span> <span class="nav-text">合并带有格式的单元格内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REPLACE-%E5%87%BD%E6%95%B0"><span class="nav-number">2.11.</span> <span class="nav-text">REPLACE 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%8F%E8%94%BD%E5%87%BD%E6%95%B0%E5%85%AC%E5%BC%8F%E8%BF%94%E5%9B%9E%E7%9A%84%E9%94%99%E8%AF%AF%E5%80%BC"><span class="nav-number">2.12.</span> <span class="nav-text">屏蔽函数公式返回的错误值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E8%88%8D%E4%BA%94%E5%85%A5%E5%87%BD%E6%95%B0"><span class="nav-number">2.13.</span> <span class="nav-text">四舍五入函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E6%95%B4%E7%9A%84%E9%97%B4%E9%9A%94%E5%B0%8F%E6%97%B6%E6%95%B0"><span class="nav-number">2.14.</span> <span class="nav-text">取整的间隔小时数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0"><span class="nav-number">2.15.</span> <span class="nav-text">时间函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9F%90%E4%B8%AA%E6%97%A5%E6%9C%9F%E6%98%AF%E6%98%9F%E6%9C%9F%E5%87%A0"><span class="nav-number">2.16.</span> <span class="nav-text">计算某个日期是星期几</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%97%A5%E6%9C%9F%E8%AE%A1%E7%AE%97%E5%B9%B4%E9%BE%84"><span class="nav-number">2.17.</span> <span class="nav-text">根据日期计算年龄</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E8%BA%AB%E4%BB%BD%E8%AF%81%E5%8F%B7%E7%A0%81%E4%B8%AD%E6%8F%90%E5%8F%96%E6%80%A7%E5%88%AB"><span class="nav-number">2.18.</span> <span class="nav-text">从身份证号码中提取性别</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="落空"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">落空</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ayoubu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ayoubu@outlook.com" title="E-Mail → mailto:ayoubu@outlook.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5095666460" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5095666460" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/ayoubu" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-zhihu"></i>知乎</a>
+      </span>
+  </div>
+
+
+<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">落空</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">55k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">50 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  <script async src="/js/cursor/love.min.js"></script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>
