@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Tp_uCM85etMVq9MuOfdPYQ6aA4SI0lOYqjanBUw5BuQ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://ayoubu.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="MongoDB简介MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为WEB应用提供可扩展的高性能数据存储解决方案。 MongoDB将数据存储为一个文档，数据结构由键值对(Key : value)组成，MongoDB文档类似于JSON对象，字段值可以包含其它文档，数组及文档数组。 MongoDB服务端可运行在Linux、Windows和Mac OS平台，支持32位和64位应用，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB简介">
+<meta property="og:url" content="https://ayoubu.github.io/archives/52778.html">
+<meta property="og:site_name" content="落空的个人博客">
+<meta property="og:description" content="MongoDB简介MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为WEB应用提供可扩展的高性能数据存储解决方案。 MongoDB将数据存储为一个文档，数据结构由键值对(Key : value)组成，MongoDB文档类似于JSON对象，字段值可以包含其它文档，数组及文档数组。 MongoDB服务端可运行在Linux、Windows和Mac OS平台，支持32位和64位应用，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.imgur.com/xTRa32i.png">
+<meta property="og:image" content="https://i.imgur.com/rvmuYB2.png">
+<meta property="og:image" content="https://i.imgur.com/OPVGh4f.png">
+<meta property="article:published_time" content="2020-09-05T10:58:05.000Z">
+<meta property="article:modified_time" content="2020-09-09T06:54:19.272Z">
+<meta property="article:author" content="落空">
+<meta property="article:tag" content="数据存储">
+<meta property="article:tag" content="MongoDB">
+<meta property="article:tag" content="PyMongo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/xTRa32i.png">
+
+
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<link rel="stylesheet" type="text/css" href="/css/injector.css" />
+  <title>MongoDB简介 | 落空的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落空的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落空的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我慢慢明白了为什么我不快乐，因为我总是期待一个结果。</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">38</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">25</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/52778.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MongoDB简介
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-05 10:58:05" itemprop="dateCreated datePublished" datetime="2020-09-05T10:58:05Z">2020-09-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-09 06:54:19" itemprop="dateModified" datetime="2020-09-09T06:54:19Z">2020-09-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">数据存储</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/MongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongoDB</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="MongoDB简介"><a href="#MongoDB简介" class="headerlink" title="MongoDB简介"></a>MongoDB简介</h2><p>MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为WEB应用提供可扩展的高性能数据存储解决方案。</p>
+<p>MongoDB将数据存储为一个文档，数据结构由键值对(Key : value)组成，MongoDB文档类似于JSON对象，字段值可以包含其它文档，数组及文档数组。</p>
+<p>MongoDB服务端可运行在Linux、Windows和Mac OS平台，支持32位和64位应用，默认端口为27017。本文所展示的为Windows平台的安装及使用。</p>
+<p>MongoDB支持各种编程语言：Python、Java、C++、PHP、C#等多种语言。</p>
+<h2 id="MongoDB的优势"><a href="#MongoDB的优势" class="headerlink" title="MongoDB的优势"></a>MongoDB的优势</h2><ul>
+<li><strong>易扩展：</strong> NoSQL（非关系型数据库）数据库种类繁多，但是一个共同的特点都是去掉关系型数据库的关系特性。数据之间无关系，这样就非常容易扩展。</li>
+<li><strong>大数据量，高性能：</strong> NoSQL数据库都具有非常高的读写性能，尤其在大数据量下，同样表现优秀。得益于它的无关系性，数据的结构简单</li>
+<li><strong>灵活的数据模型：</strong> NoSQL无需事先为要存储的数据建立字段，随时可以存储自定义的数据格式。而在关系型数据库里，增删字段是一件非常麻烦的事情。</li>
+</ul>
+<p><strong>缺点：</strong> 由于它每条数据都是单独存储的，因此在存储过程中可能会包含大量重复信息，非常占用存储空间。</p>
+<h2 id="MongDB的安装（windows）"><a href="#MongDB的安装（windows）" class="headerlink" title="MongDB的安装（windows）"></a>MongDB的安装（windows）</h2><a id="more"></a>
+
+<ol>
+<li>首先下载MongDB的社区版，我这边下载的是64位的版本（<a target="_blank" rel="noopener external nofollow noreferrer" href="https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.0-signed.msi">下载</a>）。</li>
+<li>打开.msi的安装文件，按照指示一路点击<code>Next</code>就好，如果想更改安装目录，需要选择<code>Custom</code>。在最后我选的是<code>以Web用户的方式来使用MongDB</code>。</li>
+<li>在最后不要勾选<code>Install MongoDB Compass</code>。MongoDB Compass 是一个图形界面管理工具，这里不安装也没有问题，可以自己安装一个图形界面管理工具，比如<a target="_blank" rel="noopener external nofollow noreferrer" href="https://robomongo.org/">Robo3T</a>。</li>
+</ol>
+<h2 id="配置MongoDB"><a href="#配置MongoDB" class="headerlink" title="配置MongoDB"></a>配置MongoDB</h2><p>MongoDB的安装步骤比较简单，但是配置较为繁琐。</p>
+<p>首先在MongoDB的data文件夹里新建一个db文件夹和一个log文件夹，然后在log文件夹下新建一个mongo.log文件。</p>
+<p>将安装路径(..\MongoDB\bin)添加到环境变量path中，此时打卡cmd窗口，运行mongo命令，此时得到下图结果。</p>
+<img src="https://i.imgur.com/xTRa32i.png" alt="MongoDB安装结果" style="zoom:80%;" />
+
+<p>提示我们连接失败，是因为我们还没有启动MongoDB服务。在cmd中通过以下命令启动：<code>mongod -- dbpath &quot;..\MongoDB\data\db</code>“。（注：后面这个data的文件夹也可以创建在别的路径，但是data文件夹中得包含log文件夹和db文件夹，如果没有提前创建db文件夹，则服务器会启动失败。）</p>
+<p>打开浏览器，输入<code>127.0.0.1:27017</code>，尝试连接数据库，得到下图所示结果，说明启动成功。</p>
+<img src="https://i.imgur.com/rvmuYB2.png" alt="在浏览器连接MongoDB" style="zoom:80%;" />
+
+<p><strong>配置MongoDB的自启动：</strong></p>
+<p>首先关闭mongoDB的服务，在cmd窗口可以按<code>Ctrl + C</code>来停止。然后以管理员身份运行cmd窗口，输入命令：<code>mongod --logpath &quot;..\MongoDB\data\log\mongo.log&quot;  --logappend --dbpath &quot;..\MongoDB\data\db&quot; --directoryperdb --serviceName &quot;MongoDB&quot; --install</code> ，如果没有报错，则说明添加成功，可以使用win+R，然后输入services.msc命令进行查看。</p>
+<p>我的配置命令为：<code>mongod --logpath &quot;D:\Data\MongoDB\data\log\mongo.log&quot; --logappend --dbpath &quot;D:\Data\MongoDB\data\db&quot; --directoryperdb --serviceName &quot;MongoDB&quot; --install</code>只需要替换里面的文件夹路径即可。</p>
+<img src="https://i.imgur.com/OPVGh4f.png" alt="添加MongoDB服务到系统中" style="zoom:80%;" />
+
+<p>这里显示的MongoDB Server是自动启动的，我们把它设置为手动的。然后再cmd窗口中输入：<code>net start mongodb</code>。</p>
+<p><strong>问题：</strong></p>
+<ol>
+<li>我在启动的时候出现了拒绝访问，通过管理员权限运行cmd窗口后可以正常启动。</li>
+<li>如果出现<code>服务没有相应控制功能</code>，1)运行<code>sc delete mongodb</code>删除服务，再运行一次配置服务命令。</li>
+</ol>
+<h3 id="Windows-MongoDB服务自动关闭"><a href="#Windows-MongoDB服务自动关闭" class="headerlink" title="Windows MongoDB服务自动关闭"></a><strong>Windows MongoDB服务自动关闭</strong></h3><p>我在使用windows 系统的MongoDB服务时，服务总是自动中断，通过下述方式解决。</p>
+<ol>
+<li>在命令行中输入：<code>mongod --remove</code></li>
+<li>删除之前配置的db文件夹中的<code>mongod.lock</code>和<code>storage.bson</code>两个文件。</li>
+<li>重新配置自动启动<code>mongod --logpath &quot;D:\Data\MongoDB\data\log\mongo.log&quot; --logappend --dbpath &quot;D:\Data\MongoDB\data\db&quot; --directoryperdb --serviceName &quot;MongoDB&quot; --install</code></li>
+<li>启动服务：<code>net start mongodb</code></li>
+</ol>
+<p>注意，以上操作，会清楚数据库的信息。</p>
+<h2 id="关于Database的基础命令"><a href="#关于Database的基础命令" class="headerlink" title="关于Database的基础命令"></a>关于Database的基础命令</h2><p>在安装成功后，启用MongoDB的服务，然后在命令行窗口输入：<code>mongo</code>，就可以进入mongoDB的命令行模式，然后就可以执行一些操作。</p>
+<ol>
+<li>查看当前的数据库：db</li>
+<li>查看所有的数据库：show dbs / show databases</li>
+<li>切换数据库：use db_name</li>
+<li>删除当前的数据库：db.dropDatabase()</li>
+<li>删除数据集合：db.集合命.drop()</li>
+</ol>
+<h2 id="MongoDB数据库操作"><a href="#MongoDB数据库操作" class="headerlink" title="MongoDB数据库操作"></a>MongoDB数据库操作</h2><h3 id="mongoDB插入数据"><a href="#mongoDB插入数据" class="headerlink" title="mongoDB插入数据"></a>mongoDB插入数据</h3><ul>
+<li>db.collection.insert({}) 插入数据，<code>_id</code>存在就会报错</li>
+<li>db.collection.save({}) 插入数据，<code>_id</code>存在就会更新</li>
+</ul>
+<h3 id="mongoDB更新操作"><a href="#mongoDB更新操作" class="headerlink" title="mongoDB更新操作"></a>mongoDB更新操作</h3><ul>
+<li><code>db.collection.update(&#123;name:&quot;大宝&quot;&#125;,&#123;name:&quot;大大宝&quot;&#125;)</code> </li>
+</ul>
+<p>此操作会直接用{name:”大大宝”}这条数据替换掉包含{name:”大宝”}的这条数据。</p>
+<ul>
+<li><code>db.collection.update(&#123;name:&quot;大宝&quot;&#125;,&#123;$set:&#123;name:&quot;大大宝&quot;&#125;&#125;)</code> </li>
+</ul>
+<p>此操作只会更新包含{name:”大宝”}的这条数据中的”name”这个字段，其它信息不变。</p>
+<ul>
+<li><code>db.collection.update(&#123;name:&quot;大宝&quot;&#125;,&#123;$set:&#123;name:&quot;大大宝&quot;&#125;&#125;,&#123;multi:true&#125;)</code> </li>
+</ul>
+<p>第三个参数设置为<code>&#123;multi:true&#125;</code>，表示会更新所有符合要求的数据，不然只会更新查找到的第一条数据。（注：第一种替换的方式时不能用这个参数，因为它这可以和$连用。）</p>
+<h3 id="mongoDB删除数据"><a href="#mongoDB删除数据" class="headerlink" title="mongoDB删除数据"></a>mongoDB删除数据</h3><ul>
+<li><code>db.collection.remove(&#123;name:&quot;大大宝&#125;,&#123;justOne:true&#125;)</code> </li>
+</ul>
+<p>删除第一条出现的包含{name:”大大宝}这个信息的数据，第二个参数可以不写，不写默认删全部。</p>
+<h3 id="数据查询"><a href="#数据查询" class="headerlink" title="数据查询"></a>数据查询</h3><ul>
+<li>find() 方法：<code>db.collection.find(&#123;条件文档&#125;)</code> — 查询全部</li>
+<li>findOne() 方法：<code>db.collection.findOne(条件文档)</code> — 查询，返回第一个</li>
+<li>pretty() 方法：<code>db.collection.find(&#123;条件文档&#125;).pretty()</code> — 将结果格式化</li>
+</ul>
+<h3 id="自定义查询"><a href="#自定义查询" class="headerlink" title="自定义查询"></a>自定义查询</h3><p>使用<code>$where</code>后面写一个函数，返回满足条件的数据，这种写法(js语句)一般是在终端中写时才会用到。</p>
+<p>比如查询年龄大于30的学生：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">    $where:function()&#123;    </span><br><span class="line">        return this.age&gt;30;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="投影"><a href="#投影" class="headerlink" title="投影"></a>投影</h3><p>选择返回结果的字段。在查询到的返回结果中，只选择必要的字段。表达式：<code>db.collection.find(&#123;&#125;,&#123;字段名称:[0,1]&#125;)</code>，除了id外其它字段只能全部0或者1，写的为0时，没写的默认为1。_id 默认会显示，想不显示得设置为1。</p>
+<h3 id="统计个数"><a href="#统计个数" class="headerlink" title="统计个数"></a>统计个数</h3><p>count()方法用于统计查询结果中文档的条数。</p>
+<p>表达式：</p>
+<ul>
+<li><code>db.collection.find(&#123;条件&#125;).count()</code>  此时count()中写条件是无效的</li>
+<li><code>db.collection.count(&#123;条件&#125;)</code></li>
+</ul>
+<h3 id="消除重复"><a href="#消除重复" class="headerlink" title="消除重复"></a>消除重复</h3><p>distinct()方法用于对数据进行去重操作。表达式：<code>db.collection.distinct(&#39;去重字段&#39;, &#123;条件&#125;)</code>，如：<code>db.collecttion.distinct(&#39;hometown&#39;,&#123;age:&#123;$gt:18&#125;&#125;)</code>。</p>
+<p>distinct() 方法返回的是一个该字段中不重复值的数据列表。</p>
+<h2 id="mongoDB表达式中的运算符"><a href="#mongoDB表达式中的运算符" class="headerlink" title="mongoDB表达式中的运算符"></a>mongoDB表达式中的运算符</h2><h3 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h3><ul>
+<li>等于：默认是等于判断，没有运算符</li>
+<li>小于：$lt —&gt; (less than)</li>
+<li>小于等于：$lte —&gt; (less than equal) </li>
+<li>大于：$gt —&gt; (greater than)</li>
+<li>大于等于：$gte —&gt; (greater than equal)</li>
+<li>不等于：$ne —&gt; (no equal)</li>
+</ul>
+<p>eg：db.collection.find({age:{$gte:18}})</p>
+<h3 id="范围运算符"><a href="#范围运算符" class="headerlink" title="范围运算符"></a>范围运算符</h3><p>使用<code>&quot;$in&quot;</code>，<code>&quot;nin&quot;</code>判断是否在某个范围内，比如查询年龄为18、28、38的学生。<code>db.collection.find(&#123;age:&#123;$in:[18,28,38]&#125;&#125;)</code> 。</p>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><ul>
+<li>and: 在json中写多个条件即可。比如查询<code>年龄大于或等于18</code>，并且<code>性别为男</code>的学生：<code>db.collection(&#123;age:&#123;$gte:18&#125;,gender:&quot;男&quot;&#125;)</code>。</li>
+<li>or: 使用<code>$or</code>，值为数组，数组中每个元素为json。比如查询年龄大于18，或者性别为男的学生：<code>db.collection.find(&#123;$or:[&#123;age:&#123;&amp;gte:18&#125;&#125;,&#123;gender:&quot;男&quot;&#125;]&#125;)</code>。</li>
+</ul>
+<p>查询<code>年龄大于18</code>或<code>性别为男生</code>，并且<code>姓名是郭靖</code>：<code>db.collection.find(&#123;$or:[&#123;age:&#123;$gte:18&#125;&#125;,&#123;gender:&quot;男&quot;&#125;], name:&quot;郭靖&quot;&#125;)</code></p>
+<h3 id="mongoDB中的正则表达式"><a href="#mongoDB中的正则表达式" class="headerlink" title="mongoDB中的正则表达式"></a>mongoDB中的正则表达式</h3><p>使用<code>//</code>或者<code>$regex</code>编写正则表达式。</p>
+<p>比如: </p>
+<p><code>db.collection.find(&#123;sku:/^abc/&#125;)</code> — 表示以abc开头的。</p>
+<p><code>db.collection.find(&#123;sku:&#123;$regex:&#39;789$&#39;&#125;&#125;)</code> — 表示以789结尾的。</p>
+<h2 id="mongoDB中的一些附加方法"><a href="#mongoDB中的一些附加方法" class="headerlink" title="mongoDB中的一些附加方法"></a>mongoDB中的一些附加方法</h2><ul>
+<li>limit() 方法：用于读取指定数量的文档。表达式：<code>db.collection.find().limit(NUMBER)</code>，比如查询两条：<code>db.collection.find().limit(2)</code>。</li>
+<li>skip() 方法：用于跳过指定数量的文档。 表达式：<code>db.collection.find().skip(NUMBER)</code>，比如跳过两条数据：<code>db.collection.find().skip(2)</code>。</li>
+<li>同时使用，两者也可以同时使用，如：<code>db.collection.find().limit(4).skip(5)</code> 或者 <code>db.collection.find().skip().limit()</code>。</li>
+</ul>
+<h2 id="数据的备份和恢复"><a href="#数据的备份和恢复" class="headerlink" title="数据的备份和恢复"></a>数据的备份和恢复</h2><p><strong>备份语法：</strong></p>
+<p> <code>mongodump -h dbhost -d dbname -o dbdirectory</code></p>
+<ul>
+<li>-h: 服务器地址，也可以指定端口号</li>
+<li>-d: 需要备份的数据库名称</li>
+<li>-o: 备份的数据存放的位置，此目录中存放着备份出来的数据</li>
+</ul>
+<p><code>mongodump -h 192.168.196.128:27017 -d test -o ~/Desktop/test1bak</code></p>
+<p><strong>恢复语法：</strong></p>
+<p><code>mongorestore -h dbhost -d dbname --dir dbdirectory</code></p>
+<ul>
+<li>-h：服务器地址</li>
+<li>-d：需要恢复的数据库实例</li>
+<li>–dir：备份数据所在的位置</li>
+</ul>
+<p><code>mongorestore -h 127.0.0.1:27017 -d test --dir ~/Desktop/test1bak/test1</code></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\18082.html" rel="bookmark">Python MongoDB</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\53312.html" rel="bookmark">MongDB练习</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\61509.html" rel="bookmark">MongDB 高级功能</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="落空 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="落空 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" rel="tag"># 数据存储</a>
+              <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
+              <a href="/tags/PyMongo/" rel="tag"># PyMongo</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/53805.html" rel="prev" title="Excel学习之疑难杂症">
+      <i class="fa fa-chevron-left"></i> Excel学习之疑难杂症
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/49506.html" rel="next" title="什么是json">
+      什么是json <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">MongoDB简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">2.</span> <span class="nav-text">MongoDB的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongDB%E7%9A%84%E5%AE%89%E8%A3%85%EF%BC%88windows%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">MongDB的安装（windows）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEMongoDB"><span class="nav-number">4.</span> <span class="nav-text">配置MongoDB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-MongoDB%E6%9C%8D%E5%8A%A1%E8%87%AA%E5%8A%A8%E5%85%B3%E9%97%AD"><span class="nav-number">4.1.</span> <span class="nav-text">Windows MongoDB服务自动关闭</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EDatabase%E7%9A%84%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">关于Database的基础命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">MongoDB数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mongoDB%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">6.1.</span> <span class="nav-text">mongoDB插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mongoDB%E6%9B%B4%E6%96%B0%E6%93%8D%E4%BD%9C"><span class="nav-number">6.2.</span> <span class="nav-text">mongoDB更新操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mongoDB%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">6.3.</span> <span class="nav-text">mongoDB删除数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.4.</span> <span class="nav-text">数据查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.5.</span> <span class="nav-text">自定义查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%95%E5%BD%B1"><span class="nav-number">6.6.</span> <span class="nav-text">投影</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1%E4%B8%AA%E6%95%B0"><span class="nav-number">6.7.</span> <span class="nav-text">统计个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E9%99%A4%E9%87%8D%E5%A4%8D"><span class="nav-number">6.8.</span> <span class="nav-text">消除重复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongoDB%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">7.</span> <span class="nav-text">mongoDB表达式中的运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">7.1.</span> <span class="nav-text">比较运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8C%83%E5%9B%B4%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">7.2.</span> <span class="nav-text">范围运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">7.3.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mongoDB%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">7.4.</span> <span class="nav-text">mongoDB中的正则表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongoDB%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%99%84%E5%8A%A0%E6%96%B9%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">mongoDB中的一些附加方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D"><span class="nav-number">9.</span> <span class="nav-text">数据的备份和恢复</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="落空"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">落空</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ayoubu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ayoubu@outlook.com" title="E-Mail → mailto:ayoubu@outlook.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5095666460" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5095666460" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/ayoubu" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-zhihu"></i>知乎</a>
+      </span>
+  </div>
+
+
+<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">落空</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">87k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:19</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  <script async src="/js/cursor/love.min.js"></script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>

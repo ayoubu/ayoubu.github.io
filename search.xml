@@ -2212,7 +2212,120 @@
 <p>第二步，选中销量和市场总量数据，在插入菜单栏下的图表区域，选择柱状图，在弹出的菜单中选择堆积柱状图，此时我们可以得到下图所示的表格。</p>
 <p><img src="https://i.imgur.com/elUoRlv.png" alt="绘制堆积效果的柱状图"></p>
 <p>第三步，选中市场份额数据表中的数据，再到图表区域点击右键，选择粘贴。此时市场份额数据就会增添到图表中了。具体的效果如下图，可以看到末尾多了市场份额的信息。</p>
-<img src="https://i.imgur.com/mEK7y1x.png" alt="增加产品市场份额后的图表信息" style="zoom:80%;" />]]></content>
+<img src="https://i.imgur.com/mEK7y1x.png" alt="增加产品市场份额后的图表信息" style="zoom:80%;" />
+
+<p>第四步，在图表区域单击鼠标右键，选择更改图表类型。在弹出的对话框中选择组合图，在<code>为您的数据系列选择图表类型和轴：</code>中设置销量和总量的图表类型为堆积柱形图，并勾选<code>次坐标轴</code>选项。结果如下图所示。</p>
+<img src="https://i.imgur.com/FsbwMVA.png" alt="更改图表类型" style="zoom:80%;" />
+
+<p>第五步，点击图表，在设计菜单栏中点击<code>添加图表元素</code> ，在<code>坐标轴</code>中选择<code>次要横坐标轴</code>。然后删掉图表标题，就得到我们最终想要的复合图表了，此时图表外观如下图。</p>
+<img src="https://i.imgur.com/VC79OIt.png" alt="选择次要横坐标轴后的图表样子" style="zoom:80%;" />
+
+<p>之后还是可以根据自己的需要，再进一步对表格进行美化。</p>
+<h2 id="图表的的美化"><a href="#图表的的美化" class="headerlink" title="图表的的美化"></a>图表的的美化</h2><p>首先一个图表应该包含下述这些元素，而对图表的美化工作也主要是围绕这些方面进行的。</p>
+<img src="https://i.imgur.com/FxSw9cV.png" alt="图表中应该包含的元素" style="zoom:80%;" />
+
+<h3 id="标题美化"><a href="#标题美化" class="headerlink" title="标题美化"></a>标题美化</h3><p>标题是一个表格最重要的部分，表格通常会自带一个标题，对标题美化时，我们可以删除原始的标题。利用矩形色块和文本框可以制作新的标题，比如下图就是用文本框和矩形色块制作的标题。在颜色的选择上，我们可以选择有活力一点的，这样图表看起来也会比较积极。</p>
+<img src="https://i.imgur.com/8I8ds4l.png" alt="标题的美化" style="zoom:80%;" />
+
+<h3 id="坐标轴的刻度"><a href="#坐标轴的刻度" class="headerlink" title="坐标轴的刻度"></a>坐标轴的刻度</h3><p>在我们制作表格的时候经常会遇到坐标轴刻度差距过大的情况，即大的太大，小的太小。此时我们可以将坐标轴的刻度设置为对数刻度，这样各个图表的长短会均匀一些。</p>
+<p>选中表格中的刻度区域，在该区域点击鼠标右键，选择<code>设置坐标轴格式</code>，在坐标轴选项中勾选对数刻度，最终的显示效果如下图。</p>
+<img src="https://i.imgur.com/UU5GPH5.png" alt="对数显示坐标轴" style="zoom:80%;" />
+
+<h3 id="数据对比"><a href="#数据对比" class="headerlink" title="数据对比"></a>数据对比</h3><p>通过将两组数据用不同方式绘制在同一个图表中，可以直观的表现出数据之间的差异。绘制方法上面有介绍过，结果如下图所示。</p>
+<p><img src="https://i.imgur.com/BvCIhpe.png" alt="不同数据之间的对比"></p>
+<p>如果我们想修改折线图的样式，使之变的平滑一些，只需要选中折线，在折线上单击鼠标右键，选择<code>设置数据系列格式</code>，在<code>系列选项</code>中勾选最下面的<code>平滑线</code>。得到最终的效果如下。</p>
+<img src="https://i.imgur.com/WWEFYLu.png" alt="平滑折线后的数据对比图" style="zoom:80%;" />
+
+<h3 id="单个数据值过大"><a href="#单个数据值过大" class="headerlink" title="单个数据值过大"></a>单个数据值过大</h3><p>比如我们做一个销售量的统计图，具体如下图所示，我们可以看到12年的销售量太大，我们可以对该条数据进行美化。</p>
+<img src="https://i.imgur.com/rfpMs9V.png" alt="原始数据和图表" style="zoom:80%;" />
+
+<p>此时我们可以通过截断图表的最大值，来避免单个数据过大的情况。</p>
+<p>首先复制销售量的列，粘贴在旁边命名为辅助列。对其中比较高的数据运用公式<code>ROUND(LARGE([销售量],2)*150,0)</code> ，此时得到新的最高值为1475。也可以自己写一个值。</p>
+<p>然后对表格进行一些设置，隐藏纵坐标轴，标记数据大小并将最大值改为原来的9000，绘制截断区域。最终结果如下图所示。</p>
+<p><img src="https://i.imgur.com/npIBpaY.png" alt="最终的绘制效果"></p>
+<p>上述操作是为了避免个别数据一枝独秀，如果我就是想表现一枝独秀。那可以对最高数据的显示颜色进行更改来突出显示。</p>
+<h2 id="创意图表"><a href="#创意图表" class="headerlink" title="创意图表"></a>创意图表</h2><p>以下提供一些创意图表的思路，解决技术方面的问题。</p>
+<h3 id="山峰柱形图"><a href="#山峰柱形图" class="headerlink" title="山峰柱形图"></a>山峰柱形图</h3><p>山峰柱形图就是把柱形图做的像山峰一样重叠交错。下图为典型的山峰图示例。</p>
+<p><img src="https://i.imgur.com/NQecP6O.png" alt="山峰图示例"></p>
+<p><strong>创建山峰图步骤：</strong></p>
+<p>首先，创建山峰和我们创建柱状图的过程是一致的，它的原理是将原来的柱状图形替换为我们自己绘制的山峰图形，或者素材山峰图形（格式最好eps或者ai）。</p>
+<ol>
+<li>创建柱形图</li>
+</ol>
+<img src="https://i.imgur.com/Re7RDDJ.png" alt="山峰图-原始柱形图" style="zoom:80%;" />
+
+<ol start="2">
+<li>图表数据系列转换</li>
+</ol>
+<p>默认的情况下，创建的柱形图只有一个数据序列，如上图所示。这样的柱形图创建的山峰图是无法做出重叠效果的，因此需要对它进行修正。点击图表，在图表上方单击鼠标右键，点击<code>选择数据</code>，在弹出的对话框中点击<code>切换行/列</code>，此时图表就会从一个数据系列转换为多个数据系列。此时图像如下图所示。</p>
+<img src="https://i.imgur.com/HHjCUDJ.png" alt="图表数据系列转换后的结果图" style="zoom:80%;" />
+
+<ol start="3">
+<li>设置重叠区域</li>
+</ol>
+<p>因为我们想要绘制的是重叠山峰的感觉，所以我们需要设置不同系列之间的重合。选中任一柱形区域，在上方单击鼠标右键，选择设置数据系列格式，将系列重叠值设为24%。此时我们就可以看到各个柱形图重叠在了一起。</p>
+<ol start="4">
+<li>准备山峰素材</li>
+</ol>
+<p>如果没有山峰素材，我们也可以自己画一个。在插入菜单栏中，点击曲线，然后绘制一个山峰的形状出来。如果画的不好，可以在图形上点击鼠标右键，选择<code>编辑顶点</code>进行修改。下图为我画的山峰图。</p>
+<p><img src="https://i.imgur.com/r33zPAo.png" alt="山峰图"></p>
+<ol start="5">
+<li>替换柱状图的矩形</li>
+</ol>
+<p>先复制粘贴一份我们绘制的小山峰，用不同颜色填充。再根据我们的需要复制相应的小山峰，点击选中柱形图的柱形区域，<code>Ctrl + v</code> 粘贴，依次替换每个柱形后，我们得到下图。</p>
+<img src="https://i.imgur.com/zXVMJFK.png" alt="替换山峰后的柱形图" style="zoom:80%;" />
+
+<ol start="6">
+<li>删除不需要的元素</li>
+</ol>
+<p>首先再次调整系列重合的面积到一个合适的样子，然后删除坐标轴，网格线。最后添加数据标签，我们就得到了最终的效果图。</p>
+<img src="https://i.imgur.com/6f8PpwU.png" alt="山峰柱状图的最终效果图" style="zoom:80%;" />
+
+<p>除此之外，还可以使用别的图形来进行填充，但还是需要进行第2步的图表数据系列转换，不然只能用设置一种颜色的填充效果。除此之外，设置数据系列的格式需要改为层叠。演示图如下。</p>
+<img src="https://i.imgur.com/Ost7RqT.png" alt="星星形状填充" style="zoom:80%;" />
+
+<img src="https://i.imgur.com/Livwq09.png" alt="包子填充" style="zoom:80%;" />
+
+<h3 id="针管柱形图"><a href="#针管柱形图" class="headerlink" title="针管柱形图"></a>针管柱形图</h3><p>针管柱形图可以用来表达任务完成情况的对比，即目标值和实际值。比如我们原本的展示图如下图所示，我们想反应实际完成值和目标值之间的差距。生成的图表直接看起来并不直观。</p>
+<img src="https://i.imgur.com/Bcfugzt.png" alt="原始实际值和目标值的对比图" style="zoom:80%;" />
+
+<p>此时我们可以使用针管柱形图来表现数据，具体步骤如下。</p>
+<ol>
+<li>设置系列’目标值’格式</li>
+</ol>
+<p>在柱形图区域单击鼠标右键，选择<code>设置数据系列格式</code>，在<code>系列选项</code>中将<code>系列重叠</code>设置为100%。<code>间隙宽度</code>也可以往小的调整以下，设置为120%。此时我们的图表如下所示。</p>
+<img src="https://i.imgur.com/MsLAuBe.png" alt="设置数据系列重合后的样子" style="zoom:80%;" />
+
+<p>接着我们将系列‘目标值’（可以点击系列选项中进行选择），的填充设置为无填充，边框设置为实线，并将颜色设置为灰色。</p>
+<ol start="2">
+<li>设置系列’实际值’格式</li>
+</ol>
+<p>点击<code>系列选项</code>，选择系列’实际值’，设置边框颜色为白色，宽度为7磅，此时就可以看到类似针管的感觉了。最终的效果如下图。</p>
+<img src="https://i.imgur.com/VcJWF85.png" alt="针管图最终效果图" style="zoom:80%;" />
+
+<h3 id="剪影柱形图"><a href="#剪影柱形图" class="headerlink" title="剪影柱形图"></a>剪影柱形图</h3><p>剪影柱形图可以看作是针管柱形图的一个扩展，区别是剪影柱形图在表达上更加丰富、形象。剪影图的制作过程也很简单，只需要将复制填充图案改为剪影的图案就好，其次还需要将两个系列设置为重合，最后再在<code>设置数据系列格式</code>中选择<code>层叠并缩放</code>。</p>
+<img src="https://i.imgur.com/9VjNLuQ.png" alt="剪影柱形图" style="zoom:80%;" />
+
+<h3 id="圆环图"><a href="#圆环图" class="headerlink" title="圆环图"></a>圆环图</h3><p>圆环图适合用来表达主题完成的百分比，看起来一目了然。</p>
+<ol>
+<li>插入圆环图</li>
+</ol>
+<p>比如我们绘制的圆环数据为80%，新建一个辅助值为1-80% = 20%。使用这两个数据新建一个圆环图，圆环图如下图所示。基础的圆环图已经能反映出两个值的占比了，但是还不够美观。</p>
+<img src="https://i.imgur.com/wTogalE.png" alt="基础圆环图" style="zoom:80%;" />
+
+<ol start="2">
+<li>将圆环变细</li>
+</ol>
+<p>如果我们直至调整圆环的粗细，最多只能调整到90%的粗细，圆环还是不够细。我们可以将原始数据进行复制，在选中表格粘贴。此时我们再将圆环中间的两个圆环填充调整为无填充，边框调整为无线条，就剩下一个环可见。然后再去调整圆环的粗细，就可以将圆环调整到很细。删除图表标题和脚注后如下图。</p>
+<img src="https://i.imgur.com/Metg47P.png" alt="调整圆环粗细后的样子" style="zoom:80%;" />
+
+<ol start="3">
+<li>添加中心数字百分比</li>
+</ol>
+<p>我们想在圆环中间添加一个数字显示的百分比，百分比的数值会根据表格中的数据同步变化。插入一个文本框，将文本框的填充和边框都设为透明。然后再到编辑栏中输入<code>=</code> 再点击需要同步显示的数据单元格，调整字体大小，颜色等，最终效果如下。</p>
+<img src="https://i.imgur.com/w9MJ7KO.png" alt="圆环显示最终效果" style="zoom:80%;" />
+
+<h2 id="交互式动态创意图表"><a href="#交互式动态创意图表" class="headerlink" title="交互式动态创意图表"></a>交互式动态创意图表</h2>]]></content>
       <categories>
         <category>数据分析</category>
         <category>Excel</category>
@@ -2221,6 +2334,571 @@
         <tag>Excel</tag>
         <tag>数据分析</tag>
         <tag>图表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Excel学习之疑难杂症</title>
+    <url>/archives/53805.html</url>
+    <content><![CDATA[<h2 id="电子表格打印"><a href="#电子表格打印" class="headerlink" title="电子表格打印"></a>电子表格打印</h2><p><strong>快捷键：</strong><code>Ctrl + P</code> — 打印预览</p>
+<p><strong>将表格打印到一页纸上：</strong> <code>Ctrl + P</code> ，在最后一项中选择<code>将工作表调整为一页</code>，此方法是使用缩放功能。除此之外也可以使用<code>自定义边距</code>功能，设置页边距使得内容可以显示为一页。</p>
+<p><strong>打印选中区域：</strong> 先选中需要打印的区域，然后按<code>Ctrl + P</code>，在设置中的第一项中选择<code>打印选定区域</code>。</p>
+<p><strong>打印网格线：</strong> 首先在<code>页面布局</code> 菜单栏中的工作表选项中，勾选打印，再按<code>Ctrl + P</code> 预览的时候，就可以看到网格线了。</p>
+<p><strong>在每页都打印表头：</strong> 进入<code>页面布局</code>菜单栏，在<code>页面设置</code>区域中，点击<code>打印标题</code>，然后分别设置<code>打印区域</code> 和<code>顶端标题行</code>。注：在打印预览时，最后一项应该设置为<code>将所有列都调整为一页</code>。</p>
+<p><strong>打印页码：</strong> 进入<code>页面布局</code>菜单栏，在页面设置区域点开扩展的小箭头，选择<code>页眉/页脚</code> ，在页脚处设置页码的样式，点击确定就好。</p>
+<p><strong>不打印错误值：</strong> 还是在上述<code>页面设置</code>的对话框中，选择<code>工作表</code> ，将<code>错误单元格打印为</code>设置为空白就好。</p>
+<p><strong>打印批注：</strong> 还是在<code>页面布局</code>菜单栏中的<code>页面设置</code>对话框中，选择<code>工作表</code>，设置<code>批注和注释</code>为工作表末尾，此时再打印时，批注就会打印到末尾了。</p>
+<p><strong>设置单色打印：</strong>此时会自动忽略所有表格内的色彩，在上述的<code>页面设置</code>中的<code>工作表</code>选项卡里，勾选<code>单色打印</code>的复选框即可。</p>
+<h2 id="图表与PPT、Word之间的交互联动"><a href="#图表与PPT、Word之间的交互联动" class="headerlink" title="图表与PPT、Word之间的交互联动"></a>图表与PPT、Word之间的交互联动</h2><p>在实际工作中，我们经常需要将excel中的结果插入到PPT或者Word中，如何在改动excel表格数据时，PPT和Word中的数据也会相应的改变。从而实现数据的实时同步。</p>
+<p><strong>具体方法为：</strong> 在复制Excel表格后粘贴到PPT或者Word时，在<code>开始</code>菜单中点击粘贴底下的小箭头，选择<code>选择性粘贴</code>，然后在弹出的对话框中，选择<code>粘贴链接</code>中的<code>Microsoft Excel工作表 对象</code> 即可。</p>
+<p>粘贴后Excel的表格样式什么的会粘贴过去。如果Excel、PPT、Word三个文件均为打开状态，此时修改Excel中的数据，其它两个文件中的数据也会发生相应的更改。如果修改Excel数据时其它两个文件时关闭的，那么再次打开其它两个文件时会有提醒是否同步。为了保证数据之间的同步，最好时将Excel数据和引用它的文件放在一起，如果修改了文件名或者目录可能会导致链接不到。</p>
+<h2 id="合并多个工作表"><a href="#合并多个工作表" class="headerlink" title="合并多个工作表"></a>合并多个工作表</h2><p>新建一个工作表，选中第一个表格，单击菜单栏中的<code>数据</code>选项卡，在<code>数据工具</code>区域中选择<code>合并计算</code>，在引用位置选择第一个表中的数据，然后点击<code>添加</code>，依次添加所有表，最后勾选<code>首行</code>和<code>最左列</code>复选框，点击确定即可。</p>
+<p><code>首行</code>表示显示第一行的标题，<code>最左列</code>表示显示最左列的数据。</p>
+]]></content>
+      <categories>
+        <category>数据分析</category>
+        <category>Excel</category>
+      </categories>
+      <tags>
+        <tag>Excel</tag>
+        <tag>数据分析</tag>
+        <tag>表格打印</tag>
+        <tag>PPT</tag>
+        <tag>Word</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MongoDB简介</title>
+    <url>/archives/52778.html</url>
+    <content><![CDATA[<h2 id="MongoDB简介"><a href="#MongoDB简介" class="headerlink" title="MongoDB简介"></a>MongoDB简介</h2><p>MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为WEB应用提供可扩展的高性能数据存储解决方案。</p>
+<p>MongoDB将数据存储为一个文档，数据结构由键值对(Key : value)组成，MongoDB文档类似于JSON对象，字段值可以包含其它文档，数组及文档数组。</p>
+<p>MongoDB服务端可运行在Linux、Windows和Mac OS平台，支持32位和64位应用，默认端口为27017。本文所展示的为Windows平台的安装及使用。</p>
+<p>MongoDB支持各种编程语言：Python、Java、C++、PHP、C#等多种语言。</p>
+<h2 id="MongoDB的优势"><a href="#MongoDB的优势" class="headerlink" title="MongoDB的优势"></a>MongoDB的优势</h2><ul>
+<li><strong>易扩展：</strong> NoSQL（非关系型数据库）数据库种类繁多，但是一个共同的特点都是去掉关系型数据库的关系特性。数据之间无关系，这样就非常容易扩展。</li>
+<li><strong>大数据量，高性能：</strong> NoSQL数据库都具有非常高的读写性能，尤其在大数据量下，同样表现优秀。得益于它的无关系性，数据的结构简单</li>
+<li><strong>灵活的数据模型：</strong> NoSQL无需事先为要存储的数据建立字段，随时可以存储自定义的数据格式。而在关系型数据库里，增删字段是一件非常麻烦的事情。</li>
+</ul>
+<p><strong>缺点：</strong> 由于它每条数据都是单独存储的，因此在存储过程中可能会包含大量重复信息，非常占用存储空间。</p>
+<h2 id="MongDB的安装（windows）"><a href="#MongDB的安装（windows）" class="headerlink" title="MongDB的安装（windows）"></a>MongDB的安装（windows）</h2><a id="more"></a>
+
+<ol>
+<li>首先下载MongDB的社区版，我这边下载的是64位的版本（<a href="https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.0-signed.msi">下载</a>）。</li>
+<li>打开.msi的安装文件，按照指示一路点击<code>Next</code>就好，如果想更改安装目录，需要选择<code>Custom</code>。在最后我选的是<code>以Web用户的方式来使用MongDB</code>。</li>
+<li>在最后不要勾选<code>Install MongoDB Compass</code>。MongoDB Compass 是一个图形界面管理工具，这里不安装也没有问题，可以自己安装一个图形界面管理工具，比如<a href="https://robomongo.org/">Robo3T</a>。</li>
+</ol>
+<h2 id="配置MongoDB"><a href="#配置MongoDB" class="headerlink" title="配置MongoDB"></a>配置MongoDB</h2><p>MongoDB的安装步骤比较简单，但是配置较为繁琐。</p>
+<p>首先在MongoDB的data文件夹里新建一个db文件夹和一个log文件夹，然后在log文件夹下新建一个mongo.log文件。</p>
+<p>将安装路径(..\MongoDB\bin)添加到环境变量path中，此时打卡cmd窗口，运行mongo命令，此时得到下图结果。</p>
+<img src="https://i.imgur.com/xTRa32i.png" alt="MongoDB安装结果" style="zoom:80%;" />
+
+<p>提示我们连接失败，是因为我们还没有启动MongoDB服务。在cmd中通过以下命令启动：<code>mongod -- dbpath &quot;..\MongoDB\data\db</code>“。（注：后面这个data的文件夹也可以创建在别的路径，但是data文件夹中得包含log文件夹和db文件夹，如果没有提前创建db文件夹，则服务器会启动失败。）</p>
+<p>打开浏览器，输入<code>127.0.0.1:27017</code>，尝试连接数据库，得到下图所示结果，说明启动成功。</p>
+<img src="https://i.imgur.com/rvmuYB2.png" alt="在浏览器连接MongoDB" style="zoom:80%;" />
+
+<p><strong>配置MongoDB的自启动：</strong></p>
+<p>首先关闭mongoDB的服务，在cmd窗口可以按<code>Ctrl + C</code>来停止。然后以管理员身份运行cmd窗口，输入命令：<code>mongod --logpath &quot;..\MongoDB\data\log\mongo.log&quot;  --logappend --dbpath &quot;..\MongoDB\data\db&quot; --directoryperdb --serviceName &quot;MongoDB&quot; --install</code> ，如果没有报错，则说明添加成功，可以使用win+R，然后输入services.msc命令进行查看。</p>
+<p>我的配置命令为：<code>mongod --logpath &quot;D:\Data\MongoDB\data\log\mongo.log&quot; --logappend --dbpath &quot;D:\Data\MongoDB\data\db&quot; --directoryperdb --serviceName &quot;MongoDB&quot; --install</code>只需要替换里面的文件夹路径即可。</p>
+<img src="https://i.imgur.com/OPVGh4f.png" alt="添加MongoDB服务到系统中" style="zoom:80%;" />
+
+<p>这里显示的MongoDB Server是自动启动的，我们把它设置为手动的。然后再cmd窗口中输入：<code>net start mongodb</code>。</p>
+<p><strong>问题：</strong></p>
+<ol>
+<li>我在启动的时候出现了拒绝访问，通过管理员权限运行cmd窗口后可以正常启动。</li>
+<li>如果出现<code>服务没有相应控制功能</code>，1)运行<code>sc delete mongodb</code>删除服务，再运行一次配置服务命令。</li>
+</ol>
+<h3 id="Windows-MongoDB服务自动关闭"><a href="#Windows-MongoDB服务自动关闭" class="headerlink" title="Windows MongoDB服务自动关闭"></a><strong>Windows MongoDB服务自动关闭</strong></h3><p>我在使用windows 系统的MongoDB服务时，服务总是自动中断，通过下述方式解决。</p>
+<ol>
+<li>在命令行中输入：<code>mongod --remove</code></li>
+<li>删除之前配置的db文件夹中的<code>mongod.lock</code>和<code>storage.bson</code>两个文件。</li>
+<li>重新配置自动启动<code>mongod --logpath &quot;D:\Data\MongoDB\data\log\mongo.log&quot; --logappend --dbpath &quot;D:\Data\MongoDB\data\db&quot; --directoryperdb --serviceName &quot;MongoDB&quot; --install</code></li>
+<li>启动服务：<code>net start mongodb</code></li>
+</ol>
+<p>注意，以上操作，会清楚数据库的信息。</p>
+<h2 id="关于Database的基础命令"><a href="#关于Database的基础命令" class="headerlink" title="关于Database的基础命令"></a>关于Database的基础命令</h2><p>在安装成功后，启用MongoDB的服务，然后在命令行窗口输入：<code>mongo</code>，就可以进入mongoDB的命令行模式，然后就可以执行一些操作。</p>
+<ol>
+<li>查看当前的数据库：db</li>
+<li>查看所有的数据库：show dbs / show databases</li>
+<li>切换数据库：use db_name</li>
+<li>删除当前的数据库：db.dropDatabase()</li>
+<li>删除数据集合：db.集合命.drop()</li>
+</ol>
+<h2 id="MongoDB数据库操作"><a href="#MongoDB数据库操作" class="headerlink" title="MongoDB数据库操作"></a>MongoDB数据库操作</h2><h3 id="mongoDB插入数据"><a href="#mongoDB插入数据" class="headerlink" title="mongoDB插入数据"></a>mongoDB插入数据</h3><ul>
+<li>db.collection.insert({}) 插入数据，<code>_id</code>存在就会报错</li>
+<li>db.collection.save({}) 插入数据，<code>_id</code>存在就会更新</li>
+</ul>
+<h3 id="mongoDB更新操作"><a href="#mongoDB更新操作" class="headerlink" title="mongoDB更新操作"></a>mongoDB更新操作</h3><ul>
+<li><code>db.collection.update(&#123;name:&quot;大宝&quot;&#125;,&#123;name:&quot;大大宝&quot;&#125;)</code> </li>
+</ul>
+<p>此操作会直接用{name:”大大宝”}这条数据替换掉包含{name:”大宝”}的这条数据。</p>
+<ul>
+<li><code>db.collection.update(&#123;name:&quot;大宝&quot;&#125;,&#123;$set:&#123;name:&quot;大大宝&quot;&#125;&#125;)</code> </li>
+</ul>
+<p>此操作只会更新包含{name:”大宝”}的这条数据中的”name”这个字段，其它信息不变。</p>
+<ul>
+<li><code>db.collection.update(&#123;name:&quot;大宝&quot;&#125;,&#123;$set:&#123;name:&quot;大大宝&quot;&#125;&#125;,&#123;multi:true&#125;)</code> </li>
+</ul>
+<p>第三个参数设置为<code>&#123;multi:true&#125;</code>，表示会更新所有符合要求的数据，不然只会更新查找到的第一条数据。（注：第一种替换的方式时不能用这个参数，因为它这可以和$连用。）</p>
+<h3 id="mongoDB删除数据"><a href="#mongoDB删除数据" class="headerlink" title="mongoDB删除数据"></a>mongoDB删除数据</h3><ul>
+<li><code>db.collection.remove(&#123;name:&quot;大大宝&#125;,&#123;justOne:true&#125;)</code> </li>
+</ul>
+<p>删除第一条出现的包含{name:”大大宝}这个信息的数据，第二个参数可以不写，不写默认删全部。</p>
+<h3 id="数据查询"><a href="#数据查询" class="headerlink" title="数据查询"></a>数据查询</h3><ul>
+<li>find() 方法：<code>db.collection.find(&#123;条件文档&#125;)</code> — 查询全部</li>
+<li>findOne() 方法：<code>db.collection.findOne(条件文档)</code> — 查询，返回第一个</li>
+<li>pretty() 方法：<code>db.collection.find(&#123;条件文档&#125;).pretty()</code> — 将结果格式化</li>
+</ul>
+<h3 id="自定义查询"><a href="#自定义查询" class="headerlink" title="自定义查询"></a>自定义查询</h3><p>使用<code>$where</code>后面写一个函数，返回满足条件的数据，这种写法(js语句)一般是在终端中写时才会用到。</p>
+<p>比如查询年龄大于30的学生：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">    $where:function()&#123;    </span><br><span class="line">        return this.age&gt;30;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="投影"><a href="#投影" class="headerlink" title="投影"></a>投影</h3><p>选择返回结果的字段。在查询到的返回结果中，只选择必要的字段。表达式：<code>db.collection.find(&#123;&#125;,&#123;字段名称:[0,1]&#125;)</code>，除了id外其它字段只能全部0或者1，写的为0时，没写的默认为1。_id 默认会显示，想不显示得设置为1。</p>
+<h3 id="统计个数"><a href="#统计个数" class="headerlink" title="统计个数"></a>统计个数</h3><p>count()方法用于统计查询结果中文档的条数。</p>
+<p>表达式：</p>
+<ul>
+<li><code>db.collection.find(&#123;条件&#125;).count()</code>  此时count()中写条件是无效的</li>
+<li><code>db.collection.count(&#123;条件&#125;)</code></li>
+</ul>
+<h3 id="消除重复"><a href="#消除重复" class="headerlink" title="消除重复"></a>消除重复</h3><p>distinct()方法用于对数据进行去重操作。表达式：<code>db.collection.distinct(&#39;去重字段&#39;, &#123;条件&#125;)</code>，如：<code>db.collecttion.distinct(&#39;hometown&#39;,&#123;age:&#123;$gt:18&#125;&#125;)</code>。</p>
+<p>distinct() 方法返回的是一个该字段中不重复值的数据列表。</p>
+<h2 id="mongoDB表达式中的运算符"><a href="#mongoDB表达式中的运算符" class="headerlink" title="mongoDB表达式中的运算符"></a>mongoDB表达式中的运算符</h2><h3 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h3><ul>
+<li>等于：默认是等于判断，没有运算符</li>
+<li>小于：$lt —&gt; (less than)</li>
+<li>小于等于：$lte —&gt; (less than equal) </li>
+<li>大于：$gt —&gt; (greater than)</li>
+<li>大于等于：$gte —&gt; (greater than equal)</li>
+<li>不等于：$ne —&gt; (no equal)</li>
+</ul>
+<p>eg：db.collection.find({age:{$gte:18}})</p>
+<h3 id="范围运算符"><a href="#范围运算符" class="headerlink" title="范围运算符"></a>范围运算符</h3><p>使用<code>&quot;$in&quot;</code>，<code>&quot;nin&quot;</code>判断是否在某个范围内，比如查询年龄为18、28、38的学生。<code>db.collection.find(&#123;age:&#123;$in:[18,28,38]&#125;&#125;)</code> 。</p>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><ul>
+<li>and: 在json中写多个条件即可。比如查询<code>年龄大于或等于18</code>，并且<code>性别为男</code>的学生：<code>db.collection(&#123;age:&#123;$gte:18&#125;,gender:&quot;男&quot;&#125;)</code>。</li>
+<li>or: 使用<code>$or</code>，值为数组，数组中每个元素为json。比如查询年龄大于18，或者性别为男的学生：<code>db.collection.find(&#123;$or:[&#123;age:&#123;&amp;gte:18&#125;&#125;,&#123;gender:&quot;男&quot;&#125;]&#125;)</code>。</li>
+</ul>
+<p>查询<code>年龄大于18</code>或<code>性别为男生</code>，并且<code>姓名是郭靖</code>：<code>db.collection.find(&#123;$or:[&#123;age:&#123;$gte:18&#125;&#125;,&#123;gender:&quot;男&quot;&#125;], name:&quot;郭靖&quot;&#125;)</code></p>
+<h3 id="mongoDB中的正则表达式"><a href="#mongoDB中的正则表达式" class="headerlink" title="mongoDB中的正则表达式"></a>mongoDB中的正则表达式</h3><p>使用<code>//</code>或者<code>$regex</code>编写正则表达式。</p>
+<p>比如: </p>
+<p><code>db.collection.find(&#123;sku:/^abc/&#125;)</code> — 表示以abc开头的。</p>
+<p><code>db.collection.find(&#123;sku:&#123;$regex:&#39;789$&#39;&#125;&#125;)</code> — 表示以789结尾的。</p>
+<h2 id="mongoDB中的一些附加方法"><a href="#mongoDB中的一些附加方法" class="headerlink" title="mongoDB中的一些附加方法"></a>mongoDB中的一些附加方法</h2><ul>
+<li>limit() 方法：用于读取指定数量的文档。表达式：<code>db.collection.find().limit(NUMBER)</code>，比如查询两条：<code>db.collection.find().limit(2)</code>。</li>
+<li>skip() 方法：用于跳过指定数量的文档。 表达式：<code>db.collection.find().skip(NUMBER)</code>，比如跳过两条数据：<code>db.collection.find().skip(2)</code>。</li>
+<li>同时使用，两者也可以同时使用，如：<code>db.collection.find().limit(4).skip(5)</code> 或者 <code>db.collection.find().skip().limit()</code>。</li>
+</ul>
+<h2 id="数据的备份和恢复"><a href="#数据的备份和恢复" class="headerlink" title="数据的备份和恢复"></a>数据的备份和恢复</h2><p><strong>备份语法：</strong></p>
+<p> <code>mongodump -h dbhost -d dbname -o dbdirectory</code></p>
+<ul>
+<li>-h: 服务器地址，也可以指定端口号</li>
+<li>-d: 需要备份的数据库名称</li>
+<li>-o: 备份的数据存放的位置，此目录中存放着备份出来的数据</li>
+</ul>
+<p><code>mongodump -h 192.168.196.128:27017 -d test -o ~/Desktop/test1bak</code></p>
+<p><strong>恢复语法：</strong></p>
+<p><code>mongorestore -h dbhost -d dbname --dir dbdirectory</code></p>
+<ul>
+<li>-h：服务器地址</li>
+<li>-d：需要恢复的数据库实例</li>
+<li>–dir：备份数据所在的位置</li>
+</ul>
+<p><code>mongorestore -h 127.0.0.1:27017 -d test --dir ~/Desktop/test1bak/test1</code></p>
+]]></content>
+      <categories>
+        <category>数据存储</category>
+        <category>MongoDB</category>
+      </categories>
+      <tags>
+        <tag>数据存储</tag>
+        <tag>MongoDB</tag>
+        <tag>PyMongo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python MongoDB</title>
+    <url>/archives/18082.html</url>
+    <content><![CDATA[<h2 id="PyMongo"><a href="#PyMongo" class="headerlink" title="PyMongo"></a>PyMongo</h2><p>在Python中需要一个MongoDB的驱动程序来访问MongoDB的数据库，本文将主要介绍Python中的MongoDB驱动程序“PyMongo”。</p>
+<p><strong>安装：</strong> <code>pip install pymongo</code> </p>
+<p><strong>测试：</strong> <code>import pymongo</code></p>
+<p>如果运行后没有报错，则说明pymongo包安装成功。</p>
+<h2 id="PyMongo基本操作"><a href="#PyMongo基本操作" class="headerlink" title="PyMongo基本操作"></a>PyMongo基本操作</h2><h3 id="创建连接"><a href="#创建连接" class="headerlink" title="创建连接"></a>创建连接</h3><p><strong>需要在本地安装MongoDB社区版的服务，具体查看我的上一篇文档。</strong> </p>
+<p>在使用MongoDB创建数据库之前，需要先新建一个MongoClient(Mongo的客户端) 对象，这个对象需要使用一个具体的MongoDB的访问连接，如果是在本地开启的服务，这个连接默认为：<code>&quot;mongodb://localhost:27017/&quot;</code>。</p>
+<a id="more"></a>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"><span class="comment"># MongoDB URI 格式</span></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line"><span class="comment"># 也可以分别指定主机和端口号</span></span><br><span class="line"><span class="comment"># myclient = pymongo.MongoClient(&quot;localhost&quot;, &quot;27017&quot;)</span></span><br><span class="line"></span><br><span class="line">mydb = myclient[<span class="string">&quot;test_database&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取数据库（database）"><a href="#获取数据库（database）" class="headerlink" title="获取数据库（database）"></a>获取数据库（database）</h3><p>一个单独的MongoDB实例可以支持多个相互独立的数据库，我们有两种方式可以访问我们的数据库，如果访问的数据库名称不存在，MongoDB会自动创建一个新的数据库，并且建立连接。</p>
+<ol>
+<li>使用属性的样式访问数据库</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">mydb = myclient.test_database     <span class="comment">#属性方式</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>当我们的数据库名称中包含<code>&quot;-&quot;</code>连接符时，无法通过属性的方式进行访问，此时我们可以使用下列字典的方式进行访问。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">mydb = myclient[<span class="string">&quot;test-database&quot;</span>]    <span class="comment">#字典方式</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="获取集合（collection）"><a href="#获取集合（collection）" class="headerlink" title="获取集合（collection）"></a>获取集合（collection）</h3><p>一个集合表示一组存储在MongoDB中的文件数据，可以把它大致想象成关系型数据库中的一个表。获取集合的操作和获取数据库的操作类似。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">collection = mydb.test_collection            <span class="comment">#属性访问的方式</span></span><br><span class="line">collection = mydb[<span class="string">&#x27;test-collection&#x27;</span>]        <span class="comment">#字典访问的方式</span></span><br></pre></td></tr></table></figure>
+
+<p>注：关于MongoDB中的集合（和数据库）的重要说明是，它们是延迟创建的-上面的命令实际上都没有在MongoDB服务器上执行任何操作。集合和数据库只有在写入数据时才会在服务器上创建。</p>
+<h3 id="检查一个数据库是否存在"><a href="#检查一个数据库是否存在" class="headerlink" title="检查一个数据库是否存在"></a>检查一个数据库是否存在</h3><p>第一种方式是，将系统中的所有数据库名称都打印出来进行查看。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(myclient.list_database_names())</span><br></pre></td></tr></table></figure>
+
+<p>第二种方式是查看一个具体的数据库名称。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dblist = myclient.list_database_names()</span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;mydatabase&quot;</span> <span class="keyword">in</span> dblist:</span><br><span class="line">    print(<span class="string">&quot;The database exists.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="检查一个数据集合是否存在"><a href="#检查一个数据集合是否存在" class="headerlink" title="检查一个数据集合是否存在"></a>检查一个数据集合是否存在</h3><p>在MongoDB中检查一个数据集合是否存在和，检查数据库是否存在是类似的。可以打印出所有的数据集合名称，或者直接检查某个具体的名称。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">collist = mydb.list_collection_names()</span><br><span class="line">print(collist)        <span class="comment">#打印所有名称</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;customers&quot;</span> <span class="keyword">in</span> collist:</span><br><span class="line">    print(<span class="string">&quot;The collection exists.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="PyMongo高级操作"><a href="#PyMongo高级操作" class="headerlink" title="PyMongo高级操作"></a>PyMongo高级操作</h2><h3 id="插入数据到数据集合（Insert）"><a href="#插入数据到数据集合（Insert）" class="headerlink" title="插入数据到数据集合（Insert）"></a>插入数据到数据集合（Insert）</h3><p>我们可以使用<code>insert_one()</code>方法，将我们要记录的数据或者在MongoDB中调用的文档插入到数据集合中。</p>
+<p>比如我们向”customers”这个数据集合中插入数据：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">mydict = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;John&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Hightway 37&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">x = mycol.insert_one(mydict)</span><br></pre></td></tr></table></figure>
+
+<p>这样我们就向<code>mydatabase--&gt;customers</code>数据集合中添加了一条数据，<code>insert_one()</code>方法返回的是一个<code>InsertOneResult</code>对象，这个对象有一个属性：<code>inserted_id</code>，这个属性保存的是所插入的文件的的Id。</p>
+<p>这个objectID是一个12字节的十六进制数：</p>
+<ul>
+<li>前四个字节为当前时间戳</li>
+<li>接下来3个字节是机器ID</li>
+<li>接下来的2个字节是MongoDB的服务进程id</li>
+<li>最后3个字节是简单的增量值</li>
+</ul>
+<p>我们可以打印出这个id：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(x.inserted_id)</span><br><span class="line"><span class="comment"># 5f5498b232dca447e3a52f2b #类似这样</span></span><br></pre></td></tr></table></figure>
+
+<p>这个id我们也可以自己定义，如果未定义，MongoDB会自动帮我们为每一个文件生成一个独有的id，以上的示例我们都未定义，因此id都是MongoDB为我们自动生成的。</p>
+<h3 id="插入多条数据到数据集合中"><a href="#插入多条数据到数据集合中" class="headerlink" title="插入多条数据到数据集合中"></a>插入多条数据到数据集合中</h3><p>插入多条数据到数据集合中时，需要使用<code>insert_many()</code>方法。<code>insert_many()</code>方法的第一个参数是一个包含你想添加的内容的列表，内容是字典格式的。</p>
+<p><strong>示例：</strong> 插入多条数据。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">mylist = [</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Amy&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Apple st 652&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Hannah&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Mountain 21&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Michael&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Valley 345&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Sandy&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Ocean blvd 2&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Betty&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Green Grass 1&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Richard&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Sky st 331&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Susan&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;One way 98&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Vicky&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Yellow Garden 2&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Ben&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Park Lane 38&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;William&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Central st 954&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Chuck&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Main Road 989&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Viola&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Sideway 1633&quot;</span>&#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">x = mycol.insert_many(mylist)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印这些插入数据的id</span></span><br><span class="line">print(x.inserted_ids)</span><br><span class="line"><span class="comment"># 打印结果</span></span><br><span class="line">[ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f38&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f39&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f3a&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f3b&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f3c&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f3d&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f3e&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f3f&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f40&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f41&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f42&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f43&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+
+<p><code>insert_many()</code>方法返回的是一个<code>InsertManyResult</code>对象，它包含一个<code>inserted_ids</code>的属性，记录了所有id。根据上面的打印结果，我们可以发现，列表中的每条数据都生成了一个id，并且又以一个列表的方式返回来了。</p>
+<p><strong>save()方法：</strong></p>
+<p>在使用id进行数据插入的时候，save()方法也可以插入数据，但是不同点在于如果数据存在，save会更新数据，而insert()方法会报错。</p>
+<h3 id="插入多条数据并且指定id"><a href="#插入多条数据并且指定id" class="headerlink" title="插入多条数据并且指定id"></a>插入多条数据并且指定id</h3><p>如果我们不想MongoDB为我们自动分配id，我们也可以自己指定具体的<code>_id</code>，id必须是唯一的。</p>
+<p><strong>示例：</strong> </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">mylist = [</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">1</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;John&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Highway 37&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">2</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Peter&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Lowstreet 27&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">3</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Amy&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Apple st 652&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">4</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Hannah&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Mountain 21&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">5</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Michael&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Valley 345&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">6</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Sandy&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Ocean blvd 2&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">7</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Betty&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Green Grass 1&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">8</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Richard&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Sky st 331&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">9</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Susan&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;One way 98&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">10</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Vicky&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Yellow Garden 2&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">11</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Ben&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Park Lane 38&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">12</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;William&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Central st 954&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">13</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Chuck&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Main Road 989&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">14</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Viola&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Sideway 1633&quot;</span>&#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">x = mycol.insert_many(mylist)</span><br><span class="line"></span><br><span class="line"><span class="comment">#print list of the _id values of the inserted documents:</span></span><br><span class="line">print(x.inserted_ids)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印结果，和我们指定的相同</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="查找数据"><a href="#查找数据" class="headerlink" title="查找数据"></a>查找数据</h3><p>在MongoDB中使用<code>find()</code>和<code>findOne()</code>方法来查找数据。</p>
+<p><strong><code>findOne()</code></strong></p>
+<p>想要从数据集合中查找一条数据，我们可以使用<code>findOne()</code>方法，<code>findOne()</code>方法会返回第一条出现的数据。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">x = mycol.find_one()</span><br><span class="line"></span><br><span class="line">print(x)</span><br><span class="line"><span class="comment"># 打印结果为我们最开始插入的第一条数据</span></span><br><span class="line">&#123;<span class="string">&#x27;_id&#x27;</span>: ObjectId(<span class="string">&#x27;5f5498b232dca447e3a52f2b&#x27;</span>), <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;John&#x27;</span>, <span class="string">&#x27;address&#x27;</span>: <span class="string">&#x27;Hightway 37&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>find()</code></strong></p>
+<p>如果我们想查找一个数据集合中所有的数据，我们也可以使用<code>find()</code>方法，<code>find()</code>方法会返回所有记录的数据。<code>find()</code>方法中的第一个参数是要查找的对象，如果为空，即返回整个表中的数据。有点像MySQL中的<code>SELECT *</code>。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mycol.find():</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure>
+
+<p>此时会打印出“customers”这个表中的所有信息包括对应的id。</p>
+<p><strong>取出指定结果：</strong></p>
+<p><code>find()</code>方法中的第二个参数是一个对象，该对象包含你要查询的字段的筛选条件（即取出哪些信息，不取出哪些信息，使用0，1来表示是否取出）。此参数是可选的，如果省略，则所有字段都将包含在结果中。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不打印_id</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mycol.find(&#123;&#125;,&#123; <span class="string">&quot;_id&quot;</span>: <span class="number">0</span>, <span class="string">&quot;name&quot;</span>: <span class="number">1</span>, <span class="string">&quot;address&quot;</span>: <span class="number">1</span> &#125;):</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+<p>不允许在同一对象中同时指定0和1值（除非字段之一是_id字段），就是说你只需要指定哪些字段出现或者哪些字段不出现。如果您指定值为0的字段，则所有其他字段的值为1，反之亦然。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 除了address外其余的都打印</span></span><br><span class="line"><span class="comment"># 如果使用 ：mycol.find(&#123;&#125;,&#123; &quot;name&quot;: 1, &quot;address&quot;: 0 &#125;) 就会报错</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mycol.find(&#123;&#125;,&#123; <span class="string">&quot;address&quot;</span>: <span class="number">0</span> &#125;):</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h3><p>当我们想查询数据集中的某个条数据的时候，我们可以使用一个查询对象来对我们查找的结果进行过滤。<code>find()</code>方法中的第一个参数是查询对象，用于限制搜索。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myquery = &#123; <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Park Lane 38&quot;</span> &#125;</span><br><span class="line"></span><br><span class="line">mydoc = mycol.find(myquery)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mydoc:</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+<p><strong>高级查询：</strong></p>
+<p>我们可以通过编辑查询条件来实现高级的查询功能，例如：如果我们想找到文档中首字母开头为S之后的，我们可以使用<code>&#123;&quot;$gt&quot;:&quot;S&quot;&#125;</code>来作为查询条件。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myquery = &#123; <span class="string">&quot;address&quot;</span>: &#123; <span class="string">&quot;$gt&quot;</span>: <span class="string">&quot;S&quot;</span> &#125; &#125;</span><br><span class="line"></span><br><span class="line">mydoc = mycol.find(myquery)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mydoc:</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+<p>当然，我们也可以使用正则表达式来表达我们的查询条件。比如如果我们只是想查询首字母为’S’的地址，我们可以这样表达<code>&#123;&quot;$regex&quot;: &quot;^S&quot;&#125;</code>。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myquery = &#123; <span class="string">&quot;address&quot;</span>: &#123; <span class="string">&quot;$regex&quot;</span>: <span class="string">&quot;^S&quot;</span> &#125; &#125;</span><br><span class="line"></span><br><span class="line">mydoc = mycol.find(myquery)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mydoc:</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>我们可以使用<code>sort()</code>方法对数据进行排序，升序或者降序。<code>sort()</code>方法可以接受两个参数，第一个是以什么字段来排序，第二个是升序还是降序（默认是升序）。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将结果按照名字的字母顺序进行排序。</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">mydoc = mycol.find().sort(<span class="string">&quot;name&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mydoc:</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sort(<span class="string">&quot;name&quot;</span>, <span class="number">1</span>) <span class="comment">#升序</span></span><br><span class="line">sort(<span class="string">&quot;name&quot;</span>, <span class="number">-1</span>) <span class="comment">#降序</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除记录"><a href="#删除记录" class="headerlink" title="删除记录"></a>删除记录</h3><p>如果我们想删除一条记录，我们可以使用<code>delete_one()</code>方法。<code>delete_one()</code>方法的第一个参数是定义你要删除的对象。如果找到了多条记录，也只有第一条记录会被删除。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 删除地址为“Mountain 21”的信息</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myquery = &#123; <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Mountain 21&quot;</span> &#125;</span><br><span class="line"></span><br><span class="line">mycol.delete_one(myquery)</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除多条记录"><a href="#删除多条记录" class="headerlink" title="删除多条记录"></a>删除多条记录</h3><p>要删除多条记录，我们需要使用<code>delete_many()</code>方法，<code>delete_many()</code>方法的第一个参数也是定义你要删除的对象。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 删除所有地址中包含S的数据。</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myquery = &#123; <span class="string">&quot;address&quot;</span>: &#123;<span class="string">&quot;$regex&quot;</span>: <span class="string">&quot;^S&quot;</span>&#125; &#125;</span><br><span class="line"></span><br><span class="line">x = mycol.delete_many(myquery)</span><br><span class="line"></span><br><span class="line">print(x.deleted_count, <span class="string">&quot; documents deleted.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果想删除表中的所有数据，直接调用<code>delete_many()</code>方法就好。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 删除所有数据</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">x = mycol.delete_many(&#123;&#125;)</span><br><span class="line"></span><br><span class="line">print(x.deleted_count, <span class="string">&quot; documents deleted.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="直接删除表"><a href="#直接删除表" class="headerlink" title="直接删除表"></a>直接删除表</h3><p>我们也可以直接删除一个表，或者数据集合。我们只需要调用<code>drop()</code>方法就好。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> mycol.drop():</span><br><span class="line">    print(<span class="string">&quot;删除成功！&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>drop()</code>方法如果返回的是True，则表示删除成功。</p>
+<h3 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h3><p>我们可以使用<code>update_one()</code>方法来更新数据，<code>update_one()</code>方法的第一个参数是指定你要更新的数据，如果找到了多条数据，那么只有第一条的数据会被更新。<code>update_one()</code>方法的第二个参数是指定要更新数据是什么。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 比如我们将地址从“Valley 345” 更新为 “Canyon 123”</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myquery = &#123; <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Valley 345&quot;</span> &#125;</span><br><span class="line">newvalues = &#123; <span class="string">&quot;$set&quot;</span>: &#123; <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Canyon 123&quot;</span> &#125; &#125;</span><br><span class="line"></span><br><span class="line">mycol.update_one(myquery, newvalues)</span><br><span class="line"></span><br><span class="line"><span class="comment">#print &quot;customers&quot; after the update:</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mycol.find():</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+<h3 id="同时更新多条数据"><a href="#同时更新多条数据" class="headerlink" title="同时更新多条数据"></a>同时更新多条数据</h3><p>如果想要将我们查询到的数据全部都更新为新的数据，可以使用<code>update_many()</code>方法，参数还是两个，一个是查询的条件，一个是替换值。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将所有address开始为&#x27;S&#x27;的名字换掉</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myquery = &#123; <span class="string">&quot;address&quot;</span>: &#123; <span class="string">&quot;$regex&quot;</span>: <span class="string">&quot;^S&quot;</span> &#125; &#125;</span><br><span class="line">newvalues = &#123; <span class="string">&quot;$set&quot;</span>: &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Minnie&quot;</span> &#125; &#125;</span><br><span class="line"></span><br><span class="line">x = mycol.update_many(myquery, newvalues)</span><br><span class="line"></span><br><span class="line">print(x.modified_count, <span class="string">&quot;documents updated.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="限制返回结果"><a href="#限制返回结果" class="headerlink" title="限制返回结果"></a>限制返回结果</h3><p>我们可以使用<code>limit()</code>方法来限制搜索后返回的结果，<code>limit()</code>方法只接受一个参数，返回结果的具体数值。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 限制返回5条数据</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myresult = mycol.find().limit(<span class="number">5</span>)   <span class="comment">#直接在查询后面调用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#print the result:</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> myresult:</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>数据存储</category>
+        <category>MongoDB</category>
+      </categories>
+      <tags>
+        <tag>数据存储</tag>
+        <tag>MongoDB</tag>
+        <tag>PyMongo</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MongDB 高级功能</title>
+    <url>/archives/61509.html</url>
+    <content><![CDATA[<h2 id="聚合和管道"><a href="#聚合和管道" class="headerlink" title="聚合和管道"></a>聚合和管道</h2><p>聚合(aggregate)是基于数据处理的聚合管道，每个文档通过一个由多个阶段(stage) 组成的管道，可以对每个阶段的管道进行分组、过滤等功能，然后经过一系列的处理，输出相应的结果。</p>
+<p>表达式：<code>db.集合名称.aggregate(&#123;管道:&#123;表达式&#125;&#125;)</code> </p>
+<img src="https://i.imgur.com/DL72HF6.jpeg" alt="聚合原理图" style="zoom:80%;" />
+
+<a id="more"></a>
+
+<h3 id="常用管道"><a href="#常用管道" class="headerlink" title="常用管道"></a>常用管道</h3><p>在mongoDB中，文档处理完毕后，通过管道进行下一次处理。</p>
+<p><strong>常用管道如下：</strong></p>
+<ul>
+<li>$group: 将集合中的文档分组，可用于统计结果</li>
+<li>$match: 过滤数据，只输出符合条件的文档</li>
+<li>$project: 修改输入文档的结构，如重命名、增加、删除字段、创建计算结果</li>
+<li>$sort: 将输入文档排序后输出</li>
+<li>$skip: 跳过指定数量的文档，并返回余下的文档</li>
+<li>$unwind: 将数组类型的字段进行拆分</li>
+</ul>
+<h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><p>mongoDB中有一些表达式，用于处理输入文档并输出。</p>
+<p>语法：表达式: ‘$列名’</p>
+<p><strong>常用表达式：</strong></p>
+<ul>
+<li>$sum: 计算总和， $sum:1 表示以一倍计数</li>
+<li>$avg: 计算平均值</li>
+<li>$min: 获取最小值</li>
+<li>$max: 获取最大值</li>
+<li>$push: 在结果文档中插入值到一个数组中</li>
+<li>$first: 根据资源文档的排序获取第一个文档数据</li>
+<li>$last: 根据资源文档的排序获取最后一个文档的数据</li>
+</ul>
+<h3 id="group"><a href="#group" class="headerlink" title="$group"></a>$group</h3><ul>
+<li>将集合中的文档分组，可用于统计结果</li>
+<li>_id表示分组依据，使用某个字段的格式为’$字段’</li>
+</ul>
+<p>例如：统计男生、女生的总人数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 按照年龄进行分组，获取不同组数据的个数和平均年龄</span><br><span class="line">db.stu.aggregate(</span><br><span class="line">    &#123;$group:&#123;</span><br><span class="line">            _id:&#39;$gender&#39;,      &#x2F;&#x2F;设置分组依据</span><br><span class="line">            counter:&#123;$sum:1&#125;    &#x2F;&#x2F;计算总和，并将值赋值给counter变量</span><br><span class="line">        &#125;&#125;)</span><br><span class="line"># 根据地点分组，然后求平均年龄</span><br><span class="line">db.stu.aggregate(&#123;$group:&#123;_id:&quot;$hometown&quot;, mean_age:&#123;$avg:&quot;$age&quot;&#125;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Group by null :</strong></p>
+<p>就是将所有文档分为一组。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 求平均年龄和总人数</span><br><span class="line">db.stu.aggregate(&#123;$group:&#123;_id:null, count:&#123;$sum:1&#125;, avg_age:&#123;$avg:&quot;$age&quot;&#125;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="project"><a href="#project" class="headerlink" title="$project"></a>$project</h3><ul>
+<li>修改输入文档的结构，如重命名、增加、删除字段、创建计算结果</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 查询学生的姓名、年龄。注：字段：1表示显示，其它默认不显示，反之亦然。</span><br><span class="line">db.stu.aggregate(&#123;$project:&#123;_id:0, name:1, age:1&#125;&#125;)</span><br><span class="line"># 查询男生、女生人数，输出人数</span><br><span class="line">db.stu.aggregate(</span><br><span class="line">&#123;$group:&#123;_id:&quot;$gender&quot;, count:&#123;$sum:1&#125;&#125;&#125;,   &#x2F;&#x2F;管道1</span><br><span class="line">&#123;$project:&#123;_id:0,count:1&#125;&#125;                    &#x2F;&#x2F;管道2</span><br><span class="line">)</span><br><span class="line"># 查询男生、女生人数，修改显示名称，并输出人数</span><br><span class="line">db.stu.aggregate(</span><br><span class="line">&#123;$group:&#123;_id:&quot;$gender&quot;, count:&#123;$sum:1&#125;&#125;&#125;,</span><br><span class="line">&#123;$project:&#123;gender:&quot;$_id&quot;,_id:0,count:1&#125;&#125;  &#x2F;&#x2F;此时_id会显示为gender</span><br><span class="line">)   &#x2F;&#x2F;</span><br></pre></td></tr></table></figure>
+
+<h3 id="match"><a href="#match" class="headerlink" title="$match"></a>$match</h3><ul>
+<li>用于过滤数据，只输出符合条件的文档。它与find的区别是，它是管道命令，能将结果交给后一个管道，但是find不行。</li>
+<li>可以使用mongoDB的标准查询操作</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 查询年龄大于20的学生</span><br><span class="line">db.stu.aggregate(&#123;$match:&#123;age:&#123;$gt:20&#125;&#125;&#125;)</span><br><span class="line"># 查询年龄大于20的男生、女生人数</span><br><span class="line">db.stu.aggregate(&#123;$match:&#123;age:&#123;$gt:20&#125;&#125;&#125;,&#123;$group:&#123;_id:&quot;$gender&quot;,count:&#123;$sum:1&#125;&#125;&#125;)</span><br><span class="line"># 增加管道，美化显示</span><br><span class="line">db.stu.aggregate(</span><br><span class="line">    &#123;$match:&#123;age:&#123;$gt:20&#125;&#125;&#125;,                    &#x2F;&#x2F;过滤</span><br><span class="line">    &#123;$group:&#123;_id:&quot;$gender&quot;,count:&#123;$sum:1&#125;&#125;&#125;,    &#x2F;&#x2F;分组及统计</span><br><span class="line">    &#123;$project:&#123;_id:0,gender:&quot;$_id&quot;,count:1&#125;&#125;)    &#x2F;&#x2F;美化显示</span><br></pre></td></tr></table></figure>
+
+<h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><blockquote>
+<p>{ “country” : “china”, “province” : “sh”, “userid” : “a” } </p>
+<p>{ “country” : “china”, “province” : “sh”, “userid” : “b” } </p>
+<p>{ “country” : “china”, “province” : “sh”, “userid” : “a” } </p>
+<p>{ “country” : “china”, “province” : “sh”, “userid” : “c” } </p>
+<p>{ “country” : “china”, “province” : “bj”, “userid” : “da” } </p>
+<p>{ “country” : “china”, “province” : “bj”, “userid” : “fa” } </p>
+<p>需求：统计出每个country/province下的userid的数量（同一个userid只统计一次）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.tv3.aggregate(</span><br><span class="line">    &#123;$group:&#123;_id:&#123;country:&quot;$country&quot;,province:&quot;$province&quot;,userid:&quot;$userid&quot;&#125;&#125;&#125;,  &#x2F;&#x2F;分组去重</span><br><span class="line">    &#123;$group:&#123;_id:&#123;country:&quot;$_id.country&quot;,province:&quot;$_id.province&quot;&#125;, count:&#123;$sum:1&#125;&#125;&#125;,    &#x2F;&#x2F;分组</span><br><span class="line">    &#123;$project:&#123;country:&quot;$_id.country&quot;, province:&quot;_id.province&quot;,count:1,_id:0&#125;&#125;     &#x2F;&#x2F;美化输出</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="$注意"></a>$注意</h3><ul>
+<li><code>$group</code> 对应的字典中有几个键，结果中就有几个键。</li>
+<li>分组依据需要放到<code>_id</code>后面，可以使用多个分组依据。</li>
+<li>取不同字段的值需要使用$，<code>$gender</code>，<code>$age</code>。</li>
+<li>取字典嵌套的字典中的值的时候<code>$_id.country</code></li>
+<li>能够同时按照多个键进行分组<code>&#123;$group:&#123;_id:&#123;country:&quot;$country&quot;,province:&quot;$province&quot;&#125;&#125;&#125;</code>，结果显示为：<code>&#123;_id:&#123;country:&quot;&quot;, province:&quot;&quot;&#125;&#125;</code>。</li>
+</ul>
+<h3 id="sort"><a href="#sort" class="headerlink" title="$sort"></a>$sort</h3><ul>
+<li>将输入文档排序后输出</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 查询学生信息，按年龄升序</span><br><span class="line">db.stu.aggregate(&#123;$sort:&#123;age:1&#125;&#125;)</span><br><span class="line"># 查询男生、女生人数，按人数降序</span><br><span class="line">db.stu.aggregate(</span><br><span class="line">    &#123;$group:&#123;_id:&quot;$gender&quot;, count:&#123;$sum:1&#125;&#125;&#125;,</span><br><span class="line">    &#123;$sort:&#123;count:-1&#125;&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="limit-和-skip"><a href="#limit-和-skip" class="headerlink" title="$limit 和 $skip"></a>$limit 和 $skip</h3><p><strong>$limit:</strong> 限制聚合管道返回的文档数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#查询2条学生信息</span><br><span class="line">db.stu.aggregate(&#123;$limit:2&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>$skip:</strong> 跳过指定数量的文档，并返回余下的文档</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 查询从第3条开始的学生信息</span><br><span class="line">db.stu.aggregate(&#123;$skip:2&#125;)</span><br><span class="line"># 统计男生、女生人数，按人数升序，取第二条数据</span><br><span class="line">db.stu.aggregate(</span><br><span class="line">    &#123;$group:&#123;_id:&quot;$gender&quot;, count:&#123;$sum:1&#125;&#125;&#125;,</span><br><span class="line">    &#123;$sort:&#123;count:1&#125;&#125;,</span><br><span class="line">    &#123;$skip:1&#125;,</span><br><span class="line">    &#123;$limit:1&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="unwind"><a href="#unwind" class="headerlink" title="$unwind"></a>$unwind</h3><p>将文档中的某一个数组类型字段拆分成多条，每条包含数组中的一个值。</p>
+<p>语法：<code>db.集合名称.aggregate(&#123;$unwind:&quot;$字段名称&quot;&#125;)</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.t2.insert(&#123;_id:1, item:&#39;t-shirt&#39;, size:[&#39;S&#39;,&#39;M&#39;,&#39;L&#39;]&#125;)</span><br><span class="line">db.t2.aggregate($unwind:&#39;$size&#39;)</span><br><span class="line">#输出</span><br><span class="line">&#123; &quot;_id&quot; : 1, &quot;item&quot; : &quot;t-shirt&quot;, &quot;size&quot; : &quot;S&quot; &#125;</span><br><span class="line">&#123; &quot;_id&quot; : 1, &quot;item&quot; : &quot;t-shirt&quot;, &quot;size&quot; : &quot;M&quot; &#125;</span><br><span class="line">&#123; &quot;_id&quot; : 1, &quot;item&quot; : &quot;t-shirt&quot;, &quot;size&quot; : &quot;L&quot; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>数据库中有一条数据：{“username”:”Alex”,”tags”: [‘C#’,’Java’,’C++’]}，如何获取该tag列表的长度？</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 插入数据</span><br><span class="line">db.t2.insert(&#123;username:&quot;Alex&quot;,tags:[&#39;C#&#39;,&#39;Java&#39;,&#39;C++&#39;]&#125;)</span><br><span class="line">#进行统计</span><br><span class="line">db.t2.aggregate(</span><br><span class="line">    &#123;$match:&#123;username:&quot;Alex&quot;&#125;&#125;,            &#x2F;&#x2F;匹配数据</span><br><span class="line">    &#123;$unwind:&quot;$tags&quot;&#125;,                    &#x2F;&#x2F;拆解列表</span><br><span class="line">    &#123;$group:&#123;_id:null,count:&#123;$sum:1&#125;&#125;&#125;) &#x2F;&#x2F;统计个数</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong> </p>
+<p>属性值为false表示丢弃属性值为空的文档。比如原本要拆分的数据没有这个属性时，会当成异常值自动跳过，但是加了这个属性后，这条数据还是会保留出来。</p>
+<p>属性 preserveNullAndEmptyArrays值为true表示保留属性值为空的文档。</p>
+<p>用法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.inventor.aggregate(&#123;</span><br><span class="line">    $unwind:&#123;</span><br><span class="line">        path:&#39;$字段名称&#39;,</span><br><span class="line">        preserveNullAndEmptyArrays:&lt;boolean&gt;  #防止数据丢失</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h2><p>创建索引的目的就是为了提高数据查询时的速度。</p>
+<p>语法：<code>db.数据集合.ensureIndex(&#123;字段名:1&#125;)</code></p>
+<p>示例：</p>
+<p>首先使用JS语句插入10万条数据到数据库中：<code>for(i=0;i&lt;100000;i++)&#123;db.t255.insert(&#123;name:&#39;test&#39;+i, age:i&#125;)&#125;</code></p>
+<p>查找数据：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.t255.find(name:&#39;test10000&#39;)     #查找数据</span><br><span class="line">db.t255.find(name:&#39;test10000&#39;).explain(&#39;executionStats&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>在未添加索引之前，我们执行查询操作的耗时为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;executionStats&quot; : &#123;</span><br><span class="line">                &quot;executionSuccess&quot; : true,</span><br><span class="line">                &quot;nReturned&quot; : 1,</span><br><span class="line">                &quot;executionTimeMillis&quot; : 59,   #查询耗时</span><br><span class="line">                &quot;totalKeysExamined&quot; : 0,</span><br><span class="line">                &quot;totalDocsExamined&quot; : 100000,</span><br><span class="line">                &#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们使用name建立索引：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; db.t255.ensureIndex(&#123;name:1&#125;)</span><br><span class="line">&#123;</span><br><span class="line">        &quot;createdCollectionAutomatically&quot; : false,</span><br><span class="line">        &quot;numIndexesBefore&quot; : 1, #建立索引之前</span><br><span class="line">        &quot;numIndexesAfter&quot; : 2,  #建立索引之后</span><br><span class="line">        &quot;ok&quot; : 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后再次查询：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;executionStats&quot; : &#123;</span><br><span class="line">                &quot;executionSuccess&quot; : true,</span><br><span class="line">                &quot;nReturned&quot; : 1,</span><br><span class="line">                &quot;executionTimeMillis&quot; : 2,  #查询耗时</span><br><span class="line">                &quot;totalKeysExamined&quot; : 1,</span><br><span class="line">                &quot;totalDocsExamined&quot; : 1,</span><br><span class="line">                &#125;</span><br></pre></td></tr></table></figure>
+
+<p>原来为59ms，建立索引之后为2ms，提升巨大。</p>
+<p><strong>注意点：</strong></p>
+<ul>
+<li>在默认情况下索引字段的值可以相同</li>
+<li>创建唯一索引（索引的值时唯一的）：<code>db.t255.ensureIndex(&#123;&quot;name&quot;:1&#125;,&#123;&quot;unique&quot;:true&#125;)</code></li>
+<li>建立联合索引（什么时候需要联合索引：需要多个字段判断数据唯一性的时候可以使用）：<code>db.t255.ensureIndex(&#123;name:1,age:1&#125;)</code></li>
+<li>查看当前集合的所有索引：<code>db.t255.getIndexes()</code></li>
+<li>删除索引：<code>db.t255.dropIndex(&#123;索引名称:1&#125;)</code> 和增加对应</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据存储</category>
+        <category>MongoDB</category>
+      </categories>
+      <tags>
+        <tag>数据存储</tag>
+        <tag>MongoDB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>什么是json</title>
+    <url>/archives/49506.html</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>JSON的全称是 ”JavaScript Object Notation“，意思是JavaScript对象表示法，它是一种基于文本，独立于语言的轻量级数据交换格式。XML也是一种数据交换格式，为什么没有选择XML呢？因为XML虽然可以作为跨平台的数据交换格式，但是在JS（JavaScript）中处理XML非常不方便，同时XML标记比数据多，增加了交换产生的流量，而JSON没有附加的任何标记，在JS中可作为对象处理，所以我们更倾向于选择JSON来交换数据。</p>
+<h2 id="JSON的两种数据结构"><a href="#JSON的两种数据结构" class="headerlink" title="JSON的两种数据结构"></a>JSON的两种数据结构</h2><p>JSON有两种表示结构，对象和数组。对象结构以<code>&#123;</code> 大括号开始，以<code>&#125;</code>大括号结束。中间的信息以键值对存储，并且以<code>,</code>分割每条信息（最后一条数据不用加<code>,</code>）。键值对的格式为：<code>key:value</code>，即冒号左边为关键字，冒号右边为值。</p>
+<a id="more"></a>
+
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    key1:value1,</span><br><span class="line">    key2:value2,</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中关键字是字符串，而值可以是字符串，数值，true，false，null，对象或数组。</p>
+<p>数组结构以<code>[</code>开始，以<code>]</code>结束。数组可以为空，或者多个以<code>,</code>分隔的值列表组成，语法结构如下。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        key1:value1,</span><br><span class="line">        key2:value2</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        key3:value3,</span><br><span class="line">        key4:value4</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="认识JSON字符串"><a href="#认识JSON字符串" class="headerlink" title="认识JSON字符串"></a>认识JSON字符串</h2><p><strong>字符串，JSON字符串和json对象的区别：</strong></p>
+<p>字符串：一般指编程语言中的String类型。</p>
+<p>JSON字符串：指的是符合json格式要求的字符串。</p>
+<h2 id="JSON-in-Python"><a href="#JSON-in-Python" class="headerlink" title="JSON in Python"></a>JSON in Python</h2><p>Python中有json的内置包叫<code>json</code>，这个包可以用来处理JSON相关的数据。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Import the json module</span></span><br><span class="line"><span class="keyword">import</span> json</span><br></pre></td></tr></table></figure>
+
+<h3 id="JSON数据解析-—-将JSON转化为Python"><a href="#JSON数据解析-—-将JSON转化为Python" class="headerlink" title="JSON数据解析 — 将JSON转化为Python"></a>JSON数据解析 — 将JSON转化为Python</h3><p>如果我们想解析JSON字符串，我们可以使用<code>json.loads()</code>方法来解析。</p>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="comment"># 一段json数据</span></span><br><span class="line">x = <span class="string">&#x27;&#123;&quot;name&quot;:&quot;John&quot;,&quot;age&quot;:30,&quot;city&quot;:&quot;New York&quot;&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解析json数据</span></span><br><span class="line">y = json.loads(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解析的结果以一个字典格式存储</span></span><br><span class="line">print(y[<span class="string">&quot;age&quot;</span>])   <span class="comment"># 30</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="将Python转化成JSON"><a href="#将Python转化成JSON" class="headerlink" title="将Python转化成JSON"></a>将Python转化成JSON</h3><p>如果我们有一个Python字典，我们可以同过使用<code>json.dumps()</code>方法将其转化为JSON字符串。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="comment"># 一个Python对象，对象得为字典格式</span></span><br><span class="line">x = &#123;</span><br><span class="line">    <span class="string">&quot;name&quot;</span>: <span class="string">&quot;John&quot;</span>,</span><br><span class="line">    <span class="string">&quot;age&quot;</span>: <span class="number">30</span>,</span><br><span class="line">    <span class="string">&quot;city&quot;</span>: <span class="string">&quot;New York&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转化为JSON</span></span><br><span class="line">y = json.dumps(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果为一个JSON字符串</span></span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure>
+
+<p><strong>在Python中可以用来转化为JSON字符串的数据类型：</strong></p>
+<ul>
+<li>dict</li>
+<li>list</li>
+<li>tuple</li>
+<li>string</li>
+<li>int</li>
+<li>float</li>
+<li>True</li>
+<li>False</li>
+<li>None</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将python对象转换为JSON字符串</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line">print(json.dumps(&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;John&quot;</span>, <span class="string">&quot;age&quot;</span>:<span class="number">30</span>&#125;))</span><br><span class="line">print(json.dumps([<span class="string">&quot;apple&quot;</span>,<span class="string">&quot;bananas&quot;</span>]))</span><br><span class="line">print(json.dumps((<span class="string">&quot;apple&quot;</span>,<span class="string">&quot;bananas&quot;</span>)))</span><br><span class="line">print(json.dumps(<span class="string">&quot;hello&quot;</span>))</span><br><span class="line">print(json.dumps(<span class="number">43</span>))</span><br><span class="line">print(json.dumps(<span class="number">31.76</span>))</span><br><span class="line">print(json.dumps(<span class="literal">True</span>))</span><br><span class="line">print(json.dumps(<span class="literal">False</span>))</span><br><span class="line">print(json.dumps(<span class="literal">None</span>))</span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line">&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;John&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">30</span>&#125;</span><br><span class="line">[<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;bananas&quot;</span>]</span><br><span class="line">[<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;bananas&quot;</span>]</span><br><span class="line"><span class="string">&quot;hello&quot;</span></span><br><span class="line"><span class="number">42</span></span><br><span class="line"><span class="number">31.76</span></span><br><span class="line">true</span><br><span class="line">false</span><br><span class="line">null</span><br></pre></td></tr></table></figure>
+
+<p>Python对象和JSON的转换：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Python</th>
+<th align="left">JSON</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">dict</td>
+<td align="left">Object</td>
+</tr>
+<tr>
+<td align="left">list</td>
+<td align="left">Array</td>
+</tr>
+<tr>
+<td align="left">tuple</td>
+<td align="left">Array</td>
+</tr>
+<tr>
+<td align="left">str</td>
+<td align="left">String</td>
+</tr>
+<tr>
+<td align="left">int</td>
+<td align="left">Number</td>
+</tr>
+<tr>
+<td align="left">float</td>
+<td align="left">Number</td>
+</tr>
+<tr>
+<td align="left">True</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left">False</td>
+<td align="left">false</td>
+</tr>
+<tr>
+<td align="left">None</td>
+<td align="left">null</td>
+</tr>
+</tbody></table>
+<p>示例：转换一个包含上述所有Python关键字的的对象。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line">x = &#123;</span><br><span class="line">    <span class="string">&quot;name&quot;</span>: <span class="string">&quot;John&quot;</span>,</span><br><span class="line">  <span class="string">&quot;age&quot;</span>: <span class="number">30</span>,</span><br><span class="line">  <span class="string">&quot;married&quot;</span>: <span class="literal">True</span>,</span><br><span class="line">  <span class="string">&quot;divorced&quot;</span>: <span class="literal">False</span>,</span><br><span class="line">  <span class="string">&quot;children&quot;</span>: (<span class="string">&quot;Ann&quot;</span>,<span class="string">&quot;Billy&quot;</span>),</span><br><span class="line">  <span class="string">&quot;pets&quot;</span>: <span class="literal">None</span>,</span><br><span class="line">  <span class="string">&quot;cars&quot;</span>: [</span><br><span class="line">    &#123;<span class="string">&quot;model&quot;</span>: <span class="string">&quot;BMW 230&quot;</span>, <span class="string">&quot;mpg&quot;</span>: <span class="number">27.5</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;model&quot;</span>: <span class="string">&quot;Ford Edge&quot;</span>, <span class="string">&quot;mpg&quot;</span>: <span class="number">24.1</span>&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">print(json.dumps(x))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印的结果</span></span><br><span class="line">&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;John&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">30</span>, <span class="string">&quot;married&quot;</span>: true, <span class="string">&quot;divorced&quot;</span>: false, <span class="string">&quot;children&quot;</span>: [<span class="string">&quot;Ann&quot;</span>,<span class="string">&quot;Billy&quot;</span>], <span class="string">&quot;pets&quot;</span>: null, <span class="string">&quot;cars&quot;</span>: [&#123;<span class="string">&quot;model&quot;</span>: <span class="string">&quot;BMW 230&quot;</span>, <span class="string">&quot;mpg&quot;</span>: <span class="number">27.5</span>&#125;, &#123;<span class="string">&quot;model&quot;</span>: <span class="string">&quot;Ford Edge&quot;</span>, <span class="string">&quot;mpg&quot;</span>: <span class="number">24.1</span>&#125;]&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="格式化转换结果"><a href="#格式化转换结果" class="headerlink" title="格式化转换结果"></a>格式化转换结果</h3><p>我们直接打印JSON对象的时候，是没有换行的，数据全部连在一起，不方便查看。我们可以使用<code>json.dumps(x, indent=4)</code> 来格式化显示，此时打印结果如下。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(json.dumps(x), indent=<span class="number">4</span>)</span><br><span class="line"><span class="comment">#结果显示为</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;married&quot;</span>: true,</span><br><span class="line">    <span class="string">&quot;age&quot;</span>: <span class="number">30</span>,</span><br><span class="line">    <span class="string">&quot;pets&quot;</span>: null,</span><br><span class="line">    <span class="string">&quot;children&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;Ann&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Billy&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;cars&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;model&quot;</span>: <span class="string">&quot;BMW 230&quot;</span>,</span><br><span class="line">            <span class="string">&quot;mpg&quot;</span>: <span class="number">27.5</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;model&quot;</span>: <span class="string">&quot;Ford Edge&quot;</span>,</span><br><span class="line">            <span class="string">&quot;mpg&quot;</span>: <span class="number">24.1</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;name&quot;</span>: <span class="string">&quot;John&quot;</span>,</span><br><span class="line">    <span class="string">&quot;divorced&quot;</span>: false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们也可以定义显示时的分割符，默认的分割符为(“,” , “:” )，表示用逗号分隔不同语句，用冒号分隔键值对。我们也可以更改为(“.” , “=”) 或者(“,”, “=”) 等等，看自己需要。</p>
+<h3 id="转换结果排序"><a href="#转换结果排序" class="headerlink" title="转换结果排序"></a>转换结果排序</h3><p>我们可以对转换后的JSON数据进行排序，排序是按照键的首字母进行排序的。</p>
+<blockquote>
+<p><code>json.dumps(x, indent=4, sort_keys=True)</code></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(json.dumps(x, indent=<span class="number">4</span>, sort_keys=<span class="literal">True</span>))</span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;age&quot;</span>: <span class="number">30</span>,</span><br><span class="line">    <span class="string">&quot;cars&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;model&quot;</span>: <span class="string">&quot;BMW 230&quot;</span>,</span><br><span class="line">            <span class="string">&quot;mpg&quot;</span>: <span class="number">27.5</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;model&quot;</span>: <span class="string">&quot;Ford Edge&quot;</span>,</span><br><span class="line">            <span class="string">&quot;mpg&quot;</span>: <span class="number">24.1</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;children&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;Ann&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Billy&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;divorced&quot;</span>: false,</span><br><span class="line">    <span class="string">&quot;married&quot;</span>: true,</span><br><span class="line">    <span class="string">&quot;name&quot;</span>: <span class="string">&quot;John&quot;</span>,</span><br><span class="line">    <span class="string">&quot;pets&quot;</span>: null</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>数据存储</category>
+        <category>json</category>
+      </categories>
+      <tags>
+        <tag>json</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MongDB练习</title>
+    <url>/archives/53312.html</url>
+    <content><![CDATA[<h2 id="豆瓣数据相关"><a href="#豆瓣数据相关" class="headerlink" title="豆瓣数据相关"></a>豆瓣数据相关</h2><blockquote>
+<p>尝试将我电脑中的douban.tv1中的数据恢复到自己的电脑中，具体如何操作？</p>
+<p>完成上述操作后完成以下问题：</p>
+<p>1.获取每条数据中的title，count(所有评分人数),rate(评分),country(国家)的这些字段</p>
+<p>2.获取上述结果中的不同国家电视剧的数据量</p>
+<p>3.获取上述结果中分数大于8分的不同国家电视剧的数据量</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#1</span><br><span class="line">db.tv1.aggregate(&#123;$project:&#123;_id:0,title:1,count:&quot;$rating.count&quot;,tv_category:1&#125;&#125;)</span><br><span class="line">#2</span><br><span class="line">db.tv1.aggregate(&#123;$project:&#123;_id:0,title:1,count:&quot;$rating.count&quot;,country:&quot;$tv_category&quot;&#125;&#125;,</span><br><span class="line">&#123;$group:&#123;_id:&#123;country:&quot;$country&quot;&#125;,sum:&#123;$sum:1&#125;&#125;&#125;)</span><br><span class="line">#3</span><br><span class="line">db.tv1.aggregate(&#123;$project:&#123;_id:0,title:1,rating:&quot;$rating.value&quot;,country:&quot;$tv_category&quot;&#125;&#125;,&#123;$match:&#123;rating:&#123;$gt:8&#125;&#125;&#125;,&#123;$group:&#123;_id:&quot;$country&quot;,number:&#123;$sum:1&#125;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>数据存储</category>
+        <category>MongoDB</category>
+      </categories>
+      <tags>
+        <tag>数据存储</tag>
+        <tag>MongoDB</tag>
+        <tag>豆瓣</tag>
       </tags>
   </entry>
 </search>

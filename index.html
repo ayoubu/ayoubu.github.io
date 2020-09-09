@@ -147,17 +147,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">38</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">6</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">9</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">19</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">25</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -212,6 +212,655 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/53312.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/53312.html" class="post-title-link" itemprop="url">MongDB练习</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-09 15:19:48 / 修改时间：07:59:32" itemprop="dateCreated datePublished" datetime="2020-09-09T15:19:48Z">2020-09-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">数据存储</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/MongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongoDB</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>781</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="豆瓣数据相关"><a href="#豆瓣数据相关" class="headerlink" title="豆瓣数据相关"></a>豆瓣数据相关</h2><blockquote>
+<p>尝试将我电脑中的douban.tv1中的数据恢复到自己的电脑中，具体如何操作？</p>
+<p>完成上述操作后完成以下问题：</p>
+<p>1.获取每条数据中的title，count(所有评分人数),rate(评分),country(国家)的这些字段</p>
+<p>2.获取上述结果中的不同国家电视剧的数据量</p>
+<p>3.获取上述结果中分数大于8分的不同国家电视剧的数据量</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#1</span><br><span class="line">db.tv1.aggregate(&#123;$project:&#123;_id:0,title:1,count:&quot;$rating.count&quot;,tv_category:1&#125;&#125;)</span><br><span class="line">#2</span><br><span class="line">db.tv1.aggregate(&#123;$project:&#123;_id:0,title:1,count:&quot;$rating.count&quot;,country:&quot;$tv_category&quot;&#125;&#125;,</span><br><span class="line">&#123;$group:&#123;_id:&#123;country:&quot;$country&quot;&#125;,sum:&#123;$sum:1&#125;&#125;&#125;)</span><br><span class="line">#3</span><br><span class="line">db.tv1.aggregate(&#123;$project:&#123;_id:0,title:1,rating:&quot;$rating.value&quot;,country:&quot;$tv_category&quot;&#125;&#125;,&#123;$match:&#123;rating:&#123;$gt:8&#125;&#125;&#125;,&#123;$group:&#123;_id:&quot;$country&quot;,number:&#123;$sum:1&#125;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/61509.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/61509.html" class="post-title-link" itemprop="url">MongDB 高级功能</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-08 15:02:58" itemprop="dateCreated datePublished" datetime="2020-09-08T15:02:58Z">2020-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-09 07:48:36" itemprop="dateModified" datetime="2020-09-09T07:48:36Z">2020-09-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">数据存储</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/MongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongoDB</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="聚合和管道"><a href="#聚合和管道" class="headerlink" title="聚合和管道"></a>聚合和管道</h2><p>聚合(aggregate)是基于数据处理的聚合管道，每个文档通过一个由多个阶段(stage) 组成的管道，可以对每个阶段的管道进行分组、过滤等功能，然后经过一系列的处理，输出相应的结果。</p>
+<p>表达式：<code>db.集合名称.aggregate(&#123;管道:&#123;表达式&#125;&#125;)</code> </p>
+<img src="https://i.imgur.com/DL72HF6.jpeg" alt="聚合原理图" style="zoom:80%;" />
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/archives/61509.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/18082.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/18082.html" class="post-title-link" itemprop="url">Python MongoDB</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-06 11:38:34" itemprop="dateCreated datePublished" datetime="2020-09-06T11:38:34Z">2020-09-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-09 08:17:22" itemprop="dateModified" datetime="2020-09-09T08:17:22Z">2020-09-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">数据存储</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/MongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongoDB</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>11 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="PyMongo"><a href="#PyMongo" class="headerlink" title="PyMongo"></a>PyMongo</h2><p>在Python中需要一个MongoDB的驱动程序来访问MongoDB的数据库，本文将主要介绍Python中的MongoDB驱动程序“PyMongo”。</p>
+<p><strong>安装：</strong> <code>pip install pymongo</code> </p>
+<p><strong>测试：</strong> <code>import pymongo</code></p>
+<p>如果运行后没有报错，则说明pymongo包安装成功。</p>
+<h2 id="PyMongo基本操作"><a href="#PyMongo基本操作" class="headerlink" title="PyMongo基本操作"></a>PyMongo基本操作</h2><h3 id="创建连接"><a href="#创建连接" class="headerlink" title="创建连接"></a>创建连接</h3><p><strong>需要在本地安装MongoDB社区版的服务，具体查看我的上一篇文档。</strong> </p>
+<p>在使用MongoDB创建数据库之前，需要先新建一个MongoClient(Mongo的客户端) 对象，这个对象需要使用一个具体的MongoDB的访问连接，如果是在本地开启的服务，这个连接默认为：<code>&quot;mongodb://localhost:27017/&quot;</code>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/archives/18082.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/49506.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/49506.html" class="post-title-link" itemprop="url">什么是json</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-05 11:35:13" itemprop="dateCreated datePublished" datetime="2020-09-05T11:35:13Z">2020-09-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-09 06:54:19" itemprop="dateModified" datetime="2020-09-09T06:54:19Z">2020-09-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">数据存储</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/json/" itemprop="url" rel="index">
+                    <span itemprop="name">json</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>JSON的全称是 ”JavaScript Object Notation“，意思是JavaScript对象表示法，它是一种基于文本，独立于语言的轻量级数据交换格式。XML也是一种数据交换格式，为什么没有选择XML呢？因为XML虽然可以作为跨平台的数据交换格式，但是在JS（JavaScript）中处理XML非常不方便，同时XML标记比数据多，增加了交换产生的流量，而JSON没有附加的任何标记，在JS中可作为对象处理，所以我们更倾向于选择JSON来交换数据。</p>
+<h2 id="JSON的两种数据结构"><a href="#JSON的两种数据结构" class="headerlink" title="JSON的两种数据结构"></a>JSON的两种数据结构</h2><p>JSON有两种表示结构，对象和数组。对象结构以<code>&#123;</code> 大括号开始，以<code>&#125;</code>大括号结束。中间的信息以键值对存储，并且以<code>,</code>分割每条信息（最后一条数据不用加<code>,</code>）。键值对的格式为：<code>key:value</code>，即冒号左边为关键字，冒号右边为值。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/archives/49506.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/52778.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/52778.html" class="post-title-link" itemprop="url">MongoDB简介</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-05 10:58:05" itemprop="dateCreated datePublished" datetime="2020-09-05T10:58:05Z">2020-09-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-09 06:54:19" itemprop="dateModified" datetime="2020-09-09T06:54:19Z">2020-09-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">数据存储</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/MongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongoDB</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="MongoDB简介"><a href="#MongoDB简介" class="headerlink" title="MongoDB简介"></a>MongoDB简介</h2><p>MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为WEB应用提供可扩展的高性能数据存储解决方案。</p>
+<p>MongoDB将数据存储为一个文档，数据结构由键值对(Key : value)组成，MongoDB文档类似于JSON对象，字段值可以包含其它文档，数组及文档数组。</p>
+<p>MongoDB服务端可运行在Linux、Windows和Mac OS平台，支持32位和64位应用，默认端口为27017。本文所展示的为Windows平台的安装及使用。</p>
+<p>MongoDB支持各种编程语言：Python、Java、C++、PHP、C#等多种语言。</p>
+<h2 id="MongoDB的优势"><a href="#MongoDB的优势" class="headerlink" title="MongoDB的优势"></a>MongoDB的优势</h2><ul>
+<li><strong>易扩展：</strong> NoSQL（非关系型数据库）数据库种类繁多，但是一个共同的特点都是去掉关系型数据库的关系特性。数据之间无关系，这样就非常容易扩展。</li>
+<li><strong>大数据量，高性能：</strong> NoSQL数据库都具有非常高的读写性能，尤其在大数据量下，同样表现优秀。得益于它的无关系性，数据的结构简单</li>
+<li><strong>灵活的数据模型：</strong> NoSQL无需事先为要存储的数据建立字段，随时可以存储自定义的数据格式。而在关系型数据库里，增删字段是一件非常麻烦的事情。</li>
+</ul>
+<p><strong>缺点：</strong> 由于它每条数据都是单独存储的，因此在存储过程中可能会包含大量重复信息，非常占用存储空间。</p>
+<h2 id="MongDB的安装（windows）"><a href="#MongDB的安装（windows）" class="headerlink" title="MongDB的安装（windows）"></a>MongDB的安装（windows）</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/archives/52778.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/53805.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/53805.html" class="post-title-link" itemprop="url">Excel学习之疑难杂症</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-03 11:47:19" itemprop="dateCreated datePublished" datetime="2020-09-03T11:47:19Z">2020-09-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-09 06:54:19" itemprop="dateModified" datetime="2020-09-09T06:54:19Z">2020-09-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
+                    <span itemprop="name">数据分析</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/" itemprop="url" rel="index">
+                    <span itemprop="name">Excel</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="电子表格打印"><a href="#电子表格打印" class="headerlink" title="电子表格打印"></a>电子表格打印</h2><p><strong>快捷键：</strong><code>Ctrl + P</code> — 打印预览</p>
+<p><strong>将表格打印到一页纸上：</strong> <code>Ctrl + P</code> ，在最后一项中选择<code>将工作表调整为一页</code>，此方法是使用缩放功能。除此之外也可以使用<code>自定义边距</code>功能，设置页边距使得内容可以显示为一页。</p>
+<p><strong>打印选中区域：</strong> 先选中需要打印的区域，然后按<code>Ctrl + P</code>，在设置中的第一项中选择<code>打印选定区域</code>。</p>
+<p><strong>打印网格线：</strong> 首先在<code>页面布局</code> 菜单栏中的工作表选项中，勾选打印，再按<code>Ctrl + P</code> 预览的时候，就可以看到网格线了。</p>
+<p><strong>在每页都打印表头：</strong> 进入<code>页面布局</code>菜单栏，在<code>页面设置</code>区域中，点击<code>打印标题</code>，然后分别设置<code>打印区域</code> 和<code>顶端标题行</code>。注：在打印预览时，最后一项应该设置为<code>将所有列都调整为一页</code>。</p>
+<p><strong>打印页码：</strong> 进入<code>页面布局</code>菜单栏，在页面设置区域点开扩展的小箭头，选择<code>页眉/页脚</code> ，在页脚处设置页码的样式，点击确定就好。</p>
+<p><strong>不打印错误值：</strong> 还是在上述<code>页面设置</code>的对话框中，选择<code>工作表</code> ，将<code>错误单元格打印为</code>设置为空白就好。</p>
+<p><strong>打印批注：</strong> 还是在<code>页面布局</code>菜单栏中的<code>页面设置</code>对话框中，选择<code>工作表</code>，设置<code>批注和注释</code>为工作表末尾，此时再打印时，批注就会打印到末尾了。</p>
+<p><strong>设置单色打印：</strong>此时会自动忽略所有表格内的色彩，在上述的<code>页面设置</code>中的<code>工作表</code>选项卡里，勾选<code>单色打印</code>的复选框即可。</p>
+<h2 id="图表与PPT、Word之间的交互联动"><a href="#图表与PPT、Word之间的交互联动" class="headerlink" title="图表与PPT、Word之间的交互联动"></a>图表与PPT、Word之间的交互联动</h2><p>在实际工作中，我们经常需要将excel中的结果插入到PPT或者Word中，如何在改动excel表格数据时，PPT和Word中的数据也会相应的改变。从而实现数据的实时同步。</p>
+<p><strong>具体方法为：</strong> 在复制Excel表格后粘贴到PPT或者Word时，在<code>开始</code>菜单中点击粘贴底下的小箭头，选择<code>选择性粘贴</code>，然后在弹出的对话框中，选择<code>粘贴链接</code>中的<code>Microsoft Excel工作表 对象</code> 即可。</p>
+<p>粘贴后Excel的表格样式什么的会粘贴过去。如果Excel、PPT、Word三个文件均为打开状态，此时修改Excel中的数据，其它两个文件中的数据也会发生相应的更改。如果修改Excel数据时其它两个文件时关闭的，那么再次打开其它两个文件时会有提醒是否同步。为了保证数据之间的同步，最好时将Excel数据和引用它的文件放在一起，如果修改了文件名或者目录可能会导致链接不到。</p>
+<h2 id="合并多个工作表"><a href="#合并多个工作表" class="headerlink" title="合并多个工作表"></a>合并多个工作表</h2><p>新建一个工作表，选中第一个表格，单击菜单栏中的<code>数据</code>选项卡，在<code>数据工具</code>区域中选择<code>合并计算</code>，在引用位置选择第一个表中的数据，然后点击<code>添加</code>，依次添加所有表，最后勾选<code>首行</code>和<code>最左列</code>复选框，点击确定即可。</p>
+<p><code>首行</code>表示显示第一行的标题，<code>最左列</code>表示显示最左列的数据。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/27947.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -237,10 +886,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-09-01 12:29:12 / 修改时间：14:05:43" itemprop="dateCreated datePublished" datetime="2020-09-01T12:29:12Z">2020-09-01</time>
+              <time title="创建时间：2020-09-01 12:29:12" itemprop="dateCreated datePublished" datetime="2020-09-01T12:29:12Z">2020-09-01</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-03 03:46:57" itemprop="dateModified" datetime="2020-09-03T03:46:57Z">2020-09-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -265,14 +920,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>593</span>
+              <span>3.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -345,7 +1000,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-01 04:30:19" itemprop="dateModified" datetime="2020-09-01T04:30:19Z">2020-09-01</time>
+                <time title="修改时间：2020-09-01 14:05:54" itemprop="dateModified" datetime="2020-09-01T14:05:54Z">2020-09-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -457,7 +1112,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-31 03:39:16" itemprop="dateModified" datetime="2020-08-31T03:39:16Z">2020-08-31</time>
+                <time title="修改时间：2020-09-01 14:05:54" itemprop="dateModified" datetime="2020-09-01T14:05:54Z">2020-09-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -563,7 +1218,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-30 07:26:09" itemprop="dateModified" datetime="2020-08-30T07:26:09Z">2020-08-30</time>
+                <time title="修改时间：2020-09-01 14:05:54" itemprop="dateModified" datetime="2020-09-01T14:05:54Z">2020-09-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -645,659 +1300,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/57650.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="落空">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落空的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/57650.html" class="post-title-link" itemprop="url">Excel 快速录入和定位的小技巧</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-			
-			  
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-28 15:16:09" itemprop="dateCreated datePublished" datetime="2020-08-28T15:16:09Z">2020-08-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-29 04:09:35" itemprop="dateModified" datetime="2020-08-29T04:09:35Z">2020-08-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
-                    <span itemprop="name">数据分析</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/" itemprop="url" rel="index">
-                    <span itemprop="name">Excel</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="相似格式如何一秒快速录入"><a href="#相似格式如何一秒快速录入" class="headerlink" title="相似格式如何一秒快速录入"></a>相似格式如何一秒快速录入</h2><p>在数据录入的过程中经常需要录入一些相同的部分，比如同一个省份的开头是相同的，邮箱的后半部分。此时我们可以自定义单元格格式来加速我们数据录入的过程。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/archives/57650.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/21268.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="落空">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落空的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/21268.html" class="post-title-link" itemprop="url">Excel学习之路01</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-			
-			  
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-25 11:55:36" itemprop="dateCreated datePublished" datetime="2020-08-25T11:55:36Z">2020-08-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-28 07:15:29" itemprop="dateModified" datetime="2020-08-28T07:15:29Z">2020-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
-                    <span itemprop="name">数据分析</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/" itemprop="url" rel="index">
-                    <span itemprop="name">Excel</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Excel数据导入"><a href="#Excel数据导入" class="headerlink" title="Excel数据导入"></a>Excel数据导入</h2><h3 id="从网页导入数据"><a href="#从网页导入数据" class="headerlink" title="从网页导入数据"></a>从网页导入数据</h3><p>有时候我们需要从网上获取一些数据进行分析，有时复制粘贴可能不是最好的方式，这时候我们可以先试试excel内置的从网页导入数据功能。</p>
-<p><code>数据--&gt;自网站</code></p>
-<p>例如：我们想对中国<a target="_blank" rel="noopener external nofollow noreferrer" href="http://quotes.money.163.com/0600050.html">中国联通的股票行情</a> 做一些分析，我们可以按照上述选项，输入对应的网址连接，如下图所示：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/archives/21268.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/37845.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="落空">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落空的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/37845.html" class="post-title-link" itemprop="url">Excel学习之路00</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-			
-			  
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-08-25 11:47:09 / 修改时间：03:55:12" itemprop="dateCreated datePublished" datetime="2020-08-25T11:47:09Z">2020-08-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
-                    <span itemprop="name">数据分析</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/" itemprop="url" rel="index">
-                    <span itemprop="name">Excel</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>126</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Excel的知识体系"><a href="#Excel的知识体系" class="headerlink" title="Excel的知识体系"></a>Excel的知识体系</h2><p>用excel处理数据的基本流程如下：</p>
-<ul>
-<li>数据导入</li>
-<li>规范规则</li>
-<li>函数运算</li>
-<li>图表制作</li>
-<li>数据分析</li>
-<li>图表导出</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/archives/37845.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/53523.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="落空">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落空的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/53523.html" class="post-title-link" itemprop="url">python之模块</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-			
-			  
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-24 15:28:43" itemprop="dateCreated datePublished" datetime="2020-08-24T15:28:43Z">2020-08-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-25 03:17:41" itemprop="dateModified" datetime="2020-08-25T03:17:41Z">2020-08-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">python 语法学习</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>模块是一种更高级的封装，它的作用是封装和组织我们写的代码，将代码分割成不同的模块，便于我们的测试和维护。同时模块也可以方便我们对代码的重用。在python中我们接触过的封装有：</p>
-<ul>
-<li>容器  —&gt;  数据的封装</li>
-<li>函数  —&gt;  语句的封装</li>
-<li>类  —&gt;  方法和属性的封装</li>
-<li>模块  —&gt;  模块就是程序</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/archives/53523.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/52592.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="落空">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落空的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/52592.html" class="post-title-link" itemprop="url">python之魔法方法</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-			
-			  
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-22 11:51:09" itemprop="dateCreated datePublished" datetime="2020-08-22T11:51:09Z">2020-08-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-25 03:19:16" itemprop="dateModified" datetime="2020-08-25T03:19:16Z">2020-08-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">python 语法学习</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>11k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>10 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="构造和析构"><a href="#构造和析构" class="headerlink" title="构造和析构"></a>构造和析构</h2><h3 id="init-self-…-方法"><a href="#init-self-…-方法" class="headerlink" title="__init__(self,[, …]) 方法"></a>__init__(self,[, …]) 方法</h3><p>魔法方法总是被双下划线包围，例如__init__方法。魔法方法代表了python的强大之处。</p>
-<p>python中的默认构造函数为__init__(self,[, …]) 方法，init函数的返回值必须为None，否则会产生TpyeError的错误。</p>
-<h3 id="new-cls-…-方法"><a href="#new-cls-…-方法" class="headerlink" title="__new__(cls,[, …]) 方法"></a>__new__(cls,[, …]) 方法</h3><p>注：python中创建对象时调用的第一个对象其实并不是init，而是__new__方法，new方法是用来创建类的一个新的实例的，一般情况下我们不需要对new方法进行重写，但是有时后我们继承了某些特殊类，需要修改它的默认创建对象的方式时，可以对new方法进行重写。如下所示。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/archives/52592.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/30561.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="落空">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落空的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/30561.html" class="post-title-link" itemprop="url">python之类和对象</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-			
-			  
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-21 14:19:20" itemprop="dateCreated datePublished" datetime="2020-08-21T14:19:20Z">2020-08-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-25 03:17:41" itemprop="dateModified" datetime="2020-08-25T03:17:41Z">2020-08-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">python 语法学习</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="关于类的基本概念"><a href="#关于类的基本概念" class="headerlink" title="关于类的基本概念"></a>关于类的基本概念</h2><h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p>对象是由<strong>属性</strong>和<strong>方法</strong>组成的，属性描述的是对象的一些固有性质，而方法则是对象可以执行的操作。对象是通过实例化类得到的。</p>
-<h3 id="面向对象的特征"><a href="#面向对象的特征" class="headerlink" title="面向对象的特征"></a>面向对象的特征</h3><p>面向对象的主要特征为：</p>
-<ul>
-<li>封装：将对象的属性和方法进行封装，从而起到保护数据的作用。</li>
-<li>继承：子类自动共享父类之间数据和方法的机制。</li>
-<li>多态：不同对象对同一方法响应不同的方式。</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/archives/30561.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1365,20 +1372,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1690,13 +1697,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">55k</span>
+    <span title="站点总字数">87k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">50 分钟</span>
+    <span title="站点阅读时长">1:19</span>
 </div>
 
         

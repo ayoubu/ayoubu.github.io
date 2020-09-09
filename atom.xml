@@ -6,7 +6,7 @@
   <link href="https://ayoubu.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayoubu.github.io/"/>
-  <updated>2020-09-01T14:05:43.565Z</updated>
+  <updated>2020-09-09T07:59:32.272Z</updated>
   <id>https://ayoubu.github.io/</id>
   
   <author>
@@ -17,11 +17,191 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>MongDB练习</title>
+    <link href="https://ayoubu.github.io/archives/53312.html"/>
+    <id>https://ayoubu.github.io/archives/53312.html</id>
+    <published>2020-09-09T15:19:48.000Z</published>
+    <updated>2020-09-09T07:59:32.272Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;豆瓣数据相关&quot;&gt;&lt;a href=&quot;#豆瓣数据相关&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="数据存储" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
+    
+    <category term="MongoDB" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/MongoDB/"/>
+    
+    
+    <category term="数据存储" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
+    
+    <category term="MongoDB" scheme="https://ayoubu.github.io/tags/MongoDB/"/>
+    
+    <category term="豆瓣" scheme="https://ayoubu.github.io/tags/%E8%B1%86%E7%93%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MongDB 高级功能</title>
+    <link href="https://ayoubu.github.io/archives/61509.html"/>
+    <id>https://ayoubu.github.io/archives/61509.html</id>
+    <published>2020-09-08T15:02:58.000Z</published>
+    <updated>2020-09-09T07:48:36.902Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;聚合和管道&quot;&gt;&lt;a href=&quot;#聚合和管道&quot; class=&quot;headerlink&quot; title=&quot;聚合和管道&quot;&gt;&lt;/a&gt;聚合和管道&lt;/h2&gt;&lt;p&gt;聚合(aggregate)是基于数据处理的聚合管道，每个文档通过一个由多个阶段(stage) 组成的管道，可以对每个阶段的管道进行分组、过滤等功能，然后经过一系列的处理，输出相应的结果。&lt;/p&gt;
+&lt;p&gt;表达式：&lt;code&gt;db.集合名称.aggregate(&amp;#123;管道:&amp;#123;表达式&amp;#125;&amp;#125;)&lt;/code&gt; &lt;/p&gt;
+&lt;img src=&quot;https://i.imgur.com/DL72HF6.jpeg&quot; alt=&quot;聚合原理图&quot; style=&quot;zoom:80%;&quot; /&gt;</summary>
+    
+    
+    
+    <category term="数据存储" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
+    
+    <category term="MongoDB" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/MongoDB/"/>
+    
+    
+    <category term="数据存储" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
+    
+    <category term="MongoDB" scheme="https://ayoubu.github.io/tags/MongoDB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python MongoDB</title>
+    <link href="https://ayoubu.github.io/archives/18082.html"/>
+    <id>https://ayoubu.github.io/archives/18082.html</id>
+    <published>2020-09-06T11:38:34.000Z</published>
+    <updated>2020-09-09T08:17:22.509Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;PyMongo&quot;&gt;&lt;a href=&quot;#PyMongo&quot; class=&quot;headerlink&quot; title=&quot;PyMongo&quot;&gt;&lt;/a&gt;PyMongo&lt;/h2&gt;&lt;p&gt;在Python中需要一个MongoDB的驱动程序来访问MongoDB的数据库，本文将主要介绍Python中的MongoDB驱动程序“PyMongo”。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;安装：&lt;/strong&gt; &lt;code&gt;pip install pymongo&lt;/code&gt; &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;测试：&lt;/strong&gt; &lt;code&gt;import pymongo&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果运行后没有报错，则说明pymongo包安装成功。&lt;/p&gt;
+&lt;h2 id=&quot;PyMongo基本操作&quot;&gt;&lt;a href=&quot;#PyMongo基本操作&quot; class=&quot;headerlink&quot; title=&quot;PyMongo基本操作&quot;&gt;&lt;/a&gt;PyMongo基本操作&lt;/h2&gt;&lt;h3 id=&quot;创建连接&quot;&gt;&lt;a href=&quot;#创建连接&quot; class=&quot;headerlink&quot; title=&quot;创建连接&quot;&gt;&lt;/a&gt;创建连接&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;需要在本地安装MongoDB社区版的服务，具体查看我的上一篇文档。&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;在使用MongoDB创建数据库之前，需要先新建一个MongoClient(Mongo的客户端) 对象，这个对象需要使用一个具体的MongoDB的访问连接，如果是在本地开启的服务，这个连接默认为：&lt;code&gt;&amp;quot;mongodb://localhost:27017/&amp;quot;&lt;/code&gt;。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据存储" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
+    
+    <category term="MongoDB" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/MongoDB/"/>
+    
+    
+    <category term="数据存储" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
+    
+    <category term="MongoDB" scheme="https://ayoubu.github.io/tags/MongoDB/"/>
+    
+    <category term="PyMongo" scheme="https://ayoubu.github.io/tags/PyMongo/"/>
+    
+    <category term="Python" scheme="https://ayoubu.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>什么是json</title>
+    <link href="https://ayoubu.github.io/archives/49506.html"/>
+    <id>https://ayoubu.github.io/archives/49506.html</id>
+    <published>2020-09-05T11:35:13.000Z</published>
+    <updated>2020-09-09T06:54:19.286Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;JSON的全称是 ”JavaScript Object Notation“，意思是JavaScript对象表示法，它是一种基于文本，独立于语言的轻量级数据交换格式。XML也是一种数据交换格式，为什么没有选择XML呢？因为XML虽然可以作为跨平台的数据交换格式，但是在JS（JavaScript）中处理XML非常不方便，同时XML标记比数据多，增加了交换产生的流量，而JSON没有附加的任何标记，在JS中可作为对象处理，所以我们更倾向于选择JSON来交换数据。&lt;/p&gt;
+&lt;h2 id=&quot;JSON的两种数据结构&quot;&gt;&lt;a href=&quot;#JSON的两种数据结构&quot; class=&quot;headerlink&quot; title=&quot;JSON的两种数据结构&quot;&gt;&lt;/a&gt;JSON的两种数据结构&lt;/h2&gt;&lt;p&gt;JSON有两种表示结构，对象和数组。对象结构以&lt;code&gt;&amp;#123;&lt;/code&gt; 大括号开始，以&lt;code&gt;&amp;#125;&lt;/code&gt;大括号结束。中间的信息以键值对存储，并且以&lt;code&gt;,&lt;/code&gt;分割每条信息（最后一条数据不用加&lt;code&gt;,&lt;/code&gt;）。键值对的格式为：&lt;code&gt;key:value&lt;/code&gt;，即冒号左边为关键字，冒号右边为值。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据存储" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
+    
+    <category term="json" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/json/"/>
+    
+    
+    <category term="json" scheme="https://ayoubu.github.io/tags/json/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MongoDB简介</title>
+    <link href="https://ayoubu.github.io/archives/52778.html"/>
+    <id>https://ayoubu.github.io/archives/52778.html</id>
+    <published>2020-09-05T10:58:05.000Z</published>
+    <updated>2020-09-09T06:54:19.272Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;MongoDB简介&quot;&gt;&lt;a href=&quot;#MongoDB简介&quot; class=&quot;headerlink&quot; title=&quot;MongoDB简介&quot;&gt;&lt;/a&gt;MongoDB简介&lt;/h2&gt;&lt;p&gt;MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为WEB应用提供可扩展的高性能数据存储解决方案。&lt;/p&gt;
+&lt;p&gt;MongoDB将数据存储为一个文档，数据结构由键值对(Key : value)组成，MongoDB文档类似于JSON对象，字段值可以包含其它文档，数组及文档数组。&lt;/p&gt;
+&lt;p&gt;MongoDB服务端可运行在Linux、Windows和Mac OS平台，支持32位和64位应用，默认端口为27017。本文所展示的为Windows平台的安装及使用。&lt;/p&gt;
+&lt;p&gt;MongoDB支持各种编程语言：Python、Java、C++、PHP、C#等多种语言。&lt;/p&gt;
+&lt;h2 id=&quot;MongoDB的优势&quot;&gt;&lt;a href=&quot;#MongoDB的优势&quot; class=&quot;headerlink&quot; title=&quot;MongoDB的优势&quot;&gt;&lt;/a&gt;MongoDB的优势&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;易扩展：&lt;/strong&gt; NoSQL（非关系型数据库）数据库种类繁多，但是一个共同的特点都是去掉关系型数据库的关系特性。数据之间无关系，这样就非常容易扩展。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;大数据量，高性能：&lt;/strong&gt; NoSQL数据库都具有非常高的读写性能，尤其在大数据量下，同样表现优秀。得益于它的无关系性，数据的结构简单&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;灵活的数据模型：&lt;/strong&gt; NoSQL无需事先为要存储的数据建立字段，随时可以存储自定义的数据格式。而在关系型数据库里，增删字段是一件非常麻烦的事情。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt; 由于它每条数据都是单独存储的，因此在存储过程中可能会包含大量重复信息，非常占用存储空间。&lt;/p&gt;
+&lt;h2 id=&quot;MongDB的安装（windows）&quot;&gt;&lt;a href=&quot;#MongDB的安装（windows）&quot; class=&quot;headerlink&quot; title=&quot;MongDB的安装（windows）&quot;&gt;&lt;/a&gt;MongDB的安装（windows）&lt;/h2&gt;</summary>
+    
+    
+    
+    <category term="数据存储" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
+    
+    <category term="MongoDB" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/MongoDB/"/>
+    
+    
+    <category term="数据存储" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
+    
+    <category term="MongoDB" scheme="https://ayoubu.github.io/tags/MongoDB/"/>
+    
+    <category term="PyMongo" scheme="https://ayoubu.github.io/tags/PyMongo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Excel学习之疑难杂症</title>
+    <link href="https://ayoubu.github.io/archives/53805.html"/>
+    <id>https://ayoubu.github.io/archives/53805.html</id>
+    <published>2020-09-03T11:47:19.000Z</published>
+    <updated>2020-09-09T06:54:19.267Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;电子表格打印&quot;&gt;&lt;a href=&quot;#电子表格打印&quot; class=&quot;headerlink&quot; title=&quot;电子表格打印&quot;&gt;&lt;/a&gt;电子表格打印&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;快捷键：&lt;/strong&gt;&lt;code&gt;Ctrl + P&lt;/code&gt; —</summary>
+        
+      
+    
+    
+    
+    <category term="数据分析" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="Excel" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/"/>
+    
+    
+    <category term="Excel" scheme="https://ayoubu.github.io/tags/Excel/"/>
+    
+    <category term="数据分析" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="表格打印" scheme="https://ayoubu.github.io/tags/%E8%A1%A8%E6%A0%BC%E6%89%93%E5%8D%B0/"/>
+    
+    <category term="PPT" scheme="https://ayoubu.github.io/tags/PPT/"/>
+    
+    <category term="Word" scheme="https://ayoubu.github.io/tags/Word/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Excel学习之图表</title>
     <link href="https://ayoubu.github.io/archives/27947.html"/>
     <id>https://ayoubu.github.io/archives/27947.html</id>
     <published>2020-09-01T12:29:12.000Z</published>
-    <updated>2020-09-01T14:05:43.565Z</updated>
+    <updated>2020-09-03T03:46:57.977Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;如何制作图表&quot;&gt;&lt;a href=&quot;#如何制作图表&quot; class=&quot;headerlink&quot; title=&quot;如何制作图表&quot;&gt;&lt;/a&gt;如何制作图表&lt;/h2&gt;&lt;p&gt;Excel中插入图表，首先选中数据区域，在插入选项卡中的图表区域中选择合适的图表，此时就会在表格中插入一个图表。然后在菜单栏中的设计选项卡下，点击添加元素，这里面有我们常用的图表设计的所有元素，可以根据自己的需要选择修改。&lt;/p&gt;
@@ -47,7 +227,7 @@
     <link href="https://ayoubu.github.io/archives/50892.html"/>
     <id>https://ayoubu.github.io/archives/50892.html</id>
     <published>2020-08-31T11:40:38.000Z</published>
-    <updated>2020-09-01T04:30:19.678Z</updated>
+    <updated>2020-09-01T14:05:54.222Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;初识数据透视表&quot;&gt;&lt;a href=&quot;#初识数据透视表&quot; class=&quot;headerlink&quot; title=&quot;初识数据透视表&quot;&gt;&lt;/a&gt;初识数据透视表&lt;/h2&gt;&lt;p&gt;数据透视表在使用的时候非常简单，但是我们得先想清楚一些问题，再开始动手。&lt;/p&gt;
@@ -79,7 +259,7 @@
     <link href="https://ayoubu.github.io/archives/4338.html"/>
     <id>https://ayoubu.github.io/archives/4338.html</id>
     <published>2020-08-30T15:27:03.000Z</published>
-    <updated>2020-08-31T03:39:16.060Z</updated>
+    <updated>2020-09-01T14:05:54.220Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;什么是微图表&quot;&gt;&lt;a href=&quot;#什么是微图表&quot; class=&quot;headerlink&quot; title=&quot;什么是微图表&quot;&gt;&lt;/a&gt;什么是微图表&lt;/h2&gt;&lt;p&gt;微图表简单的说就是在单元格内绘制的图表，用来直观的反应数据的大小，从而实现数据与图表的一体化。示例如下图。&lt;/p&gt;
@@ -105,7 +285,7 @@
     <link href="https://ayoubu.github.io/archives/13281.html"/>
     <id>https://ayoubu.github.io/archives/13281.html</id>
     <published>2020-08-29T12:09:53.000Z</published>
-    <updated>2020-08-30T07:26:09.589Z</updated>
+    <updated>2020-09-01T14:05:54.212Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;函数基础&quot;&gt;&lt;a href=&quot;#函数基础&quot; class=&quot;headerlink&quot; title=&quot;函数基础&quot;&gt;&lt;/a&gt;函数基础&lt;/h2&gt;&lt;p&gt;函数是我们对原本数据进行计算统计或者用来增加字段的一种表达方式。&lt;/p&gt;
@@ -144,7 +324,7 @@
     <link href="https://ayoubu.github.io/archives/57650.html"/>
     <id>https://ayoubu.github.io/archives/57650.html</id>
     <published>2020-08-28T15:16:09.000Z</published>
-    <updated>2020-08-29T04:09:35.297Z</updated>
+    <updated>2020-09-01T14:05:54.210Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;相似格式如何一秒快速录入&quot;&gt;&lt;a href=&quot;#相似格式如何一秒快速录入&quot; class=&quot;headerlink&quot; title=&quot;相似格式如何一秒快速录入&quot;&gt;&lt;/a&gt;相似格式如何一秒快速录入&lt;/h2&gt;&lt;p&gt;在数据录入的过程中经常需要录入一些相同的部分，比如同一个省份的开头是相同的，邮箱的后半部分。此时我们可以自定义单元格格式来加速我们数据录入的过程。&lt;/p&gt;</summary>
@@ -167,7 +347,7 @@
     <link href="https://ayoubu.github.io/archives/21268.html"/>
     <id>https://ayoubu.github.io/archives/21268.html</id>
     <published>2020-08-25T11:55:36.000Z</published>
-    <updated>2020-08-28T07:15:29.698Z</updated>
+    <updated>2020-09-01T14:05:54.207Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Excel数据导入&quot;&gt;&lt;a href=&quot;#Excel数据导入&quot; class=&quot;headerlink&quot; title=&quot;Excel数据导入&quot;&gt;&lt;/a&gt;Excel数据导入&lt;/h2&gt;&lt;h3 id=&quot;从网页导入数据&quot;&gt;&lt;a href=&quot;#从网页导入数据&quot; class=&quot;headerlink&quot; title=&quot;从网页导入数据&quot;&gt;&lt;/a&gt;从网页导入数据&lt;/h3&gt;&lt;p&gt;有时候我们需要从网上获取一些数据进行分析，有时复制粘贴可能不是最好的方式，这时候我们可以先试试excel内置的从网页导入数据功能。&lt;/p&gt;
@@ -192,7 +372,7 @@
     <link href="https://ayoubu.github.io/archives/37845.html"/>
     <id>https://ayoubu.github.io/archives/37845.html</id>
     <published>2020-08-25T11:47:09.000Z</published>
-    <updated>2020-08-25T03:55:12.668Z</updated>
+    <updated>2020-09-01T14:05:54.202Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Excel的知识体系&quot;&gt;&lt;a href=&quot;#Excel的知识体系&quot; class=&quot;headerlink&quot; title=&quot;Excel的知识体系&quot;&gt;&lt;/a&gt;Excel的知识体系&lt;/h2&gt;&lt;p&gt;用excel处理数据的基本流程如下：&lt;/p&gt;
@@ -417,134 +597,6 @@
     <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
     
     <category term="函数" scheme="https://ayoubu.github.io/tags/%E5%87%BD%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python课后作业002</title>
-    <link href="https://ayoubu.github.io/archives/7409.html"/>
-    <id>https://ayoubu.github.io/archives/7409.html</id>
-    <published>2020-08-16T09:44:41.000Z</published>
-    <updated>2020-08-18T07:00:39.648Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;什么是BIF？&quot;&gt;&lt;a href=&quot;#什么是BIF？&quot; class=&quot;headerlink&quot; title=&quot;什么是BIF？&quot;&gt;&lt;/a&gt;什么是BIF？&lt;/h3&gt;&lt;p&gt;BIF 就是 Built-in</summary>
-        
-      
-    
-    
-    
-    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
-    
-    <category term="课后作业" scheme="https://ayoubu.github.io/categories/Python/%E8%AF%BE%E5%90%8E%E4%BD%9C%E4%B8%9A/"/>
-    
-    
-    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
-    
-    <category term="BIF" scheme="https://ayoubu.github.io/tags/BIF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python之字符串</title>
-    <link href="https://ayoubu.github.io/archives/49647.html"/>
-    <id>https://ayoubu.github.io/archives/49647.html</id>
-    <published>2020-08-15T16:48:26.000Z</published>
-    <updated>2020-08-16T07:29:15.616Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;字符串和元组有点类似，可以把字符串理解为一个由字符组成的元组，字符串一旦创建也是不能更改的。也就是说不能通过索引去更改某个字符。但是，python字符串类提供了很多方法，可以帮我们实现这些操作。&lt;/p&gt;
-&lt;p&gt;Python 字符串的编写方式多种多样，主要有：Single quotes、Double quotes 还有 Triple quoted 三种形式。&lt;/p&gt;
-&lt;h3 id=&quot;Single-quotes&quot;&gt;&lt;a href=&quot;#Single-quotes&quot; class=&quot;headerlink&quot; title=&quot;Single quotes&quot;&gt;&lt;/a&gt;Single quotes&lt;/h3&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;print(&lt;span class=&quot;string&quot;&gt;&amp;#x27;I love you&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;I love you&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
-    
-    <category term="python 语法学习" scheme="https://ayoubu.github.io/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
-    
-    <category term="字符串" scheme="https://ayoubu.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python 之 tuple</title>
-    <link href="https://ayoubu.github.io/archives/51299.html"/>
-    <id>https://ayoubu.github.io/archives/51299.html</id>
-    <published>2020-08-15T16:20:51.000Z</published>
-    <updated>2020-08-16T07:29:40.915Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;元组的概念&quot;&gt;&lt;a href=&quot;#元组的概念&quot; class=&quot;headerlink&quot; title=&quot;元组的概念&quot;&gt;&lt;/a&gt;元组的概念&lt;/h2&gt;&lt;p&gt;元组和列表很相似，只不过元组一旦定义了以后就不能更改了。&lt;/p&gt;
-&lt;h2 id=&quot;创建和访问元组&quot;&gt;&lt;a href=&quot;#创建和访问元组&quot; class=&quot;headerlink&quot; title=&quot;创建和访问元组&quot;&gt;&lt;/a&gt;创建和访问元组&lt;/h2&gt;&lt;p&gt;元组的创建“，”非常重要。&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#常规创建元组的方法---()&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;t = (&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;)    &lt;span class=&quot;comment&quot;&gt;#创建一个元组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;t[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;]    &lt;span class=&quot;comment&quot;&gt;#访问元组内的第一个元素&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;[&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;:]    &lt;span class=&quot;comment&quot;&gt;#访问索引为5之后的所有元素&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;t2 = t[:]     &lt;span class=&quot;comment&quot;&gt;#拷贝元组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#创建一个空元组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;t = ()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#创建只有一个元素的元组时一定要加,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;t = (&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;t = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,    &lt;span class=&quot;comment&quot;&gt;#这种语法也是合法的&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;t = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;，&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;，&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;，&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;     &lt;span class=&quot;comment&quot;&gt;#这种也可以正常创建&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
-    
-    <category term="python 语法学习" scheme="https://ayoubu.github.io/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
-    
-    <category term="tuple" scheme="https://ayoubu.github.io/tags/tuple/"/>
-    
-    <category term="元组" scheme="https://ayoubu.github.io/tags/%E5%85%83%E7%BB%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python之list</title>
-    <link href="https://ayoubu.github.io/archives/17219.html"/>
-    <id>https://ayoubu.github.io/archives/17219.html</id>
-    <published>2020-08-14T17:26:46.000Z</published>
-    <updated>2020-08-15T03:01:35.767Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;List的结构&quot;&gt;&lt;a href=&quot;#List的结构&quot; class=&quot;headerlink&quot; title=&quot;List的结构&quot;&gt;&lt;/a&gt;List的结构&lt;/h2&gt;&lt;p&gt;Python中的list是以栈这种数据结构存储的，因此包含一些栈的特性。List中可以存放任何数据以及对象。&lt;/p&gt;
-&lt;h2 id=&quot;向List中添加元素&quot;&gt;&lt;a href=&quot;#向List中添加元素&quot; class=&quot;headerlink&quot; title=&quot;向List中添加元素&quot;&gt;&lt;/a&gt;向List中添加元素&lt;/h2&gt;&lt;h3 id=&quot;append-方法&quot;&gt;&lt;a href=&quot;#append-方法&quot; class=&quot;headerlink&quot; title=&quot;append() 方法&quot;&gt;&lt;/a&gt;append() 方法&lt;/h3&gt;&lt;p&gt;向一个列表中添加一个元素。&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;l = [&lt;span class=&quot;string&quot;&gt;&amp;#x27;大宝&amp;#x27;&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;l.append(&lt;span class=&quot;string&quot;&gt;&amp;#x27;小宝&amp;#x27;&lt;/span&gt;)   &lt;span class=&quot;comment&quot;&gt;#append 只能接受一个参数&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt;l&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[&lt;span class=&quot;string&quot;&gt;&amp;#x27;大宝&amp;#x27;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&amp;#x27;小宝&amp;#x27;&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="Python" scheme="https://ayoubu.github.io/categories/Python/"/>
-    
-    <category term="python 语法学习" scheme="https://ayoubu.github.io/categories/Python/python-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-    <category term="python" scheme="https://ayoubu.github.io/tags/python/"/>
-    
-    <category term="list" scheme="https://ayoubu.github.io/tags/list/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>写作以及博文管理</title>
-    <link href="https://ayoubu.github.io/archives/6783.html"/>
-    <id>https://ayoubu.github.io/archives/6783.html</id>
-    <published>2020-08-13T14:04:10.000Z</published>
-    <updated>2020-08-14T03:03:15.484Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;我的博客网站已经搭好，在此特别感谢一下&lt;a href=&quot;https://tding.top/archives/2bd6d82.html&quot;&gt;小丁&lt;/a&gt;的分享。我下的是NexT最新的主题，再搭建的过程踩了不少坑，不过大部分问题通过参考他的解决方案都完美解决了，一些小的地方，只要理解了他的解决方式，也都可以用相似的方法解决，具体的我就不在赘述了。&lt;/p&gt;
-&lt;p&gt;在搭建好博客之后我就想开始我的博客之路了，可是关于怎么去写博客，网上虽然都介绍，但是我感觉都有点简单，对于要经常写博客的同学来说，可能有点不太友好。通过YouTube上的一位UP主&lt;a href=&quot;https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOMJR6D25ishrSedvsguVSm&quot;&gt;Mike Dan&lt;/a&gt;的分享，我整理出了一些方法，现在记录分享给大家。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="杂记" scheme="https://ayoubu.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-    <category term="hexo" scheme="https://ayoubu.github.io/tags/hexo/"/>
-    
-    <category term="博文创建及管理" scheme="https://ayoubu.github.io/tags/%E5%8D%9A%E6%96%87%E5%88%9B%E5%BB%BA%E5%8F%8A%E7%AE%A1%E7%90%86/"/>
     
   </entry>
   

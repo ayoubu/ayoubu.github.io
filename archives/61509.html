@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Tp_uCM85etMVq9MuOfdPYQ6aA4SI0lOYqjanBUw5BuQ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://ayoubu.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="聚合和管道聚合(aggregate)是基于数据处理的聚合管道，每个文档通过一个由多个阶段(stage) 组成的管道，可以对每个阶段的管道进行分组、过滤等功能，然后经过一系列的处理，输出相应的结果。 表达式：db.集合名称.aggregate(&amp;#123;管道:&amp;#123;表达式&amp;#125;&amp;#125;)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongDB 高级功能">
+<meta property="og:url" content="https://ayoubu.github.io/archives/61509.html">
+<meta property="og:site_name" content="落空的个人博客">
+<meta property="og:description" content="聚合和管道聚合(aggregate)是基于数据处理的聚合管道，每个文档通过一个由多个阶段(stage) 组成的管道，可以对每个阶段的管道进行分组、过滤等功能，然后经过一系列的处理，输出相应的结果。 表达式：db.集合名称.aggregate(&amp;#123;管道:&amp;#123;表达式&amp;#125;&amp;#125;)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.imgur.com/DL72HF6.jpeg">
+<meta property="article:published_time" content="2020-09-08T15:02:58.000Z">
+<meta property="article:modified_time" content="2020-09-09T07:48:36.902Z">
+<meta property="article:author" content="落空">
+<meta property="article:tag" content="数据存储">
+<meta property="article:tag" content="MongoDB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/DL72HF6.jpeg">
+
+
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<link rel="stylesheet" type="text/css" href="/css/injector.css" />
+  <title>MongDB 高级功能 | 落空的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落空的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落空的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我慢慢明白了为什么我不快乐，因为我总是期待一个结果。</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">38</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">25</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/61509.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MongDB 高级功能
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-08 15:02:58" itemprop="dateCreated datePublished" datetime="2020-09-08T15:02:58Z">2020-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-09 07:48:36" itemprop="dateModified" datetime="2020-09-09T07:48:36Z">2020-09-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">数据存储</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/MongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongoDB</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="聚合和管道"><a href="#聚合和管道" class="headerlink" title="聚合和管道"></a>聚合和管道</h2><p>聚合(aggregate)是基于数据处理的聚合管道，每个文档通过一个由多个阶段(stage) 组成的管道，可以对每个阶段的管道进行分组、过滤等功能，然后经过一系列的处理，输出相应的结果。</p>
+<p>表达式：<code>db.集合名称.aggregate(&#123;管道:&#123;表达式&#125;&#125;)</code> </p>
+<img src="https://i.imgur.com/DL72HF6.jpeg" alt="聚合原理图" style="zoom:80%;" />
+
+<a id="more"></a>
+
+<h3 id="常用管道"><a href="#常用管道" class="headerlink" title="常用管道"></a>常用管道</h3><p>在mongoDB中，文档处理完毕后，通过管道进行下一次处理。</p>
+<p><strong>常用管道如下：</strong></p>
+<ul>
+<li>$group: 将集合中的文档分组，可用于统计结果</li>
+<li>$match: 过滤数据，只输出符合条件的文档</li>
+<li>$project: 修改输入文档的结构，如重命名、增加、删除字段、创建计算结果</li>
+<li>$sort: 将输入文档排序后输出</li>
+<li>$skip: 跳过指定数量的文档，并返回余下的文档</li>
+<li>$unwind: 将数组类型的字段进行拆分</li>
+</ul>
+<h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><p>mongoDB中有一些表达式，用于处理输入文档并输出。</p>
+<p>语法：表达式: ‘$列名’</p>
+<p><strong>常用表达式：</strong></p>
+<ul>
+<li>$sum: 计算总和， $sum:1 表示以一倍计数</li>
+<li>$avg: 计算平均值</li>
+<li>$min: 获取最小值</li>
+<li>$max: 获取最大值</li>
+<li>$push: 在结果文档中插入值到一个数组中</li>
+<li>$first: 根据资源文档的排序获取第一个文档数据</li>
+<li>$last: 根据资源文档的排序获取最后一个文档的数据</li>
+</ul>
+<h3 id="group"><a href="#group" class="headerlink" title="$group"></a>$group</h3><ul>
+<li>将集合中的文档分组，可用于统计结果</li>
+<li>_id表示分组依据，使用某个字段的格式为’$字段’</li>
+</ul>
+<p>例如：统计男生、女生的总人数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 按照年龄进行分组，获取不同组数据的个数和平均年龄</span><br><span class="line">db.stu.aggregate(</span><br><span class="line">    &#123;$group:&#123;</span><br><span class="line">            _id:&#39;$gender&#39;,      &#x2F;&#x2F;设置分组依据</span><br><span class="line">            counter:&#123;$sum:1&#125;    &#x2F;&#x2F;计算总和，并将值赋值给counter变量</span><br><span class="line">        &#125;&#125;)</span><br><span class="line"># 根据地点分组，然后求平均年龄</span><br><span class="line">db.stu.aggregate(&#123;$group:&#123;_id:&quot;$hometown&quot;, mean_age:&#123;$avg:&quot;$age&quot;&#125;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Group by null :</strong></p>
+<p>就是将所有文档分为一组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 求平均年龄和总人数</span><br><span class="line">db.stu.aggregate(&#123;$group:&#123;_id:null, count:&#123;$sum:1&#125;, avg_age:&#123;$avg:&quot;$age&quot;&#125;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="project"><a href="#project" class="headerlink" title="$project"></a>$project</h3><ul>
+<li>修改输入文档的结构，如重命名、增加、删除字段、创建计算结果</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 查询学生的姓名、年龄。注：字段：1表示显示，其它默认不显示，反之亦然。</span><br><span class="line">db.stu.aggregate(&#123;$project:&#123;_id:0, name:1, age:1&#125;&#125;)</span><br><span class="line"># 查询男生、女生人数，输出人数</span><br><span class="line">db.stu.aggregate(</span><br><span class="line">&#123;$group:&#123;_id:&quot;$gender&quot;, count:&#123;$sum:1&#125;&#125;&#125;,   &#x2F;&#x2F;管道1</span><br><span class="line">&#123;$project:&#123;_id:0,count:1&#125;&#125;                    &#x2F;&#x2F;管道2</span><br><span class="line">)</span><br><span class="line"># 查询男生、女生人数，修改显示名称，并输出人数</span><br><span class="line">db.stu.aggregate(</span><br><span class="line">&#123;$group:&#123;_id:&quot;$gender&quot;, count:&#123;$sum:1&#125;&#125;&#125;,</span><br><span class="line">&#123;$project:&#123;gender:&quot;$_id&quot;,_id:0,count:1&#125;&#125;  &#x2F;&#x2F;此时_id会显示为gender</span><br><span class="line">)   &#x2F;&#x2F;</span><br></pre></td></tr></table></figure>
+
+<h3 id="match"><a href="#match" class="headerlink" title="$match"></a>$match</h3><ul>
+<li>用于过滤数据，只输出符合条件的文档。它与find的区别是，它是管道命令，能将结果交给后一个管道，但是find不行。</li>
+<li>可以使用mongoDB的标准查询操作</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 查询年龄大于20的学生</span><br><span class="line">db.stu.aggregate(&#123;$match:&#123;age:&#123;$gt:20&#125;&#125;&#125;)</span><br><span class="line"># 查询年龄大于20的男生、女生人数</span><br><span class="line">db.stu.aggregate(&#123;$match:&#123;age:&#123;$gt:20&#125;&#125;&#125;,&#123;$group:&#123;_id:&quot;$gender&quot;,count:&#123;$sum:1&#125;&#125;&#125;)</span><br><span class="line"># 增加管道，美化显示</span><br><span class="line">db.stu.aggregate(</span><br><span class="line">    &#123;$match:&#123;age:&#123;$gt:20&#125;&#125;&#125;,                    &#x2F;&#x2F;过滤</span><br><span class="line">    &#123;$group:&#123;_id:&quot;$gender&quot;,count:&#123;$sum:1&#125;&#125;&#125;,    &#x2F;&#x2F;分组及统计</span><br><span class="line">    &#123;$project:&#123;_id:0,gender:&quot;$_id&quot;,count:1&#125;&#125;)    &#x2F;&#x2F;美化显示</span><br></pre></td></tr></table></figure>
+
+<h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><blockquote>
+<p>{ “country” : “china”, “province” : “sh”, “userid” : “a” } </p>
+<p>{ “country” : “china”, “province” : “sh”, “userid” : “b” } </p>
+<p>{ “country” : “china”, “province” : “sh”, “userid” : “a” } </p>
+<p>{ “country” : “china”, “province” : “sh”, “userid” : “c” } </p>
+<p>{ “country” : “china”, “province” : “bj”, “userid” : “da” } </p>
+<p>{ “country” : “china”, “province” : “bj”, “userid” : “fa” } </p>
+<p>需求：统计出每个country/province下的userid的数量（同一个userid只统计一次）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.tv3.aggregate(</span><br><span class="line">    &#123;$group:&#123;_id:&#123;country:&quot;$country&quot;,province:&quot;$province&quot;,userid:&quot;$userid&quot;&#125;&#125;&#125;,  &#x2F;&#x2F;分组去重</span><br><span class="line">    &#123;$group:&#123;_id:&#123;country:&quot;$_id.country&quot;,province:&quot;$_id.province&quot;&#125;, count:&#123;$sum:1&#125;&#125;&#125;,    &#x2F;&#x2F;分组</span><br><span class="line">    &#123;$project:&#123;country:&quot;$_id.country&quot;, province:&quot;_id.province&quot;,count:1,_id:0&#125;&#125;     &#x2F;&#x2F;美化输出</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="$注意"></a>$注意</h3><ul>
+<li><code>$group</code> 对应的字典中有几个键，结果中就有几个键。</li>
+<li>分组依据需要放到<code>_id</code>后面，可以使用多个分组依据。</li>
+<li>取不同字段的值需要使用$，<code>$gender</code>，<code>$age</code>。</li>
+<li>取字典嵌套的字典中的值的时候<code>$_id.country</code></li>
+<li>能够同时按照多个键进行分组<code>&#123;$group:&#123;_id:&#123;country:&quot;$country&quot;,province:&quot;$province&quot;&#125;&#125;&#125;</code>，结果显示为：<code>&#123;_id:&#123;country:&quot;&quot;, province:&quot;&quot;&#125;&#125;</code>。</li>
+</ul>
+<h3 id="sort"><a href="#sort" class="headerlink" title="$sort"></a>$sort</h3><ul>
+<li>将输入文档排序后输出</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 查询学生信息，按年龄升序</span><br><span class="line">db.stu.aggregate(&#123;$sort:&#123;age:1&#125;&#125;)</span><br><span class="line"># 查询男生、女生人数，按人数降序</span><br><span class="line">db.stu.aggregate(</span><br><span class="line">    &#123;$group:&#123;_id:&quot;$gender&quot;, count:&#123;$sum:1&#125;&#125;&#125;,</span><br><span class="line">    &#123;$sort:&#123;count:-1&#125;&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="limit-和-skip"><a href="#limit-和-skip" class="headerlink" title="$limit 和 $skip"></a>$limit 和 $skip</h3><p><strong>$limit:</strong> 限制聚合管道返回的文档数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#查询2条学生信息</span><br><span class="line">db.stu.aggregate(&#123;$limit:2&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>$skip:</strong> 跳过指定数量的文档，并返回余下的文档</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 查询从第3条开始的学生信息</span><br><span class="line">db.stu.aggregate(&#123;$skip:2&#125;)</span><br><span class="line"># 统计男生、女生人数，按人数升序，取第二条数据</span><br><span class="line">db.stu.aggregate(</span><br><span class="line">    &#123;$group:&#123;_id:&quot;$gender&quot;, count:&#123;$sum:1&#125;&#125;&#125;,</span><br><span class="line">    &#123;$sort:&#123;count:1&#125;&#125;,</span><br><span class="line">    &#123;$skip:1&#125;,</span><br><span class="line">    &#123;$limit:1&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="unwind"><a href="#unwind" class="headerlink" title="$unwind"></a>$unwind</h3><p>将文档中的某一个数组类型字段拆分成多条，每条包含数组中的一个值。</p>
+<p>语法：<code>db.集合名称.aggregate(&#123;$unwind:&quot;$字段名称&quot;&#125;)</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.t2.insert(&#123;_id:1, item:&#39;t-shirt&#39;, size:[&#39;S&#39;,&#39;M&#39;,&#39;L&#39;]&#125;)</span><br><span class="line">db.t2.aggregate($unwind:&#39;$size&#39;)</span><br><span class="line">#输出</span><br><span class="line">&#123; &quot;_id&quot; : 1, &quot;item&quot; : &quot;t-shirt&quot;, &quot;size&quot; : &quot;S&quot; &#125;</span><br><span class="line">&#123; &quot;_id&quot; : 1, &quot;item&quot; : &quot;t-shirt&quot;, &quot;size&quot; : &quot;M&quot; &#125;</span><br><span class="line">&#123; &quot;_id&quot; : 1, &quot;item&quot; : &quot;t-shirt&quot;, &quot;size&quot; : &quot;L&quot; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>数据库中有一条数据：{“username”:”Alex”,”tags”: [‘C#’,’Java’,’C++’]}，如何获取该tag列表的长度？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 插入数据</span><br><span class="line">db.t2.insert(&#123;username:&quot;Alex&quot;,tags:[&#39;C#&#39;,&#39;Java&#39;,&#39;C++&#39;]&#125;)</span><br><span class="line">#进行统计</span><br><span class="line">db.t2.aggregate(</span><br><span class="line">    &#123;$match:&#123;username:&quot;Alex&quot;&#125;&#125;,            &#x2F;&#x2F;匹配数据</span><br><span class="line">    &#123;$unwind:&quot;$tags&quot;&#125;,                    &#x2F;&#x2F;拆解列表</span><br><span class="line">    &#123;$group:&#123;_id:null,count:&#123;$sum:1&#125;&#125;&#125;) &#x2F;&#x2F;统计个数</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong> </p>
+<p>属性值为false表示丢弃属性值为空的文档。比如原本要拆分的数据没有这个属性时，会当成异常值自动跳过，但是加了这个属性后，这条数据还是会保留出来。</p>
+<p>属性 preserveNullAndEmptyArrays值为true表示保留属性值为空的文档。</p>
+<p>用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.inventor.aggregate(&#123;</span><br><span class="line">    $unwind:&#123;</span><br><span class="line">        path:&#39;$字段名称&#39;,</span><br><span class="line">        preserveNullAndEmptyArrays:&lt;boolean&gt;  #防止数据丢失</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h2><p>创建索引的目的就是为了提高数据查询时的速度。</p>
+<p>语法：<code>db.数据集合.ensureIndex(&#123;字段名:1&#125;)</code></p>
+<p>示例：</p>
+<p>首先使用JS语句插入10万条数据到数据库中：<code>for(i=0;i&lt;100000;i++)&#123;db.t255.insert(&#123;name:&#39;test&#39;+i, age:i&#125;)&#125;</code></p>
+<p>查找数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.t255.find(name:&#39;test10000&#39;)     #查找数据</span><br><span class="line">db.t255.find(name:&#39;test10000&#39;).explain(&#39;executionStats&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>在未添加索引之前，我们执行查询操作的耗时为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&quot;executionStats&quot; : &#123;</span><br><span class="line">                &quot;executionSuccess&quot; : true,</span><br><span class="line">                &quot;nReturned&quot; : 1,</span><br><span class="line">                &quot;executionTimeMillis&quot; : 59,   #查询耗时</span><br><span class="line">                &quot;totalKeysExamined&quot; : 0,</span><br><span class="line">                &quot;totalDocsExamined&quot; : 100000,</span><br><span class="line">                &#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们使用name建立索引：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.t255.ensureIndex(&#123;name:1&#125;)</span><br><span class="line">&#123;</span><br><span class="line">        &quot;createdCollectionAutomatically&quot; : false,</span><br><span class="line">        &quot;numIndexesBefore&quot; : 1, #建立索引之前</span><br><span class="line">        &quot;numIndexesAfter&quot; : 2,  #建立索引之后</span><br><span class="line">        &quot;ok&quot; : 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后再次查询：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&quot;executionStats&quot; : &#123;</span><br><span class="line">                &quot;executionSuccess&quot; : true,</span><br><span class="line">                &quot;nReturned&quot; : 1,</span><br><span class="line">                &quot;executionTimeMillis&quot; : 2,  #查询耗时</span><br><span class="line">                &quot;totalKeysExamined&quot; : 1,</span><br><span class="line">                &quot;totalDocsExamined&quot; : 1,</span><br><span class="line">                &#125;</span><br></pre></td></tr></table></figure>
+
+<p>原来为59ms，建立索引之后为2ms，提升巨大。</p>
+<p><strong>注意点：</strong></p>
+<ul>
+<li>在默认情况下索引字段的值可以相同</li>
+<li>创建唯一索引（索引的值时唯一的）：<code>db.t255.ensureIndex(&#123;&quot;name&quot;:1&#125;,&#123;&quot;unique&quot;:true&#125;)</code></li>
+<li>建立联合索引（什么时候需要联合索引：需要多个字段判断数据唯一性的时候可以使用）：<code>db.t255.ensureIndex(&#123;name:1,age:1&#125;)</code></li>
+<li>查看当前集合的所有索引：<code>db.t255.getIndexes()</code></li>
+<li>删除索引：<code>db.t255.dropIndex(&#123;索引名称:1&#125;)</code> 和增加对应</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\53312.html" rel="bookmark">MongDB练习</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\18082.html" rel="bookmark">Python MongoDB</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\52778.html" rel="bookmark">MongoDB简介</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="落空 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="落空 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" rel="tag"># 数据存储</a>
+              <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/18082.html" rel="prev" title="Python MongoDB">
+      <i class="fa fa-chevron-left"></i> Python MongoDB
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/53312.html" rel="next" title="MongDB练习">
+      MongDB练习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%92%8C%E7%AE%A1%E9%81%93"><span class="nav-number">1.</span> <span class="nav-text">聚合和管道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%AE%A1%E9%81%93"><span class="nav-number">1.1.</span> <span class="nav-text">常用管道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#group"><span class="nav-number">1.3.</span> <span class="nav-text">$group</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#project"><span class="nav-number">1.4.</span> <span class="nav-text">$project</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#match"><span class="nav-number">1.5.</span> <span class="nav-text">$match</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">1.6.</span> <span class="nav-text">练习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">1.7.</span> <span class="nav-text">$注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">1.8.</span> <span class="nav-text">$sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#limit-%E5%92%8C-skip"><span class="nav-number">1.9.</span> <span class="nav-text">$limit 和 $skip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unwind"><span class="nav-number">1.10.</span> <span class="nav-text">$unwind</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95"><span class="nav-number">2.</span> <span class="nav-text">创建索引</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="落空"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">落空</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ayoubu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ayoubu@outlook.com" title="E-Mail → mailto:ayoubu@outlook.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5095666460" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5095666460" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/ayoubu" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-zhihu"></i>知乎</a>
+      </span>
+  </div>
+
+
+<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">落空</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">87k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:19</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  <script async src="/js/cursor/love.min.js"></script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>

@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Tp_uCM85etMVq9MuOfdPYQ6aA4SI0lOYqjanBUw5BuQ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://ayoubu.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="PyMongo在Python中需要一个MongoDB的驱动程序来访问MongoDB的数据库，本文将主要介绍Python中的MongoDB驱动程序“PyMongo”。 安装： pip install pymongo  测试： import pymongo 如果运行后没有报错，则说明pymongo包安装成功。 PyMongo基本操作创建连接需要在本地安装MongoDB社区版的服务，具体查看我的上一篇文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python MongoDB">
+<meta property="og:url" content="https://ayoubu.github.io/archives/18082.html">
+<meta property="og:site_name" content="落空的个人博客">
+<meta property="og:description" content="PyMongo在Python中需要一个MongoDB的驱动程序来访问MongoDB的数据库，本文将主要介绍Python中的MongoDB驱动程序“PyMongo”。 安装： pip install pymongo  测试： import pymongo 如果运行后没有报错，则说明pymongo包安装成功。 PyMongo基本操作创建连接需要在本地安装MongoDB社区版的服务，具体查看我的上一篇文">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-06T11:38:34.000Z">
+<meta property="article:modified_time" content="2020-09-09T08:17:22.509Z">
+<meta property="article:author" content="落空">
+<meta property="article:tag" content="数据存储">
+<meta property="article:tag" content="MongoDB">
+<meta property="article:tag" content="PyMongo">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<link rel="stylesheet" type="text/css" href="/css/injector.css" />
+  <title>Python MongoDB | 落空的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落空的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落空的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我慢慢明白了为什么我不快乐，因为我总是期待一个结果。</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">38</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">25</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/18082.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python MongoDB
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-06 11:38:34" itemprop="dateCreated datePublished" datetime="2020-09-06T11:38:34Z">2020-09-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-09 08:17:22" itemprop="dateModified" datetime="2020-09-09T08:17:22Z">2020-09-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">数据存储</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/MongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongoDB</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>11 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="PyMongo"><a href="#PyMongo" class="headerlink" title="PyMongo"></a>PyMongo</h2><p>在Python中需要一个MongoDB的驱动程序来访问MongoDB的数据库，本文将主要介绍Python中的MongoDB驱动程序“PyMongo”。</p>
+<p><strong>安装：</strong> <code>pip install pymongo</code> </p>
+<p><strong>测试：</strong> <code>import pymongo</code></p>
+<p>如果运行后没有报错，则说明pymongo包安装成功。</p>
+<h2 id="PyMongo基本操作"><a href="#PyMongo基本操作" class="headerlink" title="PyMongo基本操作"></a>PyMongo基本操作</h2><h3 id="创建连接"><a href="#创建连接" class="headerlink" title="创建连接"></a>创建连接</h3><p><strong>需要在本地安装MongoDB社区版的服务，具体查看我的上一篇文档。</strong> </p>
+<p>在使用MongoDB创建数据库之前，需要先新建一个MongoClient(Mongo的客户端) 对象，这个对象需要使用一个具体的MongoDB的访问连接，如果是在本地开启的服务，这个连接默认为：<code>&quot;mongodb://localhost:27017/&quot;</code>。</p>
+<a id="more"></a>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"><span class="comment"># MongoDB URI 格式</span></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line"><span class="comment"># 也可以分别指定主机和端口号</span></span><br><span class="line"><span class="comment"># myclient = pymongo.MongoClient(&quot;localhost&quot;, &quot;27017&quot;)</span></span><br><span class="line"></span><br><span class="line">mydb = myclient[<span class="string">&quot;test_database&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取数据库（database）"><a href="#获取数据库（database）" class="headerlink" title="获取数据库（database）"></a>获取数据库（database）</h3><p>一个单独的MongoDB实例可以支持多个相互独立的数据库，我们有两种方式可以访问我们的数据库，如果访问的数据库名称不存在，MongoDB会自动创建一个新的数据库，并且建立连接。</p>
+<ol>
+<li>使用属性的样式访问数据库</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mydb = myclient.test_database     <span class="comment">#属性方式</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>当我们的数据库名称中包含<code>&quot;-&quot;</code>连接符时，无法通过属性的方式进行访问，此时我们可以使用下列字典的方式进行访问。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mydb = myclient[<span class="string">&quot;test-database&quot;</span>]    <span class="comment">#字典方式</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="获取集合（collection）"><a href="#获取集合（collection）" class="headerlink" title="获取集合（collection）"></a>获取集合（collection）</h3><p>一个集合表示一组存储在MongoDB中的文件数据，可以把它大致想象成关系型数据库中的一个表。获取集合的操作和获取数据库的操作类似。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">collection = mydb.test_collection            <span class="comment">#属性访问的方式</span></span><br><span class="line">collection = mydb[<span class="string">&#x27;test-collection&#x27;</span>]        <span class="comment">#字典访问的方式</span></span><br></pre></td></tr></table></figure>
+
+<p>注：关于MongoDB中的集合（和数据库）的重要说明是，它们是延迟创建的-上面的命令实际上都没有在MongoDB服务器上执行任何操作。集合和数据库只有在写入数据时才会在服务器上创建。</p>
+<h3 id="检查一个数据库是否存在"><a href="#检查一个数据库是否存在" class="headerlink" title="检查一个数据库是否存在"></a>检查一个数据库是否存在</h3><p>第一种方式是，将系统中的所有数据库名称都打印出来进行查看。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(myclient.list_database_names())</span><br></pre></td></tr></table></figure>
+
+<p>第二种方式是查看一个具体的数据库名称。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dblist = myclient.list_database_names()</span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;mydatabase&quot;</span> <span class="keyword">in</span> dblist:</span><br><span class="line">    print(<span class="string">&quot;The database exists.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="检查一个数据集合是否存在"><a href="#检查一个数据集合是否存在" class="headerlink" title="检查一个数据集合是否存在"></a>检查一个数据集合是否存在</h3><p>在MongoDB中检查一个数据集合是否存在和，检查数据库是否存在是类似的。可以打印出所有的数据集合名称，或者直接检查某个具体的名称。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">collist = mydb.list_collection_names()</span><br><span class="line">print(collist)        <span class="comment">#打印所有名称</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;customers&quot;</span> <span class="keyword">in</span> collist:</span><br><span class="line">    print(<span class="string">&quot;The collection exists.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="PyMongo高级操作"><a href="#PyMongo高级操作" class="headerlink" title="PyMongo高级操作"></a>PyMongo高级操作</h2><h3 id="插入数据到数据集合（Insert）"><a href="#插入数据到数据集合（Insert）" class="headerlink" title="插入数据到数据集合（Insert）"></a>插入数据到数据集合（Insert）</h3><p>我们可以使用<code>insert_one()</code>方法，将我们要记录的数据或者在MongoDB中调用的文档插入到数据集合中。</p>
+<p>比如我们向”customers”这个数据集合中插入数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">mydict = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;John&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Hightway 37&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">x = mycol.insert_one(mydict)</span><br></pre></td></tr></table></figure>
+
+<p>这样我们就向<code>mydatabase--&gt;customers</code>数据集合中添加了一条数据，<code>insert_one()</code>方法返回的是一个<code>InsertOneResult</code>对象，这个对象有一个属性：<code>inserted_id</code>，这个属性保存的是所插入的文件的的Id。</p>
+<p>这个objectID是一个12字节的十六进制数：</p>
+<ul>
+<li>前四个字节为当前时间戳</li>
+<li>接下来3个字节是机器ID</li>
+<li>接下来的2个字节是MongoDB的服务进程id</li>
+<li>最后3个字节是简单的增量值</li>
+</ul>
+<p>我们可以打印出这个id：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(x.inserted_id)</span><br><span class="line"><span class="comment"># 5f5498b232dca447e3a52f2b #类似这样</span></span><br></pre></td></tr></table></figure>
+
+<p>这个id我们也可以自己定义，如果未定义，MongoDB会自动帮我们为每一个文件生成一个独有的id，以上的示例我们都未定义，因此id都是MongoDB为我们自动生成的。</p>
+<h3 id="插入多条数据到数据集合中"><a href="#插入多条数据到数据集合中" class="headerlink" title="插入多条数据到数据集合中"></a>插入多条数据到数据集合中</h3><p>插入多条数据到数据集合中时，需要使用<code>insert_many()</code>方法。<code>insert_many()</code>方法的第一个参数是一个包含你想添加的内容的列表，内容是字典格式的。</p>
+<p><strong>示例：</strong> 插入多条数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">mylist = [</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Amy&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Apple st 652&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Hannah&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Mountain 21&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Michael&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Valley 345&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Sandy&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Ocean blvd 2&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Betty&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Green Grass 1&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Richard&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Sky st 331&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Susan&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;One way 98&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Vicky&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Yellow Garden 2&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Ben&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Park Lane 38&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;William&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Central st 954&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Chuck&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Main Road 989&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Viola&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Sideway 1633&quot;</span>&#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">x = mycol.insert_many(mylist)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印这些插入数据的id</span></span><br><span class="line">print(x.inserted_ids)</span><br><span class="line"><span class="comment"># 打印结果</span></span><br><span class="line">[ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f38&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f39&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f3a&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f3b&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f3c&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f3d&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f3e&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f3f&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f40&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f41&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f42&#x27;</span>), ObjectId(<span class="string">&#x27;5f549f6932dca447e3a52f43&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+
+<p><code>insert_many()</code>方法返回的是一个<code>InsertManyResult</code>对象，它包含一个<code>inserted_ids</code>的属性，记录了所有id。根据上面的打印结果，我们可以发现，列表中的每条数据都生成了一个id，并且又以一个列表的方式返回来了。</p>
+<p><strong>save()方法：</strong></p>
+<p>在使用id进行数据插入的时候，save()方法也可以插入数据，但是不同点在于如果数据存在，save会更新数据，而insert()方法会报错。</p>
+<h3 id="插入多条数据并且指定id"><a href="#插入多条数据并且指定id" class="headerlink" title="插入多条数据并且指定id"></a>插入多条数据并且指定id</h3><p>如果我们不想MongoDB为我们自动分配id，我们也可以自己指定具体的<code>_id</code>，id必须是唯一的。</p>
+<p><strong>示例：</strong> </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">mylist = [</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">1</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;John&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Highway 37&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">2</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Peter&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Lowstreet 27&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">3</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Amy&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Apple st 652&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">4</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Hannah&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Mountain 21&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">5</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Michael&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Valley 345&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">6</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Sandy&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Ocean blvd 2&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">7</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Betty&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Green Grass 1&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">8</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Richard&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Sky st 331&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">9</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Susan&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;One way 98&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">10</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Vicky&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Yellow Garden 2&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">11</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Ben&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Park Lane 38&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">12</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;William&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Central st 954&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">13</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Chuck&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Main Road 989&quot;</span>&#125;,</span><br><span class="line">  &#123; <span class="string">&quot;_id&quot;</span>: <span class="number">14</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Viola&quot;</span>, <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Sideway 1633&quot;</span>&#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">x = mycol.insert_many(mylist)</span><br><span class="line"></span><br><span class="line"><span class="comment">#print list of the _id values of the inserted documents:</span></span><br><span class="line">print(x.inserted_ids)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印结果，和我们指定的相同</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="查找数据"><a href="#查找数据" class="headerlink" title="查找数据"></a>查找数据</h3><p>在MongoDB中使用<code>find()</code>和<code>findOne()</code>方法来查找数据。</p>
+<p><strong><code>findOne()</code></strong></p>
+<p>想要从数据集合中查找一条数据，我们可以使用<code>findOne()</code>方法，<code>findOne()</code>方法会返回第一条出现的数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">x = mycol.find_one()</span><br><span class="line"></span><br><span class="line">print(x)</span><br><span class="line"><span class="comment"># 打印结果为我们最开始插入的第一条数据</span></span><br><span class="line">&#123;<span class="string">&#x27;_id&#x27;</span>: ObjectId(<span class="string">&#x27;5f5498b232dca447e3a52f2b&#x27;</span>), <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;John&#x27;</span>, <span class="string">&#x27;address&#x27;</span>: <span class="string">&#x27;Hightway 37&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>find()</code></strong></p>
+<p>如果我们想查找一个数据集合中所有的数据，我们也可以使用<code>find()</code>方法，<code>find()</code>方法会返回所有记录的数据。<code>find()</code>方法中的第一个参数是要查找的对象，如果为空，即返回整个表中的数据。有点像MySQL中的<code>SELECT *</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mycol.find():</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure>
+
+<p>此时会打印出“customers”这个表中的所有信息包括对应的id。</p>
+<p><strong>取出指定结果：</strong></p>
+<p><code>find()</code>方法中的第二个参数是一个对象，该对象包含你要查询的字段的筛选条件（即取出哪些信息，不取出哪些信息，使用0，1来表示是否取出）。此参数是可选的，如果省略，则所有字段都将包含在结果中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不打印_id</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mycol.find(&#123;&#125;,&#123; <span class="string">&quot;_id&quot;</span>: <span class="number">0</span>, <span class="string">&quot;name&quot;</span>: <span class="number">1</span>, <span class="string">&quot;address&quot;</span>: <span class="number">1</span> &#125;):</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+<p>不允许在同一对象中同时指定0和1值（除非字段之一是_id字段），就是说你只需要指定哪些字段出现或者哪些字段不出现。如果您指定值为0的字段，则所有其他字段的值为1，反之亦然。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 除了address外其余的都打印</span></span><br><span class="line"><span class="comment"># 如果使用 ：mycol.find(&#123;&#125;,&#123; &quot;name&quot;: 1, &quot;address&quot;: 0 &#125;) 就会报错</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mycol.find(&#123;&#125;,&#123; <span class="string">&quot;address&quot;</span>: <span class="number">0</span> &#125;):</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h3><p>当我们想查询数据集中的某个条数据的时候，我们可以使用一个查询对象来对我们查找的结果进行过滤。<code>find()</code>方法中的第一个参数是查询对象，用于限制搜索。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myquery = &#123; <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Park Lane 38&quot;</span> &#125;</span><br><span class="line"></span><br><span class="line">mydoc = mycol.find(myquery)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mydoc:</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+<p><strong>高级查询：</strong></p>
+<p>我们可以通过编辑查询条件来实现高级的查询功能，例如：如果我们想找到文档中首字母开头为S之后的，我们可以使用<code>&#123;&quot;$gt&quot;:&quot;S&quot;&#125;</code>来作为查询条件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myquery = &#123; <span class="string">&quot;address&quot;</span>: &#123; <span class="string">&quot;$gt&quot;</span>: <span class="string">&quot;S&quot;</span> &#125; &#125;</span><br><span class="line"></span><br><span class="line">mydoc = mycol.find(myquery)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mydoc:</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+<p>当然，我们也可以使用正则表达式来表达我们的查询条件。比如如果我们只是想查询首字母为’S’的地址，我们可以这样表达<code>&#123;&quot;$regex&quot;: &quot;^S&quot;&#125;</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myquery = &#123; <span class="string">&quot;address&quot;</span>: &#123; <span class="string">&quot;$regex&quot;</span>: <span class="string">&quot;^S&quot;</span> &#125; &#125;</span><br><span class="line"></span><br><span class="line">mydoc = mycol.find(myquery)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mydoc:</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>我们可以使用<code>sort()</code>方法对数据进行排序，升序或者降序。<code>sort()</code>方法可以接受两个参数，第一个是以什么字段来排序，第二个是升序还是降序（默认是升序）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将结果按照名字的字母顺序进行排序。</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">mydoc = mycol.find().sort(<span class="string">&quot;name&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mydoc:</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sort(<span class="string">&quot;name&quot;</span>, <span class="number">1</span>) <span class="comment">#升序</span></span><br><span class="line">sort(<span class="string">&quot;name&quot;</span>, <span class="number">-1</span>) <span class="comment">#降序</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除记录"><a href="#删除记录" class="headerlink" title="删除记录"></a>删除记录</h3><p>如果我们想删除一条记录，我们可以使用<code>delete_one()</code>方法。<code>delete_one()</code>方法的第一个参数是定义你要删除的对象。如果找到了多条记录，也只有第一条记录会被删除。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除地址为“Mountain 21”的信息</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myquery = &#123; <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Mountain 21&quot;</span> &#125;</span><br><span class="line"></span><br><span class="line">mycol.delete_one(myquery)</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除多条记录"><a href="#删除多条记录" class="headerlink" title="删除多条记录"></a>删除多条记录</h3><p>要删除多条记录，我们需要使用<code>delete_many()</code>方法，<code>delete_many()</code>方法的第一个参数也是定义你要删除的对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除所有地址中包含S的数据。</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myquery = &#123; <span class="string">&quot;address&quot;</span>: &#123;<span class="string">&quot;$regex&quot;</span>: <span class="string">&quot;^S&quot;</span>&#125; &#125;</span><br><span class="line"></span><br><span class="line">x = mycol.delete_many(myquery)</span><br><span class="line"></span><br><span class="line">print(x.deleted_count, <span class="string">&quot; documents deleted.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果想删除表中的所有数据，直接调用<code>delete_many()</code>方法就好。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 删除所有数据</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">x = mycol.delete_many(&#123;&#125;)</span><br><span class="line"></span><br><span class="line">print(x.deleted_count, <span class="string">&quot; documents deleted.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="直接删除表"><a href="#直接删除表" class="headerlink" title="直接删除表"></a>直接删除表</h3><p>我们也可以直接删除一个表，或者数据集合。我们只需要调用<code>drop()</code>方法就好。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> mycol.drop():</span><br><span class="line">    print(<span class="string">&quot;删除成功！&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>drop()</code>方法如果返回的是True，则表示删除成功。</p>
+<h3 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h3><p>我们可以使用<code>update_one()</code>方法来更新数据，<code>update_one()</code>方法的第一个参数是指定你要更新的数据，如果找到了多条数据，那么只有第一条的数据会被更新。<code>update_one()</code>方法的第二个参数是指定要更新数据是什么。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 比如我们将地址从“Valley 345” 更新为 “Canyon 123”</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myquery = &#123; <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Valley 345&quot;</span> &#125;</span><br><span class="line">newvalues = &#123; <span class="string">&quot;$set&quot;</span>: &#123; <span class="string">&quot;address&quot;</span>: <span class="string">&quot;Canyon 123&quot;</span> &#125; &#125;</span><br><span class="line"></span><br><span class="line">mycol.update_one(myquery, newvalues)</span><br><span class="line"></span><br><span class="line"><span class="comment">#print &quot;customers&quot; after the update:</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mycol.find():</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+<h3 id="同时更新多条数据"><a href="#同时更新多条数据" class="headerlink" title="同时更新多条数据"></a>同时更新多条数据</h3><p>如果想要将我们查询到的数据全部都更新为新的数据，可以使用<code>update_many()</code>方法，参数还是两个，一个是查询的条件，一个是替换值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将所有address开始为&#x27;S&#x27;的名字换掉</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myquery = &#123; <span class="string">&quot;address&quot;</span>: &#123; <span class="string">&quot;$regex&quot;</span>: <span class="string">&quot;^S&quot;</span> &#125; &#125;</span><br><span class="line">newvalues = &#123; <span class="string">&quot;$set&quot;</span>: &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Minnie&quot;</span> &#125; &#125;</span><br><span class="line"></span><br><span class="line">x = mycol.update_many(myquery, newvalues)</span><br><span class="line"></span><br><span class="line">print(x.modified_count, <span class="string">&quot;documents updated.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="限制返回结果"><a href="#限制返回结果" class="headerlink" title="限制返回结果"></a>限制返回结果</h3><p>我们可以使用<code>limit()</code>方法来限制搜索后返回的结果，<code>limit()</code>方法只接受一个参数，返回结果的具体数值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 限制返回5条数据</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">&quot;mongodb://localhost:27017/&quot;</span>)</span><br><span class="line">mydb = myclient[<span class="string">&quot;mydatabase&quot;</span>]</span><br><span class="line">mycol = mydb[<span class="string">&quot;customers&quot;</span>]</span><br><span class="line"></span><br><span class="line">myresult = mycol.find().limit(<span class="number">5</span>)   <span class="comment">#直接在查询后面调用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#print the result:</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> myresult:</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\52778.html" rel="bookmark">MongoDB简介</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\53312.html" rel="bookmark">MongDB练习</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\61509.html" rel="bookmark">MongDB 高级功能</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="落空 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="落空 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" rel="tag"># 数据存储</a>
+              <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
+              <a href="/tags/PyMongo/" rel="tag"># PyMongo</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/49506.html" rel="prev" title="什么是json">
+      <i class="fa fa-chevron-left"></i> 什么是json
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/61509.html" rel="next" title="MongDB 高级功能">
+      MongDB 高级功能 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PyMongo"><span class="nav-number">1.</span> <span class="nav-text">PyMongo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PyMongo%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">PyMongo基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.1.</span> <span class="nav-text">创建连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88database%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">获取数据库（database）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%9B%86%E5%90%88%EF%BC%88collection%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">获取集合（collection）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">2.4.</span> <span class="nav-text">检查一个数据库是否存在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">2.5.</span> <span class="nav-text">检查一个数据集合是否存在</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PyMongo%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">PyMongo高级操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E5%88%B0%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88%EF%BC%88Insert%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">插入数据到数据集合（Insert）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E5%A4%9A%E6%9D%A1%E6%95%B0%E6%8D%AE%E5%88%B0%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88%E4%B8%AD"><span class="nav-number">3.2.</span> <span class="nav-text">插入多条数据到数据集合中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E5%A4%9A%E6%9D%A1%E6%95%B0%E6%8D%AE%E5%B9%B6%E4%B8%94%E6%8C%87%E5%AE%9Aid"><span class="nav-number">3.3.</span> <span class="nav-text">插入多条数据并且指定id</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E6%95%B0%E6%8D%AE"><span class="nav-number">3.4.</span> <span class="nav-text">查找数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">3.5.</span> <span class="nav-text">查询数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">3.6.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%AE%B0%E5%BD%95"><span class="nav-number">3.7.</span> <span class="nav-text">删除记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%A4%9A%E6%9D%A1%E8%AE%B0%E5%BD%95"><span class="nav-number">3.8.</span> <span class="nav-text">删除多条记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%88%A0%E9%99%A4%E8%A1%A8"><span class="nav-number">3.9.</span> <span class="nav-text">直接删除表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="nav-number">3.10.</span> <span class="nav-text">更新数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E6%9B%B4%E6%96%B0%E5%A4%9A%E6%9D%A1%E6%95%B0%E6%8D%AE"><span class="nav-number">3.11.</span> <span class="nav-text">同时更新多条数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%90%E5%88%B6%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="nav-number">3.12.</span> <span class="nav-text">限制返回结果</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="落空"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">落空</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ayoubu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ayoubu@outlook.com" title="E-Mail → mailto:ayoubu@outlook.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5095666460" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5095666460" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/ayoubu" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-zhihu"></i>知乎</a>
+      </span>
+  </div>
+
+
+<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">落空</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">87k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:19</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  <script async src="/js/cursor/love.min.js"></script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>
