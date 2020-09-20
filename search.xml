@@ -7,6 +7,8 @@
 <h3 id="什么是-scrapy"><a href="#什么是-scrapy" class="headerlink" title="什么是 scrapy"></a>什么是 scrapy</h3><p>Scrapy 是一个为了<strong>爬取网站数据</strong> ，<strong>提取结构性数据</strong> 而编写的应用<strong>框架</strong> ，我们只需要实现少量的代码，就能够快速的抓取。（框可能包含了多个模块，而模块只是负责单一功能）</p>
 <p>Srcapy 使用了 Twisted[‘twistid’] 异步网络框架，可以加快我们的下载速度。</p>
 <p><a href="https://scrapy-chs.readthedocs.io/zh_CN/1.0/intro/overview.html">Scrapy 中文文档</a></p>
+<a id="more"></a>
+
 <ul>
 <li><strong>异步和非阻塞的区别</strong></li>
 </ul>
@@ -232,6 +234,8 @@
 <li>Selenium</li>
 </ul>
 <p>Selenium 是一个 Web 的自动化测试工具，最初是为网站自动化测试而开发的，Selenium 可以直接运行在浏览器上，它支持所有主流的浏览器（包括 PhantomJS 这种无界面的浏览器），可以接收指令，让浏览器自动加载页面，获取需要的数据，甚至页面截屏</p>
+<a id="more"></a>
+
 <ul>
 <li>PhantomJS</li>
 </ul>
@@ -804,10 +808,12 @@
 <p>如果你安装了Anaconda，直接在Prompt中使用：<code>pip install requests</code></p>
 <p>如果你是下载了requests的包，直接cd到requests文件夹中：<code>python - m pip install</code></p>
 <h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h3><p>在安装好Requests库之后，我们来看看Requests怎么使用。</p>
+<a id="more"></a>
+
 <p>首先，导入库。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br></pre></td></tr></table></figure>
 
-<a id="more"></a>
+<!--more-->
 
 <p>如果我们试着访问一个网页，我们可以发送下列请求：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">r = requests.get(<span class="string">&quot;https://www.baidu.com&quot;</span>)</span><br></pre></td></tr></table></figure>

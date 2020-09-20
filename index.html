@@ -245,7 +245,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-20 07:33:50" itemprop="dateModified" datetime="2020-09-20T07:33:50Z">2020-09-20</time>
+                <time title="修改时间：2020-09-20 13:17:55" itemprop="dateModified" datetime="2020-09-20T13:17:55Z">2020-09-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -294,214 +294,14 @@
 <h3 id="什么是-scrapy"><a href="#什么是-scrapy" class="headerlink" title="什么是 scrapy"></a>什么是 scrapy</h3><p>Scrapy 是一个为了<strong>爬取网站数据</strong> ，<strong>提取结构性数据</strong> 而编写的应用<strong>框架</strong> ，我们只需要实现少量的代码，就能够快速的抓取。（框可能包含了多个模块，而模块只是负责单一功能）</p>
 <p>Srcapy 使用了 Twisted[‘twistid’] 异步网络框架，可以加快我们的下载速度。</p>
 <p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://scrapy-chs.readthedocs.io/zh_CN/1.0/intro/overview.html">Scrapy 中文文档</a></p>
-<ul>
-<li><strong>异步和非阻塞的区别</strong></li>
-</ul>
-<p>异步：调用在发出之后，这个调用就直接返回，不管有无结果</p>
-<p>非阻塞：关注的是程序在等待调用结果（消息，返回值）时的状态，指在不能立刻得到结果之前，调用不会阻塞当前线程。</p>
-<img src="https://i.imgur.com/tSSgJYV.png" alt="异步和非阻塞" style="zoom:80%;" />
-
-<h2 id="scrapy-的工作流程"><a href="#scrapy-的工作流程" class="headerlink" title="scrapy 的工作流程"></a>scrapy 的工作流程</h2><p><strong>我们最开始的爬虫流程：</strong></p>
-<img src="https://i.imgur.com/gKViPeU.png" alt="普通爬虫的工作流程" style="zoom:80%;" />
-
-<p>我们之前的爬虫是一个同步的过程，只有上一步完成，下一步才能继续。</p>
-<p><strong>在使用多线程之后：</strong></p>
-<p><img src="https://i.imgur.com/v8WU4Tx.png" alt="多线程爬虫"></p>
-<p>如上图所示，在多线程的爬虫过程，各个部分都被分开了，各干各的，干完了就等着。直到所有的线程都做完了，那么整个过程就结束了。</p>
-<p><strong>scrapy的爬虫流程：</strong></p>
-<img src="https://i.imgur.com/HPoy0bh.png" alt="scrapy 的爬虫流程" style="zoom:80%;" />
-
-<p><strong>scrapy 模块说明：</strong></p>
-<table>
-<thead>
-<tr>
-<th>模块名</th>
-<th>说明</th>
-<th>是否需要实现</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Scrapy Engine (引擎)</td>
-<td>总指挥：负责数据和信号在不同模块间的传递</td>
-<td>scrapy 已经实现</td>
-</tr>
-<tr>
-<td>Scheduler (调度器)</td>
-<td>一个队列，存放引擎发过来的 requests 请求</td>
-<td>scrapy 已经实现</td>
-</tr>
-<tr>
-<td>Downloader (下载器)</td>
-<td>下载引擎发来的requests请求，并返回给引擎。</td>
-<td>scrapy 已经实现</td>
-</tr>
-<tr>
-<td>Spider (爬虫)</td>
-<td>处理引擎发过来的response，提取数据，提取url，并交给引擎</td>
-<td>需要手写</td>
-</tr>
-<tr>
-<td>Item Pipeline (管道)</td>
-<td>处理引擎传过来的数据，比如存储</td>
-<td>需要手写</td>
-</tr>
-<tr>
-<td>Downloader Middlewares (下载中间件)</td>
-<td>可以自定义的下载扩展，比如设置代理</td>
-<td>一般不用手写</td>
-</tr>
-<tr>
-<td>Spider MiddlewareSpider (爬虫中间件)</td>
-<td>可以自定义 requests 请求和进行 response 过滤</td>
-<td>一般不用手写</td>
-</tr>
-</tbody></table>
-<h3 id="scrapy-的数据流程"><a href="#scrapy-的数据流程" class="headerlink" title="scrapy 的数据流程"></a>scrapy 的数据流程</h3><ul>
-<li>调取器 —&gt; request 对象 —&gt; 引擎 —&gt; 下载中间件 —&gt; 下载器</li>
-<li>下载发送请求，获取响应 —&gt; response —&gt; 下载中间件 —&gt; 引擎 —&gt; 爬虫中间件 —&gt; spider</li>
-<li>spider 提取数据 —&gt; 引擎 —&gt; pipeline</li>
-<li>spider 提取的 url 地址 —&gt; 构造 request 对象 —&gt; 爬虫中间件 —&gt; 引擎 —&gt; 调度器</li>
-</ul>
-<h2 id="Scrapy-入门"><a href="#Scrapy-入门" class="headerlink" title="Scrapy 入门"></a>Scrapy 入门</h2><h3 id="Scrapy-安装"><a href="#Scrapy-安装" class="headerlink" title="Scrapy 安装"></a>Scrapy 安装</h3><p>我在anaconda中安装了scrapy 并且可以在 anaconda prompt 中也可以调用成功，但是在cmd窗口中却无法调用scrapy，找了半天也没找到原因。我之前在我的电脑上有单独装过python的环境，于是我在这个环境下单独装了一个scrapy，这样我就可以在cmd命令行使用scrapy创建模板项目了，在编辑项目的时候我还是使用的anaconda的python环境，因为两个版本都是一样的，不会冲突。安装方法网上都有。</p>
-<h3 id="Scrapy-一般使用步骤"><a href="#Scrapy-一般使用步骤" class="headerlink" title="Scrapy 一般使用步骤"></a>Scrapy 一般使用步骤</h3><ol>
-<li>创建一个 scrapy 项目<ul>
-<li><code>scrapy startproject mySpider</code></li>
-</ul>
-</li>
-<li>生成一个爬虫<ul>
-<li><code>scrapy gendpider itcast &quot;itcast.cn&quot;</code></li>
-</ul>
-</li>
-<li>提取数据<ul>
-<li>完善 spider，使用 xpath 等方法</li>
-</ul>
-</li>
-<li>保存数据<ul>
-<li>pipeline 中保存数据</li>
-</ul>
-</li>
-</ol>
-<p>爬虫的启动：在命令行窗口cd到创建的文件夹中，输入：<code>scrapy crawl +&lt;爬虫名&gt;</code></p>
-<p>关闭日志显示：在<code>setting.py</code> 中添加：<code>LOG_LEVEL = &quot;WARNING&quot;</code> 字段，设置显示等级。</p>
-<p>爬虫的响应主要是写在自己创建的<code>itcast.py</code> 文件中。</p>
-<h4 id="创建一个-scrapy-项目"><a href="#创建一个-scrapy-项目" class="headerlink" title="创建一个 scrapy 项目"></a>创建一个 scrapy 项目</h4><p>命令：<code>scrapy startproject +&lt;项目名称&gt;</code> 比如：<code>scrapy startproject myspider</code></p>
-<p>打开我们创建的项目目录，我们可以得到下图所示的目录结构：</p>
-<img src="https://i.imgur.com/glnW0bF.png" alt="scrapy 项目目录结构" style="zoom:80%;" />
-
-<h4 id="创建一个爬虫"><a href="#创建一个爬虫" class="headerlink" title="创建一个爬虫"></a>创建一个爬虫</h4><p>命令：<code>scrapy genspider +&lt;爬虫的名字&gt; +&lt;允许爬取的域名&gt;</code>，比如：<code>scrapy genspider itcast &quot;itcast.cn&quot;</code></p>
-<p>此时在我们刚才创建的项目中会生成以下文件：<br><img src="https://i.imgur.com/TJBDPIf.png" alt="创建一个爬虫" style="zoom:80%;" /></p>
-<h4 id="完善-spider-文件"><a href="#完善-spider-文件" class="headerlink" title="完善 spider 文件"></a>完善 spider 文件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ItcastSpider</span>(<span class="params">scrapy.Spider</span>):</span></span><br><span class="line">    name = <span class="string">&#x27;itcast&#x27;</span>     <span class="comment"># 爬虫名字&lt;爬虫启动时使用：scrapy crawl itcast&gt;</span></span><br><span class="line">    allowed_domains = [<span class="string">&#x27;itcast.cn&#x27;</span>]   <span class="comment">#允许爬取的范围</span></span><br><span class="line">    start_urls = [<span class="string">&#x27;http://www.itcast.cn/channel/teacher.shtml&#x27;</span>]  <span class="comment">#最开始请求的url地址</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        <span class="comment"># 处理start_urls地址对应的响应</span></span><br><span class="line">        <span class="comment"># ret =  response.xpath(&#x27;//ul[@class=&quot;clears&quot;]//h2/text()&#x27;).extract() # 虽然返回的任然是列表，但是做了特殊处理，因此可以使用extract()方法</span></span><br><span class="line">        <span class="comment"># 分组提取</span></span><br><span class="line">        li_list = response.xpath(<span class="string">&#x27;//div[@class=&quot;maincon&quot;]/ul/li&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> li <span class="keyword">in</span> li_list:</span><br><span class="line">            item = &#123;&#125;</span><br><span class="line">            item[<span class="string">&quot;name&quot;</span>] = li.xpath(<span class="string">&#x27;.//h2/text()&#x27;</span>).extract_first()</span><br><span class="line">            item[<span class="string">&quot;title&quot;</span>]= li.xpath(<span class="string">&#x27;.//h2/span/text()&#x27;</span>).extract_first()</span><br><span class="line">            <span class="keyword">yield</span> item  <span class="comment">#此时会将数据全部都传给管道</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>从选择器中提取字符串：</strong></p>
-<ol>
-<li>extract() 返回一个包含有字符串数据的列表</li>
-<li>extract_first() 返回列表中的第一个字符串</li>
-</ol>
-<p><strong>注意：</strong></p>
-<ul>
-<li>spider 中的 parse 方法名不能修改</li>
-<li>需要爬取的 url 地址必须要属于 allow_domain 下的链接</li>
-<li>response.xpath() 返回的是一个含有 selector 对象的列表</li>
-</ul>
-<h4 id="spider-的数据传到-pipeline"><a href="#spider-的数据传到-pipeline" class="headerlink" title="spider 的数据传到 pipeline"></a>spider 的数据传到 pipeline</h4><p>在我们编写完 spider 中的 parse 函数后，想要将我们提取到的数据传给管道，此时只需要使用：<code>yield item</code> 方法就好了。</p>
-<p><strong>为什么要使用yield？</strong></p>
-<p>让整个函数变成一个生成器，变成 generator (生成器) 的好处就是每次遍历的时候挨个读到内存中，不会导致内存的占用量瞬间变高。python3 中 range 和 python2 中的 xrange 同理。</p>
-<p><strong>使用 pipeline：</strong></p>
-<p>编辑 <code>pipeline.py</code> 文件，用来处理要保存的数据：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># useful for handling different item types with a single interface</span></span><br><span class="line"><span class="keyword">from</span> itemadapter <span class="keyword">import</span> ItemAdapter</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="comment">## 用于处理数据，需要在设置中开启</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyspiderPipeline</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span>(<span class="params">self, item, spider</span>):</span>  <span class="comment">#实现存储方法</span></span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">&#x27;itcast.txt&#x27;</span>,<span class="string">&#x27;a&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            json.dump(item, f, ensure_ascii=<span class="literal">False</span>,indent=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-
-<p>在完成代码后，需要在 setting 中设置开启</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Configure item pipelines</span></span><br><span class="line"><span class="comment"># See https://docs.scrapy.org/en/latest/topics/item-pipeline.html</span></span><br><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">    <span class="comment"># 前面表示的是pipeline的位置，后面是权重</span></span><br><span class="line">   <span class="string">&#x27;mySpider.pipelines.MyspiderPipeline&#x27;</span>: <span class="number">300</span>,  <span class="comment"># 值越小，越被先处理</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>从pipeline 的字典形式可以看出来，pipeline 可以有多个，而且确实可以定义多个。</p>
-<p>为什么需要多个 pipeline：</p>
-<ol>
-<li>可能会有多个 spider，不同的 pipeline 处理不同的 item 的内容</li>
-<li>一个 spider 的内容可能需要不同的操作，比如存入不同的数据库中</li>
-<li>判断数据的来源可以通过给item中添加键来完成，也可以通过判断spider的名称来判断：<code>if spider.name == &#39;itcast&#39;</code>，因为我们在定义爬虫的时候有定义爬虫的名字。</li>
-</ol>
-<p>注意：</p>
-<ol>
-<li>pipeline 的权重越小优先级越高</li>
-<li>pipeline 中 process_Item 方法名不能改为其它名称</li>
-</ol>
-<h4 id="简单设置-log"><a href="#简单设置-log" class="headerlink" title="简单设置 log"></a>简单设置 log</h4><p>为了让输出端的，我们希望看到的内容更清晰一些，我们可以在 setting.py 中设置显示的 log 级别，通过添加一行代码（全部大写）：<code>LOG_LEVEL = WARNING</code>，默认显示的是 debug 级别的 log 信息。</p>
-<p>在 Scrapy 中我们可以通过 print 函数打印过程信息，但是这种方式的缺点是，当创建的爬虫多了以后，不清楚到底是哪个爬虫打印的，同时打印的信息也无法保存在本地中。此时我们可以使用 python 中的 logging 模块，将我们想要打印的信息，以log的方式打印出来。我们还可以在setting 中设置，将信息保存下来。</p>
-<p>在我们需要输出信息的地方导入logging模块</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直接使用</span></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_item</span>(<span class="params">self, item, spider</span>):</span></span><br><span class="line">    logging.warning(item)     <span class="comment"># 此时无法显示log位置</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2020</span><span class="number">-09</span><span class="number">-19</span> <span class="number">16</span>:<span class="number">13</span>:<span class="number">10</span> [root] WARNING:&#123;item&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logger = logging.getLogger(__name__)   <span class="comment">#设置logger的位置为当前文件</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_item</span>(<span class="params">self, item, spider</span>):</span></span><br><span class="line">    logger.warning(item)     <span class="comment"># 此时就可以显示log的位置了</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>logging 模块使用总结：</strong></p>
-<ul>
-<li>srcapy 中使用<ul>
-<li>setting 中设置 LOG_LEVEL=”WARNING”</li>
-<li>setting 中设置 LOG_FILE=”./a.log”  # 设置日志保存的位置，设置后终端不会显示日志的内容，但是会保存在本地</li>
-<li>import logging，实例化 logger 的方式在任何文件中使用logger 输出内容</li>
-</ul>
-</li>
-<li>普通项目中使用<ul>
-<li>import logging</li>
-<li>设置日志输出的样式，格式：<code>logging.basicConfig(...)</code></li>
-<li>实例化一个logger：<code>logger=logging.getLogger(__name__)</code></li>
-<li>在任何py文件中调用 logger 即可</li>
-</ul>
-</li>
-</ul>
-<h3 id="Scrapy的使用流程总结"><a href="#Scrapy的使用流程总结" class="headerlink" title="Scrapy的使用流程总结"></a>Scrapy的使用流程总结</h3><img src="https://i.imgur.com/JE9Bo1Y.png" alt="scrapy 入门学习总结" style="zoom:80%;" />
-
-<ul>
-<li>创建项目：</li>
-<li>创建爬虫：</li>
-<li>完善爬虫<ul>
-<li>start_url, response —&gt; parse</li>
-<li>数据通过 yield 传递给管道</li>
-<li>能够 yield 的数据类型：dict, request, Item, None</li>
-</ul>
-</li>
-<li>管道<ul>
-<li>开启管道 —&gt; 键：位置，值：距离引擎的远近，越小越近，说明越先经过</li>
-</ul>
-</li>
-</ul>
-<h2 id="Scrapy-深入学习"><a href="#Scrapy-深入学习" class="headerlink" title="Scrapy 深入学习"></a>Scrapy 深入学习</h2><h3 id="实现翻页请求"><a href="#实现翻页请求" class="headerlink" title="实现翻页请求"></a>实现翻页请求</h3><p>在我们使用requests 模块的时候，我们的翻页请求是通过找到下一页的地址，然后直接调用 <code>requests.get(url)</code> 来实现的。</p>
-<p>而在 scrapy 中翻页的原理一样，只不过我们需要将下一页的 url 地址组合成一个 requests 对象，来实现翻页的请求的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">next_page_url = response.xpath(<span class="string">&quot;//a[text()=&#x27;下一页&#x27;]/@href&quot;</span>).extract()</span><br><span class="line"><span class="keyword">while</span> len(next_page_url)&gt;<span class="number">0</span>:</span><br><span class="line">    <span class="keyword">yield</span> scrapy.Request(next_page_url, callback=self.parse)</span><br><span class="line">    <span class="comment">#scrapy.Request 能构建一个 requests，同时指定提取数据的callback函数</span></span><br></pre></td></tr></table></figure>
-
-<p>如果我们想增加User-Agent，必须在setting中进行设置：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">USER_AGENT=<span class="string">&#x27;...&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>关于 <code>scrapy.Request </code>知识点：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy.request(url[,callback,method=<span class="string">&#x27;GET&#x27;</span>, headers,body,cookies,meta,dont_filter=<span class="literal">False</span>])</span><br></pre></td></tr></table></figure>
-
-<p>在文档中方括号的参数表示可选参数，比较重要的为：</p>
-<ul>
-<li>callback：指定传入的 url 交给哪个解析函数去处理</li>
-<li>meta：实现在不同的解析函数中传递数据，meta 默认会携带部分信息，比如<strong>下载延迟，请求深度</strong> 等。</li>
-<li>dont_filter：让 scrapy 的去重不会过滤当前 url，scrapy 默认有url去重的功能。此参数对于需要重复请求的url很重要。</li>
-</ul>
-<h3 id="Item-的使用"><a href="#Item-的使用" class="headerlink" title="Item 的使用"></a>Item 的使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyspiderItem</span>(<span class="params">scrapy.Item</span>):</span>  <span class="comment"># scrapy.Item 也是一个字典</span></span><br><span class="line">    <span class="comment"># define the fields for your item here like:</span></span><br><span class="line">    name = scrapy.Field()   <span class="comment">#scrapy.Field() 是一个字典</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-
-<p>为什么要定义一个字典呢？</p>
-<ul>
-<li>在获取到数据的时候，使用不同的 Item 来存放不同的数据</li>
-<li>在把数据交给 pipeline 的时候，可以通过 isinstance(item, MyspiderItem) 来判断数据属于哪个 item，进行不同的数据(item) 处理。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置要爬取的字段</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sun0769Item</span>(<span class="params">scrapy.Item</span>):</span></span><br><span class="line">    id = scrapy.Field()</span><br><span class="line">    status = scrapy.Field()</span><br><span class="line">    title = scrapy.Field()</span><br><span class="line">    href = scrapy.Field()</span><br><span class="line">    response_time = scrapy.Field()</span><br><span class="line">    ask_time = scrapy.Field()</span><br><span class="line">    user_name = scrapy.Field()</span><br><span class="line">    description = scrapy.Field()</span><br><span class="line">    img = scrapy.Field()</span><br><span class="line"><span class="comment"># 在spider文件中</span></span><br><span class="line"><span class="keyword">from</span> mySpider.items <span class="keyword">import</span> Sun0769Item</span><br><span class="line">item = Sun0769Item()  <span class="comment"># 实例化一个自定义的item，item的操作和字典一样，但是写入到mongoDB中时需要强制转换</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="不同解析函数中传递参数"><a href="#不同解析函数中传递参数" class="headerlink" title="不同解析函数中传递参数"></a>不同解析函数中传递参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        <span class="comment"># 获取首页响应</span></span><br><span class="line">        li_list = response.xpath(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        <span class="comment"># 提取数据</span></span><br><span class="line">        <span class="keyword">for</span> li <span class="keyword">in</span> li_list:</span><br><span class="line">            item = Sun0769Item()</span><br><span class="line">            <span class="comment"># 提取首页包含的数据</span></span><br><span class="line">            item[<span class="string">&quot;id&quot;</span>] = li.xpath(<span class="string">&#x27;&#x27;</span>).extract_first()</span><br><span class="line">            item[<span class="string">&quot;status&quot;</span>] = li.xpath(<span class="string">&#x27;&#x27;</span>).extract_first()</span><br><span class="line">            item[<span class="string">&quot;title&quot;</span>] = li.xpath(<span class="string">&#x27;&#x27;</span>).extract_first()</span><br><span class="line">            item[<span class="string">&quot;ask_time&quot;</span>] = li.xpath(<span class="string">&#x27;&#x27;</span>).extract_first()</span><br><span class="line">            <span class="comment"># 将帖子的详细地址传给别的函数进行爬取</span></span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(</span><br><span class="line">                item[<span class="string">&quot;href&quot;</span>], </span><br><span class="line">                self.parse_detail, </span><br><span class="line">                cb_kwargs=dict(item=item)</span><br><span class="line">            )</span><br><span class="line">            <span class="comment"># 另一种方式</span></span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(</span><br><span class="line">                item[<span class="string">&quot;href&quot;</span>], </span><br><span class="line">                callback= self.parse_detail2,</span><br><span class="line">                meta=&#123;<span class="string">&quot;item&quot;</span>:item&#125;  <span class="comment">#传一个键的方式</span></span><br><span class="line">                )</span><br><span class="line">        <span class="comment"># 找到下一页地址</span></span><br><span class="line">        next_url = response.xpath(<span class="string">&#x27;&#x27;</span>).extract_first()</span><br><span class="line">        next_url = self.home + next_url <span class="keyword">if</span> next_url <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> next_url:</span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(next_url,self.parse)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">&quot;获取下一页失败！&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_detail</span>(<span class="params">self, response,item</span>):</span></span><br><span class="line">        <span class="comment">#需要爬取的字段,直接使用item</span></span><br><span class="line">        item[<span class="string">&quot;user_name&quot;</span>] = response.xpath(<span class="string">&#x27;&#x27;</span>).extract_first()</span><br><span class="line">        item[<span class="string">&quot;description&quot;</span>] = response.xpath(<span class="string">&#x27;&#x27;</span>).extract()</span><br><span class="line">        item[<span class="string">&quot;img&quot;</span>]=response.xpath(<span class="string">&#x27;&#x27;</span>).extract()</span><br><span class="line">        <span class="keyword">yield</span> item</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_detail2</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        item = response.meta[<span class="string">&quot;item&quot;</span>]</span><br><span class="line">        <span class="comment"># 就可以接着使用item了</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Scrapy-认识程序-debug-信息"><a href="#Scrapy-认识程序-debug-信息" class="headerlink" title="Scrapy 认识程序 debug 信息"></a>Scrapy 认识程序 debug 信息</h3><img src="https://i.imgur.com/VMChheo.png" alt="Scrapy 的程序 debug 信息" style="zoom:80%;" />
-
-<h3 id="Scrapy-shell"><a href="#Scrapy-shell" class="headerlink" title="Scrapy shell"></a>Scrapy shell</h3><p>Scrapy shell 是一个交互终端，我们可以在未启动spider的情况下尝试及调试代码，也可以用来测试 XPath 表达式。</p>
-<p>使用方法：<code>scrapy shell 网址</code></p>
-<p>常用方法：</p>
-<ul>
-<li>response.url：当前响应的url地址</li>
-<li>response.request.url：当前响应对应的请求 url 地址</li>
-<li>response.headers：响应头</li>
-<li>response.body：响应体，也就是 html 代码，默认是 byte 类型</li>
-<li>response.requests.headers：当前响应的请求头</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/archives/58909.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -553,7 +353,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-18 04:30:32" itemprop="dateModified" datetime="2020-09-18T04:30:32Z">2020-09-18</time>
+                <time title="修改时间：2020-09-20 13:18:15" itemprop="dateModified" datetime="2020-09-20T13:18:15Z">2020-09-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -604,133 +404,14 @@
 <li>Selenium</li>
 </ul>
 <p>Selenium 是一个 Web 的自动化测试工具，最初是为网站自动化测试而开发的，Selenium 可以直接运行在浏览器上，它支持所有主流的浏览器（包括 PhantomJS 这种无界面的浏览器），可以接收指令，让浏览器自动加载页面，获取需要的数据，甚至页面截屏</p>
-<ul>
-<li>PhantomJS</li>
-</ul>
-<p>PhantomJS 是一个基于 Webkit 的 “无界面” （headless）浏览器，它会把网站加载到内存并执行页面上的 JavaScript</p>
-<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://selenium-python-zh.readthedocs.io/en/latest/waits.html">Selenium-Python 的中文文档</a></p>
-<h3 id="phantomjs-安装指南"><a href="#phantomjs-安装指南" class="headerlink" title="phantomjs 安装指南"></a>phantomjs 安装指南</h3><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://npm.taobao.org/mirrors/chromedriver">chromedirver下载地址:</a></p>
-<ul>
-<li>windows 中可以不用安装，直接通过路径来引用。</li>
-</ul>
-<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://phantomjs.org/download.html">phantomjs 下载地址</a></p>
-<h2 id="Selenium-和-PhantomJS-入门"><a href="#Selenium-和-PhantomJS-入门" class="headerlink" title="Selenium 和 PhantomJS 入门"></a>Selenium 和 PhantomJS 入门</h2><h3 id="Selenium-的基本操作"><a href="#Selenium-的基本操作" class="headerlink" title="Selenium 的基本操作"></a>Selenium 的基本操作</h3><ol>
-<li>加载网页<ul>
-<li><code>from selenium import webdriver</code></li>
-<li><code>driver = webdriver.PhantomJS(&quot;C:····/pantomjs.exe&quot;)</code>，这里也可使用其它浏览器，但是得单独下载。</li>
-<li><code>driver.get(&quot;http://www.baidu.com/&quot;)</code></li>
-<li><code>driver.save_screenshot(&quot;baidu.png&quot;)</code></li>
-</ul>
-</li>
-<li>定位和操作：<ul>
-<li><code>driver.find_element_by_id(&quot;kw&quot;).send_keys(&quot;长城&quot;)</code></li>
-<li><code>driver.find_element_by_id(&quot;su&quot;).click()</code></li>
-</ul>
-</li>
-<li>查看请求信息：<ul>
-<li><code>driver.page_source</code></li>
-<li><code>driver.get_cookies()</code></li>
-<li><code>driver.current_url</code>，获取当前的url地址</li>
-</ul>
-</li>
-<li>退出<ul>
-<li><code>driver.close()  #退出当前页面</code></li>
-<li><code>driver.quit()  #退出浏览器</code></li>
-</ul>
-</li>
-</ol>
-<h3 id="页面元素定位"><a href="#页面元素定位" class="headerlink" title="页面元素定位"></a>页面元素定位</h3><ol>
-<li>用法：<ul>
-<li>find_element_by_id  （返回一个）</li>
-<li>find_element_by_xpath   （返回一个列表）</li>
-<li>find_element_by_link_text</li>
-<li>find_element_partial_link_text</li>
-<li>find_element_by_tag_name</li>
-<li>find_elements_by_class_name</li>
-<li>find_elements_by_css_selector</li>
-</ul>
-</li>
-<li>注意点<ol>
-<li>find_element 和 find_elements 的区别：返回一个和返回一个列表</li>
-<li>by_link_text 和 by_partial_link_text 的区别：全部文本和包含某个文本</li>
-<li>by_css_selector 的用法：# food span.dairy.aged</li>
-<li>by_xpath 中获取属性和文本需要使用get_attribute() 和 .text</li>
-</ol>
-</li>
-</ol>
-<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p><strong>cookie的相关用法：</strong></p>
-<ul>
-<li><code>&#123;cookie[&#39;name&#39;]:cookie[&#39;value&#39;] for cookie in driver.get_cookies()&#125;</code></li>
-<li><code>driver.delete_cookie(&quot;CookieName&quot;)</code></li>
-<li><code>driver.delete_all_cookies()</code></li>
-</ul>
-<h3 id="页面等待"><a href="#页面等待" class="headerlink" title="页面等待"></a>页面等待</h3><ul>
-<li><p><strong>为什么需要等待？</strong></p>
-<ul>
-<li>如果网站采用了动态html技术，那么页面上的部分元素出现时间便不能确定，这个时候就可以设置一个等待时间，强制要求在时间内出现，否则报错</li>
-</ul>
-</li>
-<li><p>强制等待：<code>time.sleep(10)</code>-强制等待10秒</p>
-</li>
-</ul>
-<h3 id="selenium-使用的注意点"><a href="#selenium-使用的注意点" class="headerlink" title="selenium 使用的注意点"></a>selenium 使用的注意点</h3><ol>
-<li>获取文本和属性<ul>
-<li>先定位到元素，然后调用<code>.text()</code> 或者 <code>get_attribute</code> 方法来取</li>
-</ul>
-</li>
-<li>selenium 获取的页面是浏览器中 elements 的内容</li>
-<li>find_element 和 find_elements 的区别<ul>
-<li>find_element 返回的是一个 element，如果没有会报错</li>
-<li>find_elements返回一个列表，没有就是空列表</li>
-<li>在判断是否有下一页的时候，使用find_elements来根据结果列表长度判断</li>
-</ul>
-</li>
-<li>如果页面中含有iframe、frame，需要先调用 driver.switch_to.frame的方法切换到frame中才能定位元素</li>
-<li>selenium 请求第一页的时候会等待页面加载完了之后再获取数据，但是在点击翻页之后，会直接获取数据，此时可能会报错，因为数据还没有加载出来，需要<code>time.sleep(3)</code> 来强制等待。</li>
-<li>selenium 中 find_element_by_class_name 只能接收一个class对应的一个值，不能传入多个。</li>
-</ol>
-<h2 id="验证码的识别"><a href="#验证码的识别" class="headerlink" title="验证码的识别"></a>验证码的识别</h2><ul>
-<li><p>url 不变，验证码不变</p>
-<ul>
-<li>请求验证码的地址，获得响应，调用接口进行识别</li>
-</ul>
-</li>
-<li><p>url 不变，验证码会变</p>
-<ul>
-<li>思路：对方服务器返回验证码的时候，会将每个用户的信息和验证码进行一个对应，之后，在用户发送post请求的时候，会对比post请求中发的验证码和当前用户真正的存储在服务器端的验证码是否相同</li>
-</ul>
-<ol>
-<li>实例化 session</li>
-<li>使用 session 请求登录页面，获取验证码的地址</li>
-<li>使用 session 请求验证码，识别</li>
-<li>使用 session 发送 post 请求</li>
-</ol>
-</li>
-<li><p>使用 selenium 登录，遇到验证码</p>
-<ul>
-<li><p>url不变，验证码不变，同上</p>
-</li>
-<li><p>url不变，验证码会变</p>
-<ol>
-<li>selenium 请求登录页面，同时拿到验证码的地址</li>
-<li>获取登录页面中的 driver 中的 cookie，交给 requests 模块发送验证码的请求，识别</li>
-<li>输入验证码，点击登录</li>
-</ol>
-<ul>
-<li>实验不行就使用截图工具对页面验证码区域进行自动截图，此时需要固定浏览器的宽高，不然截图的区域会变。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Tesseract"><a href="#Tesseract" class="headerlink" title="Tesseract"></a>Tesseract</h3><p>tesseract 是一个将图像翻译成文字的OCR库（光学文字识别，Optical Character Recognition）</p>
-<p><strong>安装：</strong> 在python中调用</p>
-<ul>
-<li>pip install pytesseract</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pytesseract</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">image = Image.open(jpg)</span><br><span class="line">pytesseract.image_to_string(image)</span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/archives/32542.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -782,7 +463,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-16 08:59:05" itemprop="dateModified" datetime="2020-09-16T08:59:05Z">2020-09-16</time>
+                <time title="修改时间：2020-09-20 13:12:34" itemprop="dateModified" datetime="2020-09-20T13:12:34Z">2020-09-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1198,7 +879,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-17 03:06:51" itemprop="dateModified" datetime="2020-09-17T03:06:51Z">2020-09-17</time>
+                <time title="修改时间：2020-09-20 13:12:34" itemprop="dateModified" datetime="2020-09-20T13:12:34Z">2020-09-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1313,10 +994,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-09-11 10:32:48 / 修改时间：06:22:09" itemprop="dateCreated datePublished" datetime="2020-09-11T10:32:48Z">2020-09-11</time>
+              <time title="创建时间：2020-09-11 10:32:48" itemprop="dateCreated datePublished" datetime="2020-09-11T10:32:48Z">2020-09-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-20 13:12:34" itemprop="dateModified" datetime="2020-09-20T13:12:34Z">2020-09-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -1423,7 +1110,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-15 08:43:17" itemprop="dateModified" datetime="2020-09-15T08:43:17Z">2020-09-15</time>
+                <time title="修改时间：2020-09-20 13:17:34" itemprop="dateModified" datetime="2020-09-20T13:17:34Z">2020-09-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1472,8 +1159,6 @@
 <p>如果你安装了Anaconda，直接在Prompt中使用：<code>pip install requests</code></p>
 <p>如果你是下载了requests的包，直接cd到requests文件夹中：<code>python - m pip install</code></p>
 <h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h3><p>在安装好Requests库之后，我们来看看Requests怎么使用。</p>
-<p>首先，导入库。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/archives/45141.html#more" rel="contents">
@@ -1533,7 +1218,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-10 08:59:34" itemprop="dateModified" datetime="2020-09-10T08:59:34Z">2020-09-10</time>
+                <time title="修改时间：2020-09-20 13:12:34" itemprop="dateModified" datetime="2020-09-20T13:12:34Z">2020-09-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">

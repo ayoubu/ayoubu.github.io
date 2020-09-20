@@ -6,7 +6,7 @@
   <link href="https://ayoubu.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayoubu.github.io/"/>
-  <updated>2020-09-20T07:33:50.957Z</updated>
+  <updated>2020-09-20T13:17:55.093Z</updated>
   <id>https://ayoubu.github.io/</id>
   
   <author>
@@ -21,16 +21,13 @@
     <link href="https://ayoubu.github.io/archives/58909.html"/>
     <id>https://ayoubu.github.io/archives/58909.html</id>
     <published>2020-09-18T12:32:41.000Z</published>
-    <updated>2020-09-20T07:33:50.957Z</updated>
+    <updated>2020-09-20T13:17:55.093Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;scrapy-的基础概念&quot;&gt;&lt;a href=&quot;#scrapy-的基础概念&quot; class=&quot;headerlink&quot; title=&quot;scrapy 的基础概念&quot;&gt;&lt;/a&gt;scrapy 的基础概念&lt;/h2&gt;&lt;p&gt;在之前学的&lt;code&gt;requests +</summary>
-        
-      
+    <summary type="html">&lt;h2 id=&quot;scrapy-的基础概念&quot;&gt;&lt;a href=&quot;#scrapy-的基础概念&quot; class=&quot;headerlink&quot; title=&quot;scrapy 的基础概念&quot;&gt;&lt;/a&gt;scrapy 的基础概念&lt;/h2&gt;&lt;p&gt;在之前学的&lt;code&gt;requests + selenium&lt;/code&gt; 已经可以解决90%的爬虫需求了，而学习 scrapy 是为了让我们爬虫更快，更强。从而提高我们爬虫的效率和速度。&lt;/p&gt;
+&lt;h3 id=&quot;什么是-scrapy&quot;&gt;&lt;a href=&quot;#什么是-scrapy&quot; class=&quot;headerlink&quot; title=&quot;什么是 scrapy&quot;&gt;&lt;/a&gt;什么是 scrapy&lt;/h3&gt;&lt;p&gt;Scrapy 是一个为了&lt;strong&gt;爬取网站数据&lt;/strong&gt; ，&lt;strong&gt;提取结构性数据&lt;/strong&gt; 而编写的应用&lt;strong&gt;框架&lt;/strong&gt; ，我们只需要实现少量的代码，就能够快速的抓取。（框可能包含了多个模块，而模块只是负责单一功能）&lt;/p&gt;
+&lt;p&gt;Srcapy 使用了 Twisted[‘twistid’] 异步网络框架，可以加快我们的下载速度。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://scrapy-chs.readthedocs.io/zh_CN/1.0/intro/overview.html&quot;&gt;Scrapy 中文文档&lt;/a&gt;&lt;/p&gt;</summary>
     
     
     
@@ -48,16 +45,15 @@
     <link href="https://ayoubu.github.io/archives/32542.html"/>
     <id>https://ayoubu.github.io/archives/32542.html</id>
     <published>2020-09-17T10:42:14.000Z</published>
-    <updated>2020-09-18T04:30:32.826Z</updated>
+    <updated>2020-09-20T13:18:15.243Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;动态HTML技术了解&quot;&gt;&lt;a href=&quot;#动态HTML技术了解&quot; class=&quot;headerlink&quot; title=&quot;动态HTML技术了解&quot;&gt;&lt;/a&gt;动态HTML技术了解&lt;/h2&gt;&lt;img</summary>
-        
-      
+    <summary type="html">&lt;h2 id=&quot;动态HTML技术了解&quot;&gt;&lt;a href=&quot;#动态HTML技术了解&quot; class=&quot;headerlink&quot; title=&quot;动态HTML技术了解&quot;&gt;&lt;/a&gt;动态HTML技术了解&lt;/h2&gt;&lt;img src=&quot;https://i.imgur.com/SEToUXO.png&quot; alt=&quot;动态HTML技术了解&quot; style=&quot;zoom:80%;&quot; /&gt;
+
+&lt;h2 id=&quot;Selenium-和-PhantomJS&quot;&gt;&lt;a href=&quot;#Selenium-和-PhantomJS&quot; class=&quot;headerlink&quot; title=&quot;Selenium 和 PhantomJS&quot;&gt;&lt;/a&gt;Selenium 和 PhantomJS&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Selenium&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Selenium 是一个 Web 的自动化测试工具，最初是为网站自动化测试而开发的，Selenium 可以直接运行在浏览器上，它支持所有主流的浏览器（包括 PhantomJS 这种无界面的浏览器），可以接收指令，让浏览器自动加载页面，获取需要的数据，甚至页面截屏&lt;/p&gt;</summary>
     
     
     
@@ -79,7 +75,7 @@
     <link href="https://ayoubu.github.io/archives/20690.html"/>
     <id>https://ayoubu.github.io/archives/20690.html</id>
     <published>2020-09-12T16:38:19.000Z</published>
-    <updated>2020-09-16T08:59:05.136Z</updated>
+    <updated>2020-09-20T13:12:34.404Z</updated>
     
     
       
@@ -116,7 +112,7 @@
     <link href="https://ayoubu.github.io/archives/40952.html"/>
     <id>https://ayoubu.github.io/archives/40952.html</id>
     <published>2020-09-12T11:48:04.000Z</published>
-    <updated>2020-09-17T03:06:51.065Z</updated>
+    <updated>2020-09-20T13:12:34.408Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;寻找POST的地址&quot;&gt;&lt;a href=&quot;#寻找POST的地址&quot; class=&quot;headerlink&quot; title=&quot;寻找POST的地址&quot;&gt;&lt;/a&gt;寻找POST的地址&lt;/h2&gt;&lt;ul&gt;
@@ -155,7 +151,7 @@
     <link href="https://ayoubu.github.io/archives/63676.html"/>
     <id>https://ayoubu.github.io/archives/63676.html</id>
     <published>2020-09-11T10:32:48.000Z</published>
-    <updated>2020-09-11T06:22:09.377Z</updated>
+    <updated>2020-09-20T13:12:34.401Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;如何在命令行运行-python-程序&quot;&gt;&lt;a href=&quot;#如何在命令行运行-python-程序&quot; class=&quot;headerlink&quot; title=&quot;如何在命令行运行 python 程序&quot;&gt;&lt;/a&gt;如何在命令行运行 python 程序&lt;/h2&gt;&lt;p&gt;最简单的情况就是，在当前python程序所在的路径下打开命令行终端，然后直接输入：&lt;code&gt;python 程序名.py&lt;/code&gt; 就可以运行。&lt;/p&gt;
@@ -181,15 +177,13 @@
     <link href="https://ayoubu.github.io/archives/45141.html"/>
     <id>https://ayoubu.github.io/archives/45141.html</id>
     <published>2020-09-09T20:07:30.000Z</published>
-    <updated>2020-09-15T08:43:17.273Z</updated>
+    <updated>2020-09-20T13:17:34.619Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Requests-安装&quot;&gt;&lt;a href=&quot;#Requests-安装&quot; class=&quot;headerlink&quot; title=&quot;Requests 安装&quot;&gt;&lt;/a&gt;Requests 安装&lt;/h2&gt;&lt;p&gt;命令行安装：&lt;code&gt;python -m pip install requests&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;如果你安装了Anaconda，直接在Prompt中使用：&lt;code&gt;pip install requests&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;如果你是下载了requests的包，直接cd到requests文件夹中：&lt;code&gt;python - m pip install&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id=&quot;快速开始&quot;&gt;&lt;a href=&quot;#快速开始&quot; class=&quot;headerlink&quot; title=&quot;快速开始&quot;&gt;&lt;/a&gt;快速开始&lt;/h2&gt;&lt;h3 id=&quot;发送请求&quot;&gt;&lt;a href=&quot;#发送请求&quot; class=&quot;headerlink&quot; title=&quot;发送请求&quot;&gt;&lt;/a&gt;发送请求&lt;/h3&gt;&lt;p&gt;在安装好Requests库之后，我们来看看Requests怎么使用。&lt;/p&gt;
-&lt;p&gt;首先，导入库。&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; requests&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+&lt;h2 id=&quot;快速开始&quot;&gt;&lt;a href=&quot;#快速开始&quot; class=&quot;headerlink&quot; title=&quot;快速开始&quot;&gt;&lt;/a&gt;快速开始&lt;/h2&gt;&lt;h3 id=&quot;发送请求&quot;&gt;&lt;a href=&quot;#发送请求&quot; class=&quot;headerlink&quot; title=&quot;发送请求&quot;&gt;&lt;/a&gt;发送请求&lt;/h3&gt;&lt;p&gt;在安装好Requests库之后，我们来看看Requests怎么使用。&lt;/p&gt;</summary>
     
     
     
@@ -209,7 +203,7 @@
     <link href="https://ayoubu.github.io/archives/48798.html"/>
     <id>https://ayoubu.github.io/archives/48798.html</id>
     <published>2020-09-09T16:51:31.000Z</published>
-    <updated>2020-09-10T08:59:34.649Z</updated>
+    <updated>2020-09-20T13:12:34.406Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;爬虫的简介&quot;&gt;&lt;a href=&quot;#爬虫的简介&quot; class=&quot;headerlink&quot; title=&quot;爬虫的简介&quot;&gt;&lt;/a&gt;爬虫的简介&lt;/h2&gt;&lt;p&gt;网络爬虫（又被称为网页蜘蛛，网络机器人），就是模拟客户端发送网络请求，接受请求响应。是一种按照一定的&lt;strong&gt;规则&lt;/strong&gt;，&lt;strong&gt;自动&lt;/strong&gt;地抓取互联网信息的&lt;strong&gt;程序&lt;/strong&gt;。只要浏览器能做的事情，原则上爬虫都可以做。&lt;/p&gt;
