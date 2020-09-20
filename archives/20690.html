@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Tp_uCM85etMVq9MuOfdPYQ6aA4SI0lOYqjanBUw5BuQ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://ayoubu.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="基础知识数据提取数据提取就是从响应中获取我们想要的数据的过程。提取出的数据我们可以结构化后保存在我们的数据库中。 数据分类数据主要分为结构化数据和非结构化数据。主要是看数据的规律是否明显。    数据类型 示例 处理方法    结构化数据 json、xml 转换为python数据类型   非结构化数据 html 等 正则表达式、xpath   json模块复习数据提取值JSONJSON(JavaS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据提取方法">
+<meta property="og:url" content="https://ayoubu.github.io/archives/20690.html">
+<meta property="og:site_name" content="落空的个人博客">
+<meta property="og:description" content="基础知识数据提取数据提取就是从响应中获取我们想要的数据的过程。提取出的数据我们可以结构化后保存在我们的数据库中。 数据分类数据主要分为结构化数据和非结构化数据。主要是看数据的规律是否明显。    数据类型 示例 处理方法    结构化数据 json、xml 转换为python数据类型   非结构化数据 html 等 正则表达式、xpath   json模块复习数据提取值JSONJSON(JavaS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.imgur.com/Q1AmdcI.png">
+<meta property="og:image" content="https://i.imgur.com/z3u0BG1.jpeg">
+<meta property="og:image" content="https://i.imgur.com/UojK0Hn.png">
+<meta property="article:published_time" content="2020-09-12T16:38:19.000Z">
+<meta property="article:modified_time" content="2020-09-16T08:59:05.136Z">
+<meta property="article:author" content="落空">
+<meta property="article:tag" content="json">
+<meta property="article:tag" content="爬虫">
+<meta property="article:tag" content="数据提取">
+<meta property="article:tag" content="正则表达式">
+<meta property="article:tag" content="re">
+<meta property="article:tag" content="XPATH">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/Q1AmdcI.png">
+
+
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<link rel="stylesheet" type="text/css" href="/css/injector.css" />
+  <title>数据提取方法 | 落空的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落空的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落空的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我慢慢明白了为什么我不快乐，因为我总是期待一个结果。</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">48</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">32</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/20690.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据提取方法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-12 16:38:19" itemprop="dateCreated datePublished" datetime="2020-09-12T16:38:19Z">2020-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-16 08:59:05" itemprop="dateModified" datetime="2020-09-16T08:59:05Z">2020-09-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/" itemprop="url" rel="index">
+                    <span itemprop="name">数据获取</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="数据提取"><a href="#数据提取" class="headerlink" title="数据提取"></a>数据提取</h3><p>数据提取就是从响应中获取我们想要的数据的过程。提取出的数据我们可以结构化后保存在我们的数据库中。</p>
+<h3 id="数据分类"><a href="#数据分类" class="headerlink" title="数据分类"></a>数据分类</h3><p>数据主要分为<strong>结构化数据</strong>和<strong>非结构化数据</strong>。主要是看数据的规律是否明显。</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>示例</th>
+<th>处理方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>结构化数据</td>
+<td>json、xml</td>
+<td>转换为python数据类型</td>
+</tr>
+<tr>
+<td>非结构化数据</td>
+<td>html 等</td>
+<td>正则表达式、xpath</td>
+</tr>
+</tbody></table>
+<h2 id="json模块复习"><a href="#json模块复习" class="headerlink" title="json模块复习"></a>json模块复习</h2><h3 id="数据提取值JSON"><a href="#数据提取值JSON" class="headerlink" title="数据提取值JSON"></a>数据提取值JSON</h3><p>JSON(JavaScript Object Notion) 是一种轻量级的数据交换格式，它使得人们很容易的进行阅读和编写，同时也方便了机器进行解析和生成。适用于进行数据交换的场景，比如网站前台与后台之间的数据交互。</p>
+<p>由于把json数据转化为python内建数据类型很简单，所以爬虫中，如果我们能够找到返回json数据的URL，就尽量使用这种URL。</p>
+<p><strong>常用方法：</strong></p>
+<img src="https://i.imgur.com/Q1AmdcI.png" alt="python中json模块的使用方法" style="zoom:80%;" />
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 示例：</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> pprint <span class="keyword">import</span> pprint        <span class="comment">#美化打印</span></span><br><span class="line"></span><br><span class="line">json_str = json字符串</span><br><span class="line"></span><br><span class="line"><span class="comment"># json.loads 把json字符串转化为python类型</span></span><br><span class="line">ret = json.loads(json_str)</span><br><span class="line"><span class="comment">#打印</span></span><br><span class="line">print(ret)        <span class="comment">#普通打印</span></span><br><span class="line">pprint(ret)        <span class="comment">#美化后的打印</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># json.dumps能够把python类型转化为json字符串</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">&quot;json_str.json&quot;</span>,<span class="string">&quot;w&quot;</span>,encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(json.dumps(ret,ensure_ascii=<span class="literal">False</span>,indent=<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
+
+<p>以上代码中，注意参数：<code>encoding=&quot;utf-8&quot;,ensure_ascii=False,indent=4</code></p>
+<p><strong>json.load() 和 json.dump:**实现包含</strong>类文件对象** <em>（具有read()或者write()方法的对象，如: f=open(“a.txt”,”r”)，f就是类文件对象）</em> 和 <strong>python数据类型</strong> 之间的相互转化。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用json.load提取类文件对象中的数据</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">&quot;json_str.json&quot;</span>,<span class="string">&quot;r&quot;</span>,encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    ret = json.load(f)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># json.dump能够把python类型放入文件对象中</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">&quot;json_str.json&quot;</span>,<span class="string">&quot;w&quot;</span>,encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    json.dump(python_str,f,ensure_ascii= <span class="literal">False</span>, indent=<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何找到返回json的url？"><a href="#如何找到返回json的url？" class="headerlink" title="如何找到返回json的url？"></a>如何找到返回json的url？</h3><ul>
+<li>使用chrome切换到手机界面</li>
+<li>抓包手机app的软件</li>
+</ul>
+<h3 id="json使用注意点"><a href="#json使用注意点" class="headerlink" title="json使用注意点"></a>json使用注意点</h3><ul>
+<li>json中的字符串都是双引号引起来的</li>
+<li>如果不是双引号<ul>
+<li>eval：能实现简单的字符串和python类型的转化</li>
+<li>replace：能把单引号替换为双引号</li>
+</ul>
+</li>
+<li>往一个文件中写入多个json字符串，不再是一个json字符串，不能直接读取<ul>
+<li>一行写一个json字符串，按照行来读取</li>
+</ul>
+</li>
+</ul>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p><strong>正则表达式的定义：</strong>就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个<strong>“规则字符串”</strong> 用来表达对字符串的一种<strong>过滤</strong> 逻辑。</p>
+<p><strong>常用正则表达式的方法：</strong></p>
+<ul>
+<li>re.compile()   —  编译</li>
+<li>pattern.match()  —  从头找一个</li>
+<li>pattern.search()  —  找一个</li>
+<li><strong>pattern.findall()</strong>  —  找所有（找出所有）</li>
+<li>pattern.sub()  —  替换</li>
+</ul>
+<img src="https://i.imgur.com/z3u0BG1.jpeg" alt="常用正则表达式语法" style="zoom:80%;" />
+
+<h3 id="python中原始字符串r的用法"><a href="#python中原始字符串r的用法" class="headerlink" title="python中原始字符串r的用法"></a>python中原始字符串r的用法</h3><p>在字符串前加<code>r</code>，表示这个字符串中的所有都是字符格式，此时一些特殊字符也会全部被当作普通字符来处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">r&#x27;\nab == &quot;\\nab&quot;</span></span><br><span class="line"><span class="string">True</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong> 在python正则表达中<strong>尽可能的使用原始字符串</strong>，待匹配的字符串中看到什么就在正则表达式写什么，就不会有问题。</p>
+<h3 id="re-compile的使用"><a href="#re-compile的使用" class="headerlink" title="re.compile的使用"></a>re.compile的使用</h3><p>re.compile()是re模块中的一个方法，它的第一个参数是要编译的参数，第二个参数是模式（比如可以设置为：<code>re.DOTALL/re.S</code>，表示匹配一些特殊字符如<code>\n</code>等），返回值是<code>re.Pattern</code>的一个对象。有了这个对象以后就不用在正则匹配中去添加正则表达式了，直接使用这个对象就会默认使用创建对象时的正则表达式。这样做的好处就是正则表达式只会生成一次，在我们多次使用正则匹配的时候可以帮我们节省运行时间。</p>
+<h3 id="贪婪匹配和非贪婪匹配"><a href="#贪婪匹配和非贪婪匹配" class="headerlink" title="贪婪匹配和非贪婪匹配"></a>贪婪匹配和非贪婪匹配</h3><p>在匹配时使用<code>*</code>或者<code>+</code>号就是属于贪婪匹配。贪婪匹配就是尽可能多的向后匹配。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 匹配示例</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">&#x27;&#x27;&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;</span></span><br><span class="line"><span class="string">    &lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.findall(<span class="string">&quot;&lt;.+&gt;&quot;</span>,a)    <span class="comment"># 使用.和+号匹配，\n 除外</span></span><br><span class="line">[<span class="string">&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;&#x27;</span>, <span class="string">&#x27;&lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>此时匹配到了两条数据，是因为a中有换行符，虽然不能直接看到，但是通过运行a就可以看到。而<code>.</code>运算符是不能匹配到换行符的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="string">&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;\n    &lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>贪婪匹配：</strong></p>
+<p>为了演示贪婪匹配和非贪婪匹配，我们可以在findall()方法中，添加参数，使得<code>.</code>运算符可以匹配到换行符，通过设置模式为：<code>re.S或者re.DOTALL</code>，此时我们得到的结果只有一条，如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">&#x27;&#x27;&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;</span></span><br><span class="line"><span class="string">    &lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.findall(<span class="string">&quot;&lt;.+&gt;&quot;</span>,a,re.S)    <span class="comment"># 贪婪匹配，尽可能多的进行匹配</span></span><br><span class="line">[<span class="string">&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;\n    &lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;</span>]</span><br><span class="line"><span class="comment">#用.*匹配也是一样的。</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.findall(<span class="string">&quot;&lt;.*&gt;&quot;</span>,a,re.S)</span><br><span class="line">[<span class="string">&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;\n    &lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>非贪婪匹配：</strong></p>
+<p>非贪婪匹配就是尽可能少的匹配，发现一个满足条件的就返回，然后接着找。非贪婪匹配就是在刚才贪婪匹配后面加个<code>?</code>号就行。此时得到的就是两条数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.findall(<span class="string">&quot;&lt;.*?&gt;&quot;</span>,a,re.S)    <span class="comment">#非贪婪匹配</span></span><br><span class="line">[<span class="string">&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;&#x27;</span>, <span class="string">&#x27;&lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;</span>]</span><br><span class="line">&gt;&gt; re.findall(<span class="string">&quot;&lt;.+?&gt;&quot;</span>,a,re.S)</span><br><span class="line">[<span class="string">&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;&#x27;</span>, <span class="string">&#x27;&lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="加不加（）的区别"><a href="#加不加（）的区别" class="headerlink" title="加不加（）的区别"></a>加不加（）的区别</h3><p>不加<code>()</code>括号返回的是匹配的是整体，级整个字符串的内容。加<code>()</code>只会返回括号里面匹配到的内容。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#加()匹配</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.findall(<span class="string">&quot;&lt;(.*?)&gt;&quot;</span>,a,re.S)    <span class="comment"># 此时不会返回&#x27;&lt;&#x27;和&#x27;&gt;&#x27;</span></span><br><span class="line">[<span class="string">&#x27;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&#x27;</span>, <span class="string">&#x27;meta name=&quot;referrer&quot; content=&quot;always&quot;&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="正在表达式使用的注意点"><a href="#正在表达式使用的注意点" class="headerlink" title="正在表达式使用的注意点"></a>正在表达式使用的注意点</h3><ul>
+<li><code>re,findall(&quot;a(.*?)b&quot;,&quot;str&quot;)</code>，能够返回括号中的内容，括号前后的内容起到的是过滤的作用。</li>
+<li>原始字符串r，待匹配字符串中有反斜杠的时候，使用r能够忽视反斜杠带来的转义的效果。</li>
+<li>点号默认情况匹配不到<code>\n</code></li>
+<li><code>\s</code>能够匹配空白字符，不仅仅包含空格，还有<code>\t,\r,\n</code>。</li>
+</ul>
+<h2 id="XPATH-和-LXML类库"><a href="#XPATH-和-LXML类库" class="headerlink" title="XPATH 和 LXML类库"></a>XPATH 和 LXML类库</h2><p><strong>为什么要学习XPATH和LXML类库：</strong></p>
+<p>lxml是一款高性能的Python HTML/XML解析器，我们可以利用XPath，来快速的<strong>定位特定元素</strong> 以及获取节点信息。</p>
+<p><strong>什么是XPATH：</strong></p>
+<p>XPath（XML Path Language）是一门在 HTML、XML文档中查找信息的语言，可用来在<code>HTML\XML</code>文档中对元素和属性进行遍历。（[W3School官方文档](<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.w3school.com.cn/xpath/index.asp">XPath 教程 (w3school.com.cn)</a>)）</p>
+<h3 id="认识XML"><a href="#认识XML" class="headerlink" title="认识XML"></a>认识XML</h3><p>XML和HTML之间的区别：</p>
+<table>
+<thead>
+<tr>
+<th>数据格式</th>
+<th>描述</th>
+<th>设计目标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>XML</td>
+<td>Extensible Markup Language （可扩展标记语言）</td>
+<td>被设计为传输和存储数据，其焦点是数据的内容</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td>HyperText Markup Language （超文本标记语言）</td>
+<td>显示数据以及如何更好显示数据</td>
+</tr>
+</tbody></table>
+<h3 id="XML-的节点关系"><a href="#XML-的节点关系" class="headerlink" title="XML 的节点关系"></a>XML 的节点关系</h3><img src="https://i.imgur.com/UojK0Hn.png" alt="XML的节点关系" style="zoom:80%;" />
+
+<h3 id="XPATH节点选择"><a href="#XPATH节点选择" class="headerlink" title="XPATH节点选择"></a>XPATH节点选择</h3><p><strong>常用节点选择工具：</strong></p>
+<ul>
+<li>Chrome插件 XPath Helper</li>
+<li>开源XPath表达式编辑工具：XMLQuire（XML格式文件可用）</li>
+<li>Firefox插件XPath Checker</li>
+</ul>
+<h3 id="XPath节点选择语法"><a href="#XPath节点选择语法" class="headerlink" title="XPath节点选择语法"></a>XPath节点选择语法</h3><p>XPath使用路径表达式来选取XML文档中的节点或者节点集。这些路劲表达式和我们在常规的电脑文件系统中看到的表达式非常相似。</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>nodename</td>
+<td>选取此节点的所有字节点。</td>
+</tr>
+<tr>
+<td>/</td>
+<td>从根节点选取。</td>
+</tr>
+<tr>
+<td>//</td>
+<td>从匹配选择的当前节点选择文档中的节点，而不是考虑他们的位置。</td>
+</tr>
+<tr>
+<td>.</td>
+<td>选取当前节点。</td>
+</tr>
+<tr>
+<td>..</td>
+<td>选取当前节点的父节点。</td>
+</tr>
+<tr>
+<td>@</td>
+<td>选取属性。</td>
+</tr>
+</tbody></table>
+<p>查找<strong>某个特定的</strong> 节点或者<strong>包含某个指定的值</strong> 的节点。</p>
+<table>
+<thead>
+<tr>
+<th>路径表达式</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/bookstore/book[1]</td>
+<td>选取属于bookstore子元素的第一个book元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[last()]</td>
+<td>选取属于bookstore子元素的最后一个book元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[last()-1]</td>
+<td>选取属于bookstore子元素的倒数第二个book元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[position()&lt;3]</td>
+<td>选取最前面两个属于bookstore元素的子元素的book元素</td>
+</tr>
+<tr>
+<td>//title[@lang]</td>
+<td>选取所有拥有名为lang的属性的title元素</td>
+</tr>
+<tr>
+<td>//title[@lang=’eng’]</td>
+<td>选取所有title元素，且这些元素拥有值为eng的lang属性。</td>
+</tr>
+<tr>
+<td>/bookstore/book[price&gt;35]</td>
+<td>选取bookstore元素的所有book元素，且其中的price元素的值必须大于35</td>
+</tr>
+<tr>
+<td>/bookstore/book[price&gt;35]/title</td>
+<td>选取bookstore元素中的book元素的所有title元素，且其中price元素的值须大于35。</td>
+</tr>
+</tbody></table>
+<h3 id="lxml库"><a href="#lxml库" class="headerlink" title="lxml库"></a>lxml库</h3><ul>
+<li>使用入门：（需要安装 lxml 第三方模块）<ul>
+<li>导入 lxml 的 etree 库：<code>from lxml import etree</code></li>
+<li>利用 etree.HTML，将字符串转化为Element对象</li>
+<li>Element对象具有xpath的方法：<code>html = etree.HTML(text)</code></li>
+</ul>
+</li>
+<li>lxml 可以自动修正 html 代码</li>
+<li>查看转换后的 html 文本，可以使用:<code>etree.tostring(html).decode()</code> </li>
+</ul>
+<h3 id="XPath学习重点"><a href="#XPath学习重点" class="headerlink" title="XPath学习重点"></a>XPath学习重点</h3><ul>
+<li>使用xpath helper或者是chrome中的copy xpath都是从elements中提取的数据，但是爬虫获取的是url对应的响应，往往和elemens中的内容不一样。</li>
+<li>获取文本的方法<ul>
+<li><code>a/text()</code> —&gt; 获取a标签下的文本</li>
+<li><code>a//text()</code> —&gt; 获取a标签下的所有文本</li>
+<li><code>//a[text()=&#39;下一页&#39;]</code> —&gt; 选择文本为下一页三个字的a标签</li>
+</ul>
+</li>
+<li><code>@符号</code>的使用方法<ul>
+<li><code>a/@href</code> —&gt; 获取a标签下的所有网址</li>
+<li><code>//ul[@id=&quot;detail-list&quot;]</code> —&gt; 选取id为”detail-list”的ul标签</li>
+</ul>
+</li>
+<li><code>//</code>的使用<ul>
+<li>在XPath开始的时候表示从当前html中任意位置开始选择</li>
+<li><code>li//a</code>表示的是li下任何一个a标签</li>
+</ul>
+</li>
+<li>xpath 的包含<ul>
+<li><code>//div[contains(@class,&#39;i&#39;)]</code> —&gt; 表示div中class包含i的标签</li>
+</ul>
+</li>
+</ul>
+<h3 id="lxml-使用注意点"><a href="#lxml-使用注意点" class="headerlink" title="lxml 使用注意点"></a>lxml 使用注意点</h3><ul>
+<li>lxml 能够修正 HTML 代码，但是可能会改错了<ul>
+<li>使用 <code>etree.tostring</code> 观察修改之后的 html 的样子，根据修改之后的 html 字符串写 xpath</li>
+</ul>
+</li>
+<li>lxml 能够接收 bytes 和 str 的字符串，如果一个转换错误，就试试另一个。</li>
+<li>提取页面数据的思路<ul>
+<li>先分组，取到一个包含分组标签的列表</li>
+<li>再遍历，取其中每一组进行数据的提取，不会造成数据的对应错乱</li>
+</ul>
+</li>
+</ul>
+<h3 id="递归获取帖子中的图片"><a href="#递归获取帖子中的图片" class="headerlink" title="递归获取帖子中的图片"></a>递归获取帖子中的图片</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_img_list</span>(<span class="params">self,detail_url, total_img_list</span>):</span></span><br><span class="line">    <span class="comment">#请求列表页的url地址，获取帖子详情页的第一页</span></span><br><span class="line">    detail_html_str = self.parse_url(detail_url)</span><br><span class="line">    detail_html = etree.HTML(detail_html_str)</span><br><span class="line">    <span class="comment">#获取第一页的所有图片</span></span><br><span class="line">    img_list = detail_html.xpath(<span class="string">&quot;img[@class=&#x27;BDE_Image&#x27;]/@src&quot;</span>)</span><br><span class="line">    tatal_img_list.extend(img_list)</span><br><span class="line">    <span class="comment">#请求下一页的地址，进入循环</span></span><br><span class="line">    detail_next_url=detail_html.xpath(<span class="string">&quot;a[text()=&#x27;下一页&#x27;]/@href&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> len(detail_next_url)&gt;<span class="number">0</span>:</span><br><span class="line">        detail_next_url = detail_next_url[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">return</span> self.get_img_list(detail_next_url,total_img_list)</span><br><span class="line">    <span class="keyword">return</span> total_img_list</span><br></pre></td></tr></table></figure>
+
+<h2 id="实现爬虫的套路"><a href="#实现爬虫的套路" class="headerlink" title="实现爬虫的套路"></a>实现爬虫的套路</h2><p><strong>准备url：</strong> </p>
+<ul>
+<li>准备start_url<ul>
+<li>url地址规律不明显，总数不确定</li>
+<li>通过代码提取下一页的url<ul>
+<li>xpath</li>
+<li>寻找url地址，部分参数在当前的响应中（比如，当前页码数和总页码数在当前响应中）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>准备url_list<ul>
+<li>页码总数明确</li>
+<li>url地址规律明显</li>
+</ul>
+</li>
+</ul>
+<p><strong>发送请求，获取响应：</strong></p>
+<ul>
+<li>添加随机的User-Agent，反反爬虫</li>
+<li>添加随机的代理IP，反反爬虫</li>
+<li>在对方判断出我们是爬虫之后，应该添加更多的headers字段，包括cookie</li>
+<li>cookie的处理可以使用session来解决</li>
+<li>准备一堆能用的cookie，组成cookie池<ul>
+<li>如果不登录<ul>
+<li>准备开始能够请求对方网站的cookie，就是接收对方网站设置在response的cookie</li>
+<li>下一次请求的时候，使用之前的列表中的cookie来请求</li>
+</ul>
+</li>
+<li>如果登录<ul>
+<li>准备多个账号</li>
+<li>使用程序获取每个账号的cookie</li>
+<li>之后再随机的选择cookie，请求登录之后才能访问的网站</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>提取数据：</strong></p>
+<ul>
+<li>确定数据的位置<ul>
+<li>如果数据在当前的url地址中<ul>
+<li>提取的是列表页的数据<ul>
+<li>直接请求列表页的url地址，不用进入详情页</li>
+</ul>
+</li>
+<li>提取的是详情页的数据<ol>
+<li>确定url</li>
+<li>发送请求</li>
+<li>提取数据</li>
+<li>返回</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>如果数据不在当前的url地址中<ul>
+<li>在其它的响应中，寻找数据的位置<ol>
+<li>从network中从上往下找</li>
+<li>使用chrome中的过滤条件，选择除了js，css，img之外的按钮</li>
+<li>使用chrome的search all file，搜索数字和英文</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据提取<ul>
+<li>xpath，从html中提取整块的数据，先分组，之后每一组再提取</li>
+<li>re，提取max_time，price，html中的json字符串</li>
+<li>json，从对应的响应中直接得到数据</li>
+</ul>
+</li>
+<li>保存数据<ul>
+<li>保存在本地，text，json，csv</li>
+<li>保存在数据库</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\49506.html" rel="bookmark">什么是json</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\32542.html" rel="bookmark">动态html数据获取</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\40952.html" rel="bookmark">爬虫编写技巧</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\45141.html" rel="bookmark">Requests学习</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\48798.html" rel="bookmark">爬虫学习01</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="落空 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="落空 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/json/" rel="tag"># json</a>
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96/" rel="tag"># 数据提取</a>
+              <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag"># 正则表达式</a>
+              <a href="/tags/re/" rel="tag"># re</a>
+              <a href="/tags/XPATH/" rel="tag"># XPATH</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/40952.html" rel="prev" title="爬虫编写技巧">
+      <i class="fa fa-chevron-left"></i> 爬虫编写技巧
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/32542.html" rel="next" title="动态html数据获取">
+      动态html数据获取 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96"><span class="nav-number">1.1.</span> <span class="nav-text">数据提取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">数据分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json%E6%A8%A1%E5%9D%97%E5%A4%8D%E4%B9%A0"><span class="nav-number">2.</span> <span class="nav-text">json模块复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96%E5%80%BCJSON"><span class="nav-number">2.1.</span> <span class="nav-text">数据提取值JSON</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E8%BF%94%E5%9B%9Ejson%E7%9A%84url%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">如何找到返回json的url？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#json%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number">2.3.</span> <span class="nav-text">json使用注意点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#python%E4%B8%AD%E5%8E%9F%E5%A7%8B%E5%AD%97%E7%AC%A6%E4%B8%B2r%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">python中原始字符串r的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#re-compile%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">re.compile的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AA%E5%A9%AA%E5%8C%B9%E9%85%8D%E5%92%8C%E9%9D%9E%E8%B4%AA%E5%A9%AA%E5%8C%B9%E9%85%8D"><span class="nav-number">3.3.</span> <span class="nav-text">贪婪匹配和非贪婪匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E4%B8%8D%E5%8A%A0%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.4.</span> <span class="nav-text">加不加（）的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%9C%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number">3.5.</span> <span class="nav-text">正在表达式使用的注意点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPATH-%E5%92%8C-LXML%E7%B1%BB%E5%BA%93"><span class="nav-number">4.</span> <span class="nav-text">XPATH 和 LXML类库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A4%E8%AF%86XML"><span class="nav-number">4.1.</span> <span class="nav-text">认识XML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XML-%E7%9A%84%E8%8A%82%E7%82%B9%E5%85%B3%E7%B3%BB"><span class="nav-number">4.2.</span> <span class="nav-text">XML 的节点关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XPATH%E8%8A%82%E7%82%B9%E9%80%89%E6%8B%A9"><span class="nav-number">4.3.</span> <span class="nav-text">XPATH节点选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XPath%E8%8A%82%E7%82%B9%E9%80%89%E6%8B%A9%E8%AF%AD%E6%B3%95"><span class="nav-number">4.4.</span> <span class="nav-text">XPath节点选择语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lxml%E5%BA%93"><span class="nav-number">4.5.</span> <span class="nav-text">lxml库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XPath%E5%AD%A6%E4%B9%A0%E9%87%8D%E7%82%B9"><span class="nav-number">4.6.</span> <span class="nav-text">XPath学习重点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lxml-%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number">4.7.</span> <span class="nav-text">lxml 使用注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E8%8E%B7%E5%8F%96%E5%B8%96%E5%AD%90%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87"><span class="nav-number">4.8.</span> <span class="nav-text">递归获取帖子中的图片</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%88%AC%E8%99%AB%E7%9A%84%E5%A5%97%E8%B7%AF"><span class="nav-number">5.</span> <span class="nav-text">实现爬虫的套路</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="落空"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">落空</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ayoubu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ayoubu@outlook.com" title="E-Mail → mailto:ayoubu@outlook.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5095666460" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5095666460" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/ayoubu" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-zhihu"></i>知乎</a>
+      </span>
+  </div>
+
+
+<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">落空</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">113k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:43</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  <script async src="/js/cursor/love.min.js"></script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>

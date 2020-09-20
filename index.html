@@ -147,17 +147,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">38</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">48</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">9</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">25</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">32</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -212,6 +212,1405 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/58909.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/58909.html" class="post-title-link" itemprop="url">Scrapy 框架学习</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-18 12:32:41" itemprop="dateCreated datePublished" datetime="2020-09-18T12:32:41Z">2020-09-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-20 07:33:50" itemprop="dateModified" datetime="2020-09-20T07:33:50Z">2020-09-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/" itemprop="url" rel="index">
+                    <span itemprop="name">数据获取</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="scrapy-的基础概念"><a href="#scrapy-的基础概念" class="headerlink" title="scrapy 的基础概念"></a>scrapy 的基础概念</h2><p>在之前学的<code>requests + selenium</code> 已经可以解决90%的爬虫需求了，而学习 scrapy 是为了让我们爬虫更快，更强。从而提高我们爬虫的效率和速度。</p>
+<h3 id="什么是-scrapy"><a href="#什么是-scrapy" class="headerlink" title="什么是 scrapy"></a>什么是 scrapy</h3><p>Scrapy 是一个为了<strong>爬取网站数据</strong> ，<strong>提取结构性数据</strong> 而编写的应用<strong>框架</strong> ，我们只需要实现少量的代码，就能够快速的抓取。（框可能包含了多个模块，而模块只是负责单一功能）</p>
+<p>Srcapy 使用了 Twisted[‘twistid’] 异步网络框架，可以加快我们的下载速度。</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://scrapy-chs.readthedocs.io/zh_CN/1.0/intro/overview.html">Scrapy 中文文档</a></p>
+<ul>
+<li><strong>异步和非阻塞的区别</strong></li>
+</ul>
+<p>异步：调用在发出之后，这个调用就直接返回，不管有无结果</p>
+<p>非阻塞：关注的是程序在等待调用结果（消息，返回值）时的状态，指在不能立刻得到结果之前，调用不会阻塞当前线程。</p>
+<img src="https://i.imgur.com/tSSgJYV.png" alt="异步和非阻塞" style="zoom:80%;" />
+
+<h2 id="scrapy-的工作流程"><a href="#scrapy-的工作流程" class="headerlink" title="scrapy 的工作流程"></a>scrapy 的工作流程</h2><p><strong>我们最开始的爬虫流程：</strong></p>
+<img src="https://i.imgur.com/gKViPeU.png" alt="普通爬虫的工作流程" style="zoom:80%;" />
+
+<p>我们之前的爬虫是一个同步的过程，只有上一步完成，下一步才能继续。</p>
+<p><strong>在使用多线程之后：</strong></p>
+<p><img src="https://i.imgur.com/v8WU4Tx.png" alt="多线程爬虫"></p>
+<p>如上图所示，在多线程的爬虫过程，各个部分都被分开了，各干各的，干完了就等着。直到所有的线程都做完了，那么整个过程就结束了。</p>
+<p><strong>scrapy的爬虫流程：</strong></p>
+<img src="https://i.imgur.com/HPoy0bh.png" alt="scrapy 的爬虫流程" style="zoom:80%;" />
+
+<p><strong>scrapy 模块说明：</strong></p>
+<table>
+<thead>
+<tr>
+<th>模块名</th>
+<th>说明</th>
+<th>是否需要实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scrapy Engine (引擎)</td>
+<td>总指挥：负责数据和信号在不同模块间的传递</td>
+<td>scrapy 已经实现</td>
+</tr>
+<tr>
+<td>Scheduler (调度器)</td>
+<td>一个队列，存放引擎发过来的 requests 请求</td>
+<td>scrapy 已经实现</td>
+</tr>
+<tr>
+<td>Downloader (下载器)</td>
+<td>下载引擎发来的requests请求，并返回给引擎。</td>
+<td>scrapy 已经实现</td>
+</tr>
+<tr>
+<td>Spider (爬虫)</td>
+<td>处理引擎发过来的response，提取数据，提取url，并交给引擎</td>
+<td>需要手写</td>
+</tr>
+<tr>
+<td>Item Pipeline (管道)</td>
+<td>处理引擎传过来的数据，比如存储</td>
+<td>需要手写</td>
+</tr>
+<tr>
+<td>Downloader Middlewares (下载中间件)</td>
+<td>可以自定义的下载扩展，比如设置代理</td>
+<td>一般不用手写</td>
+</tr>
+<tr>
+<td>Spider MiddlewareSpider (爬虫中间件)</td>
+<td>可以自定义 requests 请求和进行 response 过滤</td>
+<td>一般不用手写</td>
+</tr>
+</tbody></table>
+<h3 id="scrapy-的数据流程"><a href="#scrapy-的数据流程" class="headerlink" title="scrapy 的数据流程"></a>scrapy 的数据流程</h3><ul>
+<li>调取器 —&gt; request 对象 —&gt; 引擎 —&gt; 下载中间件 —&gt; 下载器</li>
+<li>下载发送请求，获取响应 —&gt; response —&gt; 下载中间件 —&gt; 引擎 —&gt; 爬虫中间件 —&gt; spider</li>
+<li>spider 提取数据 —&gt; 引擎 —&gt; pipeline</li>
+<li>spider 提取的 url 地址 —&gt; 构造 request 对象 —&gt; 爬虫中间件 —&gt; 引擎 —&gt; 调度器</li>
+</ul>
+<h2 id="Scrapy-入门"><a href="#Scrapy-入门" class="headerlink" title="Scrapy 入门"></a>Scrapy 入门</h2><h3 id="Scrapy-安装"><a href="#Scrapy-安装" class="headerlink" title="Scrapy 安装"></a>Scrapy 安装</h3><p>我在anaconda中安装了scrapy 并且可以在 anaconda prompt 中也可以调用成功，但是在cmd窗口中却无法调用scrapy，找了半天也没找到原因。我之前在我的电脑上有单独装过python的环境，于是我在这个环境下单独装了一个scrapy，这样我就可以在cmd命令行使用scrapy创建模板项目了，在编辑项目的时候我还是使用的anaconda的python环境，因为两个版本都是一样的，不会冲突。安装方法网上都有。</p>
+<h3 id="Scrapy-一般使用步骤"><a href="#Scrapy-一般使用步骤" class="headerlink" title="Scrapy 一般使用步骤"></a>Scrapy 一般使用步骤</h3><ol>
+<li>创建一个 scrapy 项目<ul>
+<li><code>scrapy startproject mySpider</code></li>
+</ul>
+</li>
+<li>生成一个爬虫<ul>
+<li><code>scrapy gendpider itcast &quot;itcast.cn&quot;</code></li>
+</ul>
+</li>
+<li>提取数据<ul>
+<li>完善 spider，使用 xpath 等方法</li>
+</ul>
+</li>
+<li>保存数据<ul>
+<li>pipeline 中保存数据</li>
+</ul>
+</li>
+</ol>
+<p>爬虫的启动：在命令行窗口cd到创建的文件夹中，输入：<code>scrapy crawl +&lt;爬虫名&gt;</code></p>
+<p>关闭日志显示：在<code>setting.py</code> 中添加：<code>LOG_LEVEL = &quot;WARNING&quot;</code> 字段，设置显示等级。</p>
+<p>爬虫的响应主要是写在自己创建的<code>itcast.py</code> 文件中。</p>
+<h4 id="创建一个-scrapy-项目"><a href="#创建一个-scrapy-项目" class="headerlink" title="创建一个 scrapy 项目"></a>创建一个 scrapy 项目</h4><p>命令：<code>scrapy startproject +&lt;项目名称&gt;</code> 比如：<code>scrapy startproject myspider</code></p>
+<p>打开我们创建的项目目录，我们可以得到下图所示的目录结构：</p>
+<img src="https://i.imgur.com/glnW0bF.png" alt="scrapy 项目目录结构" style="zoom:80%;" />
+
+<h4 id="创建一个爬虫"><a href="#创建一个爬虫" class="headerlink" title="创建一个爬虫"></a>创建一个爬虫</h4><p>命令：<code>scrapy genspider +&lt;爬虫的名字&gt; +&lt;允许爬取的域名&gt;</code>，比如：<code>scrapy genspider itcast &quot;itcast.cn&quot;</code></p>
+<p>此时在我们刚才创建的项目中会生成以下文件：<br><img src="https://i.imgur.com/TJBDPIf.png" alt="创建一个爬虫" style="zoom:80%;" /></p>
+<h4 id="完善-spider-文件"><a href="#完善-spider-文件" class="headerlink" title="完善 spider 文件"></a>完善 spider 文件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ItcastSpider</span>(<span class="params">scrapy.Spider</span>):</span></span><br><span class="line">    name = <span class="string">&#x27;itcast&#x27;</span>     <span class="comment"># 爬虫名字&lt;爬虫启动时使用：scrapy crawl itcast&gt;</span></span><br><span class="line">    allowed_domains = [<span class="string">&#x27;itcast.cn&#x27;</span>]   <span class="comment">#允许爬取的范围</span></span><br><span class="line">    start_urls = [<span class="string">&#x27;http://www.itcast.cn/channel/teacher.shtml&#x27;</span>]  <span class="comment">#最开始请求的url地址</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        <span class="comment"># 处理start_urls地址对应的响应</span></span><br><span class="line">        <span class="comment"># ret =  response.xpath(&#x27;//ul[@class=&quot;clears&quot;]//h2/text()&#x27;).extract() # 虽然返回的任然是列表，但是做了特殊处理，因此可以使用extract()方法</span></span><br><span class="line">        <span class="comment"># 分组提取</span></span><br><span class="line">        li_list = response.xpath(<span class="string">&#x27;//div[@class=&quot;maincon&quot;]/ul/li&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> li <span class="keyword">in</span> li_list:</span><br><span class="line">            item = &#123;&#125;</span><br><span class="line">            item[<span class="string">&quot;name&quot;</span>] = li.xpath(<span class="string">&#x27;.//h2/text()&#x27;</span>).extract_first()</span><br><span class="line">            item[<span class="string">&quot;title&quot;</span>]= li.xpath(<span class="string">&#x27;.//h2/span/text()&#x27;</span>).extract_first()</span><br><span class="line">            <span class="keyword">yield</span> item  <span class="comment">#此时会将数据全部都传给管道</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>从选择器中提取字符串：</strong></p>
+<ol>
+<li>extract() 返回一个包含有字符串数据的列表</li>
+<li>extract_first() 返回列表中的第一个字符串</li>
+</ol>
+<p><strong>注意：</strong></p>
+<ul>
+<li>spider 中的 parse 方法名不能修改</li>
+<li>需要爬取的 url 地址必须要属于 allow_domain 下的链接</li>
+<li>response.xpath() 返回的是一个含有 selector 对象的列表</li>
+</ul>
+<h4 id="spider-的数据传到-pipeline"><a href="#spider-的数据传到-pipeline" class="headerlink" title="spider 的数据传到 pipeline"></a>spider 的数据传到 pipeline</h4><p>在我们编写完 spider 中的 parse 函数后，想要将我们提取到的数据传给管道，此时只需要使用：<code>yield item</code> 方法就好了。</p>
+<p><strong>为什么要使用yield？</strong></p>
+<p>让整个函数变成一个生成器，变成 generator (生成器) 的好处就是每次遍历的时候挨个读到内存中，不会导致内存的占用量瞬间变高。python3 中 range 和 python2 中的 xrange 同理。</p>
+<p><strong>使用 pipeline：</strong></p>
+<p>编辑 <code>pipeline.py</code> 文件，用来处理要保存的数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># useful for handling different item types with a single interface</span></span><br><span class="line"><span class="keyword">from</span> itemadapter <span class="keyword">import</span> ItemAdapter</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="comment">## 用于处理数据，需要在设置中开启</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyspiderPipeline</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span>(<span class="params">self, item, spider</span>):</span>  <span class="comment">#实现存储方法</span></span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">&#x27;itcast.txt&#x27;</span>,<span class="string">&#x27;a&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            json.dump(item, f, ensure_ascii=<span class="literal">False</span>,indent=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在完成代码后，需要在 setting 中设置开启</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Configure item pipelines</span></span><br><span class="line"><span class="comment"># See https://docs.scrapy.org/en/latest/topics/item-pipeline.html</span></span><br><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">    <span class="comment"># 前面表示的是pipeline的位置，后面是权重</span></span><br><span class="line">   <span class="string">&#x27;mySpider.pipelines.MyspiderPipeline&#x27;</span>: <span class="number">300</span>,  <span class="comment"># 值越小，越被先处理</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从pipeline 的字典形式可以看出来，pipeline 可以有多个，而且确实可以定义多个。</p>
+<p>为什么需要多个 pipeline：</p>
+<ol>
+<li>可能会有多个 spider，不同的 pipeline 处理不同的 item 的内容</li>
+<li>一个 spider 的内容可能需要不同的操作，比如存入不同的数据库中</li>
+<li>判断数据的来源可以通过给item中添加键来完成，也可以通过判断spider的名称来判断：<code>if spider.name == &#39;itcast&#39;</code>，因为我们在定义爬虫的时候有定义爬虫的名字。</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>pipeline 的权重越小优先级越高</li>
+<li>pipeline 中 process_Item 方法名不能改为其它名称</li>
+</ol>
+<h4 id="简单设置-log"><a href="#简单设置-log" class="headerlink" title="简单设置 log"></a>简单设置 log</h4><p>为了让输出端的，我们希望看到的内容更清晰一些，我们可以在 setting.py 中设置显示的 log 级别，通过添加一行代码（全部大写）：<code>LOG_LEVEL = WARNING</code>，默认显示的是 debug 级别的 log 信息。</p>
+<p>在 Scrapy 中我们可以通过 print 函数打印过程信息，但是这种方式的缺点是，当创建的爬虫多了以后，不清楚到底是哪个爬虫打印的，同时打印的信息也无法保存在本地中。此时我们可以使用 python 中的 logging 模块，将我们想要打印的信息，以log的方式打印出来。我们还可以在setting 中设置，将信息保存下来。</p>
+<p>在我们需要输出信息的地方导入logging模块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直接使用</span></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_item</span>(<span class="params">self, item, spider</span>):</span></span><br><span class="line">    logging.warning(item)     <span class="comment"># 此时无法显示log位置</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2020</span><span class="number">-09</span><span class="number">-19</span> <span class="number">16</span>:<span class="number">13</span>:<span class="number">10</span> [root] WARNING:&#123;item&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logger = logging.getLogger(__name__)   <span class="comment">#设置logger的位置为当前文件</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_item</span>(<span class="params">self, item, spider</span>):</span></span><br><span class="line">    logger.warning(item)     <span class="comment"># 此时就可以显示log的位置了</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>logging 模块使用总结：</strong></p>
+<ul>
+<li>srcapy 中使用<ul>
+<li>setting 中设置 LOG_LEVEL=”WARNING”</li>
+<li>setting 中设置 LOG_FILE=”./a.log”  # 设置日志保存的位置，设置后终端不会显示日志的内容，但是会保存在本地</li>
+<li>import logging，实例化 logger 的方式在任何文件中使用logger 输出内容</li>
+</ul>
+</li>
+<li>普通项目中使用<ul>
+<li>import logging</li>
+<li>设置日志输出的样式，格式：<code>logging.basicConfig(...)</code></li>
+<li>实例化一个logger：<code>logger=logging.getLogger(__name__)</code></li>
+<li>在任何py文件中调用 logger 即可</li>
+</ul>
+</li>
+</ul>
+<h3 id="Scrapy的使用流程总结"><a href="#Scrapy的使用流程总结" class="headerlink" title="Scrapy的使用流程总结"></a>Scrapy的使用流程总结</h3><img src="https://i.imgur.com/JE9Bo1Y.png" alt="scrapy 入门学习总结" style="zoom:80%;" />
+
+<ul>
+<li>创建项目：</li>
+<li>创建爬虫：</li>
+<li>完善爬虫<ul>
+<li>start_url, response —&gt; parse</li>
+<li>数据通过 yield 传递给管道</li>
+<li>能够 yield 的数据类型：dict, request, Item, None</li>
+</ul>
+</li>
+<li>管道<ul>
+<li>开启管道 —&gt; 键：位置，值：距离引擎的远近，越小越近，说明越先经过</li>
+</ul>
+</li>
+</ul>
+<h2 id="Scrapy-深入学习"><a href="#Scrapy-深入学习" class="headerlink" title="Scrapy 深入学习"></a>Scrapy 深入学习</h2><h3 id="实现翻页请求"><a href="#实现翻页请求" class="headerlink" title="实现翻页请求"></a>实现翻页请求</h3><p>在我们使用requests 模块的时候，我们的翻页请求是通过找到下一页的地址，然后直接调用 <code>requests.get(url)</code> 来实现的。</p>
+<p>而在 scrapy 中翻页的原理一样，只不过我们需要将下一页的 url 地址组合成一个 requests 对象，来实现翻页的请求的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">next_page_url = response.xpath(<span class="string">&quot;//a[text()=&#x27;下一页&#x27;]/@href&quot;</span>).extract()</span><br><span class="line"><span class="keyword">while</span> len(next_page_url)&gt;<span class="number">0</span>:</span><br><span class="line">    <span class="keyword">yield</span> scrapy.Request(next_page_url, callback=self.parse)</span><br><span class="line">    <span class="comment">#scrapy.Request 能构建一个 requests，同时指定提取数据的callback函数</span></span><br></pre></td></tr></table></figure>
+
+<p>如果我们想增加User-Agent，必须在setting中进行设置：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">USER_AGENT=<span class="string">&#x27;...&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>关于 <code>scrapy.Request </code>知识点：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy.request(url[,callback,method=<span class="string">&#x27;GET&#x27;</span>, headers,body,cookies,meta,dont_filter=<span class="literal">False</span>])</span><br></pre></td></tr></table></figure>
+
+<p>在文档中方括号的参数表示可选参数，比较重要的为：</p>
+<ul>
+<li>callback：指定传入的 url 交给哪个解析函数去处理</li>
+<li>meta：实现在不同的解析函数中传递数据，meta 默认会携带部分信息，比如<strong>下载延迟，请求深度</strong> 等。</li>
+<li>dont_filter：让 scrapy 的去重不会过滤当前 url，scrapy 默认有url去重的功能。此参数对于需要重复请求的url很重要。</li>
+</ul>
+<h3 id="Item-的使用"><a href="#Item-的使用" class="headerlink" title="Item 的使用"></a>Item 的使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyspiderItem</span>(<span class="params">scrapy.Item</span>):</span>  <span class="comment"># scrapy.Item 也是一个字典</span></span><br><span class="line">    <span class="comment"># define the fields for your item here like:</span></span><br><span class="line">    name = scrapy.Field()   <span class="comment">#scrapy.Field() 是一个字典</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>为什么要定义一个字典呢？</p>
+<ul>
+<li>在获取到数据的时候，使用不同的 Item 来存放不同的数据</li>
+<li>在把数据交给 pipeline 的时候，可以通过 isinstance(item, MyspiderItem) 来判断数据属于哪个 item，进行不同的数据(item) 处理。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置要爬取的字段</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sun0769Item</span>(<span class="params">scrapy.Item</span>):</span></span><br><span class="line">    id = scrapy.Field()</span><br><span class="line">    status = scrapy.Field()</span><br><span class="line">    title = scrapy.Field()</span><br><span class="line">    href = scrapy.Field()</span><br><span class="line">    response_time = scrapy.Field()</span><br><span class="line">    ask_time = scrapy.Field()</span><br><span class="line">    user_name = scrapy.Field()</span><br><span class="line">    description = scrapy.Field()</span><br><span class="line">    img = scrapy.Field()</span><br><span class="line"><span class="comment"># 在spider文件中</span></span><br><span class="line"><span class="keyword">from</span> mySpider.items <span class="keyword">import</span> Sun0769Item</span><br><span class="line">item = Sun0769Item()  <span class="comment"># 实例化一个自定义的item，item的操作和字典一样，但是写入到mongoDB中时需要强制转换</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="不同解析函数中传递参数"><a href="#不同解析函数中传递参数" class="headerlink" title="不同解析函数中传递参数"></a>不同解析函数中传递参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        <span class="comment"># 获取首页响应</span></span><br><span class="line">        li_list = response.xpath(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        <span class="comment"># 提取数据</span></span><br><span class="line">        <span class="keyword">for</span> li <span class="keyword">in</span> li_list:</span><br><span class="line">            item = Sun0769Item()</span><br><span class="line">            <span class="comment"># 提取首页包含的数据</span></span><br><span class="line">            item[<span class="string">&quot;id&quot;</span>] = li.xpath(<span class="string">&#x27;&#x27;</span>).extract_first()</span><br><span class="line">            item[<span class="string">&quot;status&quot;</span>] = li.xpath(<span class="string">&#x27;&#x27;</span>).extract_first()</span><br><span class="line">            item[<span class="string">&quot;title&quot;</span>] = li.xpath(<span class="string">&#x27;&#x27;</span>).extract_first()</span><br><span class="line">            item[<span class="string">&quot;ask_time&quot;</span>] = li.xpath(<span class="string">&#x27;&#x27;</span>).extract_first()</span><br><span class="line">            <span class="comment"># 将帖子的详细地址传给别的函数进行爬取</span></span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(</span><br><span class="line">                item[<span class="string">&quot;href&quot;</span>], </span><br><span class="line">                self.parse_detail, </span><br><span class="line">                cb_kwargs=dict(item=item)</span><br><span class="line">            )</span><br><span class="line">            <span class="comment"># 另一种方式</span></span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(</span><br><span class="line">                item[<span class="string">&quot;href&quot;</span>], </span><br><span class="line">                callback= self.parse_detail2,</span><br><span class="line">                meta=&#123;<span class="string">&quot;item&quot;</span>:item&#125;  <span class="comment">#传一个键的方式</span></span><br><span class="line">                )</span><br><span class="line">        <span class="comment"># 找到下一页地址</span></span><br><span class="line">        next_url = response.xpath(<span class="string">&#x27;&#x27;</span>).extract_first()</span><br><span class="line">        next_url = self.home + next_url <span class="keyword">if</span> next_url <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> next_url:</span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(next_url,self.parse)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">&quot;获取下一页失败！&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_detail</span>(<span class="params">self, response,item</span>):</span></span><br><span class="line">        <span class="comment">#需要爬取的字段,直接使用item</span></span><br><span class="line">        item[<span class="string">&quot;user_name&quot;</span>] = response.xpath(<span class="string">&#x27;&#x27;</span>).extract_first()</span><br><span class="line">        item[<span class="string">&quot;description&quot;</span>] = response.xpath(<span class="string">&#x27;&#x27;</span>).extract()</span><br><span class="line">        item[<span class="string">&quot;img&quot;</span>]=response.xpath(<span class="string">&#x27;&#x27;</span>).extract()</span><br><span class="line">        <span class="keyword">yield</span> item</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_detail2</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        item = response.meta[<span class="string">&quot;item&quot;</span>]</span><br><span class="line">        <span class="comment"># 就可以接着使用item了</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Scrapy-认识程序-debug-信息"><a href="#Scrapy-认识程序-debug-信息" class="headerlink" title="Scrapy 认识程序 debug 信息"></a>Scrapy 认识程序 debug 信息</h3><img src="https://i.imgur.com/VMChheo.png" alt="Scrapy 的程序 debug 信息" style="zoom:80%;" />
+
+<h3 id="Scrapy-shell"><a href="#Scrapy-shell" class="headerlink" title="Scrapy shell"></a>Scrapy shell</h3><p>Scrapy shell 是一个交互终端，我们可以在未启动spider的情况下尝试及调试代码，也可以用来测试 XPath 表达式。</p>
+<p>使用方法：<code>scrapy shell 网址</code></p>
+<p>常用方法：</p>
+<ul>
+<li>response.url：当前响应的url地址</li>
+<li>response.request.url：当前响应对应的请求 url 地址</li>
+<li>response.headers：响应头</li>
+<li>response.body：响应体，也就是 html 代码，默认是 byte 类型</li>
+<li>response.requests.headers：当前响应的请求头</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/32542.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/32542.html" class="post-title-link" itemprop="url">动态html数据获取</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-17 10:42:14" itemprop="dateCreated datePublished" datetime="2020-09-17T10:42:14Z">2020-09-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-18 04:30:32" itemprop="dateModified" datetime="2020-09-18T04:30:32Z">2020-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/" itemprop="url" rel="index">
+                    <span itemprop="name">数据获取</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="动态HTML技术了解"><a href="#动态HTML技术了解" class="headerlink" title="动态HTML技术了解"></a>动态HTML技术了解</h2><img src="https://i.imgur.com/SEToUXO.png" alt="动态HTML技术了解" style="zoom:80%;" />
+
+<h2 id="Selenium-和-PhantomJS"><a href="#Selenium-和-PhantomJS" class="headerlink" title="Selenium 和 PhantomJS"></a>Selenium 和 PhantomJS</h2><ul>
+<li>Selenium</li>
+</ul>
+<p>Selenium 是一个 Web 的自动化测试工具，最初是为网站自动化测试而开发的，Selenium 可以直接运行在浏览器上，它支持所有主流的浏览器（包括 PhantomJS 这种无界面的浏览器），可以接收指令，让浏览器自动加载页面，获取需要的数据，甚至页面截屏</p>
+<ul>
+<li>PhantomJS</li>
+</ul>
+<p>PhantomJS 是一个基于 Webkit 的 “无界面” （headless）浏览器，它会把网站加载到内存并执行页面上的 JavaScript</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://selenium-python-zh.readthedocs.io/en/latest/waits.html">Selenium-Python 的中文文档</a></p>
+<h3 id="phantomjs-安装指南"><a href="#phantomjs-安装指南" class="headerlink" title="phantomjs 安装指南"></a>phantomjs 安装指南</h3><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://npm.taobao.org/mirrors/chromedriver">chromedirver下载地址:</a></p>
+<ul>
+<li>windows 中可以不用安装，直接通过路径来引用。</li>
+</ul>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://phantomjs.org/download.html">phantomjs 下载地址</a></p>
+<h2 id="Selenium-和-PhantomJS-入门"><a href="#Selenium-和-PhantomJS-入门" class="headerlink" title="Selenium 和 PhantomJS 入门"></a>Selenium 和 PhantomJS 入门</h2><h3 id="Selenium-的基本操作"><a href="#Selenium-的基本操作" class="headerlink" title="Selenium 的基本操作"></a>Selenium 的基本操作</h3><ol>
+<li>加载网页<ul>
+<li><code>from selenium import webdriver</code></li>
+<li><code>driver = webdriver.PhantomJS(&quot;C:····/pantomjs.exe&quot;)</code>，这里也可使用其它浏览器，但是得单独下载。</li>
+<li><code>driver.get(&quot;http://www.baidu.com/&quot;)</code></li>
+<li><code>driver.save_screenshot(&quot;baidu.png&quot;)</code></li>
+</ul>
+</li>
+<li>定位和操作：<ul>
+<li><code>driver.find_element_by_id(&quot;kw&quot;).send_keys(&quot;长城&quot;)</code></li>
+<li><code>driver.find_element_by_id(&quot;su&quot;).click()</code></li>
+</ul>
+</li>
+<li>查看请求信息：<ul>
+<li><code>driver.page_source</code></li>
+<li><code>driver.get_cookies()</code></li>
+<li><code>driver.current_url</code>，获取当前的url地址</li>
+</ul>
+</li>
+<li>退出<ul>
+<li><code>driver.close()  #退出当前页面</code></li>
+<li><code>driver.quit()  #退出浏览器</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="页面元素定位"><a href="#页面元素定位" class="headerlink" title="页面元素定位"></a>页面元素定位</h3><ol>
+<li>用法：<ul>
+<li>find_element_by_id  （返回一个）</li>
+<li>find_element_by_xpath   （返回一个列表）</li>
+<li>find_element_by_link_text</li>
+<li>find_element_partial_link_text</li>
+<li>find_element_by_tag_name</li>
+<li>find_elements_by_class_name</li>
+<li>find_elements_by_css_selector</li>
+</ul>
+</li>
+<li>注意点<ol>
+<li>find_element 和 find_elements 的区别：返回一个和返回一个列表</li>
+<li>by_link_text 和 by_partial_link_text 的区别：全部文本和包含某个文本</li>
+<li>by_css_selector 的用法：# food span.dairy.aged</li>
+<li>by_xpath 中获取属性和文本需要使用get_attribute() 和 .text</li>
+</ol>
+</li>
+</ol>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p><strong>cookie的相关用法：</strong></p>
+<ul>
+<li><code>&#123;cookie[&#39;name&#39;]:cookie[&#39;value&#39;] for cookie in driver.get_cookies()&#125;</code></li>
+<li><code>driver.delete_cookie(&quot;CookieName&quot;)</code></li>
+<li><code>driver.delete_all_cookies()</code></li>
+</ul>
+<h3 id="页面等待"><a href="#页面等待" class="headerlink" title="页面等待"></a>页面等待</h3><ul>
+<li><p><strong>为什么需要等待？</strong></p>
+<ul>
+<li>如果网站采用了动态html技术，那么页面上的部分元素出现时间便不能确定，这个时候就可以设置一个等待时间，强制要求在时间内出现，否则报错</li>
+</ul>
+</li>
+<li><p>强制等待：<code>time.sleep(10)</code>-强制等待10秒</p>
+</li>
+</ul>
+<h3 id="selenium-使用的注意点"><a href="#selenium-使用的注意点" class="headerlink" title="selenium 使用的注意点"></a>selenium 使用的注意点</h3><ol>
+<li>获取文本和属性<ul>
+<li>先定位到元素，然后调用<code>.text()</code> 或者 <code>get_attribute</code> 方法来取</li>
+</ul>
+</li>
+<li>selenium 获取的页面是浏览器中 elements 的内容</li>
+<li>find_element 和 find_elements 的区别<ul>
+<li>find_element 返回的是一个 element，如果没有会报错</li>
+<li>find_elements返回一个列表，没有就是空列表</li>
+<li>在判断是否有下一页的时候，使用find_elements来根据结果列表长度判断</li>
+</ul>
+</li>
+<li>如果页面中含有iframe、frame，需要先调用 driver.switch_to.frame的方法切换到frame中才能定位元素</li>
+<li>selenium 请求第一页的时候会等待页面加载完了之后再获取数据，但是在点击翻页之后，会直接获取数据，此时可能会报错，因为数据还没有加载出来，需要<code>time.sleep(3)</code> 来强制等待。</li>
+<li>selenium 中 find_element_by_class_name 只能接收一个class对应的一个值，不能传入多个。</li>
+</ol>
+<h2 id="验证码的识别"><a href="#验证码的识别" class="headerlink" title="验证码的识别"></a>验证码的识别</h2><ul>
+<li><p>url 不变，验证码不变</p>
+<ul>
+<li>请求验证码的地址，获得响应，调用接口进行识别</li>
+</ul>
+</li>
+<li><p>url 不变，验证码会变</p>
+<ul>
+<li>思路：对方服务器返回验证码的时候，会将每个用户的信息和验证码进行一个对应，之后，在用户发送post请求的时候，会对比post请求中发的验证码和当前用户真正的存储在服务器端的验证码是否相同</li>
+</ul>
+<ol>
+<li>实例化 session</li>
+<li>使用 session 请求登录页面，获取验证码的地址</li>
+<li>使用 session 请求验证码，识别</li>
+<li>使用 session 发送 post 请求</li>
+</ol>
+</li>
+<li><p>使用 selenium 登录，遇到验证码</p>
+<ul>
+<li><p>url不变，验证码不变，同上</p>
+</li>
+<li><p>url不变，验证码会变</p>
+<ol>
+<li>selenium 请求登录页面，同时拿到验证码的地址</li>
+<li>获取登录页面中的 driver 中的 cookie，交给 requests 模块发送验证码的请求，识别</li>
+<li>输入验证码，点击登录</li>
+</ol>
+<ul>
+<li>实验不行就使用截图工具对页面验证码区域进行自动截图，此时需要固定浏览器的宽高，不然截图的区域会变。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Tesseract"><a href="#Tesseract" class="headerlink" title="Tesseract"></a>Tesseract</h3><p>tesseract 是一个将图像翻译成文字的OCR库（光学文字识别，Optical Character Recognition）</p>
+<p><strong>安装：</strong> 在python中调用</p>
+<ul>
+<li>pip install pytesseract</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pytesseract</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">image = Image.open(jpg)</span><br><span class="line">pytesseract.image_to_string(image)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/20690.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/20690.html" class="post-title-link" itemprop="url">数据提取方法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-12 16:38:19" itemprop="dateCreated datePublished" datetime="2020-09-12T16:38:19Z">2020-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-16 08:59:05" itemprop="dateModified" datetime="2020-09-16T08:59:05Z">2020-09-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/" itemprop="url" rel="index">
+                    <span itemprop="name">数据获取</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="数据提取"><a href="#数据提取" class="headerlink" title="数据提取"></a>数据提取</h3><p>数据提取就是从响应中获取我们想要的数据的过程。提取出的数据我们可以结构化后保存在我们的数据库中。</p>
+<h3 id="数据分类"><a href="#数据分类" class="headerlink" title="数据分类"></a>数据分类</h3><p>数据主要分为<strong>结构化数据</strong>和<strong>非结构化数据</strong>。主要是看数据的规律是否明显。</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>示例</th>
+<th>处理方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>结构化数据</td>
+<td>json、xml</td>
+<td>转换为python数据类型</td>
+</tr>
+<tr>
+<td>非结构化数据</td>
+<td>html 等</td>
+<td>正则表达式、xpath</td>
+</tr>
+</tbody></table>
+<h2 id="json模块复习"><a href="#json模块复习" class="headerlink" title="json模块复习"></a>json模块复习</h2><h3 id="数据提取值JSON"><a href="#数据提取值JSON" class="headerlink" title="数据提取值JSON"></a>数据提取值JSON</h3><p>JSON(JavaScript Object Notion) 是一种轻量级的数据交换格式，它使得人们很容易的进行阅读和编写，同时也方便了机器进行解析和生成。适用于进行数据交换的场景，比如网站前台与后台之间的数据交互。</p>
+<p>由于把json数据转化为python内建数据类型很简单，所以爬虫中，如果我们能够找到返回json数据的URL，就尽量使用这种URL。</p>
+<p><strong>常用方法：</strong></p>
+<img src="https://i.imgur.com/Q1AmdcI.png" alt="python中json模块的使用方法" style="zoom:80%;" />
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 示例：</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> pprint <span class="keyword">import</span> pprint        <span class="comment">#美化打印</span></span><br><span class="line"></span><br><span class="line">json_str = json字符串</span><br><span class="line"></span><br><span class="line"><span class="comment"># json.loads 把json字符串转化为python类型</span></span><br><span class="line">ret = json.loads(json_str)</span><br><span class="line"><span class="comment">#打印</span></span><br><span class="line">print(ret)        <span class="comment">#普通打印</span></span><br><span class="line">pprint(ret)        <span class="comment">#美化后的打印</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># json.dumps能够把python类型转化为json字符串</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">&quot;json_str.json&quot;</span>,<span class="string">&quot;w&quot;</span>,encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(json.dumps(ret,ensure_ascii=<span class="literal">False</span>,indent=<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
+
+<p>以上代码中，注意参数：<code>encoding=&quot;utf-8&quot;,ensure_ascii=False,indent=4</code></p>
+<p><strong>json.load() 和 json.dump:**实现包含</strong>类文件对象** <em>（具有read()或者write()方法的对象，如: f=open(“a.txt”,”r”)，f就是类文件对象）</em> 和 <strong>python数据类型</strong> 之间的相互转化。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用json.load提取类文件对象中的数据</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">&quot;json_str.json&quot;</span>,<span class="string">&quot;r&quot;</span>,encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    ret = json.load(f)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># json.dump能够把python类型放入文件对象中</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">&quot;json_str.json&quot;</span>,<span class="string">&quot;w&quot;</span>,encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    json.dump(python_str,f,ensure_ascii= <span class="literal">False</span>, indent=<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何找到返回json的url？"><a href="#如何找到返回json的url？" class="headerlink" title="如何找到返回json的url？"></a>如何找到返回json的url？</h3><ul>
+<li>使用chrome切换到手机界面</li>
+<li>抓包手机app的软件</li>
+</ul>
+<h3 id="json使用注意点"><a href="#json使用注意点" class="headerlink" title="json使用注意点"></a>json使用注意点</h3><ul>
+<li>json中的字符串都是双引号引起来的</li>
+<li>如果不是双引号<ul>
+<li>eval：能实现简单的字符串和python类型的转化</li>
+<li>replace：能把单引号替换为双引号</li>
+</ul>
+</li>
+<li>往一个文件中写入多个json字符串，不再是一个json字符串，不能直接读取<ul>
+<li>一行写一个json字符串，按照行来读取</li>
+</ul>
+</li>
+</ul>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p><strong>正则表达式的定义：</strong>就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个<strong>“规则字符串”</strong> 用来表达对字符串的一种<strong>过滤</strong> 逻辑。</p>
+<p><strong>常用正则表达式的方法：</strong></p>
+<ul>
+<li>re.compile()   —  编译</li>
+<li>pattern.match()  —  从头找一个</li>
+<li>pattern.search()  —  找一个</li>
+<li><strong>pattern.findall()</strong>  —  找所有（找出所有）</li>
+<li>pattern.sub()  —  替换</li>
+</ul>
+<img src="https://i.imgur.com/z3u0BG1.jpeg" alt="常用正则表达式语法" style="zoom:80%;" />
+
+<h3 id="python中原始字符串r的用法"><a href="#python中原始字符串r的用法" class="headerlink" title="python中原始字符串r的用法"></a>python中原始字符串r的用法</h3><p>在字符串前加<code>r</code>，表示这个字符串中的所有都是字符格式，此时一些特殊字符也会全部被当作普通字符来处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">r&#x27;\nab == &quot;\\nab&quot;</span></span><br><span class="line"><span class="string">True</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong> 在python正则表达中<strong>尽可能的使用原始字符串</strong>，待匹配的字符串中看到什么就在正则表达式写什么，就不会有问题。</p>
+<h3 id="re-compile的使用"><a href="#re-compile的使用" class="headerlink" title="re.compile的使用"></a>re.compile的使用</h3><p>re.compile()是re模块中的一个方法，它的第一个参数是要编译的参数，第二个参数是模式（比如可以设置为：<code>re.DOTALL/re.S</code>，表示匹配一些特殊字符如<code>\n</code>等），返回值是<code>re.Pattern</code>的一个对象。有了这个对象以后就不用在正则匹配中去添加正则表达式了，直接使用这个对象就会默认使用创建对象时的正则表达式。这样做的好处就是正则表达式只会生成一次，在我们多次使用正则匹配的时候可以帮我们节省运行时间。</p>
+<h3 id="贪婪匹配和非贪婪匹配"><a href="#贪婪匹配和非贪婪匹配" class="headerlink" title="贪婪匹配和非贪婪匹配"></a>贪婪匹配和非贪婪匹配</h3><p>在匹配时使用<code>*</code>或者<code>+</code>号就是属于贪婪匹配。贪婪匹配就是尽可能多的向后匹配。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 匹配示例</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">&#x27;&#x27;&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;</span></span><br><span class="line"><span class="string">    &lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.findall(<span class="string">&quot;&lt;.+&gt;&quot;</span>,a)    <span class="comment"># 使用.和+号匹配，\n 除外</span></span><br><span class="line">[<span class="string">&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;&#x27;</span>, <span class="string">&#x27;&lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>此时匹配到了两条数据，是因为a中有换行符，虽然不能直接看到，但是通过运行a就可以看到。而<code>.</code>运算符是不能匹配到换行符的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="string">&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;\n    &lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>贪婪匹配：</strong></p>
+<p>为了演示贪婪匹配和非贪婪匹配，我们可以在findall()方法中，添加参数，使得<code>.</code>运算符可以匹配到换行符，通过设置模式为：<code>re.S或者re.DOTALL</code>，此时我们得到的结果只有一条，如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">&#x27;&#x27;&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;</span></span><br><span class="line"><span class="string">    &lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.findall(<span class="string">&quot;&lt;.+&gt;&quot;</span>,a,re.S)    <span class="comment"># 贪婪匹配，尽可能多的进行匹配</span></span><br><span class="line">[<span class="string">&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;\n    &lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;</span>]</span><br><span class="line"><span class="comment">#用.*匹配也是一样的。</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.findall(<span class="string">&quot;&lt;.*&gt;&quot;</span>,a,re.S)</span><br><span class="line">[<span class="string">&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;\n    &lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>非贪婪匹配：</strong></p>
+<p>非贪婪匹配就是尽可能少的匹配，发现一个满足条件的就返回，然后接着找。非贪婪匹配就是在刚才贪婪匹配后面加个<code>?</code>号就行。此时得到的就是两条数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.findall(<span class="string">&quot;&lt;.*?&gt;&quot;</span>,a,re.S)    <span class="comment">#非贪婪匹配</span></span><br><span class="line">[<span class="string">&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;&#x27;</span>, <span class="string">&#x27;&lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;</span>]</span><br><span class="line">&gt;&gt; re.findall(<span class="string">&quot;&lt;.+?&gt;&quot;</span>,a,re.S)</span><br><span class="line">[<span class="string">&#x27;&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;&#x27;</span>, <span class="string">&#x27;&lt;meta name=&quot;referrer&quot; content=&quot;always&quot;&gt;&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="加不加（）的区别"><a href="#加不加（）的区别" class="headerlink" title="加不加（）的区别"></a>加不加（）的区别</h3><p>不加<code>()</code>括号返回的是匹配的是整体，级整个字符串的内容。加<code>()</code>只会返回括号里面匹配到的内容。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#加()匹配</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.findall(<span class="string">&quot;&lt;(.*?)&gt;&quot;</span>,a,re.S)    <span class="comment"># 此时不会返回&#x27;&lt;&#x27;和&#x27;&gt;&#x27;</span></span><br><span class="line">[<span class="string">&#x27;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&#x27;</span>, <span class="string">&#x27;meta name=&quot;referrer&quot; content=&quot;always&quot;&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="正在表达式使用的注意点"><a href="#正在表达式使用的注意点" class="headerlink" title="正在表达式使用的注意点"></a>正在表达式使用的注意点</h3><ul>
+<li><code>re,findall(&quot;a(.*?)b&quot;,&quot;str&quot;)</code>，能够返回括号中的内容，括号前后的内容起到的是过滤的作用。</li>
+<li>原始字符串r，待匹配字符串中有反斜杠的时候，使用r能够忽视反斜杠带来的转义的效果。</li>
+<li>点号默认情况匹配不到<code>\n</code></li>
+<li><code>\s</code>能够匹配空白字符，不仅仅包含空格，还有<code>\t,\r,\n</code>。</li>
+</ul>
+<h2 id="XPATH-和-LXML类库"><a href="#XPATH-和-LXML类库" class="headerlink" title="XPATH 和 LXML类库"></a>XPATH 和 LXML类库</h2><p><strong>为什么要学习XPATH和LXML类库：</strong></p>
+<p>lxml是一款高性能的Python HTML/XML解析器，我们可以利用XPath，来快速的<strong>定位特定元素</strong> 以及获取节点信息。</p>
+<p><strong>什么是XPATH：</strong></p>
+<p>XPath（XML Path Language）是一门在 HTML、XML文档中查找信息的语言，可用来在<code>HTML\XML</code>文档中对元素和属性进行遍历。（[W3School官方文档](<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.w3school.com.cn/xpath/index.asp">XPath 教程 (w3school.com.cn)</a>)）</p>
+<h3 id="认识XML"><a href="#认识XML" class="headerlink" title="认识XML"></a>认识XML</h3><p>XML和HTML之间的区别：</p>
+<table>
+<thead>
+<tr>
+<th>数据格式</th>
+<th>描述</th>
+<th>设计目标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>XML</td>
+<td>Extensible Markup Language （可扩展标记语言）</td>
+<td>被设计为传输和存储数据，其焦点是数据的内容</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td>HyperText Markup Language （超文本标记语言）</td>
+<td>显示数据以及如何更好显示数据</td>
+</tr>
+</tbody></table>
+<h3 id="XML-的节点关系"><a href="#XML-的节点关系" class="headerlink" title="XML 的节点关系"></a>XML 的节点关系</h3><img src="https://i.imgur.com/UojK0Hn.png" alt="XML的节点关系" style="zoom:80%;" />
+
+<h3 id="XPATH节点选择"><a href="#XPATH节点选择" class="headerlink" title="XPATH节点选择"></a>XPATH节点选择</h3><p><strong>常用节点选择工具：</strong></p>
+<ul>
+<li>Chrome插件 XPath Helper</li>
+<li>开源XPath表达式编辑工具：XMLQuire（XML格式文件可用）</li>
+<li>Firefox插件XPath Checker</li>
+</ul>
+<h3 id="XPath节点选择语法"><a href="#XPath节点选择语法" class="headerlink" title="XPath节点选择语法"></a>XPath节点选择语法</h3><p>XPath使用路径表达式来选取XML文档中的节点或者节点集。这些路劲表达式和我们在常规的电脑文件系统中看到的表达式非常相似。</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>nodename</td>
+<td>选取此节点的所有字节点。</td>
+</tr>
+<tr>
+<td>/</td>
+<td>从根节点选取。</td>
+</tr>
+<tr>
+<td>//</td>
+<td>从匹配选择的当前节点选择文档中的节点，而不是考虑他们的位置。</td>
+</tr>
+<tr>
+<td>.</td>
+<td>选取当前节点。</td>
+</tr>
+<tr>
+<td>..</td>
+<td>选取当前节点的父节点。</td>
+</tr>
+<tr>
+<td>@</td>
+<td>选取属性。</td>
+</tr>
+</tbody></table>
+<p>查找<strong>某个特定的</strong> 节点或者<strong>包含某个指定的值</strong> 的节点。</p>
+<table>
+<thead>
+<tr>
+<th>路径表达式</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/bookstore/book[1]</td>
+<td>选取属于bookstore子元素的第一个book元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[last()]</td>
+<td>选取属于bookstore子元素的最后一个book元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[last()-1]</td>
+<td>选取属于bookstore子元素的倒数第二个book元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[position()&lt;3]</td>
+<td>选取最前面两个属于bookstore元素的子元素的book元素</td>
+</tr>
+<tr>
+<td>//title[@lang]</td>
+<td>选取所有拥有名为lang的属性的title元素</td>
+</tr>
+<tr>
+<td>//title[@lang=’eng’]</td>
+<td>选取所有title元素，且这些元素拥有值为eng的lang属性。</td>
+</tr>
+<tr>
+<td>/bookstore/book[price&gt;35]</td>
+<td>选取bookstore元素的所有book元素，且其中的price元素的值必须大于35</td>
+</tr>
+<tr>
+<td>/bookstore/book[price&gt;35]/title</td>
+<td>选取bookstore元素中的book元素的所有title元素，且其中price元素的值须大于35。</td>
+</tr>
+</tbody></table>
+<h3 id="lxml库"><a href="#lxml库" class="headerlink" title="lxml库"></a>lxml库</h3><ul>
+<li>使用入门：（需要安装 lxml 第三方模块）<ul>
+<li>导入 lxml 的 etree 库：<code>from lxml import etree</code></li>
+<li>利用 etree.HTML，将字符串转化为Element对象</li>
+<li>Element对象具有xpath的方法：<code>html = etree.HTML(text)</code></li>
+</ul>
+</li>
+<li>lxml 可以自动修正 html 代码</li>
+<li>查看转换后的 html 文本，可以使用:<code>etree.tostring(html).decode()</code> </li>
+</ul>
+<h3 id="XPath学习重点"><a href="#XPath学习重点" class="headerlink" title="XPath学习重点"></a>XPath学习重点</h3><ul>
+<li>使用xpath helper或者是chrome中的copy xpath都是从elements中提取的数据，但是爬虫获取的是url对应的响应，往往和elemens中的内容不一样。</li>
+<li>获取文本的方法<ul>
+<li><code>a/text()</code> —&gt; 获取a标签下的文本</li>
+<li><code>a//text()</code> —&gt; 获取a标签下的所有文本</li>
+<li><code>//a[text()=&#39;下一页&#39;]</code> —&gt; 选择文本为下一页三个字的a标签</li>
+</ul>
+</li>
+<li><code>@符号</code>的使用方法<ul>
+<li><code>a/@href</code> —&gt; 获取a标签下的所有网址</li>
+<li><code>//ul[@id=&quot;detail-list&quot;]</code> —&gt; 选取id为”detail-list”的ul标签</li>
+</ul>
+</li>
+<li><code>//</code>的使用<ul>
+<li>在XPath开始的时候表示从当前html中任意位置开始选择</li>
+<li><code>li//a</code>表示的是li下任何一个a标签</li>
+</ul>
+</li>
+<li>xpath 的包含<ul>
+<li><code>//div[contains(@class,&#39;i&#39;)]</code> —&gt; 表示div中class包含i的标签</li>
+</ul>
+</li>
+</ul>
+<h3 id="lxml-使用注意点"><a href="#lxml-使用注意点" class="headerlink" title="lxml 使用注意点"></a>lxml 使用注意点</h3><ul>
+<li>lxml 能够修正 HTML 代码，但是可能会改错了<ul>
+<li>使用 <code>etree.tostring</code> 观察修改之后的 html 的样子，根据修改之后的 html 字符串写 xpath</li>
+</ul>
+</li>
+<li>lxml 能够接收 bytes 和 str 的字符串，如果一个转换错误，就试试另一个。</li>
+<li>提取页面数据的思路<ul>
+<li>先分组，取到一个包含分组标签的列表</li>
+<li>再遍历，取其中每一组进行数据的提取，不会造成数据的对应错乱</li>
+</ul>
+</li>
+</ul>
+<h3 id="递归获取帖子中的图片"><a href="#递归获取帖子中的图片" class="headerlink" title="递归获取帖子中的图片"></a>递归获取帖子中的图片</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_img_list</span>(<span class="params">self,detail_url, total_img_list</span>):</span></span><br><span class="line">    <span class="comment">#请求列表页的url地址，获取帖子详情页的第一页</span></span><br><span class="line">    detail_html_str = self.parse_url(detail_url)</span><br><span class="line">    detail_html = etree.HTML(detail_html_str)</span><br><span class="line">    <span class="comment">#获取第一页的所有图片</span></span><br><span class="line">    img_list = detail_html.xpath(<span class="string">&quot;img[@class=&#x27;BDE_Image&#x27;]/@src&quot;</span>)</span><br><span class="line">    tatal_img_list.extend(img_list)</span><br><span class="line">    <span class="comment">#请求下一页的地址，进入循环</span></span><br><span class="line">    detail_next_url=detail_html.xpath(<span class="string">&quot;a[text()=&#x27;下一页&#x27;]/@href&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> len(detail_next_url)&gt;<span class="number">0</span>:</span><br><span class="line">        detail_next_url = detail_next_url[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">return</span> self.get_img_list(detail_next_url,total_img_list)</span><br><span class="line">    <span class="keyword">return</span> total_img_list</span><br></pre></td></tr></table></figure>
+
+<h2 id="实现爬虫的套路"><a href="#实现爬虫的套路" class="headerlink" title="实现爬虫的套路"></a>实现爬虫的套路</h2><p><strong>准备url：</strong> </p>
+<ul>
+<li>准备start_url<ul>
+<li>url地址规律不明显，总数不确定</li>
+<li>通过代码提取下一页的url<ul>
+<li>xpath</li>
+<li>寻找url地址，部分参数在当前的响应中（比如，当前页码数和总页码数在当前响应中）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>准备url_list<ul>
+<li>页码总数明确</li>
+<li>url地址规律明显</li>
+</ul>
+</li>
+</ul>
+<p><strong>发送请求，获取响应：</strong></p>
+<ul>
+<li>添加随机的User-Agent，反反爬虫</li>
+<li>添加随机的代理IP，反反爬虫</li>
+<li>在对方判断出我们是爬虫之后，应该添加更多的headers字段，包括cookie</li>
+<li>cookie的处理可以使用session来解决</li>
+<li>准备一堆能用的cookie，组成cookie池<ul>
+<li>如果不登录<ul>
+<li>准备开始能够请求对方网站的cookie，就是接收对方网站设置在response的cookie</li>
+<li>下一次请求的时候，使用之前的列表中的cookie来请求</li>
+</ul>
+</li>
+<li>如果登录<ul>
+<li>准备多个账号</li>
+<li>使用程序获取每个账号的cookie</li>
+<li>之后再随机的选择cookie，请求登录之后才能访问的网站</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>提取数据：</strong></p>
+<ul>
+<li>确定数据的位置<ul>
+<li>如果数据在当前的url地址中<ul>
+<li>提取的是列表页的数据<ul>
+<li>直接请求列表页的url地址，不用进入详情页</li>
+</ul>
+</li>
+<li>提取的是详情页的数据<ol>
+<li>确定url</li>
+<li>发送请求</li>
+<li>提取数据</li>
+<li>返回</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>如果数据不在当前的url地址中<ul>
+<li>在其它的响应中，寻找数据的位置<ol>
+<li>从network中从上往下找</li>
+<li>使用chrome中的过滤条件，选择除了js，css，img之外的按钮</li>
+<li>使用chrome的search all file，搜索数字和英文</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据提取<ul>
+<li>xpath，从html中提取整块的数据，先分组，之后每一组再提取</li>
+<li>re，提取max_time，price，html中的json字符串</li>
+<li>json，从对应的响应中直接得到数据</li>
+</ul>
+</li>
+<li>保存数据<ul>
+<li>保存在本地，text，json，csv</li>
+<li>保存在数据库</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/40952.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/40952.html" class="post-title-link" itemprop="url">爬虫编写技巧</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-12 11:48:04" itemprop="dateCreated datePublished" datetime="2020-09-12T11:48:04Z">2020-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-17 03:06:51" itemprop="dateModified" datetime="2020-09-17T03:06:51Z">2020-09-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/" itemprop="url" rel="index">
+                    <span itemprop="name">数据获取</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>527</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="寻找POST的地址"><a href="#寻找POST的地址" class="headerlink" title="寻找POST的地址"></a>寻找POST的地址</h2><ul>
+<li>在form表单中寻找action对应的url地址<ul>
+<li>post的数据是input标签中name的值作为键，真正的用户名密码作为值的字典，post的url地址就是action对应的url地址</li>
+</ul>
+</li>
+<li>抓包，寻找登录的url地址<ul>
+<li>勾选perserve log按钮，防止页面跳转后找不到跳转的url</li>
+<li>寻找post数据，确定参数（看url中的参数和post数据中的参数）<ul>
+<li>参数不会变的时候直接使用，比如密码不是动态加密的时候</li>
+<li>参数会变的时候<ul>
+<li>看当前参数是否在当前相应中，比如通过前一次的相应来得到当前的值</li>
+<li>还是参数是通过js生成，此时就需要定位到相应的js中进行查看。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/archives/40952.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/63676.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/63676.html" class="post-title-link" itemprop="url">命令行运行python程序</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-11 10:32:48 / 修改时间：06:22:09" itemprop="dateCreated datePublished" datetime="2020-09-11T10:32:48Z">2020-09-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">杂记</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>633</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="如何在命令行运行-python-程序"><a href="#如何在命令行运行-python-程序" class="headerlink" title="如何在命令行运行 python 程序"></a>如何在命令行运行 python 程序</h2><p>最简单的情况就是，在当前python程序所在的路径下打开命令行终端，然后直接输入：<code>python 程序名.py</code> 就可以运行。</p>
+<p>但是有时候我们需要向程序中输入参数，我们可以直接使用<code>x = input()</code> ，但是这样会多一步交互，不够简洁。</p>
+<p>在命令行中，如果我们输入：<code>python 程序名.py 1 2 3</code>，我们实际上可以得到一个列表：<code>[&#39;程序名.py&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</code>，而后面的这些输入其实是可以作为参数传给程序的。</p>
+<p>我们只需要在程序中使用<code>sys.argv[]</code>来接收就行，如果我们写<code>x = sys.argv[1]</code>表示我们接收的值为第一个，即<code>1</code>，此时<code>x=1</code>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/archives/63676.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/45141.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/45141.html" class="post-title-link" itemprop="url">Requests学习</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-09 20:07:30" itemprop="dateCreated datePublished" datetime="2020-09-09T20:07:30Z">2020-09-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-15 08:43:17" itemprop="dateModified" datetime="2020-09-15T08:43:17Z">2020-09-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/" itemprop="url" rel="index">
+                    <span itemprop="name">数据获取</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Requests-安装"><a href="#Requests-安装" class="headerlink" title="Requests 安装"></a>Requests 安装</h2><p>命令行安装：<code>python -m pip install requests</code></p>
+<p>如果你安装了Anaconda，直接在Prompt中使用：<code>pip install requests</code></p>
+<p>如果你是下载了requests的包，直接cd到requests文件夹中：<code>python - m pip install</code></p>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h3><p>在安装好Requests库之后，我们来看看Requests怎么使用。</p>
+<p>首先，导入库。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/archives/45141.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/48798.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/48798.html" class="post-title-link" itemprop="url">爬虫学习01</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-09 16:51:31" itemprop="dateCreated datePublished" datetime="2020-09-09T16:51:31Z">2020-09-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-10 08:59:34" itemprop="dateModified" datetime="2020-09-10T08:59:34Z">2020-09-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/" itemprop="url" rel="index">
+                    <span itemprop="name">数据获取</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="爬虫的简介"><a href="#爬虫的简介" class="headerlink" title="爬虫的简介"></a>爬虫的简介</h2><p>网络爬虫（又被称为网页蜘蛛，网络机器人），就是模拟客户端发送网络请求，接受请求响应。是一种按照一定的<strong>规则</strong>，<strong>自动</strong>地抓取互联网信息的<strong>程序</strong>。只要浏览器能做的事情，原则上爬虫都可以做。</p>
+<ul>
+<li><strong>通用爬虫：</strong>通常指搜索引擎的爬虫</li>
+<li><strong>聚焦爬虫：</strong>针对特定网站的爬虫</li>
+</ul>
+<p><strong>工作流程：</strong></p>
+<img src="https://i.imgur.com/0Dx5H2T.png" alt="通用爬虫和聚焦爬虫工作流程" style="zoom:80%;" />
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/archives/48798.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/53312.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -239,7 +1638,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-09-09 15:19:48 / 修改时间：07:59:32" itemprop="dateCreated datePublished" datetime="2020-09-09T15:19:48Z">2020-09-09</time>
+              <time title="创建时间：2020-09-09 15:19:48 / 修改时间：08:39:22" itemprop="dateCreated datePublished" datetime="2020-09-09T15:19:48Z">2020-09-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -525,786 +1924,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/49506.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="落空">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落空的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/49506.html" class="post-title-link" itemprop="url">什么是json</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-			
-			  
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-05 11:35:13" itemprop="dateCreated datePublished" datetime="2020-09-05T11:35:13Z">2020-09-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-09 06:54:19" itemprop="dateModified" datetime="2020-09-09T06:54:19Z">2020-09-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">数据存储</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/json/" itemprop="url" rel="index">
-                    <span itemprop="name">json</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>JSON的全称是 ”JavaScript Object Notation“，意思是JavaScript对象表示法，它是一种基于文本，独立于语言的轻量级数据交换格式。XML也是一种数据交换格式，为什么没有选择XML呢？因为XML虽然可以作为跨平台的数据交换格式，但是在JS（JavaScript）中处理XML非常不方便，同时XML标记比数据多，增加了交换产生的流量，而JSON没有附加的任何标记，在JS中可作为对象处理，所以我们更倾向于选择JSON来交换数据。</p>
-<h2 id="JSON的两种数据结构"><a href="#JSON的两种数据结构" class="headerlink" title="JSON的两种数据结构"></a>JSON的两种数据结构</h2><p>JSON有两种表示结构，对象和数组。对象结构以<code>&#123;</code> 大括号开始，以<code>&#125;</code>大括号结束。中间的信息以键值对存储，并且以<code>,</code>分割每条信息（最后一条数据不用加<code>,</code>）。键值对的格式为：<code>key:value</code>，即冒号左边为关键字，冒号右边为值。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/archives/49506.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/52778.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="落空">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落空的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/52778.html" class="post-title-link" itemprop="url">MongoDB简介</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-			
-			  
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-05 10:58:05" itemprop="dateCreated datePublished" datetime="2020-09-05T10:58:05Z">2020-09-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-09 06:54:19" itemprop="dateModified" datetime="2020-09-09T06:54:19Z">2020-09-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">数据存储</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/MongoDB/" itemprop="url" rel="index">
-                    <span itemprop="name">MongoDB</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="MongoDB简介"><a href="#MongoDB简介" class="headerlink" title="MongoDB简介"></a>MongoDB简介</h2><p>MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为WEB应用提供可扩展的高性能数据存储解决方案。</p>
-<p>MongoDB将数据存储为一个文档，数据结构由键值对(Key : value)组成，MongoDB文档类似于JSON对象，字段值可以包含其它文档，数组及文档数组。</p>
-<p>MongoDB服务端可运行在Linux、Windows和Mac OS平台，支持32位和64位应用，默认端口为27017。本文所展示的为Windows平台的安装及使用。</p>
-<p>MongoDB支持各种编程语言：Python、Java、C++、PHP、C#等多种语言。</p>
-<h2 id="MongoDB的优势"><a href="#MongoDB的优势" class="headerlink" title="MongoDB的优势"></a>MongoDB的优势</h2><ul>
-<li><strong>易扩展：</strong> NoSQL（非关系型数据库）数据库种类繁多，但是一个共同的特点都是去掉关系型数据库的关系特性。数据之间无关系，这样就非常容易扩展。</li>
-<li><strong>大数据量，高性能：</strong> NoSQL数据库都具有非常高的读写性能，尤其在大数据量下，同样表现优秀。得益于它的无关系性，数据的结构简单</li>
-<li><strong>灵活的数据模型：</strong> NoSQL无需事先为要存储的数据建立字段，随时可以存储自定义的数据格式。而在关系型数据库里，增删字段是一件非常麻烦的事情。</li>
-</ul>
-<p><strong>缺点：</strong> 由于它每条数据都是单独存储的，因此在存储过程中可能会包含大量重复信息，非常占用存储空间。</p>
-<h2 id="MongDB的安装（windows）"><a href="#MongDB的安装（windows）" class="headerlink" title="MongDB的安装（windows）"></a>MongDB的安装（windows）</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/archives/52778.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/53805.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="落空">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落空的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/53805.html" class="post-title-link" itemprop="url">Excel学习之疑难杂症</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-			
-			  
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-03 11:47:19" itemprop="dateCreated datePublished" datetime="2020-09-03T11:47:19Z">2020-09-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-09 06:54:19" itemprop="dateModified" datetime="2020-09-09T06:54:19Z">2020-09-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
-                    <span itemprop="name">数据分析</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/" itemprop="url" rel="index">
-                    <span itemprop="name">Excel</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="电子表格打印"><a href="#电子表格打印" class="headerlink" title="电子表格打印"></a>电子表格打印</h2><p><strong>快捷键：</strong><code>Ctrl + P</code> — 打印预览</p>
-<p><strong>将表格打印到一页纸上：</strong> <code>Ctrl + P</code> ，在最后一项中选择<code>将工作表调整为一页</code>，此方法是使用缩放功能。除此之外也可以使用<code>自定义边距</code>功能，设置页边距使得内容可以显示为一页。</p>
-<p><strong>打印选中区域：</strong> 先选中需要打印的区域，然后按<code>Ctrl + P</code>，在设置中的第一项中选择<code>打印选定区域</code>。</p>
-<p><strong>打印网格线：</strong> 首先在<code>页面布局</code> 菜单栏中的工作表选项中，勾选打印，再按<code>Ctrl + P</code> 预览的时候，就可以看到网格线了。</p>
-<p><strong>在每页都打印表头：</strong> 进入<code>页面布局</code>菜单栏，在<code>页面设置</code>区域中，点击<code>打印标题</code>，然后分别设置<code>打印区域</code> 和<code>顶端标题行</code>。注：在打印预览时，最后一项应该设置为<code>将所有列都调整为一页</code>。</p>
-<p><strong>打印页码：</strong> 进入<code>页面布局</code>菜单栏，在页面设置区域点开扩展的小箭头，选择<code>页眉/页脚</code> ，在页脚处设置页码的样式，点击确定就好。</p>
-<p><strong>不打印错误值：</strong> 还是在上述<code>页面设置</code>的对话框中，选择<code>工作表</code> ，将<code>错误单元格打印为</code>设置为空白就好。</p>
-<p><strong>打印批注：</strong> 还是在<code>页面布局</code>菜单栏中的<code>页面设置</code>对话框中，选择<code>工作表</code>，设置<code>批注和注释</code>为工作表末尾，此时再打印时，批注就会打印到末尾了。</p>
-<p><strong>设置单色打印：</strong>此时会自动忽略所有表格内的色彩，在上述的<code>页面设置</code>中的<code>工作表</code>选项卡里，勾选<code>单色打印</code>的复选框即可。</p>
-<h2 id="图表与PPT、Word之间的交互联动"><a href="#图表与PPT、Word之间的交互联动" class="headerlink" title="图表与PPT、Word之间的交互联动"></a>图表与PPT、Word之间的交互联动</h2><p>在实际工作中，我们经常需要将excel中的结果插入到PPT或者Word中，如何在改动excel表格数据时，PPT和Word中的数据也会相应的改变。从而实现数据的实时同步。</p>
-<p><strong>具体方法为：</strong> 在复制Excel表格后粘贴到PPT或者Word时，在<code>开始</code>菜单中点击粘贴底下的小箭头，选择<code>选择性粘贴</code>，然后在弹出的对话框中，选择<code>粘贴链接</code>中的<code>Microsoft Excel工作表 对象</code> 即可。</p>
-<p>粘贴后Excel的表格样式什么的会粘贴过去。如果Excel、PPT、Word三个文件均为打开状态，此时修改Excel中的数据，其它两个文件中的数据也会发生相应的更改。如果修改Excel数据时其它两个文件时关闭的，那么再次打开其它两个文件时会有提醒是否同步。为了保证数据之间的同步，最好时将Excel数据和引用它的文件放在一起，如果修改了文件名或者目录可能会导致链接不到。</p>
-<h2 id="合并多个工作表"><a href="#合并多个工作表" class="headerlink" title="合并多个工作表"></a>合并多个工作表</h2><p>新建一个工作表，选中第一个表格，单击菜单栏中的<code>数据</code>选项卡，在<code>数据工具</code>区域中选择<code>合并计算</code>，在引用位置选择第一个表中的数据，然后点击<code>添加</code>，依次添加所有表，最后勾选<code>首行</code>和<code>最左列</code>复选框，点击确定即可。</p>
-<p><code>首行</code>表示显示第一行的标题，<code>最左列</code>表示显示最左列的数据。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/27947.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="落空">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落空的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/27947.html" class="post-title-link" itemprop="url">Excel学习之图表</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-			
-			  
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-01 12:29:12" itemprop="dateCreated datePublished" datetime="2020-09-01T12:29:12Z">2020-09-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-03 03:46:57" itemprop="dateModified" datetime="2020-09-03T03:46:57Z">2020-09-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
-                    <span itemprop="name">数据分析</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/" itemprop="url" rel="index">
-                    <span itemprop="name">Excel</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="如何制作图表"><a href="#如何制作图表" class="headerlink" title="如何制作图表"></a>如何制作图表</h2><p>Excel中插入图表，首先选中数据区域，在插入选项卡中的图表区域中选择合适的图表，此时就会在表格中插入一个图表。然后在菜单栏中的设计选项卡下，点击添加元素，这里面有我们常用的图表设计的所有元素，可以根据自己的需要选择修改。</p>
-<h2 id="如何制作复合图表"><a href="#如何制作复合图表" class="headerlink" title="如何制作复合图表"></a>如何制作复合图表</h2><p>复合图表是指在一个图表中，反应多个不同的信息，且不同信息的表现方式也不同，比如条形图和折线图相结合。我们假设我们要处理的数据如下图所示：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/archives/27947.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/50892.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="落空">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落空的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/50892.html" class="post-title-link" itemprop="url">Excel学习之数据透视表</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-			
-			  
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-31 11:40:38" itemprop="dateCreated datePublished" datetime="2020-08-31T11:40:38Z">2020-08-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-01 14:05:54" itemprop="dateModified" datetime="2020-09-01T14:05:54Z">2020-09-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
-                    <span itemprop="name">数据分析</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/" itemprop="url" rel="index">
-                    <span itemprop="name">Excel</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="初识数据透视表"><a href="#初识数据透视表" class="headerlink" title="初识数据透视表"></a>初识数据透视表</h2><p>数据透视表在使用的时候非常简单，但是我们得先想清楚一些问题，再开始动手。</p>
-<p><strong>罗列什么、汇总什么</strong></p>
-<p>把需要罗列的部分放入行区域当中，需要计算的字段放入值区域当中。</p>
-<p><strong>他们是怎样的关系，要按照怎样的顺序来排列</strong></p>
-<p>如果是上下级关系的，那我们就全部放在行区域内，如果是交叉区域的，就放在列区域内，在同一个区域就要按照顺序来进行摆放</p>
-<p><strong>以什么方式来进行汇总？是合计数、求平均、还是计数值？</strong></p>
-<p><strong>是否需要分页进行筛选？</strong></p>
-<p>使用筛选器。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/archives/50892.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/4338.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="落空">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落空的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/4338.html" class="post-title-link" itemprop="url">Excel学习之路之微图表</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-			
-			  
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-30 15:27:03" itemprop="dateCreated datePublished" datetime="2020-08-30T15:27:03Z">2020-08-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-01 14:05:54" itemprop="dateModified" datetime="2020-09-01T14:05:54Z">2020-09-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
-                    <span itemprop="name">数据分析</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/" itemprop="url" rel="index">
-                    <span itemprop="name">Excel</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="什么是微图表"><a href="#什么是微图表" class="headerlink" title="什么是微图表"></a>什么是微图表</h2><p>微图表简单的说就是在单元格内绘制的图表，用来直观的反应数据的大小，从而实现数据与图表的一体化。示例如下图。</p>
-<p><img src="https://i.imgur.com/fnxrIjW.png" alt="微图表示例"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/archives/4338.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/13281.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="落空">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落空的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/13281.html" class="post-title-link" itemprop="url">Excel学习之路-函数</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-			
-			  
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-29 12:09:53" itemprop="dateCreated datePublished" datetime="2020-08-29T12:09:53Z">2020-08-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-01 14:05:54" itemprop="dateModified" datetime="2020-09-01T14:05:54Z">2020-09-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
-                    <span itemprop="name">数据分析</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/" itemprop="url" rel="index">
-                    <span itemprop="name">Excel</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="函数基础"><a href="#函数基础" class="headerlink" title="函数基础"></a>函数基础</h2><p>函数是我们对原本数据进行计算统计或者用来增加字段的一种表达方式。</p>
-<ol>
-<li>兼容性函数 — 38</li>
-<li>多维数据集函数 — 7</li>
-<li>数据库函数 — 12</li>
-<li>日期和时间函数  — 22</li>
-<li>工程函数 — 41</li>
-<li>财务函数 — 53</li>
-<li>信息函数 —17</li>
-<li>逻辑函数 — 7</li>
-<li>查找和引用函数 — 20</li>
-<li>数学和三角函数 — 63</li>
-<li>统计函数 — 98</li>
-<li>文本函数 — 27</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/archives/13281.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1372,20 +1996,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">48</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1697,13 +2321,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">87k</span>
+    <span title="站点总字数">113k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:19</span>
+    <span title="站点阅读时长">1:43</span>
 </div>
 
         

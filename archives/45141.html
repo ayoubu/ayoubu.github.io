@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Tp_uCM85etMVq9MuOfdPYQ6aA4SI0lOYqjanBUw5BuQ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://ayoubu.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Requests 安装命令行安装：python -m pip install requests 如果你安装了Anaconda，直接在Prompt中使用：pip install requests 如果你是下载了requests的包，直接cd到requests文件夹中：python - m pip install 快速开始发送请求在安装好Requests库之后，我们来看看Requests怎么使用。 首">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Requests学习">
+<meta property="og:url" content="https://ayoubu.github.io/archives/45141.html">
+<meta property="og:site_name" content="落空的个人博客">
+<meta property="og:description" content="Requests 安装命令行安装：python -m pip install requests 如果你安装了Anaconda，直接在Prompt中使用：pip install requests 如果你是下载了requests的包，直接cd到requests文件夹中：python - m pip install 快速开始发送请求在安装好Requests库之后，我们来看看Requests怎么使用。 首">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.imgur.com/q2VGZdq.png">
+<meta property="og:image" content="https://i.imgur.com/hR7aDaJ.png">
+<meta property="article:published_time" content="2020-09-09T20:07:30.000Z">
+<meta property="article:modified_time" content="2020-09-15T08:43:17.273Z">
+<meta property="article:author" content="落空">
+<meta property="article:tag" content="爬虫">
+<meta property="article:tag" content="Requests">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/q2VGZdq.png">
+
+
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<link rel="stylesheet" type="text/css" href="/css/injector.css" />
+  <title>Requests学习 | 落空的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落空的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落空的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我慢慢明白了为什么我不快乐，因为我总是期待一个结果。</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">48</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">32</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/45141.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Requests学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-09 20:07:30" itemprop="dateCreated datePublished" datetime="2020-09-09T20:07:30Z">2020-09-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-15 08:43:17" itemprop="dateModified" datetime="2020-09-15T08:43:17Z">2020-09-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/" itemprop="url" rel="index">
+                    <span itemprop="name">数据获取</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Requests-安装"><a href="#Requests-安装" class="headerlink" title="Requests 安装"></a>Requests 安装</h2><p>命令行安装：<code>python -m pip install requests</code></p>
+<p>如果你安装了Anaconda，直接在Prompt中使用：<code>pip install requests</code></p>
+<p>如果你是下载了requests的包，直接cd到requests文件夹中：<code>python - m pip install</code></p>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h3><p>在安装好Requests库之后，我们来看看Requests怎么使用。</p>
+<p>首先，导入库。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>如果我们试着访问一个网页，我们可以发送下列请求：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r = requests.get(<span class="string">&quot;https://www.baidu.com&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>此时我们得到了一个名为<code>r</code>的<code>Requests</code>对象，我们可以从这个对象中得到所有我们需要的网页中的信息。</p>
+<p>除此之外我们还可以发送一个HTTP POST请求：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r = requests.post(<span class="string">&#x27;http://httpbin.org/post&#x27;</span>, data = &#123;<span class="string">&#x27;key&#x27;</span>:<span class="string">&#x27;value&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>对于其它的请求，比如：PUT，DELETE，HEAD 以及 OPTIONS 请求也一样简单：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r = requests.put(<span class="string">&#x27;http://httpbin.org/put&#x27;</span>, data = &#123;<span class="string">&#x27;key&#x27;</span>:<span class="string">&#x27;value&#x27;</span>&#125;)</span><br><span class="line">r = requests.delete(<span class="string">&#x27;http://httpbin.org/delete&#x27;</span>)</span><br><span class="line">r = requests.head(<span class="string">&#x27;http://httpbin.org/get&#x27;</span>)</span><br><span class="line">r = requests.options(<span class="string">&#x27;http://httpbin.org/get&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>关于这些请求的含义可以参考：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.w3school.com.cn/tags/html_ref_httpmethods.asp">GET 对比 POST</a></p>
+<h3 id="传递URL参数"><a href="#传递URL参数" class="headerlink" title="传递URL参数"></a>传递URL参数</h3><p>我们在发送请求的时候，有时也需要传递一些参数。如果你是手工构建URL，那么数据会以键/值对的形式置于URL中，跟在一个问号的后面。例如：<code>httpbin.org/get?key=val</code>。</p>
+<p>Requests允许使用<code>params</code>关键字参数，以一个字符串字典来提供这些参数。例如：如果你想传递<code>key1=value1</code> 和 <code>key2=value2</code> 到 <code>httpbin.org/get</code> ，那么我们可以使用如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload = &#123;<span class="string">&#x27;key1&#x27;</span>:<span class="string">&#x27;value1&#x27;</span>,<span class="string">&#x27;key2&#x27;</span>:<span class="string">&#x27;value2&#x27;</span>&#125;</span><br><span class="line">r = requests.get(<span class="string">&quot;http://httpbin.org/get&quot;</span>,params=payload)</span><br></pre></td></tr></table></figure>
+
+<p>我们也可以将一个列表作为值传入：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">payload = &#123;<span class="string">&#x27;key1&#x27;</span>: <span class="string">&#x27;value1&#x27;</span>, <span class="string">&#x27;key2&#x27;</span>: [<span class="string">&#x27;value2&#x27;</span>, <span class="string">&#x27;value3&#x27;</span>]&#125;</span><br><span class="line"></span><br><span class="line">r = requests.get(<span class="string">&#x27;http://httpbin.org/get&#x27;</span>, params=payload)</span><br><span class="line">print(r.url)</span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line">http://httpbin.org/get?key1=value1&amp;key2=value2&amp;key2=value3</span><br></pre></td></tr></table></figure>
+
+<p>注：如果字典内的值为<code>None</code>，则不会被添加。</p>
+<p><strong>url编码：</strong>如果我们看到浏览器中的地址中有<code>%</code>，则说明该url是经过编码的，可以使用在线解码工具对其进行解码。</p>
+<p><strong>补充：</strong>传递参数也可以直接使用字符串拼接的方式，将我们需要访问的内容和链接地址拼接在一起。<code>&quot;https://www.baidu.com/s?wd=&#123;&#125;&quot;.format(&quot;python&quot;)</code>。</p>
+<h3 id="响应内容"><a href="#响应内容" class="headerlink" title="响应内容"></a>响应内容</h3><p>通过向服务器发送请求，我们能得到服务器的响应内容，我们我之前向百度发送的请求：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.get(<span class="string">&#x27;https://www.baidu.com&#x27;</span>)</span><br><span class="line"><span class="comment"># 此时 返回一个Response对象r</span></span><br><span class="line"><span class="comment"># 对r进行解析</span></span><br><span class="line">print(r.text)</span><br><span class="line"><span class="comment"># 此时打印的就是返回的整个网页的代码。</span></span><br></pre></td></tr></table></figure>
+
+<p><code>r.text</code> 就是对来自服务器的内容进行解析，一般情况下Requests会根据HTTP的头来猜测使用什么方法对网页进行解析。我们可以使用<code>r.encoding</code> 来查看当前解析网页的编码格式。当然我们也可以根据自己的需要设置我们想使用的解码格式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>r.encoding</span><br><span class="line"><span class="string">&#x27;ISO-8859-1&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r.encoding = <span class="string">&#x27;utf-8&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>一旦我们设置了新的编码格式，当我们再次调用<code>r.text</code> 时，Requests将会使用新的解码格式进行解码。</p>
+<h3 id="二进制响应内容"><a href="#二进制响应内容" class="headerlink" title="二进制响应内容"></a>二进制响应内容</h3><p>我们也可以使用非文本的方式来访问响应<code>r</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">r.content</span><br><span class="line">#此时得到信息由于编码的问题可能会出现乱码。</span><br></pre></td></tr></table></figure>
+
+<p>假如我们返回的信息是一张图片的编码，那么我们就可以使用图片的方式对返回的数据进行解析，然后我们就可以得到一张图片了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</span><br><span class="line"></span><br><span class="line">i = Image.open(BytesIO(r.content))</span><br></pre></td></tr></table></figure>
+
+<p>我们可以直接使用文件读写的方式来保存文件，什么类型的都可以，只需要指定对应的文件名就好。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment">#发送请求</span></span><br><span class="line">response = requests.get(<span class="string">&quot;图片地址&quot;</span>)</span><br><span class="line"><span class="comment"># 保存</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">&quot;文件名&quot;</span>,<span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(response.content)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Requests-常用方法"><a href="#Requests-常用方法" class="headerlink" title="Requests 常用方法"></a>Requests 常用方法</h2><ul>
+<li>response.text</li>
+<li>response.content</li>
+<li>response.status_code</li>
+<li>response.request.headers</li>
+<li>response.headers</li>
+</ul>
+<h3 id="response-text-和-response-content-的区别"><a href="#response-text-和-response-content-的区别" class="headerlink" title="response.text 和 response.content 的区别"></a>response.text 和 response.content 的区别</h3><ul>
+<li><strong>response.text</strong><ul>
+<li>类型： str</li>
+<li>解码类型：根据HTTP头部对相应的编码作出有根据的推测，推测的文本编码</li>
+<li>修改编码方式：<code>response.encoding = &quot;gbk&quot;</code> </li>
+</ul>
+</li>
+<li><strong>response.content</strong><ul>
+<li>类型：bytes</li>
+<li>解码类型：没有指定</li>
+<li>如何修改编码方式：<code>response.content.decode(&quot;utf8&quot;)</code></li>
+</ul>
+</li>
+<li><strong>requests中解决编解码的方法：</strong><ul>
+<li>response.content.decode()</li>
+<li>response.content.decode(“gbk”)</li>
+<li>reponse.text</li>
+</ul>
+</li>
+</ul>
+<h3 id="发送header的请求"><a href="#发送header的请求" class="headerlink" title="发送header的请求"></a>发送header的请求</h3><p>为了模拟浏览器，欺骗服务器，从而获取和浏览器一致的内容，我们发送向服务器发送请求的时候最好带上header（浏览器的信息）</p>
+<ul>
+<li>header的形式：字典</li>
+<li>headers={“User-Agent”: “Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36”} </li>
+<li>用法：<code>requests.get(url, headers=headers)</code></li>
+</ul>
+<h3 id="发送POST请求"><a href="#发送POST请求" class="headerlink" title="发送POST请求"></a>发送POST请求</h3><p>哪些地方我们会使用POST请求：</p>
+<ul>
+<li>登录注册（POST 比 GET 更安全）</li>
+<li>需要传输大文本内容的时候（POST 请求对数据长度没有要求）</li>
+</ul>
+<p><strong>用法：</strong> <code>response = requests.post(&quot;http://www.baidu.com/&quot;,data = data, headers = headers)</code>，data的形式：字典。</p>
+<h3 id="使用代理"><a href="#使用代理" class="headerlink" title="使用代理"></a>使用代理</h3><p>为什么我们要使用代理呢？</p>
+<ul>
+<li>让服务器以为不是同一个客户端在请求</li>
+<li>防止我们的真实地址被泄露，防止被追究责任</li>
+</ul>
+<p>原理图：</p>
+<img src="https://i.imgur.com/q2VGZdq.png" alt="使用代理原理图" style="zoom:80%;" />
+
+<p><strong>正向代理和反向代理：</strong></p>
+<p>正向代理和反向代理的主要区别就是我们知不知道我们要访问的服务器的具体信息，如果我们知道，就是正向代理，不知道就是反向代理</p>
+<img src="https://i.imgur.com/hR7aDaJ.png" alt="正向代理和反向代理" style="zoom:80%;" />
+
+<p>如上图所示，反向代理我们实际访问的是nginx服务器，nginx服务器再根据我们的访问请求从真实服务器上给我们返回我们想要的信息，这样做可以很好的保护我们的信息安全，同时也可以做到负载均衡。</p>
+<p><strong>如何使用：</strong></p>
+<ul>
+<li><p>在我们发送get请求的时候只需要添加一个proxies参数就好，比如：<code>requests.get(&quot;http://www.baidu.com&quot;,proxies=proxies)</code>，</p>
+</li>
+<li><p>proxies的形式：字典（键值对形式，键：协议；值：协议+IP地址+端口号）</p>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">proxies=&#123;</span><br><span class="line">    <span class="string">&quot;http&quot;</span>:<span class="string">&quot;http://12.34.56.79:9527&quot;</span>,    <span class="comment">#如果我们访问的为http请求用这个</span></span><br><span class="line">    <span class="string">&quot;https&quot;</span>:<span class="string">&quot;https://12.34..56.79:9527&quot;</span>  <span class="comment">#如果我们访问的为https请求用这个</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代理IP我们可以在网上获取，可以使用爬虫批量下载下来备用。</p>
+<p><strong>使用代理IP注意事项：</strong></p>
+<ul>
+<li><p>开始时准备一堆IP地址组成IP池，使用时随机选择一个IP地址使用。</p>
+</li>
+<li><p>如何随机选择代理IP：根据使用次数进行排序，让使用次数少的IP有更大的可能性被用到。</p>
+<ul>
+<li>将每个IP地址组合成一个字典：<code>&#123;&quot;ip:ip&quot;,&quot;times&quot;:0&#125;</code>。</li>
+<li>把这些IP地址放进一个列表中，对这个列表进行排序，按照使用次数进行排序</li>
+<li>选择使用次数少的10个IP，从中随机选择一个使用。</li>
+</ul>
+</li>
+<li><p>检查代理IP的可用性</p>
+<ul>
+<li>可以使用requests添加超参数，判断IP地址的质量</li>
+<li>在线代理IP质量检测的网站</li>
+</ul>
+</li>
+</ul>
+<h3 id="cookie-和-session"><a href="#cookie-和-session" class="headerlink" title="cookie 和 session"></a>cookie 和 session</h3><p><strong>处理cookies、session请求：</strong></p>
+<p>requests 提供了一个叫session 类，来实现客户端和服务端的会话保持。</p>
+<p><strong>使用方法：</strong></p>
+<ul>
+<li>实例化一个session对象：<code>session = requests.session()</code></li>
+<li>让session发送get或者post请求：<code>response = session.get(url,headers)</code></li>
+</ul>
+<p><strong>cookie 和 session的区别 ：</strong></p>
+<ul>
+<li>cookie数据存放在客户的浏览器上，session数据放在服务器上</li>
+<li>cookie不是很安全，别人可以分析存放在本地的cookie并进行cookie欺骗。</li>
+<li>session会在一定时间内保存在服务器上，当访问曾多，会比较占用你服务器的性能。</li>
+<li>单个cookie保存的数据不能超过4k，很多浏览器都限制一个站点最多保存20个cookie。</li>
+</ul>
+<p><strong>爬虫处理cookie和session：</strong> </p>
+<ul>
+<li>带上cookie、session的好处：能够请求到登录之后的页面。</li>
+<li>带上cookie、session的弊端：一套cookie和session往往和一个用户对应，请求太快，请求次数太多，容易被服务器识别为爬虫。</li>
+<li>能不使用就不使用，如果为了获得登录之后的页面时，就必须发送带有cookies的请求了。</li>
+</ul>
+<p><strong>使用requests提供的session类来请求登录之后的网站的思路：</strong></p>
+<ul>
+<li>实例化session</li>
+<li>先使用session发送请求，登录好网站，把cookie保存在session中</li>
+<li>再使用session请求登录后才能访问的网站，session能够自动的携带登录成功时保存在其中的cookie，进行请求。</li>
+</ul>
+<p><strong>不发送post请求，使用cookie获取登录后的页面：</strong></p>
+<ul>
+<li>cookie过期时间很长的网站</li>
+<li>在cookie过期之前能够拿到所有数据</li>
+<li>配合其它程序一起使用，其它程序专门获取cookie，当前程序专门请求页面</li>
+</ul>
+<p><strong>切割cookies的技巧：</strong></p>
+<p>在使用cookies参数的时候，我们需要将cookie切割成键值对的形式，此时可以使用字典引导式：<code>cookies=&#123;i.split(&quot;=&quot;)[0]:i.split(&quot;=&quot;)[1] for i in cookie.split(&quot;; &quot;)&#125;</code> </p>
+<p><strong>生成url列表的技巧：</strong></p>
+<p><code>[self.url_temp.format(i*50) for i in range(1000)]</code> </p>
+<h3 id="获取登录后的页面的三种方式"><a href="#获取登录后的页面的三种方式" class="headerlink" title="获取登录后的页面的三种方式"></a>获取登录后的页面的三种方式</h3><ul>
+<li>实例化session，使用session发送post请求，再使用他获取登录后的页面</li>
+<li>headers中添加cookie键，值为cookie字符串</li>
+<li>在请求方法中添加cookies参数，接收字典形式的cookie。字典形式的cookie中的键是cookie的name对应值，值是cookie的value对应值。</li>
+</ul>
+<h2 id="Requests-小技巧"><a href="#Requests-小技巧" class="headerlink" title="Requests 小技巧"></a>Requests 小技巧</h2><ol>
+<li><code>requests.util.dict_from_cookiejar </code>把cookie对象转化为字典</li>
+</ol>
+<p>在我们进行requests请求的时候，我们也会得到一个本地的cookie，此时如果我们想获取这个cookie，并将其转化为我们要使用的cookies对象的时候，可以调用此方法。</p>
+<ol start="2">
+<li>对url地址进行编码和解码</li>
+</ol>
+<p>在url地址中出现中文的字符时往往会被进行url编码，变成一堆我们看不懂的东西，我们可以使用在线查看工具进行查看，当然requests中也提供的相应的方法对url进行解码。我们在访问网址时没有进行编码也是可以访问成功的。</p>
+<p><strong>解码：</strong><code>requests.utils.unquote(&quot;需要解码的url地址&quot;)</code></p>
+<p><strong>编码：</strong><code>requests.utils.quote(&quot;需要编码的url地址&quot;)</code></p>
+<ol start="3">
+<li>请求SSL证书验证</li>
+</ol>
+<p>当我们在浏览器中访问一些网址的时候，可能会弹出一个警告：<code>您的连接不是私密连接</code>，此时只有点击隐藏详情中的<code>继续前往...</code>时，才能继续访问，这是因为该网站没有够吗SSL认证的加密算法导致的。</p>
+<p>如果想要忽视证数导致的访问问题，可以这样访问：<code>response=requests.get(&quot;https://www.12306.cn/mormhweb/&quot;, verify=False)</code></p>
+<ol start="3">
+<li>设置程序响应时间</li>
+</ol>
+<p>在我们请求url地址时，由于网络波动问题，可能造成程序一直等待响应的状态，会大大降低我们程序的速度，此时我们可以在响应中增加一个timeout参数，来控制响应的时间。</p>
+<p>如：<code>response=requests.get(url.timeout=10) #timeout的单位为：秒</code> </p>
+<p>有的时候请求时间太久的问题可以通过重新请求的方式来解决，在python中有一个模块可以让我们的程序执行指定的次数，如果还是有错误，再返回。这个模块为：<code>retrying</code>，下面将演示这个模块配合请求使用的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> retrying <span class="keyword">import</span> retry</span><br><span class="line">headers = &#123;&#125;</span><br><span class="line"><span class="comment"># 以装饰器的方式使用retry方法</span></span><br><span class="line"><span class="meta">@retry(stop_max_attempt_number=3)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_parse_url</span>(<span class="params">url</span>):</span></span><br><span class="line">    response = requests.get(url, headers= headers,timeout=<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">assert</span> response.status_code == <span class="number">200</span>    <span class="comment"># 断言，如果为假，报错。</span></span><br><span class="line">    <span class="keyword">return</span> response.content.decode()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_url</span>(<span class="params">url</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        html_str = _parse_url(url)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        html_str = <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\32542.html" rel="bookmark">动态html数据获取</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\20690.html" rel="bookmark">数据提取方法</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\40952.html" rel="bookmark">爬虫编写技巧</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\48798.html" rel="bookmark">爬虫学习01</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="落空 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="落空 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
+              <a href="/tags/Requests/" rel="tag"># Requests</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/48798.html" rel="prev" title="爬虫学习01">
+      <i class="fa fa-chevron-left"></i> 爬虫学习01
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/63676.html" rel="next" title="命令行运行python程序">
+      命令行运行python程序 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Requests-%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">Requests 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B"><span class="nav-number">2.</span> <span class="nav-text">快速开始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82"><span class="nav-number">2.1.</span> <span class="nav-text">发送请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E9%80%92URL%E5%8F%82%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">传递URL参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E5%86%85%E5%AE%B9"><span class="nav-number">2.3.</span> <span class="nav-text">响应内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%93%8D%E5%BA%94%E5%86%85%E5%AE%B9"><span class="nav-number">2.4.</span> <span class="nav-text">二进制响应内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Requests-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">Requests 常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#response-text-%E5%92%8C-response-content-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.1.</span> <span class="nav-text">response.text 和 response.content 的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81header%E7%9A%84%E8%AF%B7%E6%B1%82"><span class="nav-number">3.2.</span> <span class="nav-text">发送header的请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81POST%E8%AF%B7%E6%B1%82"><span class="nav-number">3.3.</span> <span class="nav-text">发送POST请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86"><span class="nav-number">3.4.</span> <span class="nav-text">使用代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie-%E5%92%8C-session"><span class="nav-number">3.5.</span> <span class="nav-text">cookie 和 session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%99%BB%E5%BD%95%E5%90%8E%E7%9A%84%E9%A1%B5%E9%9D%A2%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">3.6.</span> <span class="nav-text">获取登录后的页面的三种方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Requests-%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="nav-number">4.</span> <span class="nav-text">Requests 小技巧</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="落空"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">落空</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ayoubu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ayoubu@outlook.com" title="E-Mail → mailto:ayoubu@outlook.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5095666460" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5095666460" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/ayoubu" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-zhihu"></i>知乎</a>
+      </span>
+  </div>
+
+
+<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">落空</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">113k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:43</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  <script async src="/js/cursor/love.min.js"></script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>
