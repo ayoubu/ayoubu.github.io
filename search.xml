@@ -397,6 +397,8 @@
 <td>正则表达式、xpath</td>
 </tr>
 </tbody></table>
+<a id="more"></a>
+
 <h2 id="json模块复习"><a href="#json模块复习" class="headerlink" title="json模块复习"></a>json模块复习</h2><h3 id="数据提取值JSON"><a href="#数据提取值JSON" class="headerlink" title="数据提取值JSON"></a>数据提取值JSON</h3><p>JSON(JavaScript Object Notion) 是一种轻量级的数据交换格式，它使得人们很容易的进行阅读和编写，同时也方便了机器进行解析和生成。适用于进行数据交换的场景，比如网站前台与后台之间的数据交互。</p>
 <p>由于把json数据转化为python内建数据类型很简单，所以爬虫中，如果我们能够找到返回json数据的URL，就尽量使用这种URL。</p>
 <p><strong>常用方法：</strong></p>

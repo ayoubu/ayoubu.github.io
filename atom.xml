@@ -75,16 +75,30 @@
     <link href="https://ayoubu.github.io/archives/20690.html"/>
     <id>https://ayoubu.github.io/archives/20690.html</id>
     <published>2020-09-12T16:38:19.000Z</published>
-    <updated>2020-09-20T13:12:34.404Z</updated>
+    <updated>2020-09-20T13:21:50.270Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;基础知识&quot;&gt;&lt;a href=&quot;#基础知识&quot; class=&quot;headerlink&quot; title=&quot;基础知识&quot;&gt;&lt;/a&gt;基础知识&lt;/h2&gt;&lt;h3 id=&quot;数据提取&quot;&gt;&lt;a href=&quot;#数据提取&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <summary type="html">&lt;h2 id=&quot;基础知识&quot;&gt;&lt;a href=&quot;#基础知识&quot; class=&quot;headerlink&quot; title=&quot;基础知识&quot;&gt;&lt;/a&gt;基础知识&lt;/h2&gt;&lt;h3 id=&quot;数据提取&quot;&gt;&lt;a href=&quot;#数据提取&quot; class=&quot;headerlink&quot; title=&quot;数据提取&quot;&gt;&lt;/a&gt;数据提取&lt;/h3&gt;&lt;p&gt;数据提取就是从响应中获取我们想要的数据的过程。提取出的数据我们可以结构化后保存在我们的数据库中。&lt;/p&gt;
+&lt;h3 id=&quot;数据分类&quot;&gt;&lt;a href=&quot;#数据分类&quot; class=&quot;headerlink&quot; title=&quot;数据分类&quot;&gt;&lt;/a&gt;数据分类&lt;/h3&gt;&lt;p&gt;数据主要分为&lt;strong&gt;结构化数据&lt;/strong&gt;和&lt;strong&gt;非结构化数据&lt;/strong&gt;。主要是看数据的规律是否明显。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;数据类型&lt;/th&gt;
+&lt;th&gt;示例&lt;/th&gt;
+&lt;th&gt;处理方法&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;结构化数据&lt;/td&gt;
+&lt;td&gt;json、xml&lt;/td&gt;
+&lt;td&gt;转换为python数据类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;非结构化数据&lt;/td&gt;
+&lt;td&gt;html 等&lt;/td&gt;
+&lt;td&gt;正则表达式、xpath&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;</summary>
     
     
     
