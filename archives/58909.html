@@ -66,7 +66,7 @@
 <meta property="og:image" content="https://i.imgur.com/JE9Bo1Y.png">
 <meta property="og:image" content="https://i.imgur.com/VMChheo.png">
 <meta property="article:published_time" content="2020-09-18T12:32:41.000Z">
-<meta property="article:modified_time" content="2020-09-20T13:17:55.093Z">
+<meta property="article:modified_time" content="2020-09-21T03:25:42.204Z">
 <meta property="article:author" content="落空">
 <meta property="article:tag" content="Scrapy">
 <meta name="twitter:card" content="summary">
@@ -258,7 +258,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-20 13:17:55" itemprop="dateModified" datetime="2020-09-20T13:17:55Z">2020-09-20</time>
+                <time title="修改时间：2020-09-21 03:25:42" itemprop="dateModified" datetime="2020-09-21T03:25:42Z">2020-09-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -291,14 +291,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>7.4k</span>
+              <span>9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
+              <span>8 分钟</span>
             </span>
 
         </div>
@@ -523,6 +523,28 @@
 <li>response.body：响应体，也就是 html 代码，默认是 byte 类型</li>
 <li>response.requests.headers：当前响应的请求头</li>
 </ul>
+<h3 id="setting-配置文件"><a href="#setting-配置文件" class="headerlink" title="setting 配置文件"></a>setting 配置文件</h3><p>为了方便自己和别人修改程序的一些设置参数，配置文件中存放一些公共的变量（比如数据库的地址，账号密码等）。</p>
+<p>在配置文件中，一般用全大写字母命名变量名：<code>SQL_HOST=&#39;localhost&#39;</code></p>
+<p>在 spider 中，setting 能够通过 self.settings 的方式访问到：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySpider</span>(<span class="params">scrapy.Spider</span>):</span></span><br><span class="line">    name = <span class="string">&#x27;myspider&#x27;</span></span><br><span class="line">    start_urls = [<span class="string">&#x27;http://www.baidu.com&#x27;</span>]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        print(<span class="string">&quot;Existing settings: %s&quot;</span> % self.settings.attributes.keys())</span><br></pre></td></tr></table></figure>
+
+<p><strong>如何在 pipeline 中使用 setting 所设置的内容：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyPipeline</span>(<span class="params">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open_spider</span>(<span class="params">self,spider</span>):</span></span><br><span class="line">        print(spider.setting.get(<span class="string">&quot;BOT_NAME&quot;</span>,<span class="literal">None</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="pipeline-深入使用"><a href="#pipeline-深入使用" class="headerlink" title="pipeline 深入使用"></a>pipeline 深入使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JsonWriterPipeline</span>(<span class="params">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open_spider</span>(<span class="params">self, spider</span>):</span>  <span class="comment">#在爬虫开启的时候执行，仅执行一次</span></span><br><span class="line">        self.file=open(spider.settings.get(<span class="string">&quot;SAVE_FILE&quot;</span>, <span class="string">&quot;./temp.json&quot;</span>), <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">close_spider</span>(<span class="params">self, item, spider</span>):</span> <span class="comment">#在爬虫关闭的时候执行，仅执行一次</span></span><br><span class="line">        self.file.close()</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span>(<span class="params">self,item, spider</span>):</span></span><br><span class="line">        line = json.dumps(dict(item)) + <span class="string">&quot;\n&quot;</span></span><br><span class="line">        self.file.write(line)</span><br><span class="line">        <span class="keyword">return</span> item <span class="comment">#不 return 的情况下，另一个权重较低的pipeline就不会获取到该 item</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="MongoDB-回顾"><a href="#MongoDB-回顾" class="headerlink" title="MongoDB 回顾"></a>MongoDB 回顾</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pymongo <span class="keyword">import</span> MongoClient</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SnbookPipeline</span>(<span class="params">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open_spider</span>(<span class="params">self, spider</span>):</span></span><br><span class="line">        con = MongoClient(spider.setting.get(<span class="string">&quot;HOST&quot;</span>),spider.setting.get(<span class="string">&quot;PORT&quot;</span>)) <span class="comment">#实例化一个 mongoclient</span></span><br><span class="line">        db = con[spider.setting.get(<span class="string">&quot;DB&quot;</span>)] <span class="comment"># 连接到数据库</span></span><br><span class="line">        self.collection = db[spider.settings.get(<span class="string">&quot;COLLECTION&quot;</span>)] <span class="comment">#连接到集合</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span>(<span class="params">self, item, spider</span>):</span></span><br><span class="line">        self.collection.insert(dict(item)) <span class="comment">#插入字典形式的item</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>mongodb shell 命令回顾：</strong></p>
+<ul>
+<li>show dbs  —&gt; 查看数据库</li>
+<li>use books —&gt; 使用数据库</li>
+<li>db.suning.find() —&gt; 无条件查找</li>
+<li>db.suning.find().pretty() —&gt; 查找并美化打印</li>
+<li>db.suning.find().count() —&gt; 查找并统计</li>
+<li>db.suning.remove({‘catetory’:’文言小说’})  —&gt; 删除所有category为小说的数据</li>
+<li>db.suning.drop()  –&gt; 删除集合（表）</li>
+</ul>
 
     </div>
 
@@ -626,7 +648,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#scrapy-%E7%9A%84%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">scrapy 的基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-scrapy"><span class="nav-number">1.1.</span> <span class="nav-text">什么是 scrapy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scrapy-%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">scrapy 的工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scrapy-%E7%9A%84%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">scrapy 的数据流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scrapy-%E5%85%A5%E9%97%A8"><span class="nav-number">3.</span> <span class="nav-text">Scrapy 入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy-%E5%AE%89%E8%A3%85"><span class="nav-number">3.1.</span> <span class="nav-text">Scrapy 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy-%E4%B8%80%E8%88%AC%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.2.</span> <span class="nav-text">Scrapy 一般使用步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA-scrapy-%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.2.1.</span> <span class="nav-text">创建一个 scrapy 项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%88%AC%E8%99%AB"><span class="nav-number">3.2.2.</span> <span class="nav-text">创建一个爬虫</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E5%96%84-spider-%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.3.</span> <span class="nav-text">完善 spider 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spider-%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E5%88%B0-pipeline"><span class="nav-number">3.2.4.</span> <span class="nav-text">spider 的数据传到 pipeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%AE%BE%E7%BD%AE-log"><span class="nav-number">3.2.5.</span> <span class="nav-text">简单设置 log</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy%E7%9A%84%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93"><span class="nav-number">3.3.</span> <span class="nav-text">Scrapy的使用流程总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scrapy-%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">Scrapy 深入学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E8%AF%B7%E6%B1%82"><span class="nav-number">4.1.</span> <span class="nav-text">实现翻页请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Item-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.2.</span> <span class="nav-text">Item 的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E8%A7%A3%E6%9E%90%E5%87%BD%E6%95%B0%E4%B8%AD%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">不同解析函数中传递参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy-%E8%AE%A4%E8%AF%86%E7%A8%8B%E5%BA%8F-debug-%E4%BF%A1%E6%81%AF"><span class="nav-number">4.4.</span> <span class="nav-text">Scrapy 认识程序 debug 信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy-shell"><span class="nav-number">4.5.</span> <span class="nav-text">Scrapy shell</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#scrapy-%E7%9A%84%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">scrapy 的基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-scrapy"><span class="nav-number">1.1.</span> <span class="nav-text">什么是 scrapy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scrapy-%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">scrapy 的工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scrapy-%E7%9A%84%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">scrapy 的数据流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scrapy-%E5%85%A5%E9%97%A8"><span class="nav-number">3.</span> <span class="nav-text">Scrapy 入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy-%E5%AE%89%E8%A3%85"><span class="nav-number">3.1.</span> <span class="nav-text">Scrapy 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy-%E4%B8%80%E8%88%AC%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.2.</span> <span class="nav-text">Scrapy 一般使用步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA-scrapy-%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.2.1.</span> <span class="nav-text">创建一个 scrapy 项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%88%AC%E8%99%AB"><span class="nav-number">3.2.2.</span> <span class="nav-text">创建一个爬虫</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E5%96%84-spider-%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.3.</span> <span class="nav-text">完善 spider 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spider-%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E5%88%B0-pipeline"><span class="nav-number">3.2.4.</span> <span class="nav-text">spider 的数据传到 pipeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%AE%BE%E7%BD%AE-log"><span class="nav-number">3.2.5.</span> <span class="nav-text">简单设置 log</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy%E7%9A%84%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93"><span class="nav-number">3.3.</span> <span class="nav-text">Scrapy的使用流程总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scrapy-%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">Scrapy 深入学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E8%AF%B7%E6%B1%82"><span class="nav-number">4.1.</span> <span class="nav-text">实现翻页请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Item-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.2.</span> <span class="nav-text">Item 的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E8%A7%A3%E6%9E%90%E5%87%BD%E6%95%B0%E4%B8%AD%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">不同解析函数中传递参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy-%E8%AE%A4%E8%AF%86%E7%A8%8B%E5%BA%8F-debug-%E4%BF%A1%E6%81%AF"><span class="nav-number">4.4.</span> <span class="nav-text">Scrapy 认识程序 debug 信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy-shell"><span class="nav-number">4.5.</span> <span class="nav-text">Scrapy shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setting-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.6.</span> <span class="nav-text">setting 配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pipeline-%E6%B7%B1%E5%85%A5%E4%BD%BF%E7%94%A8"><span class="nav-number">4.7.</span> <span class="nav-text">pipeline 深入使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB-%E5%9B%9E%E9%A1%BE"><span class="nav-number">4.8.</span> <span class="nav-text">MongoDB 回顾</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -967,13 +989,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">113k</span>
+    <span title="站点总字数">115k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:43</span>
+    <span title="站点阅读时长">1:44</span>
 </div>
 
         

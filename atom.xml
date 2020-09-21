@@ -6,7 +6,7 @@
   <link href="https://ayoubu.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayoubu.github.io/"/>
-  <updated>2020-09-20T13:17:55.093Z</updated>
+  <updated>2020-09-21T03:25:42.204Z</updated>
   <id>https://ayoubu.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://ayoubu.github.io/archives/58909.html"/>
     <id>https://ayoubu.github.io/archives/58909.html</id>
     <published>2020-09-18T12:32:41.000Z</published>
-    <updated>2020-09-20T13:17:55.093Z</updated>
+    <updated>2020-09-21T03:25:42.204Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;scrapy-的基础概念&quot;&gt;&lt;a href=&quot;#scrapy-的基础概念&quot; class=&quot;headerlink&quot; title=&quot;scrapy 的基础概念&quot;&gt;&lt;/a&gt;scrapy 的基础概念&lt;/h2&gt;&lt;p&gt;在之前学的&lt;code&gt;requests + selenium&lt;/code&gt; 已经可以解决90%的爬虫需求了，而学习 scrapy 是为了让我们爬虫更快，更强。从而提高我们爬虫的效率和速度。&lt;/p&gt;
@@ -244,7 +244,7 @@
     <link href="https://ayoubu.github.io/archives/53312.html"/>
     <id>https://ayoubu.github.io/archives/53312.html</id>
     <published>2020-09-09T15:19:48.000Z</published>
-    <updated>2020-09-09T08:39:22.802Z</updated>
+    <updated>2020-09-21T01:58:47.144Z</updated>
     
     
       
@@ -266,7 +266,7 @@
     
     <category term="MongoDB" scheme="https://ayoubu.github.io/tags/MongoDB/"/>
     
-    <category term="豆瓣" scheme="https://ayoubu.github.io/tags/%E8%B1%86%E7%93%A3/"/>
+    <category term="数据读写" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%86%99/"/>
     
   </entry>
   
