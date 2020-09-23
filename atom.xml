@@ -6,7 +6,7 @@
   <link href="https://ayoubu.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayoubu.github.io/"/>
-  <updated>2020-09-21T03:25:42.204Z</updated>
+  <updated>2020-09-23T04:02:15.981Z</updated>
   <id>https://ayoubu.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://ayoubu.github.io/archives/58909.html"/>
     <id>https://ayoubu.github.io/archives/58909.html</id>
     <published>2020-09-18T12:32:41.000Z</published>
-    <updated>2020-09-21T03:25:42.204Z</updated>
+    <updated>2020-09-23T04:02:15.981Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;scrapy-的基础概念&quot;&gt;&lt;a href=&quot;#scrapy-的基础概念&quot; class=&quot;headerlink&quot; title=&quot;scrapy 的基础概念&quot;&gt;&lt;/a&gt;scrapy 的基础概念&lt;/h2&gt;&lt;p&gt;在之前学的&lt;code&gt;requests + selenium&lt;/code&gt; 已经可以解决90%的爬虫需求了，而学习 scrapy 是为了让我们爬虫更快，更强。从而提高我们爬虫的效率和速度。&lt;/p&gt;
@@ -107,9 +107,9 @@
     <category term="爬虫" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/%E7%88%AC%E8%99%AB/"/>
     
     
-    <category term="json" scheme="https://ayoubu.github.io/tags/json/"/>
-    
     <category term="爬虫" scheme="https://ayoubu.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
+    <category term="json" scheme="https://ayoubu.github.io/tags/json/"/>
     
     <category term="数据提取" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96/"/>
     
@@ -534,11 +534,11 @@
     <category term="Excel" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/"/>
     
     
-    <category term="函数" scheme="https://ayoubu.github.io/tags/%E5%87%BD%E6%95%B0/"/>
-    
     <category term="Excel" scheme="https://ayoubu.github.io/tags/Excel/"/>
     
     <category term="数据分析" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="函数" scheme="https://ayoubu.github.io/tags/%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
