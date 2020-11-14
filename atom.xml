@@ -6,7 +6,7 @@
   <link href="https://ayoubu.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayoubu.github.io/"/>
-  <updated>2020-09-23T04:02:15.981Z</updated>
+  <updated>2020-11-14T05:16:28.281Z</updated>
   <id>https://ayoubu.github.io/</id>
   
   <author>
@@ -15,6 +15,234 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>简历</title>
+    <link href="https://ayoubu.github.io/archives/14882.html"/>
+    <id>https://ayoubu.github.io/archives/14882.html</id>
+    <published>2020-11-14T13:12:19.000Z</published>
+    <updated>2020-11-14T05:16:28.281Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;img src=&quot;https://i.imgur.com/4YmKxwU.jpeg&quot; alt=&quot;头像&quot; style=&quot;zoom:5%;&quot; /&gt;
+
+&lt;h2 id=&quot;个人信息&quot;&gt;&lt;a href=&quot;#个人信息&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="简历" scheme="https://ayoubu.github.io/categories/%E7%AE%80%E5%8E%86/"/>
+    
+    
+    <category term="简历" scheme="https://ayoubu.github.io/tags/%E7%AE%80%E5%8E%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>506-Chapter1</title>
+    <link href="https://ayoubu.github.io/archives/16280.html"/>
+    <id>https://ayoubu.github.io/archives/16280.html</id>
+    <published>2020-10-20T15:04:20.000Z</published>
+    <updated>2020-11-14T05:16:28.245Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;一些定义和区别-（Some-Definitions-and-Distinctions）&quot;&gt;&lt;a href=&quot;#一些定义和区别-（Some-Definitions-and-Distinctions）&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="USM" scheme="https://ayoubu.github.io/categories/USM/"/>
+    
+    <category term="RESEARCH &amp; CONSULTANCY &amp; PROFESSIONAL SKILLS" scheme="https://ayoubu.github.io/categories/USM/RESEARCH-CONSULTANCY-PROFESSIONAL-SKILLS/"/>
+    
+    
+    <category term="CDS506" scheme="https://ayoubu.github.io/tags/CDS506/"/>
+    
+    <category term="CONSULTANCY" scheme="https://ayoubu.github.io/tags/CONSULTANCY/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>505-Chapter2</title>
+    <link href="https://ayoubu.github.io/archives/12584.html"/>
+    <id>https://ayoubu.github.io/archives/12584.html</id>
+    <published>2020-10-19T16:09:20.000Z</published>
+    <updated>2020-11-14T05:16:28.239Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;数据抽象简介&quot;&gt;&lt;a href=&quot;#数据抽象简介&quot; class=&quot;headerlink&quot; title=&quot;数据抽象简介&quot;&gt;&lt;/a&gt;数据抽象简介&lt;/h2&gt;&lt;p&gt;四种基本的数据集类型：&lt;strong&gt;tables, networks, fields and</summary>
+        
+      
+    
+    
+    
+    <category term="USM" scheme="https://ayoubu.github.io/categories/USM/"/>
+    
+    <category term="DATA VISUALISATION &amp; VISUAL ANALYTICS" scheme="https://ayoubu.github.io/categories/USM/DATA-VISUALISATION-VISUAL-ANALYTICS/"/>
+    
+    
+    <category term="CDS505" scheme="https://ayoubu.github.io/tags/CDS505/"/>
+    
+    <category term="Data Abstraction" scheme="https://ayoubu.github.io/tags/Data-Abstraction/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Chapter 1</title>
+    <link href="https://ayoubu.github.io/archives/33679.html"/>
+    <id>https://ayoubu.github.io/archives/33679.html</id>
+    <published>2020-10-18T15:48:32.000Z</published>
+    <updated>2020-11-14T05:16:28.251Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;自然语言处理是几乎是和计算机一同诞生的，从一开始，人们就希望计算机可以读懂人类的语言，与此相关的有：语音和语言处理、人类语言技术、自然语言处理、计算机语言学和语音识别与合成。&lt;/p&gt;
+&lt;p&gt;与此相关的应用有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对话代理（conversational agent），如HAL。&lt;/li&gt;
+&lt;li&gt;对话系统&lt;/li&gt;
+&lt;li&gt;机器翻译系统&lt;/li&gt;
+&lt;li&gt;基于网络的自动问答系统&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="USM" scheme="https://ayoubu.github.io/categories/USM/"/>
+    
+    <category term="TEXT AND SPEECH ANALYTICS" scheme="https://ayoubu.github.io/categories/USM/TEXT-AND-SPEECH-ANALYTICS/"/>
+    
+    
+    <category term="CDS522" scheme="https://ayoubu.github.io/tags/CDS522/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CDS505-Weeks1</title>
+    <link href="https://ayoubu.github.io/archives/27317.html"/>
+    <id>https://ayoubu.github.io/archives/27317.html</id>
+    <published>2020-10-13T11:26:26.000Z</published>
+    <updated>2020-11-14T05:16:28.248Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;什么是可视化（Visualization）&quot;&gt;&lt;a href=&quot;#什么是可视化（Visualization）&quot; class=&quot;headerlink&quot; title=&quot;什么是可视化（Visualization）&quot;&gt;&lt;/a&gt;什么是可视化（Visualization）&lt;/h2&gt;&lt;p&gt;有几个可视化经典的例子&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Minard’s Napolean’s Army map&lt;/li&gt;
+&lt;li&gt;John Snow’s cholera map&lt;/li&gt;
+&lt;li&gt;Fairplay’s Business Graphics&lt;/li&gt;
+&lt;li&gt;Harry Beck’s London Underground map&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;可视化的定义&quot;&gt;&lt;a href=&quot;#可视化的定义&quot; class=&quot;headerlink&quot; title=&quot;可视化的定义&quot;&gt;&lt;/a&gt;可视化的定义&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;定义&lt;/strong&gt;：基于计算机的可视化可以对数据进行一种视觉化的表示，旨在帮助人们更有效地执行任务。也就是说，可视化的目的是为了增强人的能力而不是代替人。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="USM" scheme="https://ayoubu.github.io/categories/USM/"/>
+    
+    <category term="DATA VISUALISATION &amp; VISUAL ANALYTICS" scheme="https://ayoubu.github.io/categories/USM/DATA-VISUALISATION-VISUAL-ANALYTICS/"/>
+    
+    
+    <category term="CDS505" scheme="https://ayoubu.github.io/tags/CDS505/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>离散值的概率分布</title>
+    <link href="https://ayoubu.github.io/archives/33155.html"/>
+    <id>https://ayoubu.github.io/archives/33155.html</id>
+    <published>2020-09-29T17:12:54.000Z</published>
+    <updated>2020-11-14T05:16:28.277Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;二项分布&quot;&gt;&lt;a href=&quot;#二项分布&quot; class=&quot;headerlink&quot; title=&quot;二项分布&quot;&gt;&lt;/a&gt;二项分布&lt;/h2&gt;&lt;p&gt;二项分布的具体形状由n与p决定。因此，二项分布（binomial distribution）也能记为 Bn(n,p)。&lt;/p&gt;
+&lt;p&gt;在我们求二项分布中某个条件出现的次数的概率时，只要将每种情况的概率相加就好，二项分布每种排列组合的概率相等。对于我们求任意$n、p与k$ 的条件下 $P(X=k)$ 的值，有:&lt;/p&gt;
+&lt;p&gt;$P(X=k)=C_n^kp^kq^{n-k}$   $(k=0,1,2,···,n)$&lt;/p&gt;
+&lt;h2 id=&quot;期望值&quot;&gt;&lt;a href=&quot;#期望值&quot; class=&quot;headerlink&quot; title=&quot;期望值&quot;&gt;&lt;/a&gt;期望值&lt;/h2&gt;&lt;p&gt;有一组离散值，每个值出现的概率之和为1。我们可以想象这些离散值占的面积为它们出现的概率，而它们值即为高度，而我们求期望其实就是在求这些值的平均高度。即：&lt;/p&gt;
+&lt;p&gt;$E|X| = (高1)×(底面积1)+(高2)×(底面积2)+(高3)×(底面积3)···+(高n)×(底面积n)$&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="程序员的数学" scheme="https://ayoubu.github.io/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="概率统计" scheme="https://ayoubu.github.io/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/"/>
+    
+    
+    <category term="统计学" scheme="https://ayoubu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>概率统计学习笔记-第二章</title>
+    <link href="https://ayoubu.github.io/archives/13532.html"/>
+    <id>https://ayoubu.github.io/archives/13532.html</id>
+    <published>2020-09-27T15:42:11.000Z</published>
+    <updated>2020-11-14T05:16:28.260Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;条件概率理解&quot;&gt;&lt;a href=&quot;#条件概率理解&quot; class=&quot;headerlink&quot; title=&quot;条件概率理解&quot;&gt;&lt;/a&gt;条件概率理解&lt;/h2&gt;&lt;p&gt;条件概率表示在某种情况下某个事件发生的概率。比如，P(工厂|A) 表示A县中工厂所占的比例。它其实就是A县中工厂的面积÷A县所占的面积。A县中工厂的面积我们表示为P(A，工厂)。A县所占的面积，表示为P(A)。&lt;/p&gt;
+&lt;p&gt;我们假设A县和其它县组成了一个整体1，比如我们有三个县，因此：&lt;code&gt;P(A)+P(B)+P(C) = 1&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;在我们的表达中，P(工厂|A) 和 P(A|工厂)两者是不同的，因为一个分母是A县，一个分母是全国的面积：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;P(工厂|A) – 表示 A县中工厂所占的面积。&lt;/li&gt;
+&lt;li&gt;P(A|工厂) – 表示所有的工厂面积中，A县所占的面积。&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="程序员的数学" scheme="https://ayoubu.github.io/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="概率统计" scheme="https://ayoubu.github.io/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/"/>
+    
+    
+    <category term="条件概率" scheme="https://ayoubu.github.io/tags/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/"/>
+    
+    <category term="联合概率" scheme="https://ayoubu.github.io/tags/%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87/"/>
+    
+    <category term="边缘概率" scheme="https://ayoubu.github.io/tags/%E8%BE%B9%E7%BC%98%E6%A6%82%E7%8E%87/"/>
+    
+    <category term="独立性" scheme="https://ayoubu.github.io/tags/%E7%8B%AC%E7%AB%8B%E6%80%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>概率统计学习笔记-第一章</title>
+    <link href="https://ayoubu.github.io/archives/42150.html"/>
+    <id>https://ayoubu.github.io/archives/42150.html</id>
+    <published>2020-09-26T17:44:25.000Z</published>
+    <updated>2020-11-14T05:16:28.255Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;概率问题&quot;&gt;&lt;a href=&quot;#概率问题&quot; class=&quot;headerlink&quot; title=&quot;概率问题&quot;&gt;&lt;/a&gt;概率问题&lt;/h2&gt;&lt;h3 id=&quot;蒙提霍尔问题&quot;&gt;&lt;a href=&quot;#蒙提霍尔问题&quot; class=&quot;headerlink&quot; title=&quot;蒙提霍尔问题&quot;&gt;&lt;/a&gt;蒙提霍尔问题&lt;/h3&gt;&lt;p&gt;有一个这个游戏的玩法是：参赛者会看见三扇关闭了的门，其中一扇的后面有一辆&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%B1%BD%E8%BB%8A&quot;&gt;汽车&lt;/a&gt;或者是奖品，选中后面有车的那扇门就可以赢得该汽车或奖品，而另外两扇门后面则各藏有一只&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E5%B1%B1%E7%BE%8A&quot;&gt;山羊&lt;/a&gt;。当参赛者选定了一扇门，但未去开启它的时候，知道门后情形的节目主持人会开启剩下两扇门的其中一扇，露出其中一只山羊。主持人其后会问参赛者要不要换另一扇仍然关上的门。问题是：换另一扇门会否增加参赛者赢得汽车的几率？如果严格按照上述的条件的话，答案是&lt;strong&gt;会&lt;/strong&gt;。换门的话，赢得汽车的几率是2/3。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解答：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;有三种可能的情况，全部都有相等的可能性（1/3）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;参赛者挑汽车，主持人挑两头羊的任何一头。转换将失败。&lt;/li&gt;
+&lt;li&gt;参赛者挑A羊，主持人挑B羊。转换将赢得汽车。&lt;/li&gt;
+&lt;li&gt;参赛者挑B羊，主持人挑A羊。转换将赢得汽车。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最后的三种结果中有两种都是转换后赢了，所以换门的话赢得汽车的概率是2/3.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="程序员的数学" scheme="https://ayoubu.github.io/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="概率统计" scheme="https://ayoubu.github.io/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/"/>
+    
+    
+    <category term="统计学" scheme="https://ayoubu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>Scrapy 框架学习</title>
@@ -381,243 +609,6 @@
     <category term="MongoDB" scheme="https://ayoubu.github.io/tags/MongoDB/"/>
     
     <category term="PyMongo" scheme="https://ayoubu.github.io/tags/PyMongo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Excel学习之疑难杂症</title>
-    <link href="https://ayoubu.github.io/archives/53805.html"/>
-    <id>https://ayoubu.github.io/archives/53805.html</id>
-    <published>2020-09-03T11:47:19.000Z</published>
-    <updated>2020-09-09T06:54:19.267Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;电子表格打印&quot;&gt;&lt;a href=&quot;#电子表格打印&quot; class=&quot;headerlink&quot; title=&quot;电子表格打印&quot;&gt;&lt;/a&gt;电子表格打印&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;快捷键：&lt;/strong&gt;&lt;code&gt;Ctrl + P&lt;/code&gt; —</summary>
-        
-      
-    
-    
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/"/>
-    
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/tags/Excel/"/>
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="表格打印" scheme="https://ayoubu.github.io/tags/%E8%A1%A8%E6%A0%BC%E6%89%93%E5%8D%B0/"/>
-    
-    <category term="PPT" scheme="https://ayoubu.github.io/tags/PPT/"/>
-    
-    <category term="Word" scheme="https://ayoubu.github.io/tags/Word/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Excel学习之图表</title>
-    <link href="https://ayoubu.github.io/archives/27947.html"/>
-    <id>https://ayoubu.github.io/archives/27947.html</id>
-    <published>2020-09-01T12:29:12.000Z</published>
-    <updated>2020-09-03T03:46:57.977Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;如何制作图表&quot;&gt;&lt;a href=&quot;#如何制作图表&quot; class=&quot;headerlink&quot; title=&quot;如何制作图表&quot;&gt;&lt;/a&gt;如何制作图表&lt;/h2&gt;&lt;p&gt;Excel中插入图表，首先选中数据区域，在插入选项卡中的图表区域中选择合适的图表，此时就会在表格中插入一个图表。然后在菜单栏中的设计选项卡下，点击添加元素，这里面有我们常用的图表设计的所有元素，可以根据自己的需要选择修改。&lt;/p&gt;
-&lt;h2 id=&quot;如何制作复合图表&quot;&gt;&lt;a href=&quot;#如何制作复合图表&quot; class=&quot;headerlink&quot; title=&quot;如何制作复合图表&quot;&gt;&lt;/a&gt;如何制作复合图表&lt;/h2&gt;&lt;p&gt;复合图表是指在一个图表中，反应多个不同的信息，且不同信息的表现方式也不同，比如条形图和折线图相结合。我们假设我们要处理的数据如下图所示：&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/"/>
-    
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/tags/Excel/"/>
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="图表" scheme="https://ayoubu.github.io/tags/%E5%9B%BE%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Excel学习之数据透视表</title>
-    <link href="https://ayoubu.github.io/archives/50892.html"/>
-    <id>https://ayoubu.github.io/archives/50892.html</id>
-    <published>2020-08-31T11:40:38.000Z</published>
-    <updated>2020-09-01T14:05:54.222Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;初识数据透视表&quot;&gt;&lt;a href=&quot;#初识数据透视表&quot; class=&quot;headerlink&quot; title=&quot;初识数据透视表&quot;&gt;&lt;/a&gt;初识数据透视表&lt;/h2&gt;&lt;p&gt;数据透视表在使用的时候非常简单，但是我们得先想清楚一些问题，再开始动手。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;罗列什么、汇总什么&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;把需要罗列的部分放入行区域当中，需要计算的字段放入值区域当中。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;他们是怎样的关系，要按照怎样的顺序来排列&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;如果是上下级关系的，那我们就全部放在行区域内，如果是交叉区域的，就放在列区域内，在同一个区域就要按照顺序来进行摆放&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;以什么方式来进行汇总？是合计数、求平均、还是计数值？&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;是否需要分页进行筛选？&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;使用筛选器。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/"/>
-    
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/tags/Excel/"/>
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据透视表" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Excel学习之路之微图表</title>
-    <link href="https://ayoubu.github.io/archives/4338.html"/>
-    <id>https://ayoubu.github.io/archives/4338.html</id>
-    <published>2020-08-30T15:27:03.000Z</published>
-    <updated>2020-09-01T14:05:54.220Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;什么是微图表&quot;&gt;&lt;a href=&quot;#什么是微图表&quot; class=&quot;headerlink&quot; title=&quot;什么是微图表&quot;&gt;&lt;/a&gt;什么是微图表&lt;/h2&gt;&lt;p&gt;微图表简单的说就是在单元格内绘制的图表，用来直观的反应数据的大小，从而实现数据与图表的一体化。示例如下图。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/fnxrIjW.png&quot; alt=&quot;微图表示例&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/"/>
-    
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/tags/Excel/"/>
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="微图表" scheme="https://ayoubu.github.io/tags/%E5%BE%AE%E5%9B%BE%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Excel学习之路-函数</title>
-    <link href="https://ayoubu.github.io/archives/13281.html"/>
-    <id>https://ayoubu.github.io/archives/13281.html</id>
-    <published>2020-08-29T12:09:53.000Z</published>
-    <updated>2020-09-01T14:05:54.212Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;函数基础&quot;&gt;&lt;a href=&quot;#函数基础&quot; class=&quot;headerlink&quot; title=&quot;函数基础&quot;&gt;&lt;/a&gt;函数基础&lt;/h2&gt;&lt;p&gt;函数是我们对原本数据进行计算统计或者用来增加字段的一种表达方式。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;兼容性函数 — 38&lt;/li&gt;
-&lt;li&gt;多维数据集函数 — 7&lt;/li&gt;
-&lt;li&gt;数据库函数 — 12&lt;/li&gt;
-&lt;li&gt;日期和时间函数  — 22&lt;/li&gt;
-&lt;li&gt;工程函数 — 41&lt;/li&gt;
-&lt;li&gt;财务函数 — 53&lt;/li&gt;
-&lt;li&gt;信息函数 —17&lt;/li&gt;
-&lt;li&gt;逻辑函数 — 7&lt;/li&gt;
-&lt;li&gt;查找和引用函数 — 20&lt;/li&gt;
-&lt;li&gt;数学和三角函数 — 63&lt;/li&gt;
-&lt;li&gt;统计函数 — 98&lt;/li&gt;
-&lt;li&gt;文本函数 — 27&lt;/li&gt;
-&lt;/ol&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/"/>
-    
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/tags/Excel/"/>
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="函数" scheme="https://ayoubu.github.io/tags/%E5%87%BD%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Excel 快速录入和定位的小技巧</title>
-    <link href="https://ayoubu.github.io/archives/57650.html"/>
-    <id>https://ayoubu.github.io/archives/57650.html</id>
-    <published>2020-08-28T15:16:09.000Z</published>
-    <updated>2020-09-01T14:05:54.210Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;相似格式如何一秒快速录入&quot;&gt;&lt;a href=&quot;#相似格式如何一秒快速录入&quot; class=&quot;headerlink&quot; title=&quot;相似格式如何一秒快速录入&quot;&gt;&lt;/a&gt;相似格式如何一秒快速录入&lt;/h2&gt;&lt;p&gt;在数据录入的过程中经常需要录入一些相同的部分，比如同一个省份的开头是相同的，邮箱的后半部分。此时我们可以自定义单元格格式来加速我们数据录入的过程。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/"/>
-    
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/tags/Excel/"/>
-    
-    <category term="数据录入" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BD%95%E5%85%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Excel学习之路01</title>
-    <link href="https://ayoubu.github.io/archives/21268.html"/>
-    <id>https://ayoubu.github.io/archives/21268.html</id>
-    <published>2020-08-25T11:55:36.000Z</published>
-    <updated>2020-09-01T14:05:54.207Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;Excel数据导入&quot;&gt;&lt;a href=&quot;#Excel数据导入&quot; class=&quot;headerlink&quot; title=&quot;Excel数据导入&quot;&gt;&lt;/a&gt;Excel数据导入&lt;/h2&gt;&lt;h3 id=&quot;从网页导入数据&quot;&gt;&lt;a href=&quot;#从网页导入数据&quot; class=&quot;headerlink&quot; title=&quot;从网页导入数据&quot;&gt;&lt;/a&gt;从网页导入数据&lt;/h3&gt;&lt;p&gt;有时候我们需要从网上获取一些数据进行分析，有时复制粘贴可能不是最好的方式，这时候我们可以先试试excel内置的从网页导入数据功能。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;数据--&amp;gt;自网站&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;例如：我们想对中国&lt;a href=&quot;http://quotes.money.163.com/0600050.html&quot;&gt;中国联通的股票行情&lt;/a&gt; 做一些分析，我们可以按照上述选项，输入对应的网址连接，如下图所示：&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/"/>
-    
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/tags/Excel/"/>
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Excel学习之路00</title>
-    <link href="https://ayoubu.github.io/archives/37845.html"/>
-    <id>https://ayoubu.github.io/archives/37845.html</id>
-    <published>2020-08-25T11:47:09.000Z</published>
-    <updated>2020-09-01T14:05:54.202Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;Excel的知识体系&quot;&gt;&lt;a href=&quot;#Excel的知识体系&quot; class=&quot;headerlink&quot; title=&quot;Excel的知识体系&quot;&gt;&lt;/a&gt;Excel的知识体系&lt;/h2&gt;&lt;p&gt;用excel处理数据的基本流程如下：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;数据导入&lt;/li&gt;
-&lt;li&gt;规范规则&lt;/li&gt;
-&lt;li&gt;函数运算&lt;/li&gt;
-&lt;li&gt;图表制作&lt;/li&gt;
-&lt;li&gt;数据分析&lt;/li&gt;
-&lt;li&gt;图表导出&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/"/>
-    
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/tags/Excel/"/>
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
   </entry>
   

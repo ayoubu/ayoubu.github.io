@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Tp_uCM85etMVq9MuOfdPYQ6aA4SI0lOYqjanBUw5BuQ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://ayoubu.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="条件概率理解条件概率表示在某种情况下某个事件发生的概率。比如，P(工厂|A) 表示A县中工厂所占的比例。它其实就是A县中工厂的面积÷A县所占的面积。A县中工厂的面积我们表示为P(A，工厂)。A县所占的面积，表示为P(A)。 我们假设A县和其它县组成了一个整体1，比如我们有三个县，因此：P(A)+P(B)+P(C) &#x3D; 1。 在我们的表达中，P(工厂|A) 和 P(A|工厂)两者是不同的，因为一个分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="概率统计学习笔记-第二章">
+<meta property="og:url" content="https://ayoubu.github.io/archives/13532.html">
+<meta property="og:site_name" content="落空的个人博客">
+<meta property="og:description" content="条件概率理解条件概率表示在某种情况下某个事件发生的概率。比如，P(工厂|A) 表示A县中工厂所占的比例。它其实就是A县中工厂的面积÷A县所占的面积。A县中工厂的面积我们表示为P(A，工厂)。A县所占的面积，表示为P(A)。 我们假设A县和其它县组成了一个整体1，比如我们有三个县，因此：P(A)+P(B)+P(C) &#x3D; 1。 在我们的表达中，P(工厂|A) 和 P(A|工厂)两者是不同的，因为一个分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.imgur.com/dD3PEhk.png">
+<meta property="og:image" content="https://i.imgur.com/655IAAl.png">
+<meta property="og:image" content="https://i.imgur.com/uNxLzzt.png">
+<meta property="og:image" content="https://i.imgur.com/UMqa9XS.png">
+<meta property="article:published_time" content="2020-09-27T15:42:11.000Z">
+<meta property="article:modified_time" content="2020-11-14T05:16:28.260Z">
+<meta property="article:author" content="落空">
+<meta property="article:tag" content="条件概率">
+<meta property="article:tag" content="联合概率">
+<meta property="article:tag" content="边缘概率">
+<meta property="article:tag" content="独立性">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/dD3PEhk.png">
+
+
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<link rel="stylesheet" type="text/css" href="/css/injector.css" />
+  <title>概率统计学习笔记-第二章 | 落空的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落空的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落空的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我慢慢明白了为什么我不快乐，因为我总是期待一个结果。</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">59</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">40</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/13532.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="落空">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落空的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          概率统计学习笔记-第二章
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+			
+			  
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-27 15:42:11" itemprop="dateCreated datePublished" datetime="2020-09-27T15:42:11Z">2020-09-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-14 05:16:28" itemprop="dateModified" datetime="2020-11-14T05:16:28Z">2020-11-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">程序员的数学</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">概率统计</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="条件概率理解"><a href="#条件概率理解" class="headerlink" title="条件概率理解"></a>条件概率理解</h2><p>条件概率表示在某种情况下某个事件发生的概率。比如，P(工厂|A) 表示A县中工厂所占的比例。它其实就是A县中工厂的面积÷A县所占的面积。A县中工厂的面积我们表示为P(A，工厂)。A县所占的面积，表示为P(A)。</p>
+<p>我们假设A县和其它县组成了一个整体1，比如我们有三个县，因此：<code>P(A)+P(B)+P(C) = 1</code>。</p>
+<p>在我们的表达中，P(工厂|A) 和 P(A|工厂)两者是不同的，因为一个分母是A县，一个分母是全国的面积：</p>
+<ul>
+<li>P(工厂|A) – 表示 A县中工厂所占的面积。</li>
+<li>P(A|工厂) – 表示所有的工厂面积中，A县所占的面积。</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="一致性的各种表述方式"><a href="#一致性的各种表述方式" class="headerlink" title="一致性的各种表述方式"></a>一致性的各种表述方式</h3><p><strong>比例相同的情况：</strong> </p>
+<p>假定各县中住宅、工厂与农田的比例完全相同。</p>
+<blockquote>
+<p>P(住宅|A) = P(住宅|B) = P(住宅|C) = 0.3</p>
+<p>P(工厂|A) = P(工厂|B) = P(工厂|C) = 0.2</p>
+<p>P(农田|A) = P(农田|B) = P(农田|C) = 0.5</p>
+</blockquote>
+<p>这种情况下，每县的住宅面积、工厂面积、与农田面积之比相同。此时我们也可以得到：</p>
+<blockquote>
+<p>P(住宅|县) = P(住宅)</p>
+<p>P(工厂|县) = P(工厂)</p>
+<p>P(农田|县) = P(农田)</p>
+</blockquote>
+<p>于是下面的等式也成立：</p>
+<blockquote>
+<p>P(县，用途) = P(县)P(用途)</p>
+</blockquote>
+<p>按理说，我们必须计算P(A，住宅) = P(住宅|A) P(A)，不过由于此时各县的土地使用比例一致，因此每个县的住宅比例都相同（P(住宅|A) = P(住宅)）。于是我们无需知道各县的住宅比例也能计算出A县的住宅面积。</p>
+<blockquote>
+<p>A县的面积 × 全国的住宅面积比例 = A 县的住宅面积</p>
+</blockquote>
+<p><strong>一致性也可以像下面这样从反面表现:</strong></p>
+<blockquote>
+<p>P(A|住宅) = P(A|工厂) = P(A|农田)</p>
+<p>P(B|住宅) = P(B|工厂) = P(B|农田)</p>
+<p>P(C|住宅) = P(C|工厂) = P(C|农田)</p>
+</blockquote>
+<h2 id="联合概率与边缘概率"><a href="#联合概率与边缘概率" class="headerlink" title="联合概率与边缘概率"></a>联合概率与边缘概率</h2><h3 id="两个随机变量"><a href="#两个随机变量" class="headerlink" title="两个随机变量"></a>两个随机变量</h3><p>假设有随机变量<em>X</em>与<em>Y</em>，此时，P(<em>X</em>=a,<em>Y</em>=b) 用于表示 <em>X</em>=a 且 <em>Y</em>=b 的概率。这类包含多个条件且所有条件同时成立的概率称为联合概率。与之对应地，P(<em>X</em>=a) 或 P(<em>Y</em>=b) 这类仅与单个随机变量有关地概率称为边缘概率。联合概率地一览表称为联合分布，边缘概率地一览表称为边缘分布。</p>
+<p><strong>联合概率与边缘概率地关系如下：</strong></p>
+<img src="https://i.imgur.com/dD3PEhk.png" style="zoom:80%;" />
+
+<p>注：边缘概率是一个相对概念。对于随机变量X、Y、Z地联合分布来说，P(<em>Y</em>=3, <em>Z</em>=1) 也是一种边缘概率。同时 P(<em>Y</em>=3, <em>Z</em>=1)  也是<em>Y</em>=3 与 <em>Z</em>=1地联合概率</p>
+<h2 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h2><p>条件概率地表述一般为：在OO条件下XX发生地概率。</p>
+<p><strong>练习题：</strong></p>
+<img src="https://i.imgur.com/655IAAl.png" alt="练习题" style="zoom:80%;" />
+$$
+P(Y = 数字牌|X = 红色) = \frac{1}{3} \\
+P(Y = 人头牌|X = 红色) = \frac{2}{3}
+$$
+他们分别表示如下含义：
+
+<ul>
+<li>在条件<em>X</em> = 红色成立时，<em>Y</em> = 数字牌的条件概率时 1/3</li>
+<li>在条件<em>X</em> = 红色成立时，<em>Y</em> = 人头牌的条件概率时 2/3</li>
+</ul>
+<p>这些统称为：<code>在条件 X = 红色下 Y 的条件分布</code> ，其中<code>|</code> 在英语中一般读作 <code>given</code>。</p>
+<blockquote>
+<p>下面时条件概率的通用定义：</p>
+</blockquote>
+<p>$$<br>P(Y=b|X=a)=\frac{P(X=a,Y=b)}{P(X=a)}<br>$$</p>
+<blockquote>
+<p>在学习条件概率时，需要牢记以下性质：</p>
+</blockquote>
+<p>$$<br>P(Y=数字牌|X=红色) + P(Y=人头牌|X=红色)=1<br>$$</p>
+<p>“在条件 <em>X</em>=红色 下 <em>Y</em> 的条件分布” 也是一种 “<em>Y</em> 的概率分布”，因此 “穷举 <em>Y</em> 可取的值后，所有与这些值对应的概率之和为 1”。我们通常这样来表示该性质：<br>$$<br>\sum_b P(Y=b|X=a)=1<br>$$</p>
+<h3 id="联合分布、边缘分布与条件分布的关系"><a href="#联合分布、边缘分布与条件分布的关系" class="headerlink" title="联合分布、边缘分布与条件分布的关系"></a>联合分布、边缘分布与条件分布的关系</h3><ul>
+<li><p>联合概率 $P(X=a|Y=b)$:</p>
+<p>满足$X=a 且 Y=b$ 的区域的面积</p>
+</li>
+<li><p>边缘概率 $P(X=a)$:</p>
+<p>不考虑 $Y$ 的取值，所有满足 $X=a$ 的区域的总面积</p>
+</li>
+<li><p>条件概率 $P(Y=b|X=a)$:</p>
+<p>在$X=a$ 的前提下，满足 $Y=b$ 的区域的面积（比例）</p>
+</li>
+</ul>
+<p><strong>边缘概率可以通过联合概率计算得到，他们的关系如下：</strong> </p>
+<p>$P(X=a)=\sum_b P(X=a,Y=b), P(Y=b)=\sum_a P(X=a,Y=b)$ </p>
+<p><strong>我们也可以向下面这样通过边缘分布和条件分布来表示联合分布：</strong><br>$$<br>\begin{align*}<br>P(X=a,Y=b) &amp;= P(X=a|Y=b)P(Y=b) \<br>&amp;= P(Y=b|X=a)P(X=a)<br>\end{align*}<br>$$<br><strong>联合概率分解：</strong><br>$$<br>P(X=a,Y=b,Z=c)=P(X=a|Y=b,Z=c)P(Y=b|Z=c)P(Z=c)<br>$$<br><strong>条件联合分布的分解：</strong><br>$$<br>P(X=a,Y=b|Z=c)=P(X=a|Y=b,Z=c)P(Y=b|Z=c)<br>$$</p>
+<h2 id="贝叶斯公式"><a href="#贝叶斯公式" class="headerlink" title="贝叶斯公式"></a>贝叶斯公式</h2><p>本节将应用条件概率来解决逆问题。简单来讲，逆问题是指那些需要从结果反推原因的问题。通常，原因$X$ 无法被直接观察、测量，此时，我们常会通过其结果 $Y$ 来反推原因 $X$ 。</p>
+<p><strong>问题类型：</strong></p>
+<ul>
+<li>已知所有的 P(原因) 与 P(结果|原因) 一览</li>
+<li>求 P(原因|结果)</li>
+</ul>
+<p>在这类问题中，P(原因) 称为先验概率，P(原因|结果) 称为后验概率。相应的概率一览分别称为先验分布与后验分布。这些术语用于表现事件是发生于结果 Y 取得之前还是之后。</p>
+<p><strong>贝叶斯公式的推导：</strong></p>
+<img src="https://i.imgur.com/uNxLzzt.png" alt="贝叶斯公式" style="zoom:80%;" />
+
+<p>不用死记硬背，用的时候像下面这样推导出来就好。</p>
+<img src="https://i.imgur.com/UMqa9XS.png" alt="贝叶斯公式推导过程" style="zoom:80%;" />
+
+<h2 id="独立性"><a href="#独立性" class="headerlink" title="独立性"></a>独立性</h2><p>如果问题中存在多个随机变量，我们首先会怀疑这些随机变量之间是否真的存在关联。这一独立性的概念是很多应用问题中的关键。</p>
+<ul>
+<li>如果 X 与 Y 无关，由 X 推 Y 就没有意义。此时，Y 与独立的 X 没有特别的含义。</li>
+<li>不过，独立的随机变量将带来一些好处。如果 X 与 Y 无关，我们就不必具体分析它们之间的关系，概率的计算将变得非常容易。我们甚至可以积极地利用独立性，将混有各种不同成分地信号分解为各种独立地成分进一步求解（独立成分分析， independent component analysis, ICA）。</li>
+<li>通常，为了处理噪声与误差，我们需要反复进行相同地实验，记录实验地结果。如果先进行地实验对之后地实验存在影响，反复进行实验也没什么意义。</li>
+</ul>
+<p><strong>容易和概率论中独立性产生误解地例子：</strong></p>
+<ul>
+<li><p>“独立” 与 “均匀分布” 不同</p>
+<p>$P(Y=1|X=a)=P(Y=2|X=a)=P(Y=3|X=a)=…$</p>
+</li>
+<li><p>“独立” 与 “互斥” 不同</p>
+<p>独立性并不意味着 ”事件 X=1 与 Y=1 不会同时发生“。这种互斥反而表示 X 与 Y 不是独立地随机变量。</p>
+</li>
+</ul>
+<p><strong>判断两个事件是否独立：</strong> 无论一个事件地结果如何改变，另一个事件发生地概率不会变，则说明这两个事件为独立事件。比如：</p>
+<p>$P(发现陷阱|有陷阱)=P(发现陷阱|没有陷阱) = \frac{5}{6}$</p>
+<p><strong>独立地定义地多种等价表述方式：</strong></p>
+<ol>
+<li><p>OO 与 XX 独立</p>
+</li>
+<li><p>条件概率与条件无关：$P(XX|OO)=P(XX|非OO)$</p>
+</li>
+<li><p>添加或去除条件不影响概率：$P(XX|OO)=P(XX)$</p>
+</li>
+<li><p>联合概率之比相同：</p>
+<p>$P(OO,XX):P(OO,非XX)=P(非OO,XX):P(非OO,非XX)$</p>
+</li>
+<li><p>联合概率是边缘概率的乘积：$P(OO,XX)=P(OO)P(XX)$</p>
+</li>
+</ol>
+<h3 id="随机变量的独立性"><a href="#随机变量的独立性" class="headerlink" title="随机变量的独立性"></a>随机变量的独立性</h3><p><code>如果无论 a 与 b 为何值，条件 ”X=a“ 与条件 &quot;Y=b&quot; 始终独立，我们称随机变量 X 与 Y 独立。</code> 于是，对于随机变量 $X$ 与 $Y$，以下结论通用成立：</p>
+<ol>
+<li><p>$X$ 与 $Y$ 独立</p>
+</li>
+<li><p>条件概率与条件无关：$P(X=a|Y=b) 与b无关，仅由a确定$ </p>
+</li>
+<li><p>添加或去除条件不影响概率分布：无论 a,b 为何值，$P(X=a|Y=b)=P(X=a)$ 始终成立。</p>
+</li>
+<li><p>联合概率之比相同，无论$a,b,c,d$ 为何值，</p>
+<p>$P(X=a,Y=c):P(X=a|Y=d)=P(X=b|Y=c):P(X=b|Y=d)$ 始终成立。</p>
+</li>
+<li><p>联合概率是边缘概率的乘积，无论 $a,b$ 为何值，</p>
+<p>$P(X=a,Y=b)=P(X=a)P(Y=b)$ </p>
+</li>
+</ol>
+<p>总之，由互无关联的变量衍生得到的表达式一般来说依然相互独立。</p>
+<h3 id="三个或更多随机变量的独立性（注意）"><a href="#三个或更多随机变量的独立性（注意）" class="headerlink" title="三个或更多随机变量的独立性（注意）"></a>三个或更多随机变量的独立性（注意）</h3><p><strong>结论：</strong> 各对事件相互独立不代表所有事件都相互独立</p>
+<p>关于多个相互独立的事件：</p>
+<ul>
+<li><p>联合概率始终等于各个边缘概率的乘积</p>
+</li>
+<li><p>无论 $a、b、c、d 与d$ 为何值，条件 $“X=a”“Y=b”“Z=c”$ 与条件 $“W=d”$ 始终独立，我们称随机变量$X、Y、Z、W$ 独立。</p>
+<p>$P(X=a,Y=b,Z=c,W=d)=P(X=a)P(Y=b)P(Z=c)P(W=d)$ </p>
+</li>
+<li></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="落空 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="落空 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" rel="tag"># 条件概率</a>
+              <a href="/tags/%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87/" rel="tag"># 联合概率</a>
+              <a href="/tags/%E8%BE%B9%E7%BC%98%E6%A6%82%E7%8E%87/" rel="tag"># 边缘概率</a>
+              <a href="/tags/%E7%8B%AC%E7%AB%8B%E6%80%A7/" rel="tag"># 独立性</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/42150.html" rel="prev" title="概率统计学习笔记-第一章">
+      <i class="fa fa-chevron-left"></i> 概率统计学习笔记-第一章
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/33155.html" rel="next" title="离散值的概率分布">
+      离散值的概率分布 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E7%90%86%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">条件概率理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E5%90%84%E7%A7%8D%E8%A1%A8%E8%BF%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">一致性的各种表述方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87%E4%B8%8E%E8%BE%B9%E7%BC%98%E6%A6%82%E7%8E%87"><span class="nav-number">2.</span> <span class="nav-text">联合概率与边缘概率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">2.1.</span> <span class="nav-text">两个随机变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87"><span class="nav-number">3.</span> <span class="nav-text">条件概率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%E3%80%81%E8%BE%B9%E7%BC%98%E5%88%86%E5%B8%83%E4%B8%8E%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B8%83%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.1.</span> <span class="nav-text">联合分布、边缘分布与条件分布的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%85%AC%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">贝叶斯公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">独立性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="nav-number">5.1.</span> <span class="nav-text">随机变量的独立性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E4%B8%AA%E6%88%96%E6%9B%B4%E5%A4%9A%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E7%8B%AC%E7%AB%8B%E6%80%A7%EF%BC%88%E6%B3%A8%E6%84%8F%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">三个或更多随机变量的独立性（注意）</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="落空"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">落空</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ayoubu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ayoubu@outlook.com" title="E-Mail → mailto:ayoubu@outlook.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5095666460" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5095666460" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/ayoubu" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;ayoubu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-fab fa-zhihu"></i>知乎</a>
+      </span>
+  </div>
+
+
+<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">落空</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">132k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:01</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  <script async src="/js/cursor/love.min.js"></script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>
