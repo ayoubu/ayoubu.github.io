@@ -6,7 +6,7 @@
   <link href="https://ayoubu.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayoubu.github.io/"/>
-  <updated>2020-11-14T05:26:32.166Z</updated>
+  <updated>2020-11-14T05:16:28.251Z</updated>
   <id>https://ayoubu.github.io/</id>
   
   <author>
@@ -15,91 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>简历</title>
-    <link href="https://ayoubu.github.io/archives/14882.html"/>
-    <id>https://ayoubu.github.io/archives/14882.html</id>
-    <published>2020-11-14T13:12:19.000Z</published>
-    <updated>2020-11-14T05:26:32.166Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;img src=&quot;https://i.imgur.com/4YmKxwU.jpeg&quot; alt=&quot; &quot; style=&quot;zoom:5%;&quot; /&gt;
-
-&lt;h2 id=&quot;个人信息&quot;&gt;&lt;a href=&quot;#个人信息&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="简历" scheme="https://ayoubu.github.io/categories/%E7%AE%80%E5%8E%86/"/>
-    
-    
-    <category term="简历" scheme="https://ayoubu.github.io/tags/%E7%AE%80%E5%8E%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>506-Chapter1</title>
-    <link href="https://ayoubu.github.io/archives/16280.html"/>
-    <id>https://ayoubu.github.io/archives/16280.html</id>
-    <published>2020-10-20T15:04:20.000Z</published>
-    <updated>2020-11-14T05:16:28.245Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;一些定义和区别-（Some-Definitions-and-Distinctions）&quot;&gt;&lt;a href=&quot;#一些定义和区别-（Some-Definitions-and-Distinctions）&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="USM" scheme="https://ayoubu.github.io/categories/USM/"/>
-    
-    <category term="RESEARCH &amp; CONSULTANCY &amp; PROFESSIONAL SKILLS" scheme="https://ayoubu.github.io/categories/USM/RESEARCH-CONSULTANCY-PROFESSIONAL-SKILLS/"/>
-    
-    
-    <category term="CDS506" scheme="https://ayoubu.github.io/tags/CDS506/"/>
-    
-    <category term="CONSULTANCY" scheme="https://ayoubu.github.io/tags/CONSULTANCY/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>505-Chapter2</title>
-    <link href="https://ayoubu.github.io/archives/12584.html"/>
-    <id>https://ayoubu.github.io/archives/12584.html</id>
-    <published>2020-10-19T16:09:20.000Z</published>
-    <updated>2020-11-14T05:16:28.239Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;数据抽象简介&quot;&gt;&lt;a href=&quot;#数据抽象简介&quot; class=&quot;headerlink&quot; title=&quot;数据抽象简介&quot;&gt;&lt;/a&gt;数据抽象简介&lt;/h2&gt;&lt;p&gt;四种基本的数据集类型：&lt;strong&gt;tables, networks, fields and</summary>
-        
-      
-    
-    
-    
-    <category term="USM" scheme="https://ayoubu.github.io/categories/USM/"/>
-    
-    <category term="DATA VISUALISATION &amp; VISUAL ANALYTICS" scheme="https://ayoubu.github.io/categories/USM/DATA-VISUALISATION-VISUAL-ANALYTICS/"/>
-    
-    
-    <category term="CDS505" scheme="https://ayoubu.github.io/tags/CDS505/"/>
-    
-    <category term="Data Abstraction" scheme="https://ayoubu.github.io/tags/Data-Abstraction/"/>
-    
-  </entry>
   
   <entry>
     <title>Chapter 1</title>
@@ -609,6 +524,99 @@
     <category term="MongoDB" scheme="https://ayoubu.github.io/tags/MongoDB/"/>
     
     <category term="PyMongo" scheme="https://ayoubu.github.io/tags/PyMongo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Excel学习之疑难杂症</title>
+    <link href="https://ayoubu.github.io/archives/53805.html"/>
+    <id>https://ayoubu.github.io/archives/53805.html</id>
+    <published>2020-09-03T11:47:19.000Z</published>
+    <updated>2020-09-09T06:54:19.267Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;电子表格打印&quot;&gt;&lt;a href=&quot;#电子表格打印&quot; class=&quot;headerlink&quot; title=&quot;电子表格打印&quot;&gt;&lt;/a&gt;电子表格打印&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;快捷键：&lt;/strong&gt;&lt;code&gt;Ctrl + P&lt;/code&gt; —</summary>
+        
+      
+    
+    
+    
+    <category term="数据分析" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="Excel" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/"/>
+    
+    
+    <category term="Excel" scheme="https://ayoubu.github.io/tags/Excel/"/>
+    
+    <category term="数据分析" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="表格打印" scheme="https://ayoubu.github.io/tags/%E8%A1%A8%E6%A0%BC%E6%89%93%E5%8D%B0/"/>
+    
+    <category term="PPT" scheme="https://ayoubu.github.io/tags/PPT/"/>
+    
+    <category term="Word" scheme="https://ayoubu.github.io/tags/Word/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Excel学习之图表</title>
+    <link href="https://ayoubu.github.io/archives/27947.html"/>
+    <id>https://ayoubu.github.io/archives/27947.html</id>
+    <published>2020-09-01T12:29:12.000Z</published>
+    <updated>2020-09-03T03:46:57.977Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;如何制作图表&quot;&gt;&lt;a href=&quot;#如何制作图表&quot; class=&quot;headerlink&quot; title=&quot;如何制作图表&quot;&gt;&lt;/a&gt;如何制作图表&lt;/h2&gt;&lt;p&gt;Excel中插入图表，首先选中数据区域，在插入选项卡中的图表区域中选择合适的图表，此时就会在表格中插入一个图表。然后在菜单栏中的设计选项卡下，点击添加元素，这里面有我们常用的图表设计的所有元素，可以根据自己的需要选择修改。&lt;/p&gt;
+&lt;h2 id=&quot;如何制作复合图表&quot;&gt;&lt;a href=&quot;#如何制作复合图表&quot; class=&quot;headerlink&quot; title=&quot;如何制作复合图表&quot;&gt;&lt;/a&gt;如何制作复合图表&lt;/h2&gt;&lt;p&gt;复合图表是指在一个图表中，反应多个不同的信息，且不同信息的表现方式也不同，比如条形图和折线图相结合。我们假设我们要处理的数据如下图所示：&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据分析" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="Excel" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/"/>
+    
+    
+    <category term="Excel" scheme="https://ayoubu.github.io/tags/Excel/"/>
+    
+    <category term="数据分析" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="图表" scheme="https://ayoubu.github.io/tags/%E5%9B%BE%E8%A1%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Excel学习之数据透视表</title>
+    <link href="https://ayoubu.github.io/archives/50892.html"/>
+    <id>https://ayoubu.github.io/archives/50892.html</id>
+    <published>2020-08-31T11:40:38.000Z</published>
+    <updated>2020-09-01T14:05:54.222Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;初识数据透视表&quot;&gt;&lt;a href=&quot;#初识数据透视表&quot; class=&quot;headerlink&quot; title=&quot;初识数据透视表&quot;&gt;&lt;/a&gt;初识数据透视表&lt;/h2&gt;&lt;p&gt;数据透视表在使用的时候非常简单，但是我们得先想清楚一些问题，再开始动手。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;罗列什么、汇总什么&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;把需要罗列的部分放入行区域当中，需要计算的字段放入值区域当中。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;他们是怎样的关系，要按照怎样的顺序来排列&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果是上下级关系的，那我们就全部放在行区域内，如果是交叉区域的，就放在列区域内，在同一个区域就要按照顺序来进行摆放&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;以什么方式来进行汇总？是合计数、求平均、还是计数值？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;是否需要分页进行筛选？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用筛选器。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据分析" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="Excel" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/"/>
+    
+    
+    <category term="Excel" scheme="https://ayoubu.github.io/tags/Excel/"/>
+    
+    <category term="数据分析" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="数据透视表" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8/"/>
     
   </entry>
   
