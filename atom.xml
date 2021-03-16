@@ -6,7 +6,7 @@
   <link href="https://ayoubu.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayoubu.github.io/"/>
-  <updated>2020-11-14T05:16:28.251Z</updated>
+  <updated>2021-03-16T15:09:55.810Z</updated>
   <id>https://ayoubu.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>心电图心跳信号分类-Task1</title>
+    <link href="https://ayoubu.github.io/archives/54659.html"/>
+    <id>https://ayoubu.github.io/archives/54659.html</id>
+    <published>2021-03-14T19:33:47.000Z</published>
+    <updated>2021-03-16T15:09:55.810Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Task1-学习目标&quot;&gt;&lt;a href=&quot;#Task1-学习目标&quot; class=&quot;headerlink&quot; title=&quot;Task1 学习目标&quot;&gt;&lt;/a&gt;Task1 学习目标&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;理解数据和目标，清楚评分体系。&lt;/li&gt;
+&lt;li&gt;完成相应报名，下载数据和结果提交打卡（可提交示例结果），熟悉比赛流程。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;数据描述&quot;&gt;&lt;a href=&quot;#数据描述&quot; class=&quot;headerlink&quot; title=&quot;数据描述&quot;&gt;&lt;/a&gt;数据描述&lt;/h2&gt;&lt;p&gt;训练集：10万条数据&lt;/p&gt;
+&lt;p&gt;测试集A：2万条数据&lt;/p&gt;
+&lt;p&gt;给定的数据集中只有10万条的训练数据和2万条的测试数据，其中训练数据包含有标签，而测试数据集无标签。&lt;/p&gt;
+&lt;h2 id=&quot;任务描述&quot;&gt;&lt;a href=&quot;#任务描述&quot; class=&quot;headerlink&quot; title=&quot;任务描述&quot;&gt;&lt;/a&gt;任务描述&lt;/h2&gt;&lt;p&gt;根据给定的训练集数据，建立模型预测标签值。标签值分为4类（0，1，2，3），所以我们需要解决的是一个多分类的问题。最终我们需要使用我们建立的模型来预测测试集数据的标签，然后生成如样例所示的文件，然后提交结果。&lt;/p&gt;
+&lt;p&gt;补充说明：我们要预测的其实是四种不同心跳的概率，训练数据为序列数据，需要经过处理才能用于训练。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Datawhale" scheme="https://ayoubu.github.io/categories/Datawhale/"/>
+    
+    
+    <category term="数据挖掘" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
+    
+    <category term="心电图" scheme="https://ayoubu.github.io/tags/%E5%BF%83%E7%94%B5%E5%9B%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>Chapter 1</title>
@@ -102,7 +131,7 @@
     <link href="https://ayoubu.github.io/archives/13532.html"/>
     <id>https://ayoubu.github.io/archives/13532.html</id>
     <published>2020-09-27T15:42:11.000Z</published>
-    <updated>2020-11-14T05:16:28.260Z</updated>
+    <updated>2021-03-16T13:08:30.745Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;条件概率理解&quot;&gt;&lt;a href=&quot;#条件概率理解&quot; class=&quot;headerlink&quot; title=&quot;条件概率理解&quot;&gt;&lt;/a&gt;条件概率理解&lt;/h2&gt;&lt;p&gt;条件概率表示在某种情况下某个事件发生的概率。比如，P(工厂|A) 表示A县中工厂所占的比例。它其实就是A县中工厂的面积÷A县所占的面积。A县中工厂的面积我们表示为P(A，工厂)。A县所占的面积，表示为P(A)。&lt;/p&gt;
@@ -585,38 +614,6 @@
     <category term="数据分析" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
     <category term="图表" scheme="https://ayoubu.github.io/tags/%E5%9B%BE%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Excel学习之数据透视表</title>
-    <link href="https://ayoubu.github.io/archives/50892.html"/>
-    <id>https://ayoubu.github.io/archives/50892.html</id>
-    <published>2020-08-31T11:40:38.000Z</published>
-    <updated>2020-09-01T14:05:54.222Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;初识数据透视表&quot;&gt;&lt;a href=&quot;#初识数据透视表&quot; class=&quot;headerlink&quot; title=&quot;初识数据透视表&quot;&gt;&lt;/a&gt;初识数据透视表&lt;/h2&gt;&lt;p&gt;数据透视表在使用的时候非常简单，但是我们得先想清楚一些问题，再开始动手。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;罗列什么、汇总什么&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;把需要罗列的部分放入行区域当中，需要计算的字段放入值区域当中。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;他们是怎样的关系，要按照怎样的顺序来排列&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;如果是上下级关系的，那我们就全部放在行区域内，如果是交叉区域的，就放在列区域内，在同一个区域就要按照顺序来进行摆放&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;以什么方式来进行汇总？是合计数、求平均、还是计数值？&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;是否需要分页进行筛选？&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;使用筛选器。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Excel/"/>
-    
-    
-    <category term="Excel" scheme="https://ayoubu.github.io/tags/Excel/"/>
-    
-    <category term="数据分析" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    <category term="数据透视表" scheme="https://ayoubu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8/"/>
     
   </entry>
   

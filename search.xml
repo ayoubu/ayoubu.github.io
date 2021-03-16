@@ -1,6 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>心电图心跳信号分类-Task1</title>
+    <url>/archives/54659.html</url>
+    <content><![CDATA[<h2 id="Task1-学习目标"><a href="#Task1-学习目标" class="headerlink" title="Task1 学习目标"></a>Task1 学习目标</h2><ul>
+<li>理解数据和目标，清楚评分体系。</li>
+<li>完成相应报名，下载数据和结果提交打卡（可提交示例结果），熟悉比赛流程。</li>
+</ul>
+<h2 id="数据描述"><a href="#数据描述" class="headerlink" title="数据描述"></a>数据描述</h2><p>训练集：10万条数据</p>
+<p>测试集A：2万条数据</p>
+<p>给定的数据集中只有10万条的训练数据和2万条的测试数据，其中训练数据包含有标签，而测试数据集无标签。</p>
+<h2 id="任务描述"><a href="#任务描述" class="headerlink" title="任务描述"></a>任务描述</h2><p>根据给定的训练集数据，建立模型预测标签值。标签值分为4类（0，1，2，3），所以我们需要解决的是一个多分类的问题。最终我们需要使用我们建立的模型来预测测试集数据的标签，然后生成如样例所示的文件，然后提交结果。</p>
+<p>补充说明：我们要预测的其实是四种不同心跳的概率，训练数据为序列数据，需要经过处理才能用于训练。</p>
+<a id="more"></a>
+
+<h2 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h2><p>需要判断的信号类别有4种，我们需要给出四种不同类别的概率。然后求出真实值和预测值差值的绝对值。计算公式如下：</p>
+<p>总共有n个病例，针对某一个信号，若真实值为[y1,y2,y3,y4],模型预测概率值为[a1,a2,a3,a4],那么该模型的评价指标abs-sum为<br>$$abs-sum=\mathop \sum \limits_{j=1}^n\mathop\sum\limits_{i=1}^4 \left| y_i-a_i\right|$$<br>例如，某心跳信号类别为1，通过编码转成[0,1,0,0]，预测不同心跳信号概率为[0.1,0.7,0.1,0.1]，那么这个信号预测结果的abs-sum为<br>$$abs-sum=\left|0.1-0\right|+\left|0.7-1\right|+\left|0.1-0\right|+ \left|0.1-0\right|=0.6$$</p>
+<p>多分类算法常见的评估指标如下：</p>
+<h3 id="其它判断指标"><a href="#其它判断指标" class="headerlink" title="其它判断指标"></a>其它判断指标</h3><p><strong>评价分类模型常用的方法还有：</strong></p>
+<ul>
+<li>混淆矩阵（Confuse Matrix）</li>
+<li>准确率（Accuracy）</li>
+<li>精确率（Precision）</li>
+<li>召回率（Recall）</li>
+<li>宏查准率（macro-P）</li>
+<li>宏查全率（macro-R）</li>
+<li>宏F1（macro-F1）</li>
+<li>微查准率（micro-P）</li>
+<li>微查全率（micro-R）</li>
+<li>微F1（micro-F1）</li>
+</ul>
+<p>注：这些判断指标其实主要都是通过混淆矩阵计算得到的。具体计算方法有待补充。</p>
+<h2 id="查看数据"><a href="#查看数据" class="headerlink" title="查看数据"></a>查看数据</h2><p>在天池完成报名之后就可以查看本次学习过程使用的数据集。在本地环境对数据集进行查看。</p>
+<p>其中测试数据如下图所示：</p>
+<p><img src="https://i.imgur.com/PPjGxzA.png"></p>
+<p>训练数据集如下图所示：</p>
+<img src="https://i.imgur.com/ROAOC2I.png" style="zoom:80%;" />
+
+<p>数据集中的 ‘heartbeat_signals’ 就是我们要用来训练的数据，但是这个数据是string类型的无法用来训练需要进行转换。下面就是数据预处理的部分。</p>
+<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>这一部分的主要目的是对数据进行预处理，为模型训练做准备。我写了一个转换函数，如下所示：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="comment"># 将原始数据中未分割的序列数据进行分割，并生成新的数据集</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rebuilt_data</span>(<span class="params">df,column_name = <span class="string">&#x27;heartbeat_signals&#x27;</span>,seg=<span class="string">&#x27;,&#x27;</span></span>):</span></span><br><span class="line">    <span class="comment"># 按 seg 分割原始数据</span></span><br><span class="line">    rebuilt = df[column_name].str.split(seg,expand=<span class="literal">True</span>)</span><br><span class="line">    <span class="comment"># 对列名进行重命名</span></span><br><span class="line">    rebuilt.columns = [<span class="string">f&#x27;<span class="subst">&#123;column_name[<span class="number">0</span>]&#125;</span>_<span class="subst">&#123;i&#125;</span>&#x27;</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(rebuilt.shape[<span class="number">1</span>])]</span><br><span class="line">    <span class="comment"># 删除原始数据的 column_name 列</span></span><br><span class="line">    df = df.drop(column_name,axis=<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 合并分割数据到原始数据中</span></span><br><span class="line">    df = pd.concat([df,rebuilt],axis=<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> df</span><br></pre></td></tr></table></figure>
+
+<p>转换后的结果如下图所示：</p>
+<p><img src="https://i.imgur.com/UUP3QQR.png"></p>
+<p><img src="https://i.imgur.com/OjJ8Gh0.png"></p>
+<p>注：其实到这一步数据还是不能用作训练，因为转换后的数据还是 <code>string</code> 类型的 [捂脸]。</p>
+<p><strong>之后再完善一下转换函数，时间有点不够了，打算先运行一下老师提供的baseline文件。</strong></p>
+<h2 id="在天池上运行示例"><a href="#在天池上运行示例" class="headerlink" title="在天池上运行示例"></a>在天池上运行示例</h2><p>将我们使用的数据和baseline.ipynb 文件导入到天池（我这里用的是从本地上传的数据，应该可以直接在天池上进行挂载的，我没找到下载的按钮，明天再试试）。</p>
+<p>然后安装相应的python库。</p>
+<p>接着就是一步一步运行，观察结果。训练过程会比较久，我这里还没出结果，目前的状态如下图所示：</p>
+<p><img src="https://i.imgur.com/YVYkNre.png"></p>
+<p>等明天出结果后，我再上传结果。</p>
+<p>本地的环境也还在配置，配置完成之后会再跑一次示例，对比看看结果。</p>
+<h3 id="待完成"><a href="#待完成" class="headerlink" title="待完成"></a>待完成</h3><ul>
+<li>提交天池运行结果。</li>
+<li>在本地运行示例，并提交结果。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Datawhale</category>
+      </categories>
+      <tags>
+        <tag>数据挖掘</tag>
+        <tag>心电图</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Chapter 1</title>
     <url>/archives/33679.html</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>自然语言处理是几乎是和计算机一同诞生的，从一开始，人们就希望计算机可以读懂人类的语言，与此相关的有：语音和语言处理、人类语言技术、自然语言处理、计算机语言学和语音识别与合成。</p>
