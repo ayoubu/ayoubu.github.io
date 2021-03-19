@@ -63,7 +63,7 @@
 <meta property="og:image" content="https://i.imgur.com/OjJ8Gh0.png">
 <meta property="og:image" content="https://i.imgur.com/YVYkNre.png">
 <meta property="article:published_time" content="2021-03-14T19:33:47.000Z">
-<meta property="article:modified_time" content="2021-03-16T15:09:55.810Z">
+<meta property="article:modified_time" content="2021-03-17T13:55:34.120Z">
 <meta property="article:author" content="落空">
 <meta property="article:tag" content="数据挖掘">
 <meta property="article:tag" content="心电图">
@@ -159,17 +159,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">57</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">58</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">18</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">19</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">38</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">39</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -256,7 +256,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-16 15:09:55" itemprop="dateModified" datetime="2021-03-16T15:09:55Z">2021-03-16</time>
+                <time title="修改时间：2021-03-17 13:55:34" itemprop="dateModified" datetime="2021-03-17T13:55:34Z">2021-03-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -314,7 +314,7 @@
 <a id="more"></a>
 
 <h2 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h2><p>需要判断的信号类别有4种，我们需要给出四种不同类别的概率。然后求出真实值和预测值差值的绝对值。计算公式如下：</p>
-<p>总共有n个病例，针对某一个信号，若真实值为[y1,y2,y3,y4],模型预测概率值为[a1,a2,a3,a4],那么该模型的评价指标abs-sum为<br>$$abs-sum=\mathop \sum \limits_{j=1}^n\mathop\sum\limits_{i=1}^4 \left| y_i-a_i\right|$$<br>例如，某心跳信号类别为1，通过编码转成[0,1,0,0]，预测不同心跳信号概率为[0.1,0.7,0.1,0.1]，那么这个信号预测结果的abs-sum为<br>$$abs-sum=\left|0.1-0\right|+\left|0.7-1\right|+\left|0.1-0\right|+ \left|0.1-0\right|=0.6$$</p>
+<p>总共有n个病例，针对某一个信号，若真实值为[y1,y2,y3,y4],模型预测概率值为[a1,a2,a3,a4],那么该模型的评价指标abs-sum为<br>$$abs-sum= \sum\limits_{j=1}^n\mathop\sum\limits_{i=1}^4 \left| y_i-a_i\right|$$<br>例如，某心跳信号类别为1，通过编码转成[0,1,0,0]，预测不同心跳信号概率为[0.1,0.7,0.1,0.1]，那么这个信号预测结果的abs-sum为<br>$$abs-sum=\left|0.1-0\right|+\left|0.7-1\right|+\left|0.1-0\right|+ \left|0.1-0\right|=0.6$$</p>
 <p>多分类算法常见的评估指标如下：</p>
 <h3 id="其它判断指标"><a href="#其它判断指标" class="headerlink" title="其它判断指标"></a>其它判断指标</h3><p><strong>评价分类模型常用的方法还有：</strong></p>
 <ul>
@@ -362,6 +362,12 @@
     
     
       
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\29478.html" rel="bookmark">心电图信号多分类预测 task2</a></div>
+    </li>
+  </ul>
 
         <div class="reward-container">
   <div></div>
@@ -399,7 +405,10 @@
     <a href="/archives/33679.html" rel="prev" title="Chapter 1">
       <i class="fa fa-chevron-left"></i> Chapter 1
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/archives/29478.html" rel="next" title="心电图信号多分类预测 task2">
+      心电图信号多分类预测 task2 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -475,20 +484,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -800,13 +809,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">132k</span>
+    <span title="站点总字数">135k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:01</span>
+    <span title="站点阅读时长">2:03</span>
 </div>
 
         

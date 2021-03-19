@@ -50,24 +50,32 @@
   };
 </script>
 
-  <meta name="description" content="MongoDB简介MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为WEB应用提供可扩展的高性能数据存储解决方案。 MongoDB将数据存储为一个文档，数据结构由键值对(Key : value)组成，MongoDB文档类似于JSON对象，字段值可以包含其它文档，数组及文档数组。 MongoDB服务端可运行在Linux、Windows和Mac OS平台，支持32位和64位应用，">
+  <meta name="description" content="目标这一部分的主要目标是对数据集进行 探索性数据分析（EDA），EDA （Exploratory Data Analysis），是指对已有数据在尽量少的先验假设下，通过作图、制表、方程拟合、 计算特征量等手段探索数据的结构和规律的一种数据分析方法。EDA 是一种更加贴合实际情况的分析方法，它强调让数据自身 ”说话“，通过EDA我们可以最真实、直接的观察到数据的结构及特征。 EDA一般步骤检查数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MongoDB简介">
-<meta property="og:url" content="https://ayoubu.github.io/archives/52778.html">
+<meta property="og:title" content="心电图信号多分类预测 task2">
+<meta property="og:url" content="https://ayoubu.github.io/archives/29478.html">
 <meta property="og:site_name" content="落空的个人博客">
-<meta property="og:description" content="MongoDB简介MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为WEB应用提供可扩展的高性能数据存储解决方案。 MongoDB将数据存储为一个文档，数据结构由键值对(Key : value)组成，MongoDB文档类似于JSON对象，字段值可以包含其它文档，数组及文档数组。 MongoDB服务端可运行在Linux、Windows和Mac OS平台，支持32位和64位应用，">
+<meta property="og:description" content="目标这一部分的主要目标是对数据集进行 探索性数据分析（EDA），EDA （Exploratory Data Analysis），是指对已有数据在尽量少的先验假设下，通过作图、制表、方程拟合、 计算特征量等手段探索数据的结构和规律的一种数据分析方法。EDA 是一种更加贴合实际情况的分析方法，它强调让数据自身 ”说话“，通过EDA我们可以最真实、直接的观察到数据的结构及特征。 EDA一般步骤检查数据">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.imgur.com/xTRa32i.png">
-<meta property="og:image" content="https://i.imgur.com/rvmuYB2.png">
-<meta property="og:image" content="https://i.imgur.com/OPVGh4f.png">
-<meta property="article:published_time" content="2020-09-05T10:58:05.000Z">
-<meta property="article:modified_time" content="2020-09-09T06:54:19.272Z">
+<meta property="og:image" content="https://i.imgur.com/mTPKBs8.png">
+<meta property="og:image" content="https://i.imgur.com/bOZjjXb.png">
+<meta property="og:image" content="https://i.imgur.com/jo2wseg.png">
+<meta property="og:image" content="https://i.imgur.com/9w8nPLr.png">
+<meta property="og:image" content="https://i.imgur.com/Z9A1P60.png">
+<meta property="og:image" content="https://i.imgur.com/b3kBsKV.png">
+<meta property="og:image" content="https://i.imgur.com/uE8yY7g.png">
+<meta property="og:image" content="https://i.imgur.com/RIaKSW5.png">
+<meta property="og:image" content="https://i.imgur.com/5ghzoBC.png">
+<meta property="og:image" content="https://i.imgur.com/wHhf53I.png">
+<meta property="og:image" content="https://i.imgur.com/gLKLR7t.png">
+<meta property="og:image" content="https://i.imgur.com/lLIWMJI.png">
+<meta property="article:published_time" content="2021-03-19T10:35:52.000Z">
+<meta property="article:modified_time" content="2021-03-19T07:53:18.879Z">
 <meta property="article:author" content="落空">
-<meta property="article:tag" content="数据存储">
-<meta property="article:tag" content="MongoDB">
-<meta property="article:tag" content="PyMongo">
+<meta property="article:tag" content="数据挖掘">
+<meta property="article:tag" content="EDA">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.imgur.com/xTRa32i.png">
+<meta name="twitter:image" content="https://i.imgur.com/mTPKBs8.png">
 
 
 
@@ -81,7 +89,7 @@
   };
 </script>
 <link rel="stylesheet" type="text/css" href="/css/injector.css" />
-  <title>MongoDB简介 | 落空的个人博客</title>
+  <title>心电图信号多分类预测 task2 | 落空的个人博客</title>
   
 
 
@@ -223,7 +231,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/52778.html">
+    <link itemprop="mainEntityOfPage" href="https://ayoubu.github.io/archives/29478.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -236,7 +244,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          MongoDB简介
+          心电图信号多分类预测 task2
         </h1>
 
         <div class="post-meta">
@@ -247,30 +255,24 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-09-05 10:58:05" itemprop="dateCreated datePublished" datetime="2020-09-05T10:58:05Z">2020-09-05</time>
+              <time title="创建时间：2021-03-19 10:35:52 / 修改时间：07:53:18" itemprop="dateCreated datePublished" datetime="2021-03-19T10:35:52Z">2021-03-19</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-09 06:54:19" itemprop="dateModified" datetime="2020-09-09T06:54:19Z">2020-09-09</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">数据存储</span>
+                  <a href="/categories/Datawhale/" itemprop="url" rel="index">
+                    <span itemprop="name">Datawhale</span>
                   </a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/MongoDB/" itemprop="url" rel="index">
-                    <span itemprop="name">MongoDB</span>
+                  <a href="/categories/Datawhale/%E5%BF%83%E7%94%B5%E5%9B%BE%E4%BF%A1%E5%8F%B7%E5%A4%9A%E5%88%86%E7%B1%BB%E9%A2%84%E6%B5%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">心电图信号多分类预测</span>
                   </a>
                 </span>
             </span>
@@ -288,14 +290,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.4k</span>
+              <span>3.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -307,137 +309,167 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="MongoDB简介"><a href="#MongoDB简介" class="headerlink" title="MongoDB简介"></a>MongoDB简介</h2><p>MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为WEB应用提供可扩展的高性能数据存储解决方案。</p>
-<p>MongoDB将数据存储为一个文档，数据结构由键值对(Key : value)组成，MongoDB文档类似于JSON对象，字段值可以包含其它文档，数组及文档数组。</p>
-<p>MongoDB服务端可运行在Linux、Windows和Mac OS平台，支持32位和64位应用，默认端口为27017。本文所展示的为Windows平台的安装及使用。</p>
-<p>MongoDB支持各种编程语言：Python、Java、C++、PHP、C#等多种语言。</p>
-<h2 id="MongoDB的优势"><a href="#MongoDB的优势" class="headerlink" title="MongoDB的优势"></a>MongoDB的优势</h2><ul>
-<li><strong>易扩展：</strong> NoSQL（非关系型数据库）数据库种类繁多，但是一个共同的特点都是去掉关系型数据库的关系特性。数据之间无关系，这样就非常容易扩展。</li>
-<li><strong>大数据量，高性能：</strong> NoSQL数据库都具有非常高的读写性能，尤其在大数据量下，同样表现优秀。得益于它的无关系性，数据的结构简单</li>
-<li><strong>灵活的数据模型：</strong> NoSQL无需事先为要存储的数据建立字段，随时可以存储自定义的数据格式。而在关系型数据库里，增删字段是一件非常麻烦的事情。</li>
+        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>这一部分的主要目标是对数据集进行 <strong>探索性数据分析（EDA）</strong>，EDA （Exploratory Data Analysis），是指对已有数据在尽量少的先验假设下，通过作图、制表、方程拟合、 计算特征量等手段探索数据的结构和规律的一种数据分析方法。EDA 是一种更加贴合实际情况的分析方法，它强调让数据自身 ”说话“，通过EDA我们可以最真实、直接的观察到数据的结构及特征。</p>
+<h3 id="EDA一般步骤"><a href="#EDA一般步骤" class="headerlink" title="EDA一般步骤"></a>EDA一般步骤</h3><h4 id="检查数据"><a href="#检查数据" class="headerlink" title="检查数据"></a>检查数据</h4><ul>
+<li>是否有缺失值</li>
+<li>是否有异常值</li>
+<li>是否有重复值</li>
+<li>数据分布是否均衡</li>
+<li>是否需要抽样</li>
+<li>变量是否需要转换</li>
+<li>是否需要增加新的特征</li>
 </ul>
-<p><strong>缺点：</strong> 由于它每条数据都是单独存储的，因此在存储过程中可能会包含大量重复信息，非常占用存储空间。</p>
-<h2 id="MongDB的安装（windows）"><a href="#MongDB的安装（windows）" class="headerlink" title="MongDB的安装（windows）"></a>MongDB的安装（windows）</h2><a id="more"></a>
-
-<ol>
-<li>首先下载MongDB的社区版，我这边下载的是64位的版本（<a target="_blank" rel="noopener external nofollow noreferrer" href="https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.0-signed.msi">下载</a>）。</li>
-<li>打开.msi的安装文件，按照指示一路点击<code>Next</code>就好，如果想更改安装目录，需要选择<code>Custom</code>。在最后我选的是<code>以Web用户的方式来使用MongDB</code>。</li>
-<li>在最后不要勾选<code>Install MongoDB Compass</code>。MongoDB Compass 是一个图形界面管理工具，这里不安装也没有问题，可以自己安装一个图形界面管理工具，比如<a target="_blank" rel="noopener external nofollow noreferrer" href="https://robomongo.org/">Robo3T</a>。</li>
-</ol>
-<h2 id="配置MongoDB"><a href="#配置MongoDB" class="headerlink" title="配置MongoDB"></a>配置MongoDB</h2><p>MongoDB的安装步骤比较简单，但是配置较为繁琐。</p>
-<p>首先在MongoDB的data文件夹里新建一个db文件夹和一个log文件夹，然后在log文件夹下新建一个mongo.log文件。</p>
-<p>将安装路径(..\MongoDB\bin)添加到环境变量path中，此时打卡cmd窗口，运行mongo命令，此时得到下图结果。</p>
-<img src="https://i.imgur.com/xTRa32i.png" alt="MongoDB安装结果" style="zoom:80%;" />
-
-<p>提示我们连接失败，是因为我们还没有启动MongoDB服务。在cmd中通过以下命令启动：<code>mongod -- dbpath &quot;..\MongoDB\data\db</code>“。（注：后面这个data的文件夹也可以创建在别的路径，但是data文件夹中得包含log文件夹和db文件夹，如果没有提前创建db文件夹，则服务器会启动失败。）</p>
-<p>打开浏览器，输入<code>127.0.0.1:27017</code>，尝试连接数据库，得到下图所示结果，说明启动成功。</p>
-<img src="https://i.imgur.com/rvmuYB2.png" alt="在浏览器连接MongoDB" style="zoom:80%;" />
-
-<p><strong>配置MongoDB的自启动：</strong></p>
-<p>首先关闭mongoDB的服务，在cmd窗口可以按<code>Ctrl + C</code>来停止。然后以管理员身份运行cmd窗口，输入命令：<code>mongod --logpath &quot;..\MongoDB\data\log\mongo.log&quot;  --logappend --dbpath &quot;..\MongoDB\data\db&quot; --directoryperdb --serviceName &quot;MongoDB&quot; --install</code> ，如果没有报错，则说明添加成功，可以使用win+R，然后输入services.msc命令进行查看。</p>
-<p>我的配置命令为：<code>mongod --logpath &quot;D:\Data\MongoDB\data\log\mongo.log&quot; --logappend --dbpath &quot;D:\Data\MongoDB\data\db&quot; --directoryperdb --serviceName &quot;MongoDB&quot; --install</code>只需要替换里面的文件夹路径即可。</p>
-<img src="https://i.imgur.com/OPVGh4f.png" alt="添加MongoDB服务到系统中" style="zoom:80%;" />
-
-<p>这里显示的MongoDB Server是自动启动的，我们把它设置为手动的。然后再cmd窗口中输入：<code>net start mongodb</code>。</p>
-<p><strong>问题：</strong></p>
-<ol>
-<li>我在启动的时候出现了拒绝访问，通过管理员权限运行cmd窗口后可以正常启动。</li>
-<li>如果出现<code>服务没有相应控制功能</code>，1)运行<code>sc delete mongodb</code>删除服务，再运行一次配置服务命令。</li>
-</ol>
-<h3 id="Windows-MongoDB服务自动关闭"><a href="#Windows-MongoDB服务自动关闭" class="headerlink" title="Windows MongoDB服务自动关闭"></a><strong>Windows MongoDB服务自动关闭</strong></h3><p>我在使用windows 系统的MongoDB服务时，服务总是自动中断，通过下述方式解决。</p>
-<ol>
-<li>在命令行中输入：<code>mongod --remove</code></li>
-<li>删除之前配置的db文件夹中的<code>mongod.lock</code>和<code>storage.bson</code>两个文件。</li>
-<li>重新配置自动启动<code>mongod --logpath &quot;D:\Data\MongoDB\data\log\mongo.log&quot; --logappend --dbpath &quot;D:\Data\MongoDB\data\db&quot; --directoryperdb --serviceName &quot;MongoDB&quot; --install</code></li>
-<li>启动服务：<code>net start mongodb</code></li>
-</ol>
-<p>注意，以上操作，会清楚数据库的信息。</p>
-<h2 id="关于Database的基础命令"><a href="#关于Database的基础命令" class="headerlink" title="关于Database的基础命令"></a>关于Database的基础命令</h2><p>在安装成功后，启用MongoDB的服务，然后在命令行窗口输入：<code>mongo</code>，就可以进入mongoDB的命令行模式，然后就可以执行一些操作。</p>
-<ol>
-<li>查看当前的数据库：db</li>
-<li>查看所有的数据库：show dbs / show databases</li>
-<li>切换数据库：use db_name</li>
-<li>删除当前的数据库：db.dropDatabase()</li>
-<li>删除数据集合：db.集合命.drop()</li>
-</ol>
-<h2 id="MongoDB数据库操作"><a href="#MongoDB数据库操作" class="headerlink" title="MongoDB数据库操作"></a>MongoDB数据库操作</h2><h3 id="mongoDB插入数据"><a href="#mongoDB插入数据" class="headerlink" title="mongoDB插入数据"></a>mongoDB插入数据</h3><ul>
-<li>db.collection.insert({}) 插入数据，<code>_id</code>存在就会报错</li>
-<li>db.collection.save({}) 插入数据，<code>_id</code>存在就会更新</li>
+<h4 id="使用描述统计量和图表对数据进行描述"><a href="#使用描述统计量和图表对数据进行描述" class="headerlink" title="使用描述统计量和图表对数据进行描述"></a>使用描述统计量和图表对数据进行描述</h4><ul>
+<li><strong>连续变量：</strong><ul>
+<li>统计量：平均值、中位数、众数、最小值、最大值、四分位数、标准差等。</li>
+<li>图表：频数分布表、直方图、箱线图等。</li>
 </ul>
-<h3 id="mongoDB更新操作"><a href="#mongoDB更新操作" class="headerlink" title="mongoDB更新操作"></a>mongoDB更新操作</h3><ul>
-<li><code>db.collection.update(&#123;name:&quot;大宝&quot;&#125;,&#123;name:&quot;大大宝&quot;&#125;)</code> </li>
+</li>
+<li><strong>无序离散变量：</strong><ul>
+<li>统计量：各个变量出现的频数和占比</li>
+<li>图表：频数分布表、柱状图、条形图、茎叶图、饼图等。</li>
 </ul>
-<p>此操作会直接用{name:”大大宝”}这条数据替换掉包含{name:”大宝”}的这条数据。</p>
+</li>
+<li><strong>有序离散变量：</strong><ul>
+<li>统计量：各个变量出现的频数和占比</li>
+<li>图表：频数分布表，堆积柱状图，堆积条形图等</li>
+</ul>
+</li>
+</ul>
+<h4 id="考察变量之间的关系"><a href="#考察变量之间的关系" class="headerlink" title="考察变量之间的关系"></a>考察变量之间的关系</h4><ul>
+<li>离散变量</li>
+<li>连续变量</li>
+</ul>
+<h4 id="进行数据处理"><a href="#进行数据处理" class="headerlink" title="进行数据处理"></a>进行数据处理</h4><h3 id="EDA的结果"><a href="#EDA的结果" class="headerlink" title="EDA的结果"></a>EDA的结果</h3><ul>
+<li>数据的直观表现</li>
+<li>发现潜在的结构</li>
+<li>提取重要的变量</li>
+<li>处理异常数据</li>
+<li>检验统计假设</li>
+<li>建立初步模型</li>
+<li>决定最优因子的设置</li>
+</ul>
+<h3 id="本次学习目标："><a href="#本次学习目标：" class="headerlink" title="本次学习目标："></a><strong>本次学习目标：</strong></h3><ul>
+<li>熟悉数据集，了解数据集，对数据集进行验证来确定所获得数据集可以用于接下来的机器学习或者深度学习使用。</li>
+<li>了解变量之间的相互关系与预测值之间的关系。</li>
+<li>引导数据科学从业者进行数据处理以及特征工程的步骤,使数据集的结构和特征集让接下来的预测问题更加可靠。</li>
+<li>完成对于数据的探索性分析，并对于数据进行一些图表或者文字总结并打卡。</li>
+</ul>
+<h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><p><strong>探索性数据分析所用到的库：</strong></p>
 <ul>
-<li><code>db.collection.update(&#123;name:&quot;大宝&quot;&#125;,&#123;$set:&#123;name:&quot;大大宝&quot;&#125;&#125;)</code> </li>
+<li>数据科学库：<ul>
+<li>pandas</li>
+<li>numpy</li>
+<li>scipy : Scipy库是基于Python生态的一款开源数值计算、科学与工程应用的开源软件</li>
 </ul>
-<p>此操作只会更新包含{name:”大宝”}的这条数据中的”name”这个字段，其它信息不变。</p>
-<ul>
-<li><code>db.collection.update(&#123;name:&quot;大宝&quot;&#125;,&#123;$set:&#123;name:&quot;大大宝&quot;&#125;&#125;,&#123;multi:true&#125;)</code> </li>
+</li>
+<li>可视化库：<ul>
+<li>matplotlib</li>
+<li>seaborn : seaborn 是在matplotlib基础上进行了更高级的 API 封装，从而使得作图更加容易，seaborn可以视为对matplotlib的一个补充。</li>
 </ul>
-<p>第三个参数设置为<code>&#123;multi:true&#125;</code>，表示会更新所有符合要求的数据，不然只会更新查找到的第一条数据。（注：第一种替换的方式时不能用这个参数，因为它这可以和$连用。）</p>
-<h3 id="mongoDB删除数据"><a href="#mongoDB删除数据" class="headerlink" title="mongoDB删除数据"></a>mongoDB删除数据</h3><ul>
-<li><code>db.collection.remove(&#123;name:&quot;大大宝&#125;,&#123;justOne:true&#125;)</code> </li>
+</li>
 </ul>
-<p>删除第一条出现的包含{name:”大大宝}这个信息的数据，第二个参数可以不写，不写默认删全部。</p>
-<h3 id="数据查询"><a href="#数据查询" class="headerlink" title="数据查询"></a>数据查询</h3><ul>
-<li>find() 方法：<code>db.collection.find(&#123;条件文档&#125;)</code> — 查询全部</li>
-<li>findOne() 方法：<code>db.collection.findOne(条件文档)</code> — 查询，返回第一个</li>
-<li>pretty() 方法：<code>db.collection.find(&#123;条件文档&#125;).pretty()</code> — 将结果格式化</li>
-</ul>
-<h3 id="自定义查询"><a href="#自定义查询" class="headerlink" title="自定义查询"></a>自定义查询</h3><p>使用<code>$where</code>后面写一个函数，返回满足条件的数据，这种写法(js语句)一般是在终端中写时才会用到。</p>
-<p>比如查询年龄大于30的学生：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">    $where:function()&#123;    </span><br><span class="line">        return this.age&gt;30;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="1-载入各种数据科学和可视化库"><a href="#1-载入各种数据科学和可视化库" class="headerlink" title="1.载入各种数据科学和可视化库"></a><strong>1.载入各种数据科学和可视化库</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入 warning包，利用过滤器来实现忽略警告语句</span></span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">&#x27;ignore&#x27;</span>)</span><br><span class="line"><span class="keyword">import</span> missingno <span class="keyword">as</span> msno</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
 
-<h3 id="投影"><a href="#投影" class="headerlink" title="投影"></a>投影</h3><p>选择返回结果的字段。在查询到的返回结果中，只选择必要的字段。表达式：<code>db.collection.find(&#123;&#125;,&#123;字段名称:[0,1]&#125;)</code>，除了id外其它字段只能全部0或者1，写的为0时，没写的默认为1。_id 默认会显示，想不显示得设置为1。</p>
-<h3 id="统计个数"><a href="#统计个数" class="headerlink" title="统计个数"></a>统计个数</h3><p>count()方法用于统计查询结果中文档的条数。</p>
-<p>表达式：</p>
-<ul>
-<li><code>db.collection.find(&#123;条件&#125;).count()</code>  此时count()中写条件是无效的</li>
-<li><code>db.collection.count(&#123;条件&#125;)</code></li>
-</ul>
-<h3 id="消除重复"><a href="#消除重复" class="headerlink" title="消除重复"></a>消除重复</h3><p>distinct()方法用于对数据进行去重操作。表达式：<code>db.collection.distinct(&#39;去重字段&#39;, &#123;条件&#125;)</code>，如：<code>db.collecttion.distinct(&#39;hometown&#39;,&#123;age:&#123;$gt:18&#125;&#125;)</code>。</p>
-<p>distinct() 方法返回的是一个该字段中不重复值的数据列表。</p>
-<h2 id="mongoDB表达式中的运算符"><a href="#mongoDB表达式中的运算符" class="headerlink" title="mongoDB表达式中的运算符"></a>mongoDB表达式中的运算符</h2><h3 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h3><ul>
-<li>等于：默认是等于判断，没有运算符</li>
-<li>小于：$lt —&gt; (less than)</li>
-<li>小于等于：$lte —&gt; (less than equal) </li>
-<li>大于：$gt —&gt; (greater than)</li>
-<li>大于等于：$gte —&gt; (greater than equal)</li>
-<li>不等于：$ne —&gt; (no equal)</li>
-</ul>
-<p>eg：db.collection.find({age:{$gte:18}})</p>
-<h3 id="范围运算符"><a href="#范围运算符" class="headerlink" title="范围运算符"></a>范围运算符</h3><p>使用<code>&quot;$in&quot;</code>，<code>&quot;nin&quot;</code>判断是否在某个范围内，比如查询年龄为18、28、38的学生。<code>db.collection.find(&#123;age:&#123;$in:[18,28,38]&#125;&#125;)</code> 。</p>
-<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><ul>
-<li>and: 在json中写多个条件即可。比如查询<code>年龄大于或等于18</code>，并且<code>性别为男</code>的学生：<code>db.collection(&#123;age:&#123;$gte:18&#125;,gender:&quot;男&quot;&#125;)</code>。</li>
-<li>or: 使用<code>$or</code>，值为数组，数组中每个元素为json。比如查询年龄大于18，或者性别为男的学生：<code>db.collection.find(&#123;$or:[&#123;age:&#123;&amp;gte:18&#125;&#125;,&#123;gender:&quot;男&quot;&#125;]&#125;)</code>。</li>
-</ul>
-<p>查询<code>年龄大于18</code>或<code>性别为男生</code>，并且<code>姓名是郭靖</code>：<code>db.collection.find(&#123;$or:[&#123;age:&#123;$gte:18&#125;&#125;,&#123;gender:&quot;男&quot;&#125;], name:&quot;郭靖&quot;&#125;)</code></p>
-<h3 id="mongoDB中的正则表达式"><a href="#mongoDB中的正则表达式" class="headerlink" title="mongoDB中的正则表达式"></a>mongoDB中的正则表达式</h3><p>使用<code>//</code>或者<code>$regex</code>编写正则表达式。</p>
-<p>比如: </p>
-<p><code>db.collection.find(&#123;sku:/^abc/&#125;)</code> — 表示以abc开头的。</p>
-<p><code>db.collection.find(&#123;sku:&#123;$regex:&#39;789$&#39;&#125;&#125;)</code> — 表示以789结尾的。</p>
-<h2 id="mongoDB中的一些附加方法"><a href="#mongoDB中的一些附加方法" class="headerlink" title="mongoDB中的一些附加方法"></a>mongoDB中的一些附加方法</h2><ul>
-<li>limit() 方法：用于读取指定数量的文档。表达式：<code>db.collection.find().limit(NUMBER)</code>，比如查询两条：<code>db.collection.find().limit(2)</code>。</li>
-<li>skip() 方法：用于跳过指定数量的文档。 表达式：<code>db.collection.find().skip(NUMBER)</code>，比如跳过两条数据：<code>db.collection.find().skip(2)</code>。</li>
-<li>同时使用，两者也可以同时使用，如：<code>db.collection.find().limit(4).skip(5)</code> 或者 <code>db.collection.find().skip().limit()</code>。</li>
-</ul>
-<h2 id="数据的备份和恢复"><a href="#数据的备份和恢复" class="headerlink" title="数据的备份和恢复"></a>数据的备份和恢复</h2><p><strong>备份语法：</strong></p>
-<p> <code>mongodump -h dbhost -d dbname -o dbdirectory</code></p>
-<ul>
-<li>-h: 服务器地址，也可以指定端口号</li>
-<li>-d: 需要备份的数据库名称</li>
-<li>-o: 备份的数据存放的位置，此目录中存放着备份出来的数据</li>
-</ul>
-<p><code>mongodump -h 192.168.196.128:27017 -d test -o ~/Desktop/test1bak</code></p>
-<p><strong>恢复语法：</strong></p>
-<p><code>mongorestore -h dbhost -d dbname --dir dbdirectory</code></p>
-<ul>
-<li>-h：服务器地址</li>
-<li>-d：需要恢复的数据库实例</li>
-<li>–dir：备份数据所在的位置</li>
-</ul>
-<p><code>mongorestore -h 127.0.0.1:27017 -d test --dir ~/Desktop/test1bak/test1</code></p>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!pip install missingno  <span class="comment"># 安装相应库</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-载入训练集和测试集"><a href="#2-载入训练集和测试集" class="headerlink" title="2. 载入训练集和测试集"></a>2. 载入训练集和测试集</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入训练集</span></span><br><span class="line">train_data = pd.read_csv(<span class="string">&#x27;./data/train.csv&#x27;</span>)</span><br><span class="line">test_data = pd.read_csv(<span class="string">&#x27;./data/testA.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 观察训练集的首尾数据</span></span><br><span class="line">train_data.head().append(train_data.tail())</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://i.imgur.com/mTPKBs8.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 观察测试集的首尾数据</span></span><br><span class="line">test_data.head().append(test_data.tail())</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://i.imgur.com/bOZjjXb.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 观察数据集的行列信息</span></span><br><span class="line">print(<span class="string">&#x27;train_data:&#x27;</span>,train_data.shape)</span><br><span class="line">print(<span class="string">&#x27;test_data&#x27;</span>,test_data.shape)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>train_data: (100000, 3)<br>test_data (20000, 2)</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取训练集的相关统计量</span></span><br><span class="line">train_data.describe()</span><br></pre></td></tr></table></figure>
+
+<img src="https://i.imgur.com/jo2wseg.png" style="zoom:80%;" />
+
+<p>可以看出label中最大值为3，这说明我们label最多有四种。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取训练集的数据类型</span></span><br><span class="line">train_data.info()</span><br></pre></td></tr></table></figure>
+
+<img src="https://i.imgur.com/9w8nPLr.png" style="zoom:80%;" />
+
+
+<p>可以看出所有的列均无空值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取测试数据集的相关统计量</span></span><br><span class="line">test_data.describe()</span><br></pre></td></tr></table></figure>
+
+<img src="https://i.imgur.com/Z9A1P60.png" style="zoom:80%;" />
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取测试数据集的数据类型</span></span><br><span class="line">test_data.info()</span><br></pre></td></tr></table></figure>
+
+<img src="https://i.imgur.com/b3kBsKV.png" style="zoom:80%;" />
+
+
+<h3 id="3-判断数据缺失和异常"><a href="#3-判断数据缺失和异常" class="headerlink" title="3.判断数据缺失和异常"></a>3.判断数据缺失和异常</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看训练集中的空值</span></span><br><span class="line">train_data.isnull().sum()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>id                   0<br>heartbeat_signals    0<br>label                0<br>dtype: int64</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看测试集中的空值</span></span><br><span class="line">test_data.isnull().sum()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>id                   0<br>heartbeat_signals    0<br>dtype: int64</p>
+</blockquote>
+<h3 id="4-了解预测值的分布"><a href="#4-了解预测值的分布" class="headerlink" title="4.了解预测值的分布"></a>4.了解预测值的分布</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_data[<span class="string">&#x27;label&#x27;</span>].value_counts()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>0.0    64327<br>3.0    17912<br>2.0    14199<br>1.0     3562<br>Name: label, dtype: int64</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1) 总体分布概况 (无界约翰逊分布)</span></span><br><span class="line"><span class="keyword">import</span> scipy.stats <span class="keyword">as</span> st </span><br><span class="line">y = train_data[<span class="string">&#x27;label&#x27;</span>]</span><br><span class="line">plt.figure(<span class="number">1</span>); plt.title(<span class="string">&#x27;Default&#x27;</span>)</span><br><span class="line">sns.distplot(y, rug=<span class="literal">True</span>, bins=<span class="number">20</span>)</span><br><span class="line">plt.figure(<span class="number">2</span>); plt.title(<span class="string">&#x27;Normal&#x27;</span>)</span><br><span class="line">sns.distplot(y, kde=<span class="literal">False</span>, fit=st.norm)</span><br><span class="line">plt.figure(<span class="number">3</span>); plt.title(<span class="string">&#x27;Log Normal&#x27;</span>)</span><br><span class="line">sns.distplot(y, kde=<span class="literal">False</span>, fit=st.lognorm)</span><br></pre></td></tr></table></figure>
+
+<img src="https://i.imgur.com/uE8yY7g.png" alt="png" style="zoom:80%;" />
+
+<img src="https://i.imgur.com/RIaKSW5.png" alt="png" style="zoom:80%;" />
+<img src="https://i.imgur.com/5ghzoBC.png" style="zoom:80%;" />    
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2) 查看 skewness and kurtosis</span></span><br><span class="line">sns.displot(y);</span><br><span class="line">print(<span class="string">&quot;Skewness: %f&quot;</span>%y. skew())</span><br><span class="line">print(<span class="string">&quot;Kurtosis: %f&quot;</span>%y. kurt())</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Skewness: 0.871005<br>Kurtosis: -1.009573</p>
+</blockquote>
+<img src="https://i.imgur.com/wHhf53I.png" alt="png" style="zoom:80%;" />
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_data.skew(), train_data.kurt()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>(id       0.000000<br> label    0.871005<br> dtype: float64,<br> id      -1.200000<br> label   -1.009573<br> dtype: float64)</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.distplot(train_data.kurt(), color=<span class="string">&#x27;orange&#x27;</span>, axlabel=<span class="string">&#x27;Kurtness&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>&lt;AxesSubplot:xlabel=’Kurtness’, ylabel=’Density’&gt;</p>
+</blockquote>
+<p><img src="https://i.imgur.com/gLKLR7t.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3) 查看预测值的具体频数</span></span><br><span class="line">plt.hist(train_data[<span class="string">&#x27;label&#x27;</span>],orientation=<span class="string">&#x27;vertical&#x27;</span>, histtype=<span class="string">&#x27;bar&#x27;</span>,color=<span class="string">&#x27;blue&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://i.imgur.com/lLIWMJI.png" alt="png"></p>
+<h3 id="5-用-pandas-profiling-生成数据报告"><a href="#5-用-pandas-profiling-生成数据报告" class="headerlink" title="5.用 pandas_profiling 生成数据报告"></a>5.用 pandas_profiling 生成数据报告</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas_profiling</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!pip install pandas_profiling <span class="comment">#如果没有安装相应的库时运行</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">prf = pandas_profiling.ProfileReport(train_data)</span><br><span class="line">prf.to_file(<span class="string">&quot;./train_set_report.html&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Summarize dataset:   0%|          | 0/16 [00:00&lt;?, ?it/s]</p>
+<p>Generate report structure:   0%|          | 0/1 [00:00&lt;?, ?it/s]</p>
+<p>Render HTML:   0%|          | 0/1 [00:00&lt;?, ?it/s]</p>
+<p>Export report to file:   0%|          | 0/1 [00:00&lt;?, ?it/s]</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p> 本次练习，由于训练数据的主要部分为文本数据，因此初步的数据探索过程可以获得的信息是比较有限的。上述的数据探索仅仅让我们对数据的维度以及训练数据的标签的构成有了一个大概的了解。进一步的数据探索工作需要将数据集中的文本数据转换为值类型的数据才能继续进行。</p>
 
     </div>
 
@@ -448,13 +480,7 @@
   <div class="popular-posts-header">相关文章推荐</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\archives\18082.html" rel="bookmark">Python MongoDB</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\archives\53312.html" rel="bookmark">MongDB练习</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\archives\61509.html" rel="bookmark">MongDB 高级功能</a></div>
+      <div class="popular-posts-title"><a href="\archives\54659.html" rel="bookmark">心电图心跳信号分类-Task1</a></div>
     </li>
   </ul>
 
@@ -481,9 +507,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" rel="tag"># 数据存储</a>
-              <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
-              <a href="/tags/PyMongo/" rel="tag"># PyMongo</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" rel="tag"># 数据挖掘</a>
+              <a href="/tags/EDA/" rel="tag"># EDA</a>
           </div>
 
         
@@ -492,13 +517,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/archives/53805.html" rel="prev" title="Excel学习之疑难杂症">
-      <i class="fa fa-chevron-left"></i> Excel学习之疑难杂症
+    <a href="/archives/54659.html" rel="prev" title="心电图心跳信号分类-Task1">
+      <i class="fa fa-chevron-left"></i> 心电图心跳信号分类-Task1
     </a></div>
-      <div class="post-nav-item">
-    <a href="/archives/49506.html" rel="next" title="什么是json">
-      什么是json <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -558,7 +580,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">MongoDB简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">2.</span> <span class="nav-text">MongoDB的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongDB%E7%9A%84%E5%AE%89%E8%A3%85%EF%BC%88windows%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">MongDB的安装（windows）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEMongoDB"><span class="nav-number">4.</span> <span class="nav-text">配置MongoDB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-MongoDB%E6%9C%8D%E5%8A%A1%E8%87%AA%E5%8A%A8%E5%85%B3%E9%97%AD"><span class="nav-number">4.1.</span> <span class="nav-text">Windows MongoDB服务自动关闭</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EDatabase%E7%9A%84%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">关于Database的基础命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">MongoDB数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mongoDB%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">6.1.</span> <span class="nav-text">mongoDB插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mongoDB%E6%9B%B4%E6%96%B0%E6%93%8D%E4%BD%9C"><span class="nav-number">6.2.</span> <span class="nav-text">mongoDB更新操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mongoDB%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">6.3.</span> <span class="nav-text">mongoDB删除数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.4.</span> <span class="nav-text">数据查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.5.</span> <span class="nav-text">自定义查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%95%E5%BD%B1"><span class="nav-number">6.6.</span> <span class="nav-text">投影</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1%E4%B8%AA%E6%95%B0"><span class="nav-number">6.7.</span> <span class="nav-text">统计个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E9%99%A4%E9%87%8D%E5%A4%8D"><span class="nav-number">6.8.</span> <span class="nav-text">消除重复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongoDB%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">7.</span> <span class="nav-text">mongoDB表达式中的运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">7.1.</span> <span class="nav-text">比较运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8C%83%E5%9B%B4%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">7.2.</span> <span class="nav-text">范围运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">7.3.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mongoDB%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">7.4.</span> <span class="nav-text">mongoDB中的正则表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongoDB%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%99%84%E5%8A%A0%E6%96%B9%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">mongoDB中的一些附加方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D"><span class="nav-number">9.</span> <span class="nav-text">数据的备份和恢复</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-number">1.</span> <span class="nav-text">目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#EDA%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.1.</span> <span class="nav-text">EDA一般步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.1.</span> <span class="nav-text">检查数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%8F%8F%E8%BF%B0%E7%BB%9F%E8%AE%A1%E9%87%8F%E5%92%8C%E5%9B%BE%E8%A1%A8%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">使用描述统计量和图表对数据进行描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%80%83%E5%AF%9F%E5%8F%98%E9%87%8F%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.1.3.</span> <span class="nav-text">考察变量之间的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="nav-number">1.1.4.</span> <span class="nav-text">进行数据处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EDA%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.</span> <span class="nav-text">EDA的结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E6%AC%A1%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">本次学习目标：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">具体步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BD%BD%E5%85%A5%E5%90%84%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%96%E5%BA%93"><span class="nav-number">2.1.</span> <span class="nav-text">1.载入各种数据科学和可视化库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BD%BD%E5%85%A5%E8%AE%AD%E7%BB%83%E9%9B%86%E5%92%8C%E6%B5%8B%E8%AF%95%E9%9B%86"><span class="nav-number">2.2.</span> <span class="nav-text">2. 载入训练集和测试集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%88%A4%E6%96%AD%E6%95%B0%E6%8D%AE%E7%BC%BA%E5%A4%B1%E5%92%8C%E5%BC%82%E5%B8%B8"><span class="nav-number">2.3.</span> <span class="nav-text">3.判断数据缺失和异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%BA%86%E8%A7%A3%E9%A2%84%E6%B5%8B%E5%80%BC%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">2.4.</span> <span class="nav-text">4.了解预测值的分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%94%A8-pandas-profiling-%E7%94%9F%E6%88%90%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%91%8A"><span class="nav-number">2.5.</span> <span class="nav-text">5.用 pandas_profiling 生成数据报告</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
